@@ -1,0 +1,24 @@
+{
+    "name": "foostart/package_category",
+    "description": "Create overview sample can intergrate other project",
+    "keywords": [
+        "foostart",
+        "laravel 5 package sample"
+    ],
+    "authors": [
+        {
+            "name": "FooStart",
+            "email": "foostart.com@gmail.com",
+            "homepage": "http://foostart.com"
+        }
+    ],
+    "license": "MIT",
+    "require": {
+    },
+    "autoload": {
+        "psr-4": {
+            "Foostart\\Category\\": "foostart/category/"
+        }
+    },
+    "minimum-stability": "dev"
+}

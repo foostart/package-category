@@ -1,9 +1,9 @@
 {
     "name": "foostart/package_category",
-    "description": "Create overview sample can intergrate other project",
+    "description": "Create overview category can intergrate other project",
     "keywords": [
         "foostart",
-        "laravel 5 package sample"
+        "laravel 5 package category"
     ],
     "authors": [
         {
@@ -17,7 +17,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Foostart\\Category\\": "foostart/category/"
+            "Foostart\\Category\\": "foostart/package_category/"
         }
     },
     "minimum-stability": "dev"

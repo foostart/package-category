@@ -1,6 +1,6 @@
 <?php
 
-namespace Foostart\Sample;
+namespace Foostart\Category;
 
 use Illuminate\Support\ServiceProvider;
 use LaravelAcl\Authentication\Classes\Menu\SentryMenuFactory;
@@ -9,7 +9,7 @@ use URL, Route;
 use Illuminate\Http\Request;
 
 
-class SampleServiceProvider extends ServiceProvider {
+class CategoryServiceProvider extends ServiceProvider {
 
     /**
      * Bootstrap the application services.
@@ -21,22 +21,22 @@ class SampleServiceProvider extends ServiceProvider {
          * Publish
          */
          $this->publishes([
-            __DIR__.'/config/sample_admin.php' => config_path('sample_admin.php'),
+            __DIR__.'/config/lang_package_category.php' => config_path('lang_package_category.php'),
         ],'config');
 
-        $this->loadViewsFrom(__DIR__ . '/views', 'sample');
+        $this->loadViewsFrom(__DIR__ . '/views', 'category');
 
 
         /**
          * Translations
          */
-         $this->loadTranslationsFrom(__DIR__.'/lang', 'sample');
+         $this->loadTranslationsFrom(__DIR__.'/lang', 'category');
 
 
         /**
          * Load view composer
          */
-        $this->sampleViewComposer($request);
+        $this->categoryViewComposer($request);
 
          $this->publishes([
                 __DIR__.'/../database/migrations/' => database_path('migrations')
@@ -55,37 +55,37 @@ class SampleServiceProvider extends ServiceProvider {
         /**
          * Load controllers
          */
-        $this->app->make('Foostart\Sample\Controllers\Admin\SampleAdminController');
+        $this->app->make('Foostart\Category\Controllers\Admin\CategoryAdminController');
 
          /**
          * Load Views
          */
-        $this->loadViewsFrom(__DIR__ . '/views', 'sample');
+        $this->loadViewsFrom(__DIR__ . '/views', 'category');
     }
 
     /**
      *
      */
-    public function sampleViewComposer(Request $request) {
+    public function categoryViewComposer(Request $request) {
 
-        view()->composer('sample::sample*', function ($view) {
+        view()->composer('category::category*', function ($view) {
             global $request;
-            $sample_id = $request->get('id');
-            $is_action = empty($sample_id)?'page_add':'page_edit';
+            $category_id = $request->get('id');
+            $is_action = empty($category_id)?'page_add':'page_edit';
 
             $view->with('sidebar_items', [
 
                 /**
-                 * Samples
+                 * Categorys
                  */
                 //list
-                trans('sample::sample_admin.page_list') => [
-                    'url' => URL::route('admin_sample'),
+                trans('category::lang_package_category.page_list') => [
+                    'url' => URL::route('admin_category'),
                     "icon" => '<i class="fa fa-users"></i>'
                 ],
                 //add
-                trans('sample::sample_admin.'.$is_action) => [
-                    'url' => URL::route('admin_sample.edit'),
+                trans('category::lang_package_category.'.$is_action) => [
+                    'url' => URL::route('admin_category.edit'),
                     "icon" => '<i class="fa fa-users"></i>'
                 ],
 
@@ -93,8 +93,8 @@ class SampleServiceProvider extends ServiceProvider {
                  * Categories
                  */
                 //list
-                trans('sample::sample_admin.page_category_list') => [
-                    'url' => URL::route('admin_sample_category'),
+                trans('category::lang_package_category.page_category_list') => [
+                    'url' => URL::route('admin_category_category'),
                     "icon" => '<i class="fa fa-users"></i>'
                 ],
             ]);

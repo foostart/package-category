@@ -4,10 +4,9 @@ namespace Foostart\Category;
 
 use Illuminate\Support\ServiceProvider;
 use LaravelAcl\Authentication\Classes\Menu\SentryMenuFactory;
-
-use URL, Route;
+use URL,
+    Route;
 use Illuminate\Http\Request;
-
 
 class CategoryServiceProvider extends ServiceProvider {
 
@@ -17,30 +16,21 @@ class CategoryServiceProvider extends ServiceProvider {
      * @return void
      */
     public function boot(Request $request) {
-        /**
-         * Publish
-         */
-         $this->publishes([
-            __DIR__.'/config/lang_package_category.php' => config_path('lang_package_category.php'),
-        ],'config');
 
-        $this->loadViewsFrom(__DIR__ . '/views', 'category');
+        // load view
+        $this->loadViewsFrom(__DIR__ . '/Views', 'package_category');
 
+        // include view composers
+        require __DIR__ . "/composers.php";
 
-        /**
-         * Translations
-         */
-         $this->loadTranslationsFrom(__DIR__.'/lang', 'category');
+        // publish config
+        $this->publishConfig();
 
+        // publish lang
+        $this->publishLang();
 
-        /**
-         * Load view composer
-         */
-        $this->categoryViewComposer($request);
-
-         $this->publishes([
-                __DIR__.'/../database/migrations/' => database_path('migrations')
-            ], 'migrations');
+        // publish views
+        $this->publishViews();
 
     }
 
@@ -51,55 +41,40 @@ class CategoryServiceProvider extends ServiceProvider {
      */
     public function register() {
         include __DIR__ . '/routes.php';
-
-        /**
-         * Load controllers
-         */
-        $this->app->make('Foostart\Category\Controllers\Admin\CategoryAdminController');
-
-         /**
-         * Load Views
-         */
-        $this->loadViewsFrom(__DIR__ . '/views', 'category');
     }
 
     /**
-     *
+     * Public config to system
+     * @source: vendor/foostart/package_category/config
+     * @destination: config/
      */
-    public function categoryViewComposer(Request $request) {
+    protected function publishConfig() {
+        $this->publishes([
+            __DIR__ . '/config/package-category.php' => config_path('package-category.php'),
+                ], 'config');
+    }
 
-        view()->composer('category::category*', function ($view) {
-            global $request;
-            $category_id = $request->get('id');
-            $is_action = empty($category_id)?'page_add':'page_edit';
+    /**
+     * Public language to system
+     * @source: vendor/foostart/package_category/lang
+     * @destination: resources/lang
+     */
+    protected function publishLang() {
+        $this->publishes([
+            __DIR__ . '/lang' => base_path('resources/lang'),
+        ]);
+    }
 
-            $view->with('sidebar_items', [
+    /**
+     * Public view to system
+     * @source: vendor/foostart/package_category/Views
+     * @destination: resources/views/vendor/package_category
+     */
+    protected function publishViews() {
 
-                /**
-                 * Categorys
-                 */
-                //list
-                trans('category::lang_package_category.page_list') => [
-                    'url' => URL::route('admin_category'),
-                    "icon" => '<i class="fa fa-users"></i>'
-                ],
-                //add
-                trans('category::lang_package_category.'.$is_action) => [
-                    'url' => URL::route('admin_category.edit'),
-                    "icon" => '<i class="fa fa-users"></i>'
-                ],
-
-                /**
-                 * Categories
-                 */
-                //list
-                trans('category::lang_package_category.page_category_list') => [
-                    'url' => URL::route('admin_category_category'),
-                    "icon" => '<i class="fa fa-users"></i>'
-                ],
-            ]);
-            //
-        });
+        $this->publishes([
+            __DIR__ . '/Views' => base_path('resources/views/vendor/package_category'),
+        ]);
     }
 
 }

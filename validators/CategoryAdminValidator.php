@@ -36,7 +36,7 @@ class CategoryAdminValidator extends AbstractValidator
 
     public function messages() {
         self::$messages = [
-            'required' => ':attribute '.trans('category::lang_package_category.required')
+            'required' => ':attribute '.trans('category-admin.required')
         ];
     }
 
@@ -47,9 +47,9 @@ class CategoryAdminValidator extends AbstractValidator
         $min_lenght = config('lang_package_category_.name_min_lengh');
         $max_lenght = config('lang_package_category_.name_max_lengh');
 
-        $category_category_name = @$input['category_category_name'];
+        $category_name = @$input['category_name'];
 
-        if ((strlen($category_category_name) <= $min_lenght)  || ((strlen($category_category_name) >= $max_lenght))) {
+        if ((strlen($category_name) <= $min_lenght)  || ((strlen($category_name) >= $max_lenght))) {
             $this->errors->add('name_unvalid_length', trans('name_unvalid_length', ['NAME_MIN_LENGTH' => $min_lenght, 'NAME_MAX_LENGTH' => $max_lenght]));
             $flag = TRUE;
         }

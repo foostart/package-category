@@ -2,26 +2,25 @@
 
 namespace Foostart\Category\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use Foostart\Category\Models\FooModel;
 
-class Categories extends Model {
+class Categories extends FooModel {
 
     protected $table = 'categories';
     protected $prefix = 'category_';
-    public $timestamps = false;
     protected $fillable = [
         'category_name, category_description, category_status, category_del_flg, category_id_parent'
     ];
     protected $primaryKey = 'category_id';
 
-    public function get_categorys_categories($params = array()) {
-        $eloquent = self::orderBy('category_category_id');
+    public function selectItems($params = array()) {
+        $eloquent = self::orderBy('category_id');
 
-        if (!empty($params['category_category_name'])) {
-            $eloquent->where('category_category_name', 'like', '%'. $params['category_category_name'].'%');
+        if (!empty($params['category_name'])) {
+            $eloquent->where('category_name', 'like', '%'. $params['category_name'].'%');
         }
-        $categorys_category = $eloquent->paginate(10);
-        return $categorys_category;
+        $items = $eloquent->paginate(10);
+        return $items;
     }
 
     /**
@@ -30,17 +29,17 @@ class Categories extends Model {
      * @param type $category_id
      * @return type
      */
-    public function update_category_category($input, $category_id = NULL) {
+    public function updateItem($input = []) {
 
         if (empty($category_id)) {
-            $category_id = $input['category_category_id'];
+            $category_id = $input['category_id'];
         }
 
         $category = self::find($category_id);
 
         if (!empty($category)) {
 
-            $category->category_category_name = $input['category_category_name'];
+            $category->category_name = $input['category_name'];
 
             $category->save();
 
@@ -55,10 +54,10 @@ class Categories extends Model {
      * @param type $input
      * @return type
      */
-    public function add_category_category($input) {
+    public function insertItem($input = []) {
 
         $category = self::create([
-                    'category_category_name' => $input['category_category_name'],
+                    'category_name' => $input['category_name'],
         ]);
         return $category;
     }
@@ -70,12 +69,12 @@ class Categories extends Model {
      */
      public function pluckSelect($category_id = NULL) {
         if ($category_id) {
-            $categories = self::where('category_category_id', '!=', $category_id)
-                    ->orderBy('category_category_name', 'ASC')
-                ->pluck('category_category_name', 'category_category_id');
+            $categories = self::where('category_id', '!=', $category_id)
+                    ->orderBy('category_name', 'ASC')
+                ->pluck('category_name', 'category_id');
         } else {
-            $categories = self::orderBy('category_category_name', 'ASC')
-                ->pluck('category_category_name', 'category_category_id');
+            $categories = self::orderBy('category_name', 'ASC')
+                ->pluck('category_name', 'category_id');
         }
         return $categories;
     }

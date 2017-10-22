@@ -1,7 +1,7 @@
 @extends('laravel-authentication-acl::admin.layouts.base-2cols')
 
 @section('title')
-    Admin area: {{ trans('category::lang_package_category.page_category') }}
+    Admin area: {{ trans('category-admin.page_category') }}
 @stop
 
 @section('content')
@@ -19,7 +19,7 @@
            </div>
         </div>
         <div class="col-md-4">
-            @include('category::category_category.admin.category_category_search')
+            @include('category::admin.category-search')
         </div>
     </div>
 </div>

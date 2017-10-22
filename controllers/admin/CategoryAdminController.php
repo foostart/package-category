@@ -28,17 +28,16 @@ class CategoryAdminController extends Controller {
      * @return type
      */
     public function index(Request $request) {
-
         $params = $request->all();
 
-        $list_category = $this->obj_categories->get_categorys($params);
+        $items = $this->obj_categories->selectItems($params);
 
         $this->data_view = array_merge($this->data_view, array(
-            'categorys' => $list_category,
+            'items' => $items,
             'request' => $request,
             'params' => $params
         ));
-        return view('category::category.admin.category_list', $this->data_view);
+        return view('category::admin.category-list', $this->data_view);
     }
 
     /**
@@ -100,7 +99,7 @@ class CategoryAdminController extends Controller {
 
                     //Message
                     $this->addFlashMessage('message', trans('category::lang_package_category.message_update_successfully'));
-                    return Redirect::route("admin_category.edit", ["id" => $category->category_id]);
+                    return Redirect::route("categories.edit", ["id" => $category->category_id]);
                 } else {
 
                     //Message
@@ -114,7 +113,7 @@ class CategoryAdminController extends Controller {
 
                     //Message
                     $this->addFlashMessage('message', trans('category::lang_package_category.message_add_successfully'));
-                    return Redirect::route("admin_category.edit", ["id" => $category->category_id]);
+                    return Redirect::route("categories.edit", ["id" => $category->category_id]);
                 } else {
 
                     //Message
@@ -157,6 +156,6 @@ class CategoryAdminController extends Controller {
             'category' => $category,
         ));
 
-        return Redirect::route("admin_category");
+        return Redirect::route("categories.list");
     }
 }

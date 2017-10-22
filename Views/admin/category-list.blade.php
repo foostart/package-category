@@ -1,11 +1,10 @@
 @extends('laravel-authentication-acl::admin.layouts.base-2cols')
 
 @section('title')
-Admin area: {{ trans('category::lang_package_category.page_category') }}
+Admin area: {{ trans('category-admin.page_category') }}
 @stop
 
 @section('content')
-
 <div class="row">
     <div class="col-md-12">
         <div class="col-md-8">
@@ -14,9 +13,9 @@ Admin area: {{ trans('category::lang_package_category.page_category') }}
 
                 <div class="panel-heading">
                     <h3 class="panel-title bariol-thin">
-                        <i class="fa fa-group"></i> 
-                        {!! $request->all() ? 
-                            trans('category::lang_package_category.page_search') : trans('category::lang_package_category.page_category') 
+                        <i class="fa fa-group"></i>
+                        {!! $request->all() ?
+                            trans('category-admin.page_search') : trans('category-admin.page_category')
                         !!}
                     </h3>
                 </div>
@@ -32,15 +31,15 @@ Admin area: {{ trans('category::lang_package_category.page_category') }}
                 @foreach($errors->all() as $error)
                 <div class="alert alert-danger flash-message">{!! $error !!}</div>
                 @endforeach
-                @endif 
+                @endif
                 <!--/END ERRORS-->
                 <div class="panel-body">
-                    @include('category::category_category.admin.category_category_item')
+                    @include('category::admin.category-item')
                 </div>
             </div>
         </div>
         <div class="col-md-4">
-            @include('category::category_category.admin.category_category_search')
+            @include('category::admin.category-search')
         </div>
     </div>
 </div>

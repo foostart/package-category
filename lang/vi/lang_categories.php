@@ -6,7 +6,7 @@ return [
     "package_description" => 'Category package is for initial',
     "order" => '#',
     "operations" => 'Operations',
-    'category_category_name_label' => 'Category category name:',
+    'category_name_label' => 'Category category name:',
     /**
      * Page
      */
@@ -29,7 +29,7 @@ return [
     'search' => 'Search',
     'category_name_label' => 'Category name:',
     'category_name_placeholder' => 'category name',
-    'category_category_name'=> 'Category category name',
+    'category_name'=> 'Category category name',
 
     /**
      * Message
@@ -62,7 +62,7 @@ return [
     ///////////////////////////CATEGORIES///////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////
     'page_category_list' => 'Categories',
-    'category_category_add_button' => 'Add new category category',
+    'category_add_button' => 'Add new category category',
     'category_categoty_id' => 'Category ID',
     'category_categoty_name' => 'Category name',
 ];

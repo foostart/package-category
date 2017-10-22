@@ -17,7 +17,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Foostart\\Category\\": "foostart/package_category/"
+            "Foostart\\Category\\": "/"
         }
     },
     "minimum-stability": "dev"

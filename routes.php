@@ -56,7 +56,7 @@ Route::group(['middleware' => ['web']], function () {
         /**
          * delete
          */
-        Route::post('admin/categories/delete', [
+        Route::get('admin/categories/delete', [
             'as' => 'categories.delete',
             'uses' => 'Foostart\Category\Controllers\Admin\CategoryAdminController@delete'
         ]);

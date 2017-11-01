@@ -18,7 +18,7 @@ class CategoryServiceProvider extends ServiceProvider {
     public function boot(Request $request) {
 
         // load view
-        $this->loadViewsFrom(__DIR__ . '/Views', 'package_category');
+        $this->loadViewsFrom(__DIR__ . '/Views', 'package-category');
 
         // include view composers
         require __DIR__ . "/composers.php";
@@ -45,7 +45,7 @@ class CategoryServiceProvider extends ServiceProvider {
 
     /**
      * Public config to system
-     * @source: vendor/foostart/package_category/config
+     * @source: vendor/foostart/package-category/config
      * @destination: config/
      */
     protected function publishConfig() {
@@ -56,7 +56,7 @@ class CategoryServiceProvider extends ServiceProvider {
 
     /**
      * Public language to system
-     * @source: vendor/foostart/package_category/lang
+     * @source: vendor/foostart/package-category/lang
      * @destination: resources/lang
      */
     protected function publishLang() {
@@ -67,13 +67,13 @@ class CategoryServiceProvider extends ServiceProvider {
 
     /**
      * Public view to system
-     * @source: vendor/foostart/package_category/Views
-     * @destination: resources/views/vendor/package_category
+     * @source: vendor/foostart/package-category/Views
+     * @destination: resources/views/vendor/package-category
      */
     protected function publishViews() {
 
         $this->publishes([
-            __DIR__ . '/Views' => base_path('resources/views/vendor/package_category'),
+            __DIR__ . '/Views' => base_path('resources/views/vendor/package-category'),
         ]);
     }
 

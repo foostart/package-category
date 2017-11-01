@@ -13,5 +13,5 @@ return [
     |
     */
     'env' => 0,
-    'load_from' => 'category::',
+    'load_from' => 'package-category::',
 ];

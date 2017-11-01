@@ -1,65 +1,72 @@
+<!--
+| @TITLE
+| Update existing category
+| Add new category
+|
+|-------------------------------------------------------------------------------
+| @REQUIRED
+| Permission
+|
+|÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷
+| @DESCRIPTION
+| 1. Admin (category-update-all) update all categories
+| 2. Manager (category-update-team) update all categories in team
+| 3. User (category-update-self) update his categories
+|
+|_______________________________________________________________________________
+-->
 @extends('laravel-authentication-acl::admin.layouts.base-2cols')
 
 @section('title')
-Admin area: {{ trans('category-admin.page_edit') }}
+    {{ trans('category-admin.page-edit') }}
 @stop
+
 @section('content')
 <div class="row">
     <div class="col-md-12">
 
         <div class="col-md-8">
             <div class="panel panel-info">
+
+                <!--TITLE BAR-->
                 <div class="panel-heading">
                     <h3 class="panel-title bariol-thin">
-                        {!! !empty($category->category_id) ? '<i class="fa fa-pencil"></i>'.trans('category-admin.form_edit') : '<i class="fa fa-users"></i>'.trans('category-admin.form_add') !!}
+                        {!! !empty($category->id)
+                            ?
+                            '<i class="fa fa-pencil"></i>'.trans('category-admin.form_edit')
+                            :
+                            '<i class="fa fa-users"></i>'.trans('category-admin.form_add')
+                        !!}
                     </h3>
                 </div>
+
+                <!--DESCRIPTION-->
+                <div class='panel-description'>
+                    {!! trans('category-admin.page-description') !!}</h4>
+                </div>
+
                 <!-- ERRORS NAME  -->
-                {{-- model general errors from the form --}}
-                @if($errors->has('category_name') )
-                    <div class="alert alert-danger">{!! $errors->first('category_name') !!}</div>
+                @if($errors->count() > 0)
+                    <div class='panel-errors'>
+                        @include('package-category::admin.partials.errors', ['errors' => $errors])
+                    </div>
                 @endif
                 <!-- /END ERROR NAME -->
 
-                <!-- LENGTH NAME  -->
-                @if($errors->has('name_unvalid_length') )
-                    <div class="alert alert-danger">{!! $errors->first('name_unvalid_length') !!}</div>
-                @endif
-                <!-- /END LENGTH NAME -->
 
                 {{-- successful message --}}
-                <?php $message = Session::get('message'); ?>
-                @if( isset($message) )
-                <div class="alert alert-success">{{$message}}</div>
+                @if(Session::get('message'))
+                    <div class='panel-success'>
+                        @include('package-category::admin.partials.success', ['message' => Session::get('message')])
+                    </div>
                 @endif
 
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-md-12 col-xs-12">
-                            <!-- SAMPLE CATEGORIES ID -->
-                            <h4>{!! trans('category-admin.form_heading') !!}</h4>
-                            {!! Form::open(['route'=>['categories.post', 'id' => @$category->category_id],  'files'=>true, 'method' => 'post'])  !!}
 
-                            <!--END SAMPLE CATEGORIES ID  -->
+                            @include('package-category::admin.category-form')
 
-                            <!-- SAMPLE NAME TEXT-->
-                            @include('category::category.elements.text', ['name' => 'category_name'])
-                            <!-- /END SAMPLE NAME TEXT -->
-
-                            {!! Form::hidden('id',@$category->category_id) !!}
-
-                            <!-- DELETE BUTTON -->
-                            <a href="{!! URL::route('categories.delete',['id' => @$category->id, '_token' => csrf_token()]) !!}"
-                               class="btn btn-danger pull-right margin-left-5 delete">
-                                Delete
-                            </a>
-                            <!-- DELETE BUTTON -->
-
-                            <!-- SAVE BUTTON -->
-                            {!! Form::submit('Save', array("class"=>"btn btn-info pull-right ")) !!}
-                            <!-- /SAVE BUTTON -->
-
-                            {!! Form::close() !!}
                         </div>
                     </div>
                 </div>
@@ -67,7 +74,7 @@ Admin area: {{ trans('category-admin.page_edit') }}
         </div>
 
         <div class='col-md-4'>
-            @include('category::admin.category-search')
+            @include('package-category::admin.category-search')
         </div>
 
     </div>

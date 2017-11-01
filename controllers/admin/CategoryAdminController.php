@@ -1,125 +1,115 @@
-<?php
+<?php namespace Foostart\Category\Controllers\Admin;
 
-namespace Foostart\Category\Controllers\Admin;
-
+use Foostart\Category\Library\Controllers\FooController;
 use Illuminate\Http\Request;
-use Foostart\Category\Controllers\Admin\Controller;
 use URL;
 use Route,
     Redirect;
-use Foostart\Category\Models\Categories;
+use Foostart\Category\Models\Category;
 /**
  * Validators
  */
-use Foostart\Category\Validators\CategoryAdminValidator;
+use Foostart\Category\Validators\CategoryValidator;
 
-class CategoryAdminController extends Controller {
+class CategoryAdminController extends FooController {
 
-    public $data_view = array();
-    private $obj_categories = NULL;
-    private $obj_validator = NULL;
+    public $obj_category = NULL;
 
     public function __construct() {
-        $this->obj_categories = new Categories();
+        $this->obj_category = new Category(array('per_page' => config('package-category.per_page')));
+        $this->obj_validator = new CategoryValidator();
     }
 
     /**
      *
-     * @return type
+     * @return view
      */
     public function index(Request $request) {
         $params = $request->all();
 
-        $items = $this->obj_categories->selectItems($params);
-
+        $items = $this->obj_category->selectItems($params);
         $this->data_view = array_merge($this->data_view, array(
             'items' => $items,
             'request' => $request,
             'params' => $params
         ));
-        return view('category::admin.category-list', $this->data_view);
+        return view('package-category::admin.category-items', $this->data_view);
     }
 
     /**
-     *
-     * @return type
+     * Edit existing category by id
+     * Add new category
+     * @return screen
      */
     public function edit(Request $request) {
 
+        $params = $request->all();
+        $this->required_params = [
+            'id' => 1,
+        ];
+
+        $items = $this->obj_category->selectItems($params);
         $category = NULL;
-        $category_id = (int) $request->get('id');
+        $params['id'] = $request->get('id');
 
-
-        if (!empty($category_id) && (is_int($category_id))) {
-            $category = $this->obj_categories->find($category_id);
+        if (!empty($params['id'])) {
+            $category = $this->obj_category->selectItem($params);
         }
-
-        $this->obj_categories = new Categories();
 
         $this->data_view = array_merge($this->data_view, array(
             'category' => $category,
+            'categories' => $items,
             'request' => $request,
-            'categories' => $this->obj_categories->pluckSelect()
+            'categories' => $this->obj_category->pluckSelect()
         ));
-        return view('category::category.admin.category_edit', $this->data_view);
+        return view('package-category::admin.category-edit', $this->data_view);
     }
 
     /**
-     *
-     * @return type
+     * Processing data from POST method: add new item, edit existing item
+     * @return edit page
      */
     public function post(Request $request) {
 
-        $this->obj_validator = new CategoryAdminValidator();
-
         $input = $request->all();
 
-        $category_id = (int) $request->get('id');
+        $id = (int) $request->get('id');
         $category = NULL;
 
         $data = array();
 
-        if (!$this->obj_validator->validate($input)) {
+        if ($this->obj_validator->validate($input)) {
 
-            $data['errors'] = $this->obj_validator->getErrors();
+            //Update existing item
+            if (!empty($id) && is_int($id)) {
 
-            if (!empty($category_id) && is_int($category_id)) {
-
-                $category = $this->obj_categories->find($category_id);
-            }
-        } else {
-            if (!empty($category_id) && is_int($category_id)) {
-
-                $category = $this->obj_categories->find($category_id);
+                $category = $this->obj_category->find($id);
 
                 if (!empty($category)) {
 
-                    $input['category_id'] = $category_id;
-                    $category = $this->obj_categories->update_category($input);
+                    $input['id'] = $id;
+                    $category = $this->obj_category->updateItem($input);
 
                     //Message
-                    $this->addFlashMessage('message', trans('category::lang_package_category.message_update_successfully'));
-                    return Redirect::route("categories.edit", ["id" => $category->category_id]);
-                } else {
-
-                    //Message
-                    $this->addFlashMessage('message', trans('category::lang_package_category.message_update_unsuccessfully'));
+                    return Redirect::route("categories.edit", ["id" => $category->id])
+                                    ->withMessage('11');
                 }
+
+            //Add new item
             } else {
 
-                $category = $this->obj_categories->add_category($input);
-
+                $category = $this->obj_category->insertItem($input);
                 if (!empty($category)) {
 
                     //Message
-                    $this->addFlashMessage('message', trans('category::lang_package_category.message_add_successfully'));
-                    return Redirect::route("categories.edit", ["id" => $category->category_id]);
-                } else {
-
-                    //Message
-                    $this->addFlashMessage('message', trans('category::lang_package_category.message_add_unsuccessfully'));
+                    return Redirect::route("categories.edit", ["id" => $category->id])
+                                    ->withMessage('aa');
                 }
             }
+        } else {
+            $errors = $this->obj_validator->getErrors();
+            // passing the id incase fails editing an already existing item
+            return Redirect::route("categories.edit", $id ? ["id" => $id]: [])->withInput()->withErrors($errors);
         }
 
         $this->data_view = array_merge($this->data_view, array(
@@ -127,7 +117,7 @@ class CategoryAdminController extends Controller {
             'request' => $request,
                 ), $data);
 
-        return view('category::category.admin.category_edit', $this->data_view);
+        return view('package-category::admin.category-edit', $this->data_view);
     }
 
     /**
@@ -137,25 +127,16 @@ class CategoryAdminController extends Controller {
     public function delete(Request $request) {
 
         $category = NULL;
-        $category_id = $request->get('id');
+        $id = $request->get('id');
 
-        if (!empty($category_id)) {
-            $category = $this->obj_categories->find($category_id);
+        if (!empty($id)) {
+            $category = $this->obj_category->find($id);
 
             if (!empty($category)) {
-                //Message
-                $this->addFlashMessage('message', trans('category::lang_package_category.message_delete_successfully'));
-
                 $category->delete();
+                return Redirect::route("categories.list")->withMessage(trans('category-admin.delete-successful'));
             }
-        } else {
-
         }
-
-        $this->data_view = array_merge($this->data_view, array(
-            'category' => $category,
-        ));
-
-        return Redirect::route("categories.list");
+        return Redirect::route("categories.list")->withMessage(trans('category-admin.delete-unsuccessful'));
     }
 }

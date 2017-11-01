@@ -1,23 +1,28 @@
 
 <div class="panel panel-info">
     <div class="panel-heading">
-        <h3 class="panel-title bariol-thin"><i class="fa fa-search"></i><?php echo trans('category-admin.page_search') ?></h3>
+        <h3 class="panel-title bariol-thin"><i class="fa fa-search"></i><?php echo trans('category-admin.page-search') ?></h3>
     </div>
     <div class="panel-body">
 
         {!! Form::open(['route' => 'categories.list','method' => 'get']) !!}
 
-        <!--TITLE-->
-		<div class="form-group">
-            {!! Form::label('category_name',trans('category-admin.category_name_label')) !!}
-            {!! Form::text('category_name', @$params['category_name'], ['class' => 'form-control', 'placeholder' => trans('category-admin.category_name')]) !!}
-        </div>
+            <!--BUTTONS-->
+            <div class="form-group">
+                <a href="{!! URL::route('categories.list') !!}" class="btn btn-default search-reset">{!! trans('tailieuweb.btn-reset') !!}</a>
+                {!! Form::submit(trans('category-admin.search').'', ["class" => "btn btn-info pull-right", 'id' => 'search-submit']) !!}
+            </div>
 
-        {!! Form::submit(trans('category-admin.search').'', ["class" => "btn btn-info pull-right"]) !!}
+            <!-- KEYWORD -->
+            @include('package-category::admin.partials.input_text', [
+                'name' => 'keyword',
+                'label' => trans('tailieuweb.keyword'),
+                'value' => @$params['keyword'],
+            ])
+
+
+            @include('package-category::admin.partials.sorting')
+
         {!! Form::close() !!}
     </div>
 </div>
-
-
-
-

@@ -30,6 +30,7 @@ return [
     'category_name_label' => 'Category name:',
     'category_name_placeholder' => 'category name',
     'category_name'=> 'Category category name',
+    'category_parent' => 'Category parent',
 
     /**
      * Message
@@ -65,4 +66,5 @@ return [
     'category_add_button' => 'Add new category category',
     'category_categoty_id' => 'Category ID',
     'category_categoty_name' => 'Category name',
+    'test' => 'test'
 ];

@@ -26,7 +26,7 @@ class CategoriesFrontController extends Controller
             'request' => $request,
             'categorys' => $categories
         );
-        return view('category::category.index', $this->data);
+        return view('package-category::category.index', $this->data);
     }
 
 }

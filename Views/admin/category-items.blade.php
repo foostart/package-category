@@ -1,7 +1,7 @@
 @extends('laravel-authentication-acl::admin.layouts.base-2cols')
 
 @section('title')
-Admin area: {{ trans('category-admin.page_category') }}
+Admin area: {{ trans('category-admin.page-category') }}
 @stop
 
 @section('content')
@@ -15,7 +15,7 @@ Admin area: {{ trans('category-admin.page_category') }}
                     <h3 class="panel-title bariol-thin">
                         <i class="fa fa-group"></i>
                         {!! $request->all() ?
-                            trans('category-admin.page_search') : trans('category-admin.page_category')
+                            trans('package-category::category-admin.page-search') : trans('package-category::category-admin.page-category')
                         !!}
                     </h3>
                 </div>
@@ -34,12 +34,12 @@ Admin area: {{ trans('category-admin.page_category') }}
                 @endif
                 <!--/END ERRORS-->
                 <div class="panel-body">
-                    @include('category::admin.category-item')
+                    @include('package-category::admin.category-item')
                 </div>
             </div>
         </div>
         <div class="col-md-4">
-            @include('category::admin.category-search')
+            @include('package-category::admin.category-search')
         </div>
     </div>
 </div>
@@ -49,7 +49,7 @@ Admin area: {{ trans('category-admin.page_category') }}
 <!-- DELETE CONFIRM -->
 <script>
     $(".delete").click(function () {
-        return confirm({{ trans('category:lang_package_category.delete_confirm') }});
+        return confirm("{!! trans('package-category::category-admin.delete-confirm') !!}");
     });
 </script>
 <!-- /END DELETE CONFIRM -->

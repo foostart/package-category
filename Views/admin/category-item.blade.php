@@ -1,8 +1,11 @@
+<?php
+
+?>
 <!--ADD SAMPLE CATEGORY ITEM-->
 <div class="row margin-bottom-12">
     <div class="col-md-12">
         <a href="{!! URL::route('categories.edit') !!}" class="btn btn-info pull-right">
-            <i class="fa fa-plus"></i>{{trans('category-admin.category_add_button')}}
+            <i class="fa fa-plus"></i>{{trans('category-admin.btn-add-category')}}
         </a>
     </div>
 </div>
@@ -12,54 +15,68 @@
 <table class="table table-hover">
     <thead>
         <tr>
-            <td style='width:5%'>
+            <th style='width:5%'>
                 {{ trans('category-admin.order') }}
-            </td>
+            </th>
+
+            <!-- category id -->
+            <?php $name = 'id' ?>
+            <th class="hidden-xs" style='width:20%'>{!! trans('tailieuweb.'.$name) !!}
+                <a href='{!! $sorting["url"][$name] !!}' class='tb-id' data-order='asc'>
+                    @if($sorting['items'][$name] == 'asc')
+                        <i class="fa fa-sort-alpha-asc" aria-hidden="true"></i>
+                    @elseif($sorting['items'][$name] == 'desc')
+                        <i class="fa fa-sort-alpha-desc" aria-hidden="true"></i>
+                    @else
+                        <i class="fa fa-sort-desc" aria-hidden="true"></i>
+                    @endif
+                </a>
+            </th>
+
+            <!-- category name -->
+            <?php $name = 'category_name' ?>
+            <th class="hidden-xs" style='width:65%'>{!! trans('tailieuweb.'.$name) !!}
+                <a href='{!! $sorting["url"][$name] !!}' class='tb-id' data-order='asc'>
+                    @if($sorting['items'][$name] == 'asc')
+                        <i class="fa fa-sort-alpha-asc" aria-hidden="true"></i>
+                    @elseif($sorting['items'][$name] == 'desc')
+                        <i class="fa fa-sort-alpha-desc" aria-hidden="true"></i>
+                    @else
+                        <i class="fa fa-sort-desc" aria-hidden="true"></i>
+                    @endif
+                </a>
+            </th>
 
             <th style='width:10%'>
-                {{ trans('category-admin.category_categoty_id') }}
-            </th>
-
-            <th style='width:50%'>
-                {{ trans('category-admin.category_categoty_name') }}
-            </th>
-
-            <th style='width:20%'>
                 {{ trans('category-admin.operations') }}
             </th>
         </tr>
     </thead>
     <tbody>
         <?php
+            global $counter;
             $nav = $items->toArray();
             $counter = ($nav['current_page'] - 1) * $nav['per_page'] + 1;
         ?>
         @foreach($items as $category)
         <tr>
             <!--COUNTER-->
-            <td>
-                <?php echo $counter; $counter++ ?>
-            </td>
-            <!--/END COUNTER-->
+            <td> <?php echo $counter; $counter++ ?> </td>
 
-            <!--SAMPLE CATEGORY ID-->
+            <!--CATEGORY ID-->
             <td>
-                {!! $category->category_id !!}
+                {!! $category->id !!}
             </td>
-            <!--/END SAMPLE CATEGORY ID-->
 
-            <!--SAMPLE CATEGORY NAME-->
-            <td>
-                {!! $category->category_name !!}
-            </td>
-            <!--/END SAMPLE CATEGORY NAME-->
+            <!--CATEGORY NAME-->
+            <td> {!! $category->category_name !!} </td>
 
             <!--OPERATOR-->
             <td>
-                <a href="{!! URL::route('categories.edit', ['id' => $category->category_id]) !!}">
+                <a href="{!! URL::route('categories.edit', ['id' => $category->id]) !!}">
                     <i class="fa fa-edit fa-2x"></i>
                 </a>
-                <a href="{!! URL::route('categories.delete',['id' =>  $category->category_id, '_token' => csrf_token()]) !!}"
+                <a href="{!! URL::route('categories.delete',['id' =>  $category->id, '_token' => csrf_token()]) !!}"
                    class="margin-left-5 delete">
                     <i class="fa fa-trash-o fa-2x"></i>
                 </a>
@@ -67,6 +84,12 @@
             </td>
             <!--/END OPERATOR-->
         </tr>
+        @if($category->childs)
+
+            @include('package-category::admin.partials.td-record', ['childs' => $category->childs, 'counter' => &$counter])
+
+        @endif
+
         @endforeach
     </tbody>
 </table>
@@ -74,7 +97,7 @@
     <!-- FIND MESSAGE -->
     <span class="text-warning">
         <h5>
-            {{ trans('category-admin.message_find_failed') }}
+            {{ trans('category-admin.message-find-failed') }}
         </h5>
     </span>
     <!-- /END FIND MESSAGE -->

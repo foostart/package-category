@@ -17,6 +17,9 @@ class CategoryServiceProvider extends ServiceProvider {
      */
     public function boot(Request $request) {
 
+        //generate context key
+//        $this->generateContextKey();
+
         // load view
         $this->loadViewsFrom(__DIR__ . '/Views', 'package-category');
 
@@ -75,6 +78,22 @@ class CategoryServiceProvider extends ServiceProvider {
         $this->publishes([
             __DIR__ . '/Views' => base_path('resources/views/vendor/package-category'),
         ]);
+    }
+
+    /**
+     * Generate context key
+     */
+    private function generateContextKey(){
+        $numbers_context = 10;
+        $index = 0;
+        $context_key = [];
+        do {
+            $index++;
+            $context_key[] = $index.substr(md5(time().rand(1,99999)),0,11);
+
+        } while ($index < $numbers_context);
+        var_dump($context_key);
+        die();
     }
 
 }

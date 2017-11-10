@@ -18,7 +18,7 @@
 -->
 <div class="row form-group">
     <div class="col-md-12">
-        {!!Form::label(trans('tailieuweb.sorting').': ') !!}
+        {!!Form::label(trans('category-admin.sorting').': ') !!}
     </div>
 
     <!-- SORTING BY -->
@@ -37,7 +37,7 @@
     <div class="col-md-12 margin-top-10">
         <a class="btn btn-default pull-right" id="add-ordering-filter">
             <i class="fa fa-plus"></i>
-            {!! trans('tailieuweb.btn_add') !!}
+            {!! trans('category-admin.btn_add') !!}
         </a>
     </div>
     <!-- SORTED BY -->

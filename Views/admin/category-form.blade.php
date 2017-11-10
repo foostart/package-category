@@ -34,7 +34,7 @@
         <!-- CATEGORY NAME -->
         @include('package-category::admin.partials.input_text', [
         'name' => 'category_name',
-        'label' => trans('tailieuweb.category_name'),
+        'label' => trans('category-admin.category_name'),
         'value' => @$category->category_name,
         'description' => trans('category-admin.category-name-description'),
         'errors' => $errors,
@@ -68,18 +68,19 @@
 
 <div class='hidden-field'>
     {!! Form::hidden('id',@$category->id) !!}
+    {!! Form::hidden('context',$request->get('context',null)) !!}
 </div>
 
 <div class='btn-form'>
     <!-- DELETE BUTTON -->
     <a href="{!! URL::route('categories.delete',['id' => @$category->id, '_token' => csrf_token()]) !!}"
     class="btn btn-danger pull-right margin-left-5 delete">
-    {!! trans('foo-admin.btn-delete') !!}
+    {!! trans('category-admin.btn_delete') !!}
     </a>
     <!-- DELETE BUTTON -->
 
     <!-- SAVE BUTTON -->
-    {!! Form::submit(trans('foo-admin.btn-save'), array("class"=>"btn btn-info pull-right ")) !!}
+    {!! Form::submit(trans('category-admin.btn_save'), array("class"=>"btn btn-info pull-right ")) !!}
     <!-- /SAVE BUTTON -->
 </div>
 {!! Form::close() !!}

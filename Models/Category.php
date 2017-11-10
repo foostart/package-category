@@ -62,7 +62,7 @@ class Category extends FooModel {
     /**
      * Gest list of items
      * @param type $params
-     * @return array
+     * @return object list of categories
      */
     public function selectItems($params = array()) {
 
@@ -83,14 +83,20 @@ class Category extends FooModel {
 
         //build category tree (parent-child)
         if ($this->isTree) {
-            $items = $this->getChilds($items);
+            $items = $this->getChilds($items, $params);
         }
         return $items;
     }
 
-    public function selectItem($params = array()) {
+    /**
+     * Get a category by {id, context}
+     * @param type $params
+     * @return object category
+     */
+    public function selectItem($params = array(), $key = 'id') {
 
-        $item = $this->find($params['id']);
+        $item = $this->where($this->table.".$key", $params[$key])
+                     ->where($this->table.'.category_context', $params['context'])->first();
         return $item;
     }
 
@@ -139,6 +145,11 @@ class Category extends FooModel {
                                 $this->isTree = FALSE;
                             }
                             break;
+                        case 'context':
+                            if (!empty($value)) {
+                                $elo = $elo->where($this->table . '.category_context', 'LIKE', $value);
+                            }
+                            break;
                         default:
                             break;
                     }
@@ -152,7 +163,6 @@ class Category extends FooModel {
 
         return $elo;
     }
-
 
     /**
      *
@@ -197,16 +207,18 @@ class Category extends FooModel {
             $id = $input['id'];
         }
 
-        $category = self::find($id);
+        $category = $this->selectItem($input);
 
         if (!empty($category)) {
+
+            $category_id_parent_old = $category->category_id_parent;
 
             $category->category_name = $input['category_name'];
             $category->category_id_parent = $input['category_id_parent'];
 
             if (!empty($input['category_id_parent'])) {
 
-                $category_parent = self::find($input['category_id_parent']);
+                $category_parent = $this->selectItem($input, 'category_id_parent');
 
                 $category_id_parent_list = array($category_parent->id => 1);
 
@@ -253,38 +265,58 @@ class Category extends FooModel {
         }
     }
 
-
     /**
      *
      * @param type $input
      * @return type
      */
     public function insertItem($input = []) {
+
+        $category_id_parent = $input['category_id_parent'];
+        $category_id_parent_str = null;
+        if ($category_id_parent) {
+
+            $category_parent = $this->selectItem($input, 'category_id_parent');
+
+            $category_id_parent_list = array($category_parent->id => 1);
+
+            if ($category_parent->category_id_parent_str) {
+                $category_id_parent_list_sub = json_decode($category_parent->category_id_parent_str);
+                $category_id_parent_list += (array) $category_id_parent_list_sub;
+            }
+
+            $category_id_parent_str = json_encode($category_id_parent_list);
+        }
+
         $category = self::create([
                     'category_name' => $input['category_name'],
+                    'category_id_parent' => $category_id_parent,
+                    'category_id_parent_str' => $category_id_parent_str,
+                    'category_context' => $input['context'],
         ]);
         return $category;
     }
 
     /**
-     * Get list of categorys categories
+     * Get list of categories into select
      * @param type $id
      * @return type
      */
-     public function pluckSelect($id = NULL) {
-        if ($id) {
-            $categories = self::where('id', '!=', $id)
-                    ->orderBy('category_name', 'ASC')
-                ->pluck('category_name', 'id');
-        } else {
-            $categories = self::orderBy('category_name', 'ASC')
-                ->pluck('category_name', 'id');
-        }
+     public function pluckSelect($params) {
+
+        $categories = self::orderBy('category_name', 'ASC')
+                        ->where($this->table.'.category_context', @$params['context'])
+                        ->pluck('category_name', 'id');
+
         return $categories;
     }
 
-    public function deleteItem($input = []) {
-
+    public function deleteItem($input = [], $category = NULL) {
+        $category = $this->selectItem($input);
+        if ($category) {
+            return $category->delete();
+        }
+        return False;
     }
 
     /**
@@ -292,19 +324,24 @@ class Category extends FooModel {
      * @param type $categories
      * @return type
      */
-    public function getChilds($categories) {
+    public function getChilds($categories, $params = array()) {
 
         foreach ($categories as $key => $category) {
 
             $parent_pattern = '"'.$category->id.'":1';
 
-            $obj_category = self::where('category_id_parent_str', 'LIKE',  "%{$parent_pattern}%")->get();
+            $obj_category = self::where('category_id_parent_str', 'LIKE',  "%{$parent_pattern}%");
+
+            if (!empty($params['context'])) {
+                $obj_category->where($this->table . '.category_context', 'LIKE', $params['context']);
+            }
+            $obj_category = $obj_category->get();
 
             if ($obj_category) {
                 $categories[$key]->childs =  $this->buildTree($category->id, $obj_category);
             }
         }
-        
+
         return $categories;
     }
 
@@ -324,4 +361,24 @@ class Category extends FooModel {
         }
         return $childs;
     }
+
+    /**
+     *
+     * @param type $category_id_parent
+     * @return type
+     */
+    public function getIdChilds($category_id_parent) {
+
+        $parent_pattern = '"'.$category_id_parent.'":1';
+        $obj_category = self::where('category_id_parent_str', 'LIKE',  "%{$parent_pattern}%")->get();
+
+        $id_childs = [$category_id_parent];
+        if ($obj_category) {
+            foreach ($obj_category as $category) {
+                $id_childs[] = $category->id;
+            }
+        }
+        return $id_childs;
+    }
+
 }

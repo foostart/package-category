@@ -1,7 +1,7 @@
 @extends('laravel-authentication-acl::admin.layouts.base-2cols')
 
 @section('title')
-Admin area: {{ trans('category-admin.page-category') }}
+    {{ trans('category-admin.category_contexts') }}
 @stop
 
 @section('content')
@@ -14,43 +14,32 @@ Admin area: {{ trans('category-admin.page-category') }}
                 <div class="panel-heading">
                     <h3 class="panel-title bariol-thin">
                         <i class="fa fa-group"></i>
-                        {!! $request->all() ?
-                            trans('category-admin.category_search') : trans('package-category::category-admin.page-category')
-                        !!}
+                        {!! trans('category-admin.category_contexts') !!}
                     </h3>
                 </div>
                 <!--MESSAGE-->
                 <?php $message = Session::get('message'); ?>
                 @if( isset($message) )
-                <div class="alert alert-success flash-message">{!! $message !!}</div>
+                    <div class="alert alert-success flash-message">{!! $message !!}</div>
                 @endif
                 <!--/END MESSAGE-->
 
                 <!--ERRORS-->
                 @if($errors && ! $errors->isEmpty() )
-                @foreach($errors->all() as $error)
-                <div class="alert alert-danger flash-message">{!! $error !!}</div>
-                @endforeach
+                    @foreach($errors->all() as $error)
+                        <div class="alert alert-danger flash-message">{!! $error !!}</div>
+                    @endforeach
                 @endif
+
                 <!--/END ERRORS-->
                 <div class="panel-body">
-                    @include('package-category::admin.category-item')
+                    @include('package-category::admin.category-context')
                 </div>
             </div>
         </div>
         <div class="col-md-4">
-            @include('package-category::admin.category-search')
+
         </div>
     </div>
 </div>
-@stop
-
-@section('footer_scripts')
-<!-- DELETE CONFIRM -->
-<script>
-    $(".delete").click(function () {
-        return confirm("{!! trans('package-category::category-admin.delete-confirm') !!}");
-    });
-</script>
-<!-- /END DELETE CONFIRM -->
 @stop

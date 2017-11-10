@@ -1,6 +1,7 @@
 <?php namespace Foostart\Category\Helpers;
 
 use Foostart\Category\Models\Category;
+use Config;
 
 class FooCategory {
 
@@ -10,11 +11,22 @@ class FooCategory {
         $this->obj_category = new Category();
     }
 
-    public function pluckSelect(){
-        $select_category_list = $this->obj_category->pluckSelect();
+    public function pluckSelect($params){
+        $select_category_list = $this->obj_category->pluckSelect($params);
         $select_category_list = $select_category_list->toArray();
         $select_category_list[''] = trans('category-admin.all');
         return $select_category_list;
     }
 
+    public function getContextKey($context) {
+
+        $configs =  Config::get('package-category');
+        $contexts = $configs['contexts'];
+
+        if (!empty($contexts[$context])) {
+            return $contexts[$context];
+        }
+
+        return FALSE;
+    }
 }

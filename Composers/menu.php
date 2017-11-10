@@ -3,7 +3,30 @@
 use LaravelAcl\Authentication\Classes\Menu\SentryMenuFactory;
 
 /**
- * User sidebar
+ * Category sidebar
+ */
+View::composer([
+    'package-category::admin.category-contexts',
+    'package-category::admin.category-context',
+        ], function ($view) {
+
+    /*
+    |-----------------------------------------------------------------------
+    | Sidebar Items
+    |-----------------------------------------------------------------------
+    |
+    */
+    $view->with('sidebar_items', [
+        trans('category-admin.category_contexts') => [
+            "url" => URL::route('categories.list'),
+            "icon" => '<i class="fa fa-user"></i>'
+        ]
+    ]);
+});
+
+
+/**
+ * Category sidebar
  */
 View::composer([
     'package-category::admin.category-edit',
@@ -19,13 +42,14 @@ View::composer([
     |-----------------------------------------------------------------------
     |
     */
+
     $view->with('sidebar_items', [
-        trans('category-admin.category-items') => [
-            "url" => URL::route('categories.list'),
+        trans('category-admin.category_list') => [
+            "url" => URL::route('categories.list', ['context' => $_GET['context']]),
             "icon" => '<i class="fa fa-user"></i>'
         ],
-        trans('category-admin.category-add') => [
-            'url' => URL::route('categories.edit'),
+        trans('category-admin.category_add') => [
+            'url' => URL::route('categories.edit', ['context' => $_GET['context']]),
             "icon" => '<i class="fa fa-plus-circle"></i>'
         ]
     ]);
@@ -39,8 +63,8 @@ View::composer([
     //List of sorting
     $orders = [
         '' => trans('tailieuweb.no_selected'),
-        'id' => trans('tailieuweb.id'),
-        'category_name' => trans('tailieuweb.category_name'),
+        'id' => trans('category-admin.id'),
+        'category_name' => trans('category-admin.name'),
         'updated_at' => trans('tailieuweb.updated_at'),
     ];
     $sorting = [

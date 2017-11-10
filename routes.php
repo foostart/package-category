@@ -16,7 +16,7 @@ Route::get('category', [
  */
 Route::group(['middleware' => ['web']], function () {
 
-    Route::group(['middleware' => ['admin_logged', 'can_see']], function () {
+    Route::group(['middleware' => ['admin_logged', 'can_see', 'in_context']], function () {
 
         /*
           |-----------------------------------------------------------------------

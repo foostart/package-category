@@ -35,14 +35,14 @@
                             ?
                             '<i class="fa fa-pencil"></i>'.trans('category-admin.form_edit')
                             :
-                            '<i class="fa fa-users"></i>'.trans('category-admin.form_add')
+                            '<i class="fa fa-users"></i>'.trans('category-admin.category_add')
                         !!}
                     </h3>
                 </div>
 
                 <!--DESCRIPTION-->
                 <div class='panel-description'>
-                    {!! trans('category-admin.page-description') !!}</h4>
+                    {!! trans('category-admin.category_add_description') !!}</h4>
                 </div>
 
                 <!-- ERRORS NAME  -->

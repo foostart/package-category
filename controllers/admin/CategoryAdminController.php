@@ -21,34 +21,49 @@ class CategoryAdminController extends FooController {
     }
 
     /**
-     *
+     * With Super admin: show list of context key
+     * With another users: show list of categories by context
      * @return view
+     * @status publish
      */
     public function index(Request $request) {
-        $params = $request->all();
 
-        $items = $this->obj_category->selectItems($params);
-        $this->data_view = array_merge($this->data_view, array(
-            'items' => $items,
-            'request' => $request,
-            'params' => $params
-        ));
-        return view('package-category::admin.category-items', $this->data_view);
+        $params = $request->all();
+        $context_key = $request->get('context', NULL);
+
+        if ($context_key) {
+
+            $items = $this->obj_category->selectItems($params);
+            $this->data_view = array_merge($this->data_view, array(
+                'items' => $items,
+                'request' => $request,
+                'params' => $params
+            ));
+            return view('package-category::admin.category-items', $this->data_view);
+
+        } else {
+
+            $this->data_view = array_merge($this->data_view, array(
+                'request' => $request,
+                'params' => $params,
+                'contexts' => config('package-category.contexts'),
+            ));
+            return view('package-category::admin.category-contexts',$this->data_view);
+
+        }
     }
 
     /**
-     * Edit existing category by id
-     * Add new category
+     * Edit existing category by id - context
+     * Add new category by context
      * @return screen
      */
     public function edit(Request $request) {
 
         $params = $request->all();
-        $this->required_params = [
-            'id' => 1,
-        ];
 
         $items = $this->obj_category->selectItems($params);
+
         $category = NULL;
         $params['id'] = $request->get('id');
 
@@ -60,7 +75,7 @@ class CategoryAdminController extends FooController {
             'category' => $category,
             'categories' => $items,
             'request' => $request,
-            'categories' => $this->obj_category->pluckSelect()
+            'categories' => $this->obj_category->pluckSelect($params)
         ));
         return view('package-category::admin.category-edit', $this->data_view);
     }
@@ -91,7 +106,9 @@ class CategoryAdminController extends FooController {
                     $category = $this->obj_category->updateItem($input);
 
                     //Message
-                    return Redirect::route("categories.edit", ["id" => $category->id])
+                    return Redirect::route("categories.edit", ["id" => $category->id,
+                                                               'context' => $request->get('context', null)
+                                                                ])
                                     ->withMessage('11');
                 }
 
@@ -99,17 +116,21 @@ class CategoryAdminController extends FooController {
             } else {
 
                 $category = $this->obj_category->insertItem($input);
+
                 if (!empty($category)) {
 
                     //Message
-                    return Redirect::route("categories.edit", ["id" => $category->id])
-                                    ->withMessage('aa');
+                    return Redirect::route("categories.edit", ["id" => $category->id,
+                                                               'context' => $request->get('context', null)
+                                                            ])->withMessage('aa');
                 }
+
             }
         } else {
             $errors = $this->obj_validator->getErrors();
             // passing the id incase fails editing an already existing item
-            return Redirect::route("categories.edit", $id ? ["id" => $id]: [])->withInput()->withErrors($errors);
+            return Redirect::route("categories.edit", $id ? ["id" => $id,'context' => $request->get('context', null)]: [])
+                    ->withInput()->withErrors($errors);
         }
 
         $this->data_view = array_merge($this->data_view, array(
@@ -121,22 +142,24 @@ class CategoryAdminController extends FooController {
     }
 
     /**
-     *
+     * Delete category
      * @return type
      */
     public function delete(Request $request) {
 
         $category = NULL;
+        $params = $request->all();
         $id = $request->get('id');
 
         if (!empty($id)) {
-            $category = $this->obj_category->find($id);
+            $category = $this->obj_category->selectItem($params);
 
             if (!empty($category)) {
-                $category->delete();
-                return Redirect::route("categories.list")->withMessage(trans('category-admin.delete-successful'));
+                if ($this->obj_category->deleteItem($params, $category)) {
+                    return Redirect::route("categories.list", ['context' => $params['context']])->withMessage(trans('category-admin.delete-successful'));
+                }
             }
         }
-        return Redirect::route("categories.list")->withMessage(trans('category-admin.delete-unsuccessful'));
+        return Redirect::route("categories.list",['context' => $params['context']])->withMessage(trans('category-admin.delete-unsuccessful'));
     }
 }

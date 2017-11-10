@@ -4,8 +4,8 @@
 <!--ADD SAMPLE CATEGORY ITEM-->
 <div class="row margin-bottom-12">
     <div class="col-md-12">
-        <a href="{!! URL::route('categories.edit') !!}" class="btn btn-info pull-right">
-            <i class="fa fa-plus"></i>{{trans('category-admin.btn-add-category')}}
+        <a href="{!! URL::route('categories.edit', ['context' => $request->get('context')]) !!}" class="btn btn-info pull-right">
+            <i class="fa fa-plus"></i>{{trans('category-admin.category_add')}}
         </a>
     </div>
 </div>
@@ -19,23 +19,9 @@
                 {{ trans('category-admin.order') }}
             </th>
 
-            <!-- category id -->
-            <?php $name = 'id' ?>
-            <th class="hidden-xs" style='width:20%'>{!! trans('tailieuweb.'.$name) !!}
-                <a href='{!! $sorting["url"][$name] !!}' class='tb-id' data-order='asc'>
-                    @if($sorting['items'][$name] == 'asc')
-                        <i class="fa fa-sort-alpha-asc" aria-hidden="true"></i>
-                    @elseif($sorting['items'][$name] == 'desc')
-                        <i class="fa fa-sort-alpha-desc" aria-hidden="true"></i>
-                    @else
-                        <i class="fa fa-sort-desc" aria-hidden="true"></i>
-                    @endif
-                </a>
-            </th>
-
             <!-- category name -->
             <?php $name = 'category_name' ?>
-            <th class="hidden-xs" style='width:65%'>{!! trans('tailieuweb.'.$name) !!}
+            <th class="hidden-xs" style='width:65%'>{!! trans('category-admin.'.$name) !!}
                 <a href='{!! $sorting["url"][$name] !!}' class='tb-id' data-order='asc'>
                     @if($sorting['items'][$name] == 'asc')
                         <i class="fa fa-sort-alpha-asc" aria-hidden="true"></i>
@@ -63,20 +49,23 @@
             <!--COUNTER-->
             <td> <?php echo $counter; $counter++ ?> </td>
 
-            <!--CATEGORY ID-->
-            <td>
-                {!! $category->id !!}
-            </td>
-
             <!--CATEGORY NAME-->
             <td> {!! $category->category_name !!} </td>
 
             <!--OPERATOR-->
             <td>
-                <a href="{!! URL::route('categories.edit', ['id' => $category->id]) !!}">
+                <a href="{!! URL::route('categories.edit', ['id' => $category->id,
+                                                            '_token' => csrf_token(),
+                                                            'context' => $request->get('context',null)
+                                                           ])
+                        !!}">
                     <i class="fa fa-edit fa-2x"></i>
                 </a>
-                <a href="{!! URL::route('categories.delete',['id' =>  $category->id, '_token' => csrf_token()]) !!}"
+                <a href="{!! URL::route('categories.delete',['id' => $category->id,
+                                                            '_token' => csrf_token(),
+                                                            'context' => $request->get('context',null)
+                                                             ])
+                         !!}"
                    class="margin-left-5 delete">
                     <i class="fa fa-trash-o fa-2x"></i>
                 </a>

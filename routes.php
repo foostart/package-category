@@ -2,39 +2,108 @@
 
 use Illuminate\Session\TokenMismatchException;
 
-/**
- * FRONT
- */
-Route::get('category', [
-    'as' => 'category',
-    'uses' => 'Foostart\Category\Controllers\Front\CategoryFrontController@index'
-]);
-
-
-/**
- * ADMINISTRATOR
- */
+/*
+|-----------------------------------------------------------------------
+| CONTEXT
+|-----------------------------------------------------------------------
+| Manage context
+| 1. List of context
+| 2. Edit context
+| 3. Delete context
+| 4. Add new context
+|
+*/
 Route::group(['middleware' => ['web']], function () {
 
-    Route::group(['middleware' => ['admin_logged', 'can_see', 'in_context']], function () {
+    Route::group(['middleware' => ['admin_logged', 'can_see', 'in_context'],
+                  'namespace' => 'Foostart\Category\Controllers\Admin',
+        ], function () {
 
-        /*
-          |-----------------------------------------------------------------------
-          | Manage category
-          |-----------------------------------------------------------------------
-          | 1. List of categories
-          | 2. Edit category
-          | 3. Delete category
-          | 4. Add new category
-          |
+
+        /**
+         * list
+         */
+        Route::get('admin/contexts/list', [
+            'as' => 'contexts.list',
+            'uses' => 'ContextAdminController@index'
+        ]);
+
+        /**
+         * edit-add
+         */
+        Route::get('admin/contexts/edit', [
+            'as' => 'contexts.edit',
+            'uses' => 'ContextAdminController@edit'
+        ]);
+
+        /**
+         * post
+         */
+        Route::post('admin/contexts/edit', [
+            'as' => 'contexts.post',
+            'uses' => 'ContextAdminController@post'
+        ]);
+
+        /**
+         * delete
+         */
+        Route::get('admin/contexts/delete', [
+            'as' => 'contexts.delete',
+            'uses' => 'ContextAdminController@delete'
+        ]);
+
+        /**
+         * configs
         */
+        Route::get('admin/contexts/config', [
+            'as' => 'contexts.config',
+            'uses' => 'ContextAdminController@config'
+        ]);
+
+        Route::post('admin/contexts/config', [
+            'as' => 'contexts.config',
+            'uses' => 'ContextAdminController@config'
+        ]);
+
+        /**
+         * language
+        */
+        Route::get('admin/contexts/lang', [
+            'as' => 'contexts.lang',
+            'uses' => 'ContextAdminController@lang'
+        ]);
+
+        Route::post('admin/contexts/lang', [
+            'as' => 'contexts.lang',
+            'uses' => 'ContextAdminController@lang'
+        ]);
+
+    });
+});
+
+
+/*
+|-----------------------------------------------------------------------
+| CATEGORIES
+|-----------------------------------------------------------------------
+| Manage categories
+|
+|
+|
+*/
+
+Route::group(['middleware' => ['web']], function () {
+
+    Route::group(['middleware' => ['admin_logged', 'can_see', 'in_context'],
+                  'namespace' => 'Foostart\Category\Controllers\Admin',
+        ], function () {
 
         /**
          * list
          */
         Route::get('admin/categories/list', [
             'as' => 'categories.list',
-            'uses' => 'Foostart\Category\Controllers\Admin\CategoryAdminController@index'
+            'uses' => 'CategoryAdminController@index'
         ]);
 
         /**
@@ -42,7 +111,7 @@ Route::group(['middleware' => ['web']], function () {
          */
         Route::get('admin/categories/edit', [
             'as' => 'categories.edit',
-            'uses' => 'Foostart\Category\Controllers\Admin\CategoryAdminController@edit'
+            'uses' => 'CategoryAdminController@edit'
         ]);
 
         /**
@@ -50,7 +119,7 @@ Route::group(['middleware' => ['web']], function () {
          */
         Route::post('admin/categories/edit', [
             'as' => 'categories.post',
-            'uses' => 'Foostart\Category\Controllers\Admin\CategoryAdminController@post'
+            'uses' => 'CategoryAdminController@post'
         ]);
 
         /**
@@ -58,7 +127,33 @@ Route::group(['middleware' => ['web']], function () {
          */
         Route::get('admin/categories/delete', [
             'as' => 'categories.delete',
-            'uses' => 'Foostart\Category\Controllers\Admin\CategoryAdminController@delete'
+            'uses' => 'CategoryAdminController@delete'
+        ]);
+
+        /**
+         * configs
+        */
+        Route::get('admin/categories/config', [
+            'as' => 'categories.config',
+            'uses' => 'CategoryAdminController@config'
+        ]);
+
+        Route::post('admin/categories/config', [
+            'as' => 'categories.config',
+            'uses' => 'CategoryAdminController@config'
+        ]);
+
+        /**
+         * language
+        */
+        Route::get('admin/categories/lang', [
+            'as' => 'categories.lang',
+            'uses' => 'CategoryAdminController@lang'
+        ]);
+
+        Route::post('admin/categories/lang', [
+            'as' => 'categories.lang',
+            'uses' => 'CategoryAdminController@lang'
         ]);
 
     });

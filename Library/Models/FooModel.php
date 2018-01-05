@@ -11,30 +11,60 @@ class FooModel extends Model {
 
 
     protected $prefix_table = '';
+
     protected $prefix_column = '';
 
-    public $timestamps = true;
+    protected $table = NULL;
+
+    public $timestamps = TRUE;
+
+    protected $fillable = [];
+
+    protected $fields = [];
+
+    protected $valid_insert_fields = [];
+
+    protected $valid_ordering_fields = [];
+    protected $valid_filter_fields = [];
+
+    protected $primaryKey = [];
+
+    protected $perPage = 10;
 
     public static $multiple_ordering_separator = ",";
 
+    protected $field_status = 'status';
 
-    protected $valid_ordering_fields = ['id', 'category_name'];
+    protected $status = NULL;
 
-    //Check filter name is valid
-    protected $valid_fields_filter = ['id', 'category_name'];
-
-    public function selectItem($param = []) {
-
-    }
-
+    /**
+     *
+     * @param array $attributes
+     */
     public function __construct(array $attributes = array()) {
         parent::__construct($attributes);
+        $this->status = config('foostart.item.status');
     }
 
+    /**
+     *
+     * @param ARRAY $params list of parameters
+     * @return ARRAY OBJECT list of items
+     */
     public function selectItems($params = []) {
         $items = [];
         return $items;
     }
+
+    /**
+     *
+     * @param ARRAY $params list of parameters
+     * @param OBJECT $item
+     */
+    public function selectItem($params = [], $key = NULL) {
+
+    }
+
 
 
     /**
@@ -64,9 +94,15 @@ class FooModel extends Model {
      * @param array $filters
      * @return array list of valid filters
      */
-    protected function isValidFilters(array $filters = []) {
+    protected function isValidFilters(&$filters = []) {
 
         $flag = TRUE;
+
+        foreach ($filters as $key => $value) {
+            if (!in_array($key, $this->valid_filter_fields)) {
+                unset($filters[$key]);
+            }
+        }
 
         return $flag;
     }
@@ -166,6 +202,95 @@ class FooModel extends Model {
     public function getPerPage()
     {
         return $this->per_page;
+    }
+
+    /**
+     * Get integer from parameters
+     * @param ARRAY $params list of parameters
+     * @return INT value
+     */
+    public function getInt($params, $key) {
+
+        $value = NULL;
+
+        if (isset($params[$key])) {
+            $value = (int)$params[$key];
+        }
+
+        return $value;
+    }
+
+    /**
+     *
+     * @param ARRAY $params list of parameters
+     * @param STRING $key is field name
+     * @return DATE value
+     */
+    public function getDate($params, $key) {
+        $value = NULL;
+
+        if (isset($params[$key])) {
+            $value = (int)$params[$key];
+        }
+
+        return $value;
+    }
+
+    /**
+     *
+     * @param ARRAY $params list of parameters
+     * @param STRING $key is field name
+     * @return TEXT value
+     */
+    public function getText($params, $key) {
+        $value = NULL;
+
+        if (isset($params[$key])) {
+            $value = $params[$key];
+        }
+
+        return $value;
+    }
+
+    /**
+     *
+     * @param ARRAY $params
+     * @param ARRAY $fields
+     * @return ARRAY fields data
+     */
+    public function getDataFields($params, $fields) {
+
+        $data_fields = [];
+
+        foreach ($fields as $key => $field) {
+
+            $funGet = 'get'.$field['type'];
+            $data_fields[$key] = $this->$funGet($params, $field['name']);
+        }
+
+        return $data_fields;
+    }
+
+    /**
+     * Change status item to trash
+     * @param ELOQUENT OBJECT $item
+     * @return ELOQUENT OBJECT
+     */
+    public function fdelete($item) {
+
+        $field_status = $this->field_status;
+        $item->$field_status = $this->status['in_trash'];
+
+        return $item->save();
+    }
+
+    /**
+     * Get list of statuses to push to select
+     * @return ARRAY list of statuses
+     */
+    public function getPluckStatus() {
+       $pluck_status = config('foostart.item.pluck_status');
+       return $pluck_status;
     }
 
 }

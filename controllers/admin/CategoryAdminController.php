@@ -1,56 +1,85 @@
 <?php namespace Foostart\Category\Controllers\Admin;
 
-use Foostart\Category\Library\Controllers\FooController;
+/*
+|-----------------------------------------------------------------------
+| CategoryAdminController
+|-----------------------------------------------------------------------
+| @author: Kang
+| @website: http://foostart.com
+| @date: 28/12/2017
+|
+*/
+
+
 use Illuminate\Http\Request;
-use URL;
-use Route,
-    Redirect;
+use URL, Route, Redirect;
+use Illuminate\Support\Facades\App;
+
+use Foostart\Category\Library\Controllers\FooController;
+use Foostart\Category\Models\Context;
 use Foostart\Category\Models\Category;
-/**
- * Validators
- */
 use Foostart\Category\Validators\CategoryValidator;
 
 class CategoryAdminController extends FooController {
 
-    public $obj_category = NULL;
+    public $obj_item = NULL;
+    public $obj_context = NULL;
 
     public function __construct() {
-        $this->obj_category = new Category(array('per_page' => config('package-category.per_page')));
+
+        parent::__construct();
+        // models
+        $this->obj_item = new Category(array('perPage' => 10));
+        $this->obj_context = new Context();
+
+        // validators
         $this->obj_validator = new CategoryValidator();
+
+        // set language files
+        $this->plang_admin = 'category-admin';
+        $this->plang_front = 'category-front';
+
+        // package name
+        $this->package_name = 'package-category';
+        $this->package_base_name = 'category';
+
+        // root routers
+        $this->root_router = 'categories';
+
+        // page views
+        $this->page_views = [
+            'admin' => [
+                'items' => $this->package_name.'::admin.'.$this->package_base_name.'-items',
+                'edit'  => $this->package_name.'::admin.'.$this->package_base_name.'-edit',
+                'config'  => $this->package_name.'::admin.'.$this->package_base_name.'-config',
+                'lang'  => $this->package_name.'::admin.'.$this->package_base_name.'-lang',
+            ]
+        ];
+
+        $this->data_view['status'] = $this->obj_item->getPluckStatus();
+
     }
 
-    /**
-     * With Super admin: show list of context key
-     * With another users: show list of categories by context
-     * @return view
-     * @status publish
+        /**
+     * Show list of items
+     * @return view list of items
+     * @date 27/12/2017
      */
     public function index(Request $request) {
 
         $params = $request->all();
-        $context_key = $request->get('context', NULL);
+        $params['category_id_parent'] = NULL;
 
-        if ($context_key) {
+        $items = $this->obj_item->selectItems($params);
 
-            $items = $this->obj_category->selectItems($params);
-            $this->data_view = array_merge($this->data_view, array(
-                'items' => $items,
-                'request' => $request,
-                'params' => $params
-            ));
-            return view('package-category::admin.category-items', $this->data_view);
-
-        } else {
-
-            $this->data_view = array_merge($this->data_view, array(
-                'request' => $request,
-                'params' => $params,
-                'contexts' => config('package-category.contexts'),
-            ));
-            return view('package-category::admin.category-contexts',$this->data_view);
-
-        }
+        // display view
+        $this->data_view = array_merge($this->data_view, array(
+            'items' => $items,
+            'request' => $request,
+            'params' => $params,
+        ));
+        
+        return view($this->page_views['admin']['items'], $this->data_view);
     }
 
     /**
@@ -92,6 +121,7 @@ class CategoryAdminController extends FooController {
         $category = NULL;
 
         $data = array();
+        $context = $request->get('context', null);
 
         if ($this->obj_validator->validate($input)) {
 
@@ -107,7 +137,7 @@ class CategoryAdminController extends FooController {
 
                     //Message
                     return Redirect::route("categories.edit", ["id" => $category->id,
-                                                               'context' => $request->get('context', null)
+                                                               'context' => $context
                                                                 ])
                                     ->withMessage('11');
                 }
@@ -121,21 +151,23 @@ class CategoryAdminController extends FooController {
 
                     //Message
                     return Redirect::route("categories.edit", ["id" => $category->id,
-                                                               'context' => $request->get('context', null)
+                                                               'context' => $context
                                                             ])->withMessage('aa');
                 }
 
             }
         } else {
+
             $errors = $this->obj_validator->getErrors();
             // passing the id incase fails editing an already existing item
-            return Redirect::route("categories.edit", $id ? ["id" => $id,'context' => $request->get('context', null)]: [])
+            return Redirect::route("categories.edit", $id ? ["id" => $id,'context' => $context]: ['context' => $context])
                     ->withInput()->withErrors($errors);
         }
 
         $this->data_view = array_merge($this->data_view, array(
             'category' => $category,
             'request' => $request,
+            'context' => $context
                 ), $data);
 
         return view('package-category::admin.category-edit', $this->data_view);

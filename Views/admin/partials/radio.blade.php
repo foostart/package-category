@@ -4,9 +4,9 @@
 |
 |-------------------------------------------------------------------------------
 | @REQUIRED
-| $name is input name
-| $value is input value
-| $label is input lable
+| $name is radio name
+| $value is radio value
+| $label is radio lable
 | $placehover is placehover text
 | $errors is error name
 | $description is description text
@@ -21,7 +21,10 @@
     //name
     $name = empty($name)?'undefined':$name;
     //value
-    $value = empty($value)?$request->get($name):$value;
+    $value = !empty($value)?$value:0;
+   
+    //items
+    $items = empty($items)?[]:$items;
     //label
     $label = empty($label) ? '' : $label;
     //place hover
@@ -37,14 +40,23 @@
 <div class="form-group">
 
     <!--element-->
+    @if($label)
     {!! Form::label($name, $label) !!}
-    {!! Form::text($name, $value, ['class' => 'form-control', 'placeholder' => $placehover]) !!}
+    @endif
+
+    @if($items)
+        @foreach($items as $key => $item)
+            <span class='radio-item' style="display: block;">
+                {{ Form::radio($name, $key, $key==$value?true:false, ['class' => '', 'id' => $name.'-'.$key]) }}
+                <label for='{!! $name."-".$key !!}' style="font-weight: normal;">{!! $item !!}</label>
+            </span>
+        @endforeach
+    @endif
 
     <!--description-->
     @if($description)
         <span class='input-text-description'>{!! $description !!}</span>
     @endif
-
     <!--errors-->
     @if ($errors->has($name))
         <ul class='error-item'>

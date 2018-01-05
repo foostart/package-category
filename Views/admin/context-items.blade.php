@@ -1,7 +1,7 @@
 @extends('laravel-authentication-acl::admin.layouts.base-2cols')
 
 @section('title')
-    {{ trans($plang_admin.'.pages.title-list') }}
+    {{ trans($plang_admin.'.pages.title-list-context') }}
 @stop
 
 @section('content')
@@ -10,14 +10,14 @@
         <div class="col-md-12">
 
             <!--LIST OF ITEMS-->
-            <div class="col-md-8">
+            <div class="col-md-9">
 
                 <div class="panel panel-info">
 
                     <!--HEADING-->
                     <div class="panel-heading">
                         <h3 class="panel-title bariol-thin"><i class="fa fa-list-ul" aria-hidden="true"></i>
-                            {!! $request->all() ? trans($plang_admin.'.pages.title-list-search') : trans($plang_admin.'.pages.title-list') !!}
+                            {!! $request->all() ? trans($plang_admin.'.pages.title-list-search') : trans($plang_admin.'.pages.title-list-context') !!}
                         </h3>
                     </div>
 
@@ -46,9 +46,9 @@
 
                     <!--BODY-->
                     <div class="panel-body">
-                        {!! Form::open(['route'=>['categories.delete', 'id' => @$item->id], 'method' => 'get'])  !!}
+                        {!! Form::open(['route'=>['contexts.delete', 'id' => @$item->id], 'method' => 'get'])  !!}
 
-                            @include('package-category::admin.category-item')
+                            @include('package-category::admin.context-item')
 
                             {!! csrf_field(); !!}
 
@@ -61,8 +61,8 @@
             <!--/LIST OF ITEMS-->
 
             <!--SEARCH-->
-            <div class="col-md-4">
-                @include('package-category::admin.category-search')
+            <div class="col-md-3">
+                @include('package-category::admin.context-search')
             </div>
             <!--/SEARCH-->
 

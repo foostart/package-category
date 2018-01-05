@@ -1,16 +1,16 @@
 <div class="panel panel-info">
     <div class="panel-heading">
         <h3 class="panel-title bariol-thin"><i class="fa fa-search"></i>
-            <?php echo trans($plang_admin.'.labels.title-search') ?>
+            <?php echo trans($plang_admin.'.labels.title-search-context') ?>
         </h3>
     </div>
     <div class="panel-body">
 
-        {!! Form::open(['route' => 'samples.list','method' => 'get']) !!}
+        {!! Form::open(['route' => 'contexts.list','method' => 'get']) !!}
 
             <!--BUTTONS-->
             <div class="form-group">
-                <a href="{!! URL::route('samples.list', ['context' => @$params['context']]) !!}" class="btn btn-default search-reset">
+                <a href="{!! URL::route('contexts.list', ['context' => @$params['context']]) !!}" class="btn btn-default search-reset">
                     {!! trans($plang_admin.'.buttons.reset') !!}
                 </a>
                 {!! Form::submit(trans($plang_admin.'.buttons.search').'', ["class" => "btn btn-info", 'id' => 'search-submit']) !!}
@@ -28,7 +28,7 @@
                 'name' => 'status',
                 'label' => trans($plang_admin.'.form.status'),
                 'value' => @$params['status']?$params['status']:'99',
-                'items' => $status,
+                'items' => $statuses,
             ])
 
             <!--SORTING-->

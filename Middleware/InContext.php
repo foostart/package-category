@@ -39,7 +39,7 @@ class InContext
         if (!$this->authPost($routeName, $context_key, $configs)) {
             App::abort('401');
         }
-       
+
         return $next($request);
     }
 
@@ -61,10 +61,7 @@ class InContext
                     $flag = FALSE;
                 }
             } else {
-                //invalid context key
-                if (!in_array($context_key, $configs['contexts'])) {
-                    $flag = FALSE;
-                }
+                $flag = $this->isValidContextKey($context_key, $configs);
             }
         }
         return $flag;
@@ -87,7 +84,7 @@ class InContext
 
                 $flag = FALSE;
 
-            } elseif (!in_array($context_key, $configs['contexts'])) {
+            } elseif (!$this->isValidContextKey($context_key, $configs)) {
                     //check valid context key
                     $flag = FALSE;
 
@@ -117,7 +114,7 @@ class InContext
 
                 $flag = FALSE;
 
-            } elseif (!in_array($context_key, $configs['contexts'])) {
+            } elseif (!$this->isValidContextKey($context_key, $configs)) {
                     //check valid context key
                     $flag = FALSE;
 
@@ -125,6 +122,29 @@ class InContext
 
                     $flag = FALSE;
             }
+        }
+
+        return $flag;
+    }
+
+
+    /**
+     *
+     * @param type $key
+     * @param type $contexts
+     */
+    private function isValidContextKey($key, $configs) {
+
+        //valid context key
+        $flag = TRUE;
+        $validKeys = [];
+        $contexts = $configs['contexts'];
+
+        foreach ($contexts as $context) {
+            $validKeys[] = $context['key'];
+        }
+        if (!in_array($key, $validKeys)) {
+            $flag = FALSE;
         }
 
         return $flag;

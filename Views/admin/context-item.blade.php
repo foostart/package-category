@@ -2,8 +2,8 @@
 <?php
     $withs = [
         'order' => '5%',
-        'name' => '20%',
-        'user_full_name' => '20%',
+        'ref' => '20%',
+        'key' => '20%',
         'status' => '5%',
         'updated_at' => '15%',
         'operations' => '10%',
@@ -33,13 +33,13 @@
             </th>
 
             <!--REF-->
-            <th style='width:{{ $withs['name'] }}'>
-                {{ trans($plang_admin.'.columns.name') }}
+            <th style='width:{{ $withs['ref'] }}'>
+                {{ trans($plang_admin.'.columns.ref') }}
             </th>
 
             <!--KEY-->
-            <th style='width:{{ $withs['user_full_name'] }}'>
-                {{ trans($plang_admin.'.columns.user_full_name') }}
+            <th style='width:{{ $withs['key'] }}'>
+                {{ trans($plang_admin.'.columns.key') }}
             </th>
 
             <!--STATUS-->
@@ -91,16 +91,16 @@
                 <!--ORDER-->
                 <td> <?php echo $counter; $counter++ ?> </td>
 
-                <!--NAME-->
-                <td> {!! $item->category_name !!} </td>
+                <!--REF-->
+                <td> {!! $item->context_ref !!} </td>
 
-                <!--USER_FULL_NAME-->
-                <td> {!! $item->user_full_name !!} </td>
+                <!--KEY-->
+                <td> {!! $item->context_key !!} </td>
 
                 <!--STATUS-->
                 <td style="text-align: center;">
 
-                    @if($item->category_status)
+                    @if($item->context_status)
                         <i class="fa fa-circle green"></i>
                     @else
                         <i class="fa fa-circle-o red"></i>
@@ -113,7 +113,7 @@
                 <!--OPERATOR-->
                 <td>
                     <!--edit-->
-                    <a href="{!! URL::route('categories.edit', ['id' => $item->id,
+                    <a href="{!! URL::route('contexts.edit', ['id' => $item->id,
                                                                 '_token' => csrf_token()
                                                                ])
                             !!}">
@@ -121,7 +121,7 @@
                     </a>
 
                     <!--delete-->
-                    <a href="{!! URL::route('categories.delete',['id' => $item->id,
+                    <a href="{!! URL::route('contexts.delete',['id' => $item->id,
                                                                 '_token' => csrf_token(),
                                                                  ])
                              !!}"
@@ -130,7 +130,7 @@
                     </a>
 
                     <!--copy-->
-                    <a href="{!! URL::route('categories.edit',['id' => $item->id,
+                    <a href="{!! URL::route('contexts.edit',['id' => $item->id,
                                                             'cid' => $item->id,
                                                             '_token' => csrf_token(),
                                                             ])

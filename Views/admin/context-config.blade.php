@@ -1,7 +1,7 @@
 @extends('laravel-authentication-acl::admin.layouts.base-2cols')
 
 @section('title')
-    {{ trans($plang_admin.'.pages.title-list') }}
+    {{ trans($plang_admin.'.pages.title-config') }}
 @stop
 
 @section('content')
@@ -16,14 +16,14 @@
 
                     <!--HEADING-->
                     <div class="panel-heading">
-                        <h3 class="panel-title bariol-thin"><i class="fa fa-list-ul" aria-hidden="true"></i>
-                            {!! $request->all() ? trans($plang_admin.'.pages.title-list-search') : trans($plang_admin.'.pages.title-list') !!}
+                        <h3 class="panel-title bariol-thin"><i class="fa fa-braille" aria-hidden="true"></i>
+                            {!! trans($plang_admin.'.pages.title-config') !!}
                         </h3>
                     </div>
 
                     <!--DESCRIPTION-->
                     <div class='panel-info panel-description'>
-                        {!! trans($plang_admin.'.description.list') !!}</h4>
+                        {!! trans($plang_admin.'.description.config') !!}</h4>
                     </div>
                     <!--/DESCRIPTION-->
 
@@ -46,13 +46,20 @@
 
                     <!--BODY-->
                     <div class="panel-body">
-                        {!! Form::open(['route'=>['categories.delete', 'id' => @$item->id], 'method' => 'get'])  !!}
+                        {!! Form::open(['route'=>['samples.config'], 'method' => 'post'])  !!}
 
-                            @include('package-category::admin.category-item')
+                            <div class='btn-form'>
 
-                            {!! csrf_field(); !!}
+                                <!-- SAVE BUTTON -->
+                                {!! Form::submit(trans($plang_admin.'.buttons.save'), array("class"=>"btn btn-info pull-right ")) !!}
+                                <!-- /SAVE BUTTON -->
 
-                        {!! Form::close() !!}
+                            </div>
+
+                            {!! Form::label('content', trans($plang_admin.'.labels.config')) !!}
+                            {!! Form::textarea('content', $content, ['class' => 'form-control textarea-margin', 'size' => '30x50']) !!}
+
+                            {!! Form::close() !!}
                     </div>
                     <!--/BODY-->
 
@@ -62,21 +69,10 @@
 
             <!--SEARCH-->
             <div class="col-md-4">
-                @include('package-category::admin.category-search')
+                @include('package-sample::admin.sample-config-backup')
             </div>
             <!--/SEARCH-->
 
         </div>
     </div>
-@stop
-
-
-@section('footer_scripts')
-    <!-- DELETE CONFIRM -->
-    <script>
-        $(".delete").click(function () {
-            return confirm("{!! trans($plang_admin.'.confirms.delete') !!}");
-        });
-    </script>
-    <!-- /END DELETE CONFIRM -->
 @stop

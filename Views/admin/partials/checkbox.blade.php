@@ -4,9 +4,9 @@
 |
 |-------------------------------------------------------------------------------
 | @REQUIRED
-| $name is input name
-| $value is input value
-| $label is input lable
+| $name is checkbox name
+| $value is checkbox value
+| $label is checkbox lable
 | $placehover is placehover text
 | $errors is error name
 | $description is description text
@@ -22,6 +22,9 @@
     $name = empty($name)?'undefined':$name;
     //value
     $value = empty($value)?$request->get($name):$value;
+    $value = empty($value)?1:$value;
+    //items
+    $items = empty($items)?[]:$items;
     //label
     $label = empty($label) ? '' : $label;
     //place hover
@@ -37,14 +40,23 @@
 <div class="form-group">
 
     <!--element-->
+    @if($label)
     {!! Form::label($name, $label) !!}
-    {!! Form::text($name, $value, ['class' => 'form-control', 'placeholder' => $placehover]) !!}
+    @endif
+
+    @if($items)
+        @foreach($items as $item)
+            <span class='checkbox-item' style="display: block;">
+                {{ Form::checkbox($name, $value, null, ['class' => '']) }}
+                <label for='{!! $name !!}' style="font-weight: normal;">{!! $item !!}</label>
+            </span>
+        @endforeach
+    @endif
 
     <!--description-->
     @if($description)
         <span class='input-text-description'>{!! $description !!}</span>
     @endif
-
     <!--errors-->
     @if ($errors->has($name))
         <ul class='error-item'>

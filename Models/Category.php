@@ -5,57 +5,100 @@ use Illuminate\Database\Eloquent\Model;
 
 class Category extends FooModel {
 
-    //table name
-    protected $table = 'categories';
-
-    //update record
-    public $timestamps = false;
-
-    //list of field in table
-    protected $fillable = [
-        'category_name',
-        'category_id_parent',
-        'category_id_parent_str',
-        'user_id',
-        'category_context',
-        'link',
-        'status',
-        'del_flag',
-    ];
-
-    //list of field in form
-    protected $fields = [
-        'category_name' => 'category_name',
-        'category_id_parent' => 'category_id_parent',
-        'category_id_parent_str' => 'category_id_parent_str',
-        'user_id' => 'user_id',
-        'category_context' => 'category_context',
-        'link' => 'link',
-        'status' => 'status',
-        'del_flag' => 'del_flag',
-    ];
-
-
-    protected $valid_ordering_fields = ['id', 'category_name'];
-
-    //Check filter name is valid
-    protected $valid_fields_filter = ['id', 'category_name'];
-    //primary key
-    protected $primaryKey = 'id';
-
-    //the number of items on page
-    protected $perPage = 100;
-
-    //is building category tree
-    protected $isTree = TRUE;
-
-
     /**
-     * @table categories
+     * @table Categories
      * @param array $attributes
      */
     public function __construct(array $attributes = array()) {
+        //set configurations
+        $this->setConfigs();
+
         parent::__construct($attributes);
+
+    }
+
+    public function setConfigs() {
+
+        //table name
+        $this->table = 'categories';
+
+
+        //list of field in table
+        $this->fillable = [
+            'user_id',
+            'user_full_name',
+            'category_name',
+            'category_overview',
+            'category_description',
+            'category_status',
+            'category_id_parent',
+            'category_id_parent_str',
+            'category_id_child_str',
+            'created_at',
+            'updated_at',
+        ];
+
+
+        //list of fields for inserting
+        $this->fields = [
+            'category_name' => [
+                'name' => 'category_name',
+                'type' => 'Text',
+            ],
+            'category_description' => [
+                'name' => 'category_key',
+                'type' => 'Text',
+            ],
+            'category_overview' => [
+                'name' => 'category_ref',
+                'type' => 'Text',
+            ],
+            'category_status' => [
+                'name' => 'category_status',
+                'type' => 'Int',
+            ],
+            'category_slug' => [
+                'name' => 'category_slug',
+                'type' => 'Text',
+            ],
+            'user_id' => [
+                'name' => 'user_id',
+                'type' => 'Int',
+            ],
+            'user_full_name' => [
+                'name' => 'user_full_name',
+                'type' => 'Text',
+            ]
+        ];
+
+        //check valid fields for inserting
+        $this->valid_insert_fields = [
+            'category_name',
+            'category_key',
+            'category_ref',
+            'category_status',
+            'user_id',
+            'user_full_name',
+            'updated_at',
+        ];
+
+        //check valid fields for ordering
+        $this->valid_ordering_fields = [
+            'category_name',
+            'category_key',
+            $this->field_status,
+        ];
+        //check valid fields for filter
+        $this->valid_filter_fields = [
+            'keyword',
+            'status',
+        ];
+
+        //primary key
+        $this->primaryKey = 'category_id';
+
+        //the number of items on page
+        $this->perPage = 10;
 
     }
 
@@ -147,7 +190,7 @@ class Category extends FooModel {
                             break;
                         case 'context':
                             if (!empty($value)) {
-                                $elo = $elo->where($this->table . '.category_context', 'LIKE', $value);
+                               //$elo = $elo->where($this->table . '.category_context', 'LIKE', $value);
                             }
                             break;
                         default:
@@ -277,6 +320,9 @@ class Category extends FooModel {
         if ($category_id_parent) {
 
             $category_parent = $this->selectItem($input, 'category_id_parent');
+            var_dump($input);
+            var_dump($category_parent);
+            die();
 
             $category_id_parent_list = array($category_parent->id => 1);
 
@@ -299,24 +345,35 @@ class Category extends FooModel {
 
     /**
      * Get list of categories into select
-     * @param type $id
-     * @return type
+     * @return OBJECT PLUCK SELECT
      */
      public function pluckSelect($params) {
 
-        $categories = self::orderBy('category_name', 'ASC')
-                        ->where($this->table.'.category_context', @$params['context'])
-                        ->pluck('category_name', 'id');
+        $elo = self::orderBy('category_name', 'ASC');
 
+        // context
+        if (!empty($params['context'])) {
+            //$elo = $elo->where($this->table.'.category_context', @$params['context']);
+        }
+
+        $categories = $elo->pluck('category_name', 'id');
         return $categories;
     }
 
-    public function deleteItem($input = [], $category = NULL) {
+    /**
+     *
+     * @param ARRAY $input list of parameters
+     * @param ELOQUENT OBJECT $category
+     * @return BOOLEAN
+     */
+    public function deleteItem($input = []) {
+
         $category = $this->selectItem($input);
+
         if ($category) {
             return $category->delete();
         }
-        return False;
+        return FALSE;
     }
 
     /**

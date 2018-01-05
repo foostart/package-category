@@ -73,7 +73,7 @@ class CategoryValidator extends AbstractValidator
         $child_id = (int) @$input['id'];
         $parent_id = (int) @$input['category_id_parent'];
 
-        if ($child_id == $parent_id) {
+        if ( ($child_id > 0) && ($child_id == $parent_id)) {
 
             $this->errors->add('category_name', trans('category-admin.loop_category', [
                                                                 'category_child' =>  $input['category_name'],

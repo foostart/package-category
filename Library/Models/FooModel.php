@@ -7,6 +7,8 @@ use DB;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Pagination\Paginator;
 
+use Foostart\Category\Models\Context;
+
 class FooModel extends Model {
 
 
@@ -36,6 +38,8 @@ class FooModel extends Model {
     protected $field_status = 'status';
 
     protected $status = NULL;
+
+    protected $obj_context = NULL;
 
     /**
      *
@@ -291,6 +295,21 @@ class FooModel extends Model {
     public function getPluckStatus() {
        $pluck_status = config('foostart.item.pluck_status');
        return $pluck_status;
+    }
+
+    /**
+     *
+     * @param STRING $ref context
+     * @return ELOQUENT OBJECT context
+     */
+    public function getContext($ref) {
+        $obj_context = new Context();
+        $params = [
+            'ref' => $ref
+        ];
+
+        $item = $obj_context->selectItem($params);
+        return $item;
     }
 
 }

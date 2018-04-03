@@ -38,6 +38,11 @@ class FooController extends Controller {
     //user
     protected $user = NULL;
 
+    //category
+    protected $category_ref_name = NULL;
+    protected $category_ref_type = NULL;
+    protected $category_ref_level = NULL;
+
     public function __construct() {
 
     }
@@ -81,7 +86,7 @@ class FooController extends Controller {
         if (!strcmp($valid_token, $token) == 0) {
 
             $flag = FALSE;
-            
+
         }
         return $flag;
     }

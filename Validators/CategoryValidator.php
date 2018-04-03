@@ -1,65 +1,63 @@
 <?php namespace Foostart\Category\Validators;
 
+use Foostart\Category\Library\Validators\FooValidator;
 use Event;
 use \LaravelAcl\Library\Validators\AbstractValidator;
 use Foostart\Category\Models\Category;
 
 use Illuminate\Support\MessageBag as MessageBag;
 
-class CategoryValidator extends AbstractValidator
+class CategoryValidator extends FooValidator
 {
 
-    protected static $rules = array(
-        'category_name' => ["required"],
-    );
-
-    protected static $messages = [];
-
-    protected $obj_category;
+    protected $obj_item;
 
     public function __construct()
     {
+        // add rules
+        self::$rules = [
+            'category_name' => ["required"],
+        ];
+
+        // event listening
         Event::listen('validating', function($input)
         {
             self::$messages = [
-                'required' => trans('category-admin.required'),
+                'category_name.required' => trans('category-admin.errors.required', ['attribute' => 'category name']),
             ];
         });
-        $this->obj_category = new Category();
+
+        // set configs
+        self::$configs = $this->loadConfigs();
+
+        // model
+        $this->obj_item = new Category();
     }
 
+    /**
+     *
+     * @param ARRAY $input is form data
+     * @return type
+     */
     public function validate($input) {
 
         $flag = parent::validate($input);
-
-        $this->errors = $this->errors?$this->errors:new MessageBag();
-
-        $flag = $this->isValidName($input)?$flag:FALSE;
-        $flag = $this->isValidParent($input)?$flag:FALSE;
-
+       
         return $flag;
     }
 
 
     /**
-     * Validation inputed category name
-     * @param type $input
-     * @return boolean
+     * Load configuration
+     * @return ARRAY $configs list of configurations
      */
-    public function isValidName($input) {
+    public function loadConfigs(){
+        $configs = [
+            'min_lenght' => config('package-category.name_category_min_length'),
+            'max_lenght' => config('package-category.name_category_max_length'),
+        ];
 
-        $flag = TRUE;
-
-        $min_lenght = config('package-category.name_min_length');
-        $max_lenght = config('package-category.name_max_length');
-        $category_name = @$input['category_name'];
-
-        if ((strlen($category_name) < $min_lenght)  || ((strlen($category_name) > $max_lenght))) {
-            $this->errors->add('category_name', trans('category-admin.required_length', ['minlength' => $min_lenght, 'maxlength' => $max_lenght]));
-            $flag = FALSE;
-        }
-
-        return $flag;
+        return $configs;
     }
 
     /**

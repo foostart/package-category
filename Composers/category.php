@@ -34,21 +34,39 @@ View::composer([
         $view->with('plang_front', $plang_front);
 
         /**
+         * $_key context key
+         * $_token token for auth
+         */
+        $params = Request::all();
+        $_key = @$params['_key'];
+
+        /**
          * $sidebar_items
          */
         $view->with('sidebar_items', [
+            //add new
             trans('category-admin.sidebar.add') => [
-                'url' => URL::route('categories.edit', []),
+                'url' => URL::route('categories.edit', [
+                    '_key' => $_key,
+                ]),
                 'icon' => '<i class="fa fa-pencil-square-o" aria-hidden="true"></i>'
             ],
+
+            //list
             trans('category-admin.sidebar.list') => [
-                "url" => URL::route('categories.list', []),
+                "url" => URL::route('categories.list', [
+                    '_key' => $_key,
+                ]),
                 'icon' => '<i class="fa fa-list-ul" aria-hidden="true"></i>'
             ],
+
+            //config
             trans('category-admin.sidebar.config') => [
                 "url" => URL::route('categories.config', []),
                 'icon' => '<i class="fa fa-braille" aria-hidden="true"></i>'
             ],
+
+            //language
             trans('category-admin.sidebar.lang') => [
                 "url" => URL::route('categories.lang', []),
                 'icon' => '<i class="fa fa-language" aria-hidden="true"></i>'
@@ -70,8 +88,8 @@ View::composer([
             'items' => [],
             'url' => []
         ];
+
         //Order by params
-        $params = Request::all();
 
         $order_by = explode(',', @$params['order_by']);
         $ordering = explode(',', @$params['ordering']);

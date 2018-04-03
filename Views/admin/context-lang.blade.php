@@ -24,7 +24,7 @@
 
                     <!--DESCRIPTION-->
                     <div class='panel-info panel-description'>
-                        {!! trans($plang_admin.'.description.lang') !!}</h4>
+                        {!! trans($plang_admin.'.descriptions.lang') !!}</h4>
                     </div>
                     <!--/DESCRIPTION-->
 

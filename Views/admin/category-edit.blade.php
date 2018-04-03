@@ -9,16 +9,16 @@
 |
 |÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷
 | @DESCRIPTION
-| 1. Admin (category-update-all) update all categories
-| 2. Manager (category-update-team) update all categories in team
-| 3. User (category-update-self) update his categories
+| 1. Admin
+| 2. Manager
+| 3. User
 |
 |_______________________________________________________________________________
 -->
 @extends('laravel-authentication-acl::admin.layouts.base-2cols')
 
 @section('title')
-    {{ trans('category-admin.page-edit') }}
+    {{ trans($plang_admin.'.pages.title-edit-category') }}
 @stop
 
 @section('content')
@@ -31,18 +31,18 @@
                 <!--TITLE BAR-->
                 <div class="panel-heading">
                     <h3 class="panel-title bariol-thin">
-                        {!! !empty($category->id)
+                        {!! !empty($item->id)
                             ?
-                            '<i class="fa fa-pencil"></i>'.trans('category-admin.form_edit')
+                            '<i class="fa fa-pencil"></i>'.trans($plang_admin.'.pages.title-edit')
                             :
-                            '<i class="fa fa-users"></i>'.trans('category-admin.category_add')
+                            '<i class="fa fa-users"></i>'.trans($plang_admin.'.pages.title-add')
                         !!}
                     </h3>
                 </div>
 
                 <!--DESCRIPTION-->
                 <div class='panel-description'>
-                    {!! trans('category-admin.category_add_description') !!}</h4>
+                    {!! trans($plang_admin.'.descriptions.category-form') !!}</h4>
                 </div>
 
                 <!-- ERRORS NAME  -->

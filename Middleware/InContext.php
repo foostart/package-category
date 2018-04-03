@@ -15,7 +15,7 @@ class InContext
      * @param  \Closure  $next
      * @return mixed
      */
-    public function handle($request, Closure $next){
+    public function handle($request, Closure $next){ return $next($request);
         //load context config
         $configs = Config::get('package-category');
 

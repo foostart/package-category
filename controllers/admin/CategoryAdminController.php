@@ -58,13 +58,15 @@ class CategoryAdminController extends FooController {
 
         $this->data_view['status'] = $this->obj_item->getPluckStatus();
 
+        $this->statuses = config('package-category.contexts.statuses');
+
     }
 
-        /**
+    /**
      * Show list of items
      * @return view list of items
      * @date 27/12/2017
-     */
+    */
     public function index(Request $request) {
 
         $params = $request->all();
@@ -78,7 +80,7 @@ class CategoryAdminController extends FooController {
             'request' => $request,
             'params' => $params,
         ));
-        
+
         return view($this->page_views['admin']['items'], $this->data_view);
     }
 
@@ -91,107 +93,137 @@ class CategoryAdminController extends FooController {
 
         $params = $request->all();
 
-        $items = $this->obj_category->selectItems($params);
+        $categories = $this->obj_item->pluckSelect($params);
 
-        $category = NULL;
+        $item = NULL;
         $params['id'] = $request->get('id');
 
         if (!empty($params['id'])) {
-            $category = $this->obj_category->selectItem($params);
+            $item = $this->obj_item->selectItem($params);
         }
 
         $this->data_view = array_merge($this->data_view, array(
-            'category' => $category,
-            'categories' => $items,
+            'item' => $item,
+            'categories' => $categories,
             'request' => $request,
-            'categories' => $this->obj_category->pluckSelect($params)
+            'statuses' => $this->statuses
         ));
-        return view('package-category::admin.category-edit', $this->data_view);
+        
+        return view($this->page_views['admin']['edit'], $this->data_view);
     }
 
     /**
      * Processing data from POST method: add new item, edit existing item
-     * @return edit page
+     * @return view edit page
+     * @date 27/12/2017
      */
     public function post(Request $request) {
 
-        $input = $request->all();
+        $item = NULL;
+
+        $params = array_merge($request->all(), $this->getUser());
+        $_key = @$params['_key'];
+
+        $is_valid_request = $this->isValidRequest($request);
 
         $id = (int) $request->get('id');
-        $category = NULL;
 
-        $data = array();
-        $context = $request->get('context', null);
+        if ($is_valid_request && $this->obj_validator->validate($params)) {
 
-        if ($this->obj_validator->validate($input)) {
+            // update existing item
+            if (!empty($id)) {
 
-            //Update existing item
-            if (!empty($id) && is_int($id)) {
+                $item = $this->obj_item->find($id);
 
-                $category = $this->obj_category->find($id);
+                if (!empty($item)) {
 
-                if (!empty($category)) {
+                    $item = $this->obj_item->updateItem($params);
 
-                    $input['id'] = $id;
-                    $category = $this->obj_category->updateItem($input);
+                    // message
+                    return Redirect::route($this->root_router.'.edit', [
+                                                                        'id' => $item->id,
+                                                                        '_key' => $_key,
+                                                                    ])
+                                    ->withMessage(trans($this->plang_admin.'.actions.edit-ok'));
+                } else {
 
-                    //Message
-                    return Redirect::route("categories.edit", ["id" => $category->id,
-                                                               'context' => $context
-                                                                ])
-                                    ->withMessage('11');
+                    // message
+                    return Redirect::route($this->root_router.'.list')
+                                    ->withMessage(trans($this->plang_admin.'.actions.edit-error'));
                 }
 
-            //Add new item
+            // add new item
             } else {
 
-                $category = $this->obj_category->insertItem($input);
+                $item = $this->obj_item->insertItem($params);
 
-                if (!empty($category)) {
+                if (!empty($item)) {
 
-                    //Message
-                    return Redirect::route("categories.edit", ["id" => $category->id,
-                                                               'context' => $context
-                                                            ])->withMessage('aa');
+                    //message
+                    return Redirect::route($this->root_router.'.edit', [
+                                                                        'id' => $item->id,
+                                                                        '_key' => $_key,
+                                                                    ])
+                                    ->withMessage(trans($this->plang_admin.'.actions.add-ok'));
+                } else {
+
+                    //message
+                    return Redirect::route($this->root_router.'.edit', [
+                                                                        'id' => $item->id,
+                                                                        '_key' => $_key,
+                                                                    ])
+                                    ->withMessage(trans($this->plang_admin.'.actions.add-error'));
                 }
 
             }
-        } else {
+
+        } else { // invalid data
 
             $errors = $this->obj_validator->getErrors();
+
             // passing the id incase fails editing an already existing item
-            return Redirect::route("categories.edit", $id ? ["id" => $id,'context' => $context]: ['context' => $context])
+            return Redirect::route($this->root_router.'.edit', $id ? [ 'id' => $item->id,
+                                                                        '_key' => $_key,
+                                                                    ] : [])
                     ->withInput()->withErrors($errors);
         }
-
-        $this->data_view = array_merge($this->data_view, array(
-            'category' => $category,
-            'request' => $request,
-            'context' => $context
-                ), $data);
-
-        return view('package-category::admin.category-edit', $this->data_view);
     }
 
-    /**
-     * Delete category
-     * @return type
+/**
+     * Delete existing item
+     * @return view list of items
+     * @date 27/12/2017
      */
     public function delete(Request $request) {
 
-        $category = NULL;
-        $params = $request->all();
-        $id = $request->get('id');
+        $item = NULL;
+        $flag = TRUE;
+        $params = array_merge($request->all(), $this->getUser());
+        $delete_type = isset($params['del-forever'])?'delete-forever':'delete-trash';
+        $id = (int)$request->get('id');
+        $ids = $request->get('ids');
 
-        if (!empty($id)) {
-            $category = $this->obj_category->selectItem($params);
+        $is_valid_request = $this->isValidRequest($request);
 
-            if (!empty($category)) {
-                if ($this->obj_category->deleteItem($params, $category)) {
-                    return Redirect::route("categories.list", ['context' => $params['context']])->withMessage(trans('category-admin.delete-successful'));
+        if ($is_valid_request && (!empty($id) || !empty($ids))) {
+
+            $ids = !empty($id)?[$id]:$ids;
+
+            foreach ($ids as $id) {
+
+                $params['id'] = $id;
+
+                if (!$this->obj_item->deleteItem($params, $delete_type)) {
+                    $flag = FALSE;
                 }
             }
+            if ($flag) {
+                return Redirect::route($this->root_router.'.list')
+                                ->withMessage(trans($this->plang_admin.'.actions.delete-ok'));
+            }
         }
-        return Redirect::route("categories.list",['context' => $params['context']])->withMessage(trans('category-admin.delete-unsuccessful'));
+
+        return Redirect::route($this->root_router.'.list')
+                        ->withMessage(trans($this->plang_admin.'.actions.delete-error'));
     }
 }

@@ -84,9 +84,12 @@ class Context extends FooModel {
             'context_key',
             $this->field_status,
         ];
+
         //check valid fields for filter
         $this->valid_filter_fields = [
             'keyword',
+            'name',
+            'ref',
             'status',
         ];
 
@@ -98,7 +101,6 @@ class Context extends FooModel {
 
         //item status
         $this->field_status = 'context_status';
-
     }
 
     /**
@@ -147,11 +149,12 @@ class Context extends FooModel {
         $elo = $this->createSelect($elo);
 
         //id
-        $elo = $elo->where($this->primaryKey, $params['id']);
+        if (!empty($params['id'])) {
+            $elo = $elo->where($this->primaryKey, $params['id']);
+        }
 
         //first item
         $item = $elo->first();
-
         return $item;
     }
 
@@ -185,11 +188,19 @@ class Context extends FooModel {
                                 $elo = $elo->where($this->table . '.context_name', '=', $value);
                             }
                             break;
+
+                        case 'ref':
+                            if (!empty($value)) {
+                                $elo = $elo->where($this->table . '.context_ref', '=', $value);
+                            }
+                            break;
+
                         case 'status':
                             if (!empty($value)) {
                                 $elo = $elo->where($this->table . '.'.$this->field_status, '=', $value);
                             }
                             break;
+
                         case 'keyword':
                             if (!empty($value)) {
                                 $elo = $elo->where(function($elo) use ($value) {
@@ -198,11 +209,12 @@ class Context extends FooModel {
                                 });
                             }
                             break;
+
                         default:
                             break;
                     }
                 }
-            }
+            }//end foreach
         }
 
         return $elo;
@@ -241,14 +253,11 @@ class Context extends FooModel {
      */
     public function updateItem($params = [], $id = NULL) {
 
-        if (empty($id)) {
-            $id = $params['id'];
-        }
         $field_status = $this->field_status;
 
-        $sample = $this->selectItem($params);
+        $item = $this->selectItem($params);
 
-        if (!empty($sample)) {
+        if (!empty($item)) {
             $dataFields = $this->getDataFields($params, $this->fields);
 
             if(isset($dataFields['context_key'])) {
@@ -258,12 +267,12 @@ class Context extends FooModel {
             }
 
             foreach ($dataFields as $key => $value) {
-                $sample->$key = $value;
+                $item->$key = $value;
             }
 
-            $sample->save();
+            $item->save();
 
-            return $sample;
+            return $item;
         } else {
             return NULL;
         }

@@ -25,7 +25,7 @@ class FooValidator extends AbstractValidator
         $flag = parent::validate($input);
 
         $this->errors = $this->errors?$this->errors:new MessageBag();
-
+        
         return $flag;
     }
 

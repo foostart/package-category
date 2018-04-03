@@ -128,7 +128,7 @@ class ContextAdminController extends FooController {
 
         $item = NULL;
 
-        $params = $params = array_merge($request->all(), $this->getUser());
+        $params = array_merge($request->all(), $this->getUser());
 
         $is_valid_request = $this->isValidRequest($request);
 

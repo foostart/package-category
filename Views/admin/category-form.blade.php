@@ -2,13 +2,13 @@
 | List of elements in sample form
 |------------------------------------------------------------------------------->
 
-{!! Form::open(['route'=>['contexts.post', 'id' => @$item->id],  'files'=>true, 'method' => 'post'])  !!}
+{!! Form::open(['route'=>['categories.post', 'id' => @$item->id, '_key' => $request->get('_key')],  'files'=>true, 'method' => 'POST'])  !!}
 
     <!--BUTTONS-->
     <div class='btn-form'>
         <!-- DELETE BUTTON -->
         @if($item)
-            <a href="{!! URL::route('contexts.delete',['id' => @$item->id, '_token' => csrf_token()]) !!}"
+            <a href="{!! URL::route('categories.delete',['id' => @$item->id, '_token' => csrf_token()]) !!}"
             class="btn btn-danger pull-right margin-left-5 delete">
                 {!! trans($plang_admin.'.buttons.delete') !!}
             </a>
@@ -16,7 +16,7 @@
         <!-- DELETE BUTTON -->
 
         <!-- SAVE BUTTON -->
-        {!! Form::submit(trans($plang_admin.'.buttons.save'), array("class"=>"btn btn-info pull-right ")) !!}
+        {!! Form::submit(trans($plang_admin.'.buttons.save'), array("class"=>"btn btn-info pull-right")) !!}
         <!-- /SAVE BUTTON -->
     </div>
     <!--/BUTTONS-->
@@ -54,47 +54,51 @@
 
             <!--NAME-->
             @include('package-category::admin.partials.input_text', [
-            'name' => 'context_name',
-            'label' => trans($plang_admin.'.labels.context_name'),
-            'value' => @$item->context_name,
-            'description' => trans($plang_admin.'.descriptions.context_name'),
+            'name' => 'category_name',
+            'label' => trans($plang_admin.'.labels.category-name'),
+            'value' => @$item->category_name,
+            'description' => trans($plang_admin.'.descriptions.category-name'),
             'errors' => $errors,
             ])
             <!--/NAME-->
 
-            <!--NAME-->
+            <!-- CATEGORY -->
+            @include('package-category::admin.partials.select_single', [
+            'name' => 'category_id_parent',
+            'label' => trans($plang_admin.'.labels.category'),
+            'items' => $categories,
+            'value' => @$item->category_id_parent,
+            'description' => trans($plang_admin.'.descriptions.category', [
+
+                                ]),
+            'errors' => $errors,
+            ])
+
+            <!--OVERVIEW-->
             @include('package-category::admin.partials.input_text', [
-            'name' => 'context_ref',
-            'label' => trans($plang_admin.'.labels.context_ref'),
-            'value' => @$item->context_ref,
-            'description' => trans($plang_admin.'.descriptions.context_ref'),
-            'errors' => $errors,
-            ])
-            <!--/NAME-->
-
-            <!--KEY-->
-            @include('package-category::admin.partials.label', [
-            'name' => 'context_key',
-            'label' => trans($plang_admin.'.labels.context_key'),
-            'value' => @$item->context_key,
-            'description' => trans($plang_admin.'.descriptions.context_key'),
+            'name' => 'category_ref',
+            'label' => trans($plang_admin.'.labels.overview'),
+            'value' => @$item->category_ref,
+            'description' => trans($plang_admin.'.descriptions.overview'),
             'errors' => $errors,
             ])
 
-            <!--CHECKBOX-->
-            @if($request->get('id'))
-            @include('package-category::admin.partials.checkbox', [
-            'name' => 'context_key',
-            'items' => ['Set new key']
+            <!--DESCRIPTION-->
+            @include('package-category::admin.partials.input_text', [
+            'name' => 'category_description',
+            'label' => trans($plang_admin.'.labels.description'),
+            'value' => @$item->category_description,
+            'description' => trans($plang_admin.'.descriptions.description'),
+            'errors' => $errors,
             ])
-            @endif
-            
+
+
             <!--STATUS-->
             @include('package-category::admin.partials.radio', [
-            'name' => 'context_status',
-            'label' => trans($plang_admin.'.labels.context_status'),
-            'value' => @$item->context_status,
-            'description' => trans($plang_admin.'.descriptions.context_status'),
+            'name' => 'category_status',
+            'label' => trans($plang_admin.'.labels.status'),
+            'value' => @$item->categoy_status,
+            'description' => trans($plang_admin.'.descriptions.status'),
             'items' => $statuses
             ])
 
@@ -118,7 +122,7 @@
     <!--HIDDEN FIELDS-->
     <div class='hidden-field'>
         {!! Form::hidden('id',@$item->id) !!}
-        {!! Form::hidden('context',$request->get('context',null)) !!}
+        {!! Form::hidden('_key',$request->get('_key','')) !!}
     </div>
     <!--/HIDDEN FIELDS-->
 

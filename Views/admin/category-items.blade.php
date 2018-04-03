@@ -23,7 +23,7 @@
 
                     <!--DESCRIPTION-->
                     <div class='panel-info panel-description'>
-                        {!! trans($plang_admin.'.description.list') !!}</h4>
+                        {!! trans($plang_admin.'.descriptions.list') !!}</h4>
                     </div>
                     <!--/DESCRIPTION-->
 

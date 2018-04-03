@@ -16,9 +16,9 @@
 ?>
 <caption>
     @if($nav['total'] == 1)
-        {!! trans($plang_admin.'.description.counter', ['number' => $nav['total']]) !!}
+        {!! trans($plang_admin.'.descriptions.counter', ['number' => $nav['total']]) !!}
     @else
-        {!! trans($plang_admin.'.description.counters', ['number' => $nav['total']]) !!}
+        {!! trans($plang_admin.'.descriptions.counters', ['number' => $nav['total']]) !!}
     @endif
 </caption>
 
@@ -162,7 +162,7 @@
     <!--SEARCH RESULT MESSAGE-->
     <span class="text-warning">
         <h5>
-            {{ trans($plang_admin.'.description.not-found') }}
+            {{ trans($plang_admin.'.descriptions.not-found') }}
         </h5>
     </span>
     <!--/SEARCH RESULT MESSAGE-->

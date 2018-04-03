@@ -31,7 +31,6 @@ CREATE TABLE `categories` (
   `category_name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `category_id_parent` int(11) DEFAULT NULL,
   `category_id_parent_str` varchar(1000) CHARACTER SET utf8 DEFAULT NULL,
-  `category_id_child_str` varchar(1000) COLLATE utf8_unicode_ci DEFAULT NULL,
   `user_id` int(11) DEFAULT NULL,
   `category_context` varchar(15) COLLATE utf8_unicode_ci DEFAULT NULL,
   `link` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,

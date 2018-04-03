@@ -16,9 +16,9 @@
 ?>
 <caption>
     @if($nav['total'] == 1)
-        {!! trans($plang_admin.'.description.counter', ['number' => $nav['total']]) !!}
+        {!! trans($plang_admin.'.descriptions.counter', ['number' => $nav['total']]) !!}
     @else
-        {!! trans($plang_admin.'.description.counters', ['number' => $nav['total']]) !!}
+        {!! trans($plang_admin.'.descriptions.counters', ['number' => $nav['total']]) !!}
     @endif
 </caption>
 
@@ -34,12 +34,12 @@
 
             <!--REF-->
             <th style='width:{{ $withs['name'] }}'>
-                {{ trans($plang_admin.'.columns.name') }}
+                {{ trans($plang_admin.'.columns.category-name') }}
             </th>
 
             <!--KEY-->
             <th style='width:{{ $withs['user_full_name'] }}'>
-                {{ trans($plang_admin.'.columns.user_full_name') }}
+                {{ trans($plang_admin.'.columns.user-full-name') }}
             </th>
 
             <!--STATUS-->
@@ -114,6 +114,7 @@
                 <td>
                     <!--edit-->
                     <a href="{!! URL::route('categories.edit', ['id' => $item->id,
+                                                                '_key' => $request->get('_key'),
                                                                 '_token' => csrf_token()
                                                                ])
                             !!}">
@@ -122,6 +123,7 @@
 
                     <!--delete-->
                     <a href="{!! URL::route('categories.delete',['id' => $item->id,
+                                                                '_key' => $request->get('_key'),
                                                                 '_token' => csrf_token(),
                                                                  ])
                              !!}"
@@ -150,6 +152,11 @@
                 </td>
 
             </tr>
+            @if($item->childs)
+
+                @include('package-category::admin.partials.td-record', ['childs' => $item->childs, 'counter' => &$counter])
+
+            @endif
         @endforeach
 
     </tbody>
@@ -162,7 +169,7 @@
     <!--SEARCH RESULT MESSAGE-->
     <span class="text-warning">
         <h5>
-            {{ trans($plang_admin.'.description.not-found') }}
+            {{ trans($plang_admin.'.descriptions.not-found') }}
         </h5>
     </span>
     <!--/SEARCH RESULT MESSAGE-->

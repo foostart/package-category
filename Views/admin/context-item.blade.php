@@ -34,7 +34,7 @@
 
             <!--REF-->
             <th style='width:{{ $withs['ref'] }}'>
-                {{ trans($plang_admin.'.columns.ref') }}
+                    {{ trans($plang_admin.'.columns.ref') }}
             </th>
 
             <!--KEY-->
@@ -92,7 +92,11 @@
                 <td> <?php echo $counter; $counter++ ?> </td>
 
                 <!--REF-->
-                <td> {!! $item->context_ref !!} </td>
+                <td>
+                    <a href="{!! URL::route('categories.list', ['_key' => $item->context_key]) !!}">
+                        {!! $item->context_ref !!}
+                    </a>
+                </td>
 
                 <!--KEY-->
                 <td> {!! $item->context_key !!} </td>

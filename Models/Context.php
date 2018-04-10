@@ -89,7 +89,9 @@ class Context extends FooModel {
         $this->valid_filter_fields = [
             'keyword',
             'name',
+            'context_id',
             'ref',
+            '_key',
             'status',
         ];
 
@@ -135,10 +137,22 @@ class Context extends FooModel {
      */
     public function selectItem($params = array(), $key = NULL) {
 
-
         if (empty($key)) {
             $key = $this->primaryKey;
         }
+        //id and context_id are the same
+        if (!empty($params['id']) && (!empty($params['context_id']))) {
+            unset($params['id']);
+        }
+        //id and _key are the same
+        if (!empty($params['id']) && (!empty($params['_key']))) {
+            unset($params['id']);
+        }
+        //id is NULL, unset status
+        if (empty($params['id'])) {
+            unset($params['status']);
+        }
+
        //join to another tables
         $elo = $this->joinTable();
 
@@ -183,6 +197,11 @@ class Context extends FooModel {
                 {
                     switch($column)
                     {
+                        case 'context_id':
+                            if (!empty($value)) {
+                                $elo = $elo->where($this->table . '.context_id', '=', $value);
+                            }
+                            break;
                         case 'context_name':
                             if (!empty($value)) {
                                 $elo = $elo->where($this->table . '.context_name', '=', $value);
@@ -191,7 +210,12 @@ class Context extends FooModel {
 
                         case 'ref':
                             if (!empty($value)) {
-                                $elo = $elo->where($this->table . '.context_ref', '=', $value);
+                                $elo = $elo->where($this->table . '.context_ref', 'LIKE', "%{$value}%");
+                            }
+                            break;
+                        case '_key':
+                            if (!empty($value)) {
+                                $elo = $elo->where($this->table . '.context_key', '=', $value);
                             }
                             break;
 

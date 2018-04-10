@@ -2,8 +2,9 @@
 <?php
     $withs = [
         'order' => '5%',
-        'name' => '20%',
-        'user_full_name' => '20%',
+        'id' => '5%',
+        'category_name' => '30%',
+        'user_full_name' => '25%',
         'status' => '5%',
         'updated_at' => '15%',
         'operations' => '10%',
@@ -32,15 +33,42 @@
                 {{ trans($plang_admin.'.columns.order') }}
             </th>
 
-            <!--REF-->
-            <th style='width:{{ $withs['name'] }}'>
-                {{ trans($plang_admin.'.columns.category-name') }}
+            <!--ID-->
+            <th style='width:{{ $withs['id'] }}'>
+                {{ trans($plang_admin.'.columns.id') }}
             </th>
 
-            <!--KEY-->
-            <th style='width:{{ $withs['user_full_name'] }}'>
-                {{ trans($plang_admin.'.columns.user-full-name') }}
+            <!--CATEGORY NAME-->
+            <?php $name = 'category_name' ?>
+
+            <th class="hidden-xs" style='width:{{ $withs[$name] }}'>{!! trans($plang_admin.'.columns.category-name') !!}
+                <a href='{!! $sorting["url"][$name] !!}' class='tb-id' data-order='asc'>
+                    @if($sorting['items'][$name] == 'asc')
+                        <i class="fa fa-sort-alpha-asc" aria-hidden="true"></i>
+                    @elseif($sorting['items'][$name] == 'desc')
+                        <i class="fa fa-sort-alpha-desc" aria-hidden="true"></i>
+                    @else
+                        <i class="fa fa-sort-desc" aria-hidden="true"></i>
+                    @endif
+                </a>
             </th>
+
+
+            <!--USER FULL NAME-->
+            <?php $name = 'user_full_name' ?>
+
+            <th class="hidden-xs" style='width:{{ $withs[$name] }}'>{!! trans($plang_admin.'.columns.user-full-name') !!}
+                <a href='{!! $sorting["url"][$name] !!}' class='tb-id' data-order='asc'>
+                    @if($sorting['items'][$name] == 'asc')
+                        <i class="fa fa-sort-alpha-asc" aria-hidden="true"></i>
+                    @elseif($sorting['items'][$name] == 'desc')
+                        <i class="fa fa-sort-alpha-desc" aria-hidden="true"></i>
+                    @else
+                        <i class="fa fa-sort-desc" aria-hidden="true"></i>
+                    @endif
+                </a>
+            </th>
+
 
             <!--STATUS-->
             <th style='width:{{ $withs['status'] }}'>
@@ -50,7 +78,7 @@
             <!-- UPDATED AT -->
             <?php $name = 'updated_at' ?>
 
-            <th class="hidden-xs" style='width:{{ $withs['updated_at'] }}'>{!! trans($plang_admin.'.columns.updated_at') !!}
+            <th class="hidden-xs" style='width:{{ $withs[$name] }}'>{!! trans($plang_admin.'.columns.updated_at') !!}
                 <a href='{!! $sorting["url"][$name] !!}' class='tb-id' data-order='asc'>
                     @if($sorting['items'][$name] == 'asc')
                         <i class="fa fa-sort-alpha-asc" aria-hidden="true"></i>
@@ -91,6 +119,9 @@
                 <!--ORDER-->
                 <td> <?php echo $counter; $counter++ ?> </td>
 
+                <!--ID-->
+                <td> {!! $item->category_id !!} </td>
+
                 <!--NAME-->
                 <td> {!! $item->category_name !!} </td>
 
@@ -100,8 +131,9 @@
                 <!--STATUS-->
                 <td style="text-align: center;">
 
-                    @if($item->category_status)
-                        <i class="fa fa-circle green"></i>
+                    <?php $status = config('package-category.status'); ?>
+                    @if($item->category_status && (isset($status['list'][$item->category_status])))
+                        <i class="fa fa-circle" style="color:{!! $status['color'][$item->category_status] !!}" title='{!! $status["list"][$item->category_status] !!}'></i>
                     @else
                         <i class="fa fa-circle-o red"></i>
                     @endif
@@ -114,11 +146,21 @@
                 <td>
                     <!--edit-->
                     <a href="{!! URL::route('categories.edit', ['id' => $item->id,
-                                                                '_key' => $request->get('_key'),
+                                                               '_key' => $request->get('_key'),
                                                                 '_token' => csrf_token()
                                                                ])
                             !!}">
                         <i class="fa fa-edit f-tb-icon"></i>
+                    </a>
+
+                    <!--copy-->
+                    <a href="{!! URL::route('categories.copy',['cid' => $item->id,
+                                                            '_key' => $request->get('_key'),
+                                                            '_token' => csrf_token(),
+                                                            ])
+                             !!}"
+                        class="margin-left-5">
+                        <i class="fa fa-files-o f-tb-icon" aria-hidden="true"></i>
                     </a>
 
                     <!--delete-->
@@ -129,16 +171,6 @@
                              !!}"
                        class="margin-left-5 delete">
                         <i class="fa fa-trash-o f-tb-icon"></i>
-                    </a>
-
-                    <!--copy-->
-                    <a href="{!! URL::route('categories.edit',['id' => $item->id,
-                                                            'cid' => $item->id,
-                                                            '_token' => csrf_token(),
-                                                            ])
-                             !!}"
-                        class="margin-left-5 delete">
-                        <i class="fa fa-files-o f-tb-icon" aria-hidden="true"></i>
                     </a>
 
                 </td>

@@ -54,12 +54,16 @@
 
     <!--description-->
     @if($description)
-        <span class='input-text-description'>{!! $description !!}</span>
+        <span class='input-text-description'>
+            <blockquote class="quote-card">
+                <p>{!! $description !!}</p>
+            </blockquote>
+        </span>
     @endif
 
     <!--errors-->
     @if ($errors->has($name))
-        <ul class='error-item'>
+        <ul class='alert alert-danger error-item'>
             @foreach($errors->get($name) as $error)
                 @if($error)
                 <li>

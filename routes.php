@@ -114,6 +114,14 @@ Route::group(['middleware' => ['web']], function () {
             'uses' => 'CategoryAdminController@edit'
         ]);
 
+         /**
+         * copy
+         */
+        Route::get('admin/categories/copy', [
+            'as' => 'categories.copy',
+            'uses' => 'CategoryAdminController@copy'
+        ]);
+
         /**
          * post
          */

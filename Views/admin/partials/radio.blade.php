@@ -22,7 +22,7 @@
     $name = empty($name)?'undefined':$name;
     //value
     $value = !empty($value)?$value:0;
-   
+
     //items
     $items = empty($items)?[]:$items;
     //label
@@ -55,7 +55,11 @@
 
     <!--description-->
     @if($description)
-        <span class='input-text-description'>{!! $description !!}</span>
+    <span class='input-text-description'>
+        <blockquote class="quote-card">
+            <p>{!! $description !!}</p>
+        </blockquote>
+    </span>
     @endif
     <!--errors-->
     @if ($errors->has($name))

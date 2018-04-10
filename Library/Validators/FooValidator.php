@@ -14,6 +14,10 @@ class FooValidator extends AbstractValidator
 
     protected static $messages = [];
 
+    //language
+    protected $lang_admin = '';
+
+    protected $lang_front = '';
 
     /**
      *
@@ -25,25 +29,37 @@ class FooValidator extends AbstractValidator
         $flag = parent::validate($input);
 
         $this->errors = $this->errors?$this->errors:new MessageBag();
-        
+
         return $flag;
     }
 
 
     /**
-     * Check valid length string
+     * Check valid length string of element
+     * Can check on: input text, textarea
      * @param STRING $str
      * @return BOOLEAN
      */
-    public function isValidLength($element) {
+    public function isValidLength($str, $params) {
 
         $flag = TRUE;
 
-        $min_lenght = self::$configs['min_length'];
-        $max_lenght = self::$configs['min_length'];
+        if ($params['max'] == 0) {
+            if (strlen($str) < $params['min']) {
 
-        if ((strlen($str) < $min_lenght)  || ((strlen($str) > $max_lenght))) {
-            $this->errors->add($element['key'], trans($elment['context'].'.required_length', ['minlength' => $min_lenght, 'maxlength' => $max_lenght]));
+                $this->errors->add($params['key'], trans($this->lang_admin.'.errors.required_min_length', [
+                                                                                    'attribute ' => $params['label'],
+                                                                                    'minlength' => $params['min'],
+                                                                                ]));
+                $flag = FALSE;
+            }
+        } elseif ((strlen($str) < $params['min'])  || (strlen($str) > $params['max'])) {
+
+            $this->errors->add($params['key'], trans($this->lang_admin.'.errors.required_length', [
+                                                                                    'attribute ' => $params['label'],
+                                                                                    'minlength' => $params['min'],
+                                                                                    'maxlength' => $params['max'],
+                                                                                ]));
             $flag = FALSE;
         }
 

@@ -6,11 +6,11 @@
     </div>
     <div class="panel-body">
 
-        {!! Form::open(['route' => 'samples.list','method' => 'get']) !!}
+        {!! Form::open(['route' => ['categories.list', '_key' => @$params['_key']],'method' => 'get']) !!}
 
             <!--BUTTONS-->
             <div class="form-group">
-                <a href="{!! URL::route('samples.list', ['context' => @$params['context']]) !!}" class="btn btn-default search-reset">
+                <a href="{!! URL::route('categories.list', ['_key' => @$params['_key']]) !!}" class="btn btn-default search-reset">
                     {!! trans($plang_admin.'.buttons.reset') !!}
                 </a>
                 {!! Form::submit(trans($plang_admin.'.buttons.search').'', ["class" => "btn btn-info", 'id' => 'search-submit']) !!}
@@ -27,7 +27,7 @@
             @include('package-category::admin.partials.select_single', [
                 'name' => 'status',
                 'label' => trans($plang_admin.'.form.status'),
-                'value' => @$params['status']?$params['status']:'99',
+                'value' => @$params['status'],
                 'items' => $status,
             ])
 
@@ -35,7 +35,7 @@
             @include('package-category::admin.partials.sorting')
 
             <div class='hidden-field'>
-                {!! Form::hidden('context',@$request->get('context',null)) !!}
+                {!! Form::hidden('_key',@$params['_key']) !!}
                 {!! csrf_field() !!}
             </div>
 

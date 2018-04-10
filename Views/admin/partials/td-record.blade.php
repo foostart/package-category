@@ -8,6 +8,9 @@ function displayChilds($childs, $level){ ?>
                 <!--ORDER-->
                 <td> <?php echo $counter; $counter++ ?> </td>
 
+                <!--ID-->
+                <td>{!! $item->category_id !!}</td>
+
                 <!--NAME-->
                 <td><span style="padding-left: <?php echo 30*$level ?>px"></span>
                     |_
@@ -20,8 +23,9 @@ function displayChilds($childs, $level){ ?>
                 <!--STATUS-->
                 <td style="text-align: center;">
 
-                    @if($item->category_status)
-                        <i class="fa fa-circle green"></i>
+                    <?php $status = config('package-category.status'); ?>
+                    @if($item->category_status && (isset($status['list'][$item->category_status])))
+                        <i class="fa fa-circle" style="color:{!! $status['color'][$item->category_status] !!}" title='{!! $status["list"][$item->category_status] !!}'></i>
                     @else
                         <i class="fa fa-circle-o red"></i>
                     @endif
@@ -41,6 +45,16 @@ function displayChilds($childs, $level){ ?>
                         <i class="fa fa-edit f-tb-icon"></i>
                     </a>
 
+                    <!--copy-->
+                    <a href="{!! URL::route('categories.copy',['cid' => $item->id,
+                                                            '_key' => $request->get('_key'),
+                                                            '_token' => csrf_token(),
+                                                            ])
+                             !!}"
+                        class="margin-left-5">
+                        <i class="fa fa-files-o f-tb-icon" aria-hidden="true"></i>
+                    </a>
+
                     <!--delete-->
                     <a href="{!! URL::route('categories.delete',['id' => $item->id,
                                                                 '_key' => $request->get('_key'),
@@ -49,16 +63,6 @@ function displayChilds($childs, $level){ ?>
                              !!}"
                        class="margin-left-5 delete">
                         <i class="fa fa-trash-o f-tb-icon"></i>
-                    </a>
-
-                    <!--copy-->
-                    <a href="{!! URL::route('categories.edit',['id' => $item->id,
-                                                            'cid' => $item->id,
-                                                            '_token' => csrf_token(),
-                                                            ])
-                             !!}"
-                        class="margin-left-5 delete">
-                        <i class="fa fa-files-o f-tb-icon" aria-hidden="true"></i>
                     </a>
 
                 </td>

@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\App;
 
 class FooController extends Controller {
 
-    //save data
+    //send data to view
     public $data_view = array();
 
     //validator form data

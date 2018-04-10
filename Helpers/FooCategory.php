@@ -1,44 +1,92 @@
 <?php namespace Foostart\Category\Helpers;
 
 use Foostart\Category\Models\Category;
+use Foostart\Category\Models\Context;
 use Config;
 
 class FooCategory {
 
+    //Object categories
     private $obj_category;
 
+    //Object contexts
+    private $obj_context;
+
+    /**
+     * Constructor
+     */
     public function __construct() {
+
+        //Object categories
         $this->obj_category = new Category();
+
+        //Object contexts
+        $this->obj_context = new Context();
     }
 
     /**
      * Get list of categories
-     * @param type $params
-     * @return type
+     * @param ARRAY $params array of conditions
+     * @return OBJECT list of categories in select format
      */
     public function pluckSelect($params){
 
         $select_category_list = $this->obj_category->pluckSelect($params);
-        $select_category_list = $select_category_list->toArray();
-        $select_category_list[''] = trans('category-admin.all');
-        return $select_category_list;
 
+        $select_category_list = array('' => trans('category-admin.columns.none')) + $select_category_list->toArray();
+
+        return $select_category_list;
     }
 
     /**
-     * Get key of context
-     * @param type $context
-     * @return boolean
+     * Get key of context by reference name
+     * @param STRING reference name
+     * @return STRING context key
      */
-    public function getContextKey($context) {
+    public function getContextKeyByRef($ref) {
 
-        $configs =  Config::get('package-category');
-        $contexts = $configs['contexts'];
+        $params = ['ref' => $ref];
+        $context = $this->obj_context->selectItem($params);
+        $key = NULL;
+        if ($context) {
+            $key = $context->context_key;
+        }
+        return $key;
+    }
 
-        if ( (!empty($contexts[$context])) && (!empty($contexts[$context]['key']))) {
-            return $contexts[$context]['key'];
+    /**
+     *
+     * @param STRING $ref context reference name
+     * @return ELOQUENT OBJECT category
+     */
+    public function getCategoriesByRef($ref) {
+
+        $categories = [];
+
+        //get context by context ref
+        $params = [
+            'ref' => $ref
+        ];
+        $context = $this->obj_context->selectItem($params);
+
+        if (!empty($context)) {
+            //get categories by context id
+            $_params = [
+                'context_id' => $context->context_id,
+            ];
+
+            $categories = $this->obj_category->selectItems($_params);
         }
 
-        return FALSE;
+        return $categories;
+    }
+
+    /**
+     *
+     * @param INT $category_id_parent
+     * @return OBJECT list of childs of parent category
+     */
+    public function getCategoriesByIdParent($category_id_parent) {
+        return $this->obj_category->getCategoriesByIdParent($category_id_parent);
     }
 }

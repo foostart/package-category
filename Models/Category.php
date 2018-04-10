@@ -6,6 +6,11 @@ use Foostart\Category\Models\Context;
 
 class Category extends FooModel {
 
+     public $courses = NULL;
+
+    public function __set($name, $value) {
+        $this->{$name} = $value;
+    }
     public $isTree;
     /**
      * @table Categories
@@ -32,13 +37,14 @@ class Category extends FooModel {
             'category_name',
             'category_overview',
             'category_description',
+            'category_image',
             'category_status',
 
             'category_id_parent',
             'category_id_parent_str',
+            'category_id_child_str',
 
             'context_id',
-            'context_key',
 
             'created_at',
             'updated_at',
@@ -51,16 +57,16 @@ class Category extends FooModel {
                 'name' => 'category_name',
                 'type' => 'Text',
             ],
-            'category_description' => [
-                'name' => 'category_key',
+            'category_overview' => [
+                'name' => 'category_overview',
                 'type' => 'Text',
             ],
-            'category_overview' => [
-                'name' => 'category_ref',
+            'category_description' => [
+                'name' => 'category_description',
                 'type' => 'Text',
             ],
             'category_status' => [
-                'name' => 'category_status',
+                'name' => 'status',
                 'type' => 'Int',
             ],
             'category_slug' => [
@@ -75,8 +81,8 @@ class Category extends FooModel {
                 'name' => 'context_id',
                 'type' => 'Int',
             ],
-            'context_key' => [
-                'name' => '_key',
+            'category_image' => [
+                'name' => 'category_image',
                 'type' => 'Text',
             ],
             'user_id' => [
@@ -95,6 +101,7 @@ class Category extends FooModel {
             'category_name',
             'category_overview',
             'category_description',
+            'category_image',
             'category_status',
             //relation
             'category_id_parent',
@@ -104,7 +111,6 @@ class Category extends FooModel {
             'user_full_name',
             //context
             'context_id',
-            'context_key',
         ];
 
         //check valid fields for ordering
@@ -117,6 +123,7 @@ class Category extends FooModel {
         //check valid fields for filter
         $this->valid_filter_fields = [
             'keyword',
+            'context_id',
             'status',
             '_key',
         ];
@@ -178,7 +185,7 @@ class Category extends FooModel {
             $key = $this->primaryKey;
         }
        //join to another tables
-        $elo = $this->joinTable();
+        $elo = $this->joinTable($params);
 
         //search filters
         $elo = $this->searchFilters($params, $elo);
@@ -212,7 +219,7 @@ class Category extends FooModel {
         $elo = $this;
 
         if (!empty($params['_key'])) {
-            $elo = $elo->join('contexts', 'categories.context_key','=', 'contexts.context_key');
+            $elo = $elo->join('contexts', 'categories.context_id','=', 'contexts.context_id');
         }
 
         return $elo;
@@ -238,6 +245,11 @@ class Category extends FooModel {
                                 $elo = $elo->where($this->table . '.id', '=', $value);
                             }
                             break;
+                        case 'context_id':
+                            if (!empty($value)) {
+                                $elo = $elo->where($this->table . '.context_id', '=', $value);
+                            }
+                            break;
 
                         case 'category_name':
                             if (!empty($value)) {
@@ -248,15 +260,14 @@ class Category extends FooModel {
                         case 'keyword':
                             if (!empty($value)) {
                                 $elo = $elo->where(function($elo) use ($value) {
-                                    $elo->where($this->profile_table_name . '.id', 'LIKE', "%{$value}%")
-                                    ->orWhere($this->profile_table_name . '.category_name','LIKE', "%{$value}%");
+                                    $elo->where($this->table . '.category_name', 'LIKE', "%{$value}%");
                                 });
                                 $this->isTree = FALSE;
                             }
                             break;
                         case '_key':
                             if (!empty($value)) {
-                               $elo = $elo->where($this->table . '.context_key', '=', $value);
+                               $elo = $elo->where('contexts.context_key', '=', $value);
                             }
                             break;
                         default:
@@ -414,18 +425,24 @@ class Category extends FooModel {
         //update category id parent string of item
         $dataFields['category_id_parent_str'] = $this->_getIdParentStr($params, $params['category_id_parent']);
 
-        //update category id child string of parent
-
         //get context id from key
         $context = $this->getContext($params);
 
+        //set context id
         if ($context) {
             $dataFields['context_id'] = $context->context_id;
         }
+
+        //create new record
         $item = self::create($dataFields);
 
         $key = $this->primaryKey;
         $item->id = $item->$key;
+
+        //set childs for category parent
+        if ($params['category_id_parent']) {
+            $this->setChilds($params['category_id_parent']);
+        }
 
         return $item;
     }
@@ -444,12 +461,8 @@ class Category extends FooModel {
          if ($context) {
              $elo = $elo->where($this->table.'.context_id', $context->context_id);
          }
-         //except current
-         if (!empty($params['id'])) {
-             $elo = $elo->where($this->table.'.'.$this->primaryKey, '!=', $params['id']);
-         }
 
-        $items = $elo->pluck('category_name', $this->primaryKey);
+         $items = $elo->pluck('category_name', $this->primaryKey);
 
         return $items;
     }
@@ -534,13 +547,72 @@ class Category extends FooModel {
      * @param STRING $key
      * @return ELOQUENT OBJECT context
      */
-    public function getContext($key) {
+    public function getContext($params) {
         $obj_context = new Context();
-        $params = [
-            'context_key' => $key,
-        ];
+
         $context = $obj_context->selectItem($params);
 
         return $context;
     }
+
+    /**
+     * Get categories by category id parent
+     * @param INT $category_id_parent
+     * @return OBJECT list of categories
+     */
+    public function getCategoriesByIdParent($category_id_parent, $isTree = TRUE) {
+
+        $parent = self::find($category_id_parent);
+
+        if ($parent) {
+            $parent->id = $parent->category_id;
+            $parent = $this->getChilds([$parent]);
+            if (isset($parent[0])) {
+                $parent = $parent[0];
+            }
+        }
+
+        return $parent;
+    }
+
+    /**
+     * Recurse function
+     * Set childs for parent category
+     * @param type $category_id
+     */
+    public function setChilds($category_id) {
+
+        $category = self::find($category_id);
+        if ($category) {
+            //get list of childs
+            $childs = self::where('category_id_parent', $category_id)->get();
+
+            if (!empty($childs)) {
+                $list_id_childs = [];
+                foreach ($childs as $child) {
+                    $_id_childs = [$child->category_id => 1];
+                    if (!empty($child->category_id_child_str)) {
+                        $_id_childs_sub = json_decode($child->category_id_child_str);
+                        $_id_childs += (array) $_id_childs_sub;
+                    }
+
+                    $list_id_childs += $_id_childs;
+                }
+
+                if (!empty($list_id_childs)) {
+                    $category->category_id_child_str = json_encode($list_id_childs);
+                    $category->save();
+                }
+            }
+            //recurse parent of category
+            if (!empty($category->category_id_parent)) {
+                $parent = self::find($category->category_id_parent);
+                if (!empty($parent)) {
+                    $this->setChilds($parent->category_id);
+                }
+            }
+        }
+        return $category;
+    }
+
 }

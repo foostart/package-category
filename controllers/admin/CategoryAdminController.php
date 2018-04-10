@@ -56,14 +56,13 @@ class CategoryAdminController extends FooController {
             ]
         ];
 
+        // status of item
         $this->data_view['status'] = $this->obj_item->getPluckStatus();
-
-        $this->statuses = config('package-category.contexts.statuses');
 
     }
 
     /**
-     * Show list of items
+     * Show list of items by key
      * @return view list of items
      * @date 27/12/2017
     */
@@ -106,9 +105,8 @@ class CategoryAdminController extends FooController {
             'item' => $item,
             'categories' => $categories,
             'request' => $request,
-            'statuses' => $this->statuses
         ));
-        
+
         return view($this->page_views['admin']['edit'], $this->data_view);
     }
 
@@ -182,9 +180,11 @@ class CategoryAdminController extends FooController {
             $errors = $this->obj_validator->getErrors();
 
             // passing the id incase fails editing an already existing item
-            return Redirect::route($this->root_router.'.edit', $id ? [ 'id' => $item->id,
+            return Redirect::route($this->root_router.'.edit', $id ? [ 'id' => $id,
                                                                         '_key' => $_key,
-                                                                    ] : [])
+                                                                    ] : [
+                                                                        '_key' => $_key
+                                                                    ])
                     ->withInput()->withErrors($errors);
         }
     }
@@ -199,6 +199,8 @@ class CategoryAdminController extends FooController {
         $item = NULL;
         $flag = TRUE;
         $params = array_merge($request->all(), $this->getUser());
+        $_key = @$params['_key'];
+
         $delete_type = isset($params['del-forever'])?'delete-forever':'delete-trash';
         $id = (int)$request->get('id');
         $ids = $request->get('ids');
@@ -218,12 +220,54 @@ class CategoryAdminController extends FooController {
                 }
             }
             if ($flag) {
-                return Redirect::route($this->root_router.'.list')
+                return Redirect::route($this->root_router.'.list', [
+                                                            '_key' => $_key,
+                                                        ])
                                 ->withMessage(trans($this->plang_admin.'.actions.delete-ok'));
             }
         }
 
-        return Redirect::route($this->root_router.'.list')
+        return Redirect::route($this->root_router.'.list', [
+                                                            '_key' => $_key,
+                                                        ])
                         ->withMessage(trans($this->plang_admin.'.actions.delete-error'));
+    }
+
+
+    /**
+     * Edit existing item by {id} parameters OR
+     * Add new item
+     * @return view edit page
+     * @date 26/12/2017
+     */
+    public function copy(Request $request) {
+
+        $params = $request->all();
+
+        $item = NULL;
+        $params['id'] = $request->get('cid', NULL);
+
+        if (!empty($params['id'])) {
+
+            $item = $this->obj_item->selectItem($params, FALSE);
+
+            if (empty($item)) {
+                return Redirect::route($this->root_router.'.list')
+                                ->withMessage(trans($this->plang_admin.'.actions.edit-error'));
+            }
+
+            $item->id = NULL;
+        }
+
+        $categories = $this->obj_item->pluckSelect($params);
+
+        // display view
+        $this->data_view = array_merge($this->data_view, array(
+            'item' => $item,
+            'categories' => $categories,
+            'request' => $request,
+        ));
+
+        return view($this->page_views['admin']['edit'], $this->data_view);
     }
 }

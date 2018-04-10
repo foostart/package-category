@@ -54,66 +54,74 @@
 
             <!--NAME-->
             @include('package-category::admin.partials.input_text', [
-            'name' => 'category_name',
-            'label' => trans($plang_admin.'.labels.category-name'),
-            'value' => @$item->category_name,
-            'description' => trans($plang_admin.'.descriptions.category-name'),
-            'errors' => $errors,
+                'name' => 'category_name',
+                'label' => trans($plang_admin.'.labels.category-name'),
+                'value' => @$item->category_name,
+                'description' => trans($plang_admin.'.descriptions.category-name'),
+                'errors' => $errors,
             ])
             <!--/NAME-->
 
             <!-- CATEGORY -->
             @include('package-category::admin.partials.select_single', [
-            'name' => 'category_id_parent',
-            'label' => trans($plang_admin.'.labels.category'),
-            'items' => $categories,
-            'value' => @$item->category_id_parent,
+                'name' => 'category_id_parent',
+                'label' => trans($plang_admin.'.labels.category'),
+                'items' => $categories,
+                'value' => @$item->category_id_parent,
             'description' => trans($plang_admin.'.descriptions.category', [
 
                                 ]),
             'errors' => $errors,
             ])
 
-            <!--OVERVIEW-->
-            @include('package-category::admin.partials.input_text', [
-            'name' => 'category_ref',
-            'label' => trans($plang_admin.'.labels.overview'),
-            'value' => @$item->category_ref,
-            'description' => trans($plang_admin.'.descriptions.overview'),
-            'errors' => $errors,
-            ])
-
-            <!--DESCRIPTION-->
-            @include('package-category::admin.partials.input_text', [
-            'name' => 'category_description',
-            'label' => trans($plang_admin.'.labels.description'),
-            'value' => @$item->category_description,
-            'description' => trans($plang_admin.'.descriptions.description'),
-            'errors' => $errors,
-            ])
-
-
             <!--STATUS-->
-            @include('package-category::admin.partials.radio', [
-            'name' => 'category_status',
-            'label' => trans($plang_admin.'.labels.status'),
-            'value' => @$item->categoy_status,
-            'description' => trans($plang_admin.'.descriptions.status'),
-            'items' => $statuses
+            @include('package-category::admin.partials.select_single', [
+                'name' => 'status',
+                'label' => trans($plang_admin.'.form.status'),
+                'value' => @$item->category_status,
+                'items' => $status,
             ])
 
         </div>
 
         <!--MENU 2-->
         <div id="menu_2" class="tab-pane fade">
-            <h3>Menu 1</h3>
-            <p>Some content in menu 1.</p>
+            <!--CATEGORY OVERVIEW-->
+            @include('package-category::admin.partials.textarea', [
+                'name' => 'category_overview',
+                'label' => trans($plang_admin.'.labels.overview'),
+                'value' => @$item->category_overview,
+                'description' => trans($plang_admin.'.descriptions.overview'),
+                'tinymce' => false,
+                'errors' => $errors,
+            ])
+            <!--/CATEGORY OVERVIEW-->
+
+            <!--CATEGORY DESCRIPTION-->
+            @include('package-category::admin.partials.textarea', [
+                'name' => 'category_description',
+                'label' => trans($plang_admin.'.labels.description'),
+                'value' => @$item->category_description,
+                'description' => trans($plang_admin.'.descriptions.description'),
+                'rows' => 50,
+                'tinymce' => true,
+                'errors' => $errors,
+            ])
+            <!--/CATEGORY DESCRIPTION-->
+
         </div>
 
         <!--MENU 3-->
         <div id="menu_3" class="tab-pane fade">
-            <h3>Menu 2</h3>
-            <p>Some content in menu 2.</p>
+            <!--CATEGORY IMAGE-->
+            @include('package-category::admin.partials.input_image', [
+                'name' => 'category_image',
+                'label' => trans($plang_admin.'.labels.image'),
+                'value' => @$item->category_image,
+                'description' => trans($plang_admin.'.descriptions.image'),
+                'errors' => $errors,
+            ])
+            <!--/CATEGORY IMAGE-->
         </div>
 
     </div>

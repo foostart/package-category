@@ -41,6 +41,8 @@ class FooModel extends Model {
 
     protected $obj_context = NULL;
 
+    protected $is_pagination = TRUE;
+
     /**
      *
      * @param array $attributes
@@ -258,6 +260,55 @@ class FooModel extends Model {
 
     /**
      *
+     * @param ARRAY $params list of parameters
+     * @param STRING $key is field name
+     * @return TEXT value
+     */
+    public function getJson($params, $key) {
+        $value = NULL;
+
+        if (isset($params[$key])) {
+            $value = $this->_toJson($params[$key], TRUE);
+        }
+
+        return $value;
+    }
+
+    /**
+     *
+     * @param ARRAY $params
+     * @param STRING $key
+     * @param ARRAY $args
+     * @return STRING JSON
+     */
+    public function getXJson($params, $key, $args) {
+        $value = NULL;
+
+        if (!empty($params[$key]) && is_array($params[$key])) {
+            foreach ($params[$key] as $key => $item) {
+                if (!empty($item)) {
+                    $_temp = [
+                        'image' => $item
+                    ];
+                    foreach ($args as $attr) {
+
+                        if (!empty($params[$attr])) {
+
+                            $_temp[$attr] = $params[$attr][$key];
+                        }
+                    }
+                    $value[] = $_temp;
+                }
+            }
+        }
+        if ($value) {
+            $value = json_encode($value);
+        }
+        return $value;
+    }
+
+    /**
+     *
      * @param ARRAY $params
      * @param ARRAY $fields
      * @return ARRAY fields data
@@ -269,7 +320,11 @@ class FooModel extends Model {
         foreach ($fields as $key => $field) {
 
             $funGet = 'get'.$field['type'];
-            $data_fields[$key] = $this->$funGet($params, $field['name']);
+            if (!empty($field['attr'])) {
+                $data_fields[$key] = $this->$funGet($params, $field['name'], $field['attr']);
+            }else {
+                $data_fields[$key] = $this->$funGet($params, $field['name']);
+            }
         }
 
         return $data_fields;
@@ -293,7 +348,7 @@ class FooModel extends Model {
      * @return ARRAY list of statuses
      */
     public function getPluckStatus() {
-       $pluck_status = config('foostart.item.pluck_status');
+       $pluck_status = config('package-category.status.list');
        return $pluck_status;
     }
 
@@ -310,6 +365,31 @@ class FooModel extends Model {
 
         $item = $obj_context->selectItem($params);
         return $item;
+    }
+
+    /**
+     * Convert array to jSon
+     * @param ARRAY $arr
+     * @param BOOLEAN $isNull remove elements are null
+     * @return JSON
+     */
+    public function _toJson($arr, $isNull = false) {
+        $json = NULL;
+
+        if ($isNull) {
+            $_arr = [];
+            foreach ($arr as $item) {
+                if (!empty($item)) {
+                    $_arr[] = $item;
+                }
+            }
+            $arr = $_arr;
+        }
+        if (is_array($arr)) {
+            $json = json_encode($arr);
+        }
+
+        return $json;
     }
 
 }

@@ -29,7 +29,7 @@
     <ol class='list-errors'>
 
         @foreach($errors->all() as $error)
-            <li class='error-item'>
+            <li>
                 {!! $error !!}
             </li>
         @endforeach

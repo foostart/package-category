@@ -35,7 +35,11 @@
 
     <!--description-->
     @if($description)
-        <span class='input-text-description'>{!! $description !!}</span>
+    <span class='input-text-description'>
+        <blockquote class="quote-card">
+            <p>{!! $description !!}</p>
+        </blockquote>
+    </span>
     @endif
 
 </div>

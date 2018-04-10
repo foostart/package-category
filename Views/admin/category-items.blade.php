@@ -17,7 +17,7 @@
                     <!--HEADING-->
                     <div class="panel-heading">
                         <h3 class="panel-title bariol-thin"><i class="fa fa-list-ul" aria-hidden="true"></i>
-                            {!! $request->all() ? trans($plang_admin.'.pages.title-list-search') : trans($plang_admin.'.pages.title-list') !!}
+                            {!! $params ? trans($plang_admin.'.pages.title-list-search') : trans($plang_admin.'.pages.title-list') !!}
                         </h3>
                     </div>
 
@@ -50,8 +50,10 @@
 
                             @include('package-category::admin.category-item')
 
+                            <div class='hidden-field'>
                             {!! csrf_field(); !!}
-
+                            {!! Form::hidden('_key',$request->get('_key','')) !!}
+                            </div>
                         {!! Form::close() !!}
                     </div>
                     <!--/BODY-->

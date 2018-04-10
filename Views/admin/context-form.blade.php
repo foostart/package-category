@@ -26,90 +26,73 @@
         <!--MENU 1-->
         <li class="active">
             <a data-toggle="tab" href="#menu_1">
-                {!! trans($plang_admin.'.tabs.menu_1') !!}
+                {!! trans($plang_admin.'.tabs.basic') !!}
             </a>
         </li>
 
         <!--MENU 2-->
         <li>
             <a data-toggle="tab" href="#menu_2">
-                {!! trans($plang_admin.'.tabs.menu_2') !!}
+                {!! trans($plang_admin.'.tabs.guide') !!}
             </a>
         </li>
 
-        <!--MENU 3-->
-        <li>
-            <a data-toggle="tab" href="#menu_3">
-                {!! trans($plang_admin.'.tabs.menu_3') !!}
-            </a>
-        </li>
     </ul>
     <!--/TAB MENU-->
 
     <!--TAB CONTENT-->
     <div class="tab-content">
 
-        <!--MENU 1-->
+        <!--BASIC-->
         <div id="menu_1" class="tab-pane fade in active">
 
             <!--NAME-->
             @include('package-category::admin.partials.input_text', [
             'name' => 'context_name',
-            'label' => trans($plang_admin.'.labels.context_name'),
+            'label' => trans($plang_admin.'.labels.context-name'),
             'value' => @$item->context_name,
-            'description' => trans($plang_admin.'.descriptions.context_name'),
+            'description' => trans($plang_admin.'.descriptions.context-name'),
             'errors' => $errors,
             ])
             <!--/NAME-->
 
-            <!--NAME-->
+            <!--REF-->
             @include('package-category::admin.partials.input_text', [
             'name' => 'context_ref',
-            'label' => trans($plang_admin.'.labels.context_ref'),
+            'label' => trans($plang_admin.'.labels.context-ref'),
             'value' => @$item->context_ref,
-            'description' => trans($plang_admin.'.descriptions.context_ref'),
+            'description' => trans($plang_admin.'.descriptions.context-ref'),
             'errors' => $errors,
             ])
-            <!--/NAME-->
+            <!--/REF-->
 
-            <!--KEY-->
-            @include('package-category::admin.partials.label', [
-            'name' => 'context_key',
-            'label' => trans($plang_admin.'.labels.context_key'),
-            'value' => @$item->context_key,
-            'description' => trans($plang_admin.'.descriptions.context_key'),
-            'errors' => $errors,
-            ])
-
-            <!--CHECKBOX-->
-            @if($request->get('id'))
+            <!--CONTEXT KEY-->
             @include('package-category::admin.partials.checkbox', [
-            'name' => 'context_key',
-            'items' => ['Set new key']
+                'name' => 'context_key',
+                'label' => trans($plang_admin.'.labels.context-key'),
+                'value' => @$item->context_key,
+                'items' => [
+                           'add' => trans($plang_admin.'.checkboxs.context-key.add'),
+                        ],
+                'description' => trans($plang_admin.'.descriptions.context-key'),
+                'errors' => $errors,
             ])
-            @endif
-            
+
             <!--STATUS-->
             @include('package-category::admin.partials.radio', [
             'name' => 'context_status',
-            'label' => trans($plang_admin.'.labels.context_status'),
+            'label' => trans($plang_admin.'.labels.context-status'),
             'value' => @$item->context_status,
-            'description' => trans($plang_admin.'.descriptions.context_status'),
+            'description' => trans($plang_admin.'.descriptions.context-status'),
             'items' => $statuses
             ])
 
         </div>
 
-        <!--MENU 2-->
+        <!--GUIDE-->
         <div id="menu_2" class="tab-pane fade">
             <h3>Menu 1</h3>
             <p>Some content in menu 1.</p>
-        </div>
-
-        <!--MENU 3-->
-        <div id="menu_3" class="tab-pane fade">
-            <h3>Menu 2</h3>
-            <p>Some content in menu 2.</p>
         </div>
 
     </div>

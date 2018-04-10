@@ -2,7 +2,8 @@
 use Request;
 class SortTable {
 
-    public $orders = array();
+    public $orders = [];
+    public $sorting = [];
 
     public function __construct($orders = array()) {
         if (!empty($orders)) {
@@ -18,6 +19,9 @@ class SortTable {
         return $this->orders;
     }
 
+    public function setSorting($sorting) {
+        $this->sorting = $sorting;
+    }
     public function linkOrders() {
 
         $sorting = [
@@ -25,6 +29,11 @@ class SortTable {
             'items' => [],
             'url' => []
         ];
+        
+        if ($this->sorting) {
+            $sorting = $this->sorting;
+        }
+
         //Order by params
         $params = Request::all();
 

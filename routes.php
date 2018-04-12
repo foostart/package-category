@@ -106,6 +106,11 @@ Route::group(['middleware' => ['web']], function () {
             'uses' => 'CategoryAdminController@index'
         ]);
 
+        Route::get('admin/categories/level', [
+            'as' => 'categories.level',
+            'uses' => 'CategoryAdminController@index'
+        ]);
+
         /**
          * edit-add
          */

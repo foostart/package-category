@@ -33,7 +33,7 @@ class FooCategory {
 
         $select_category_list = $this->obj_category->pluckSelect($params);
 
-        $select_category_list = array('' => trans('category-admin.columns.none')) + $select_category_list->toArray();
+        $select_category_list = array('' => trans('category-admin.columns.any')) + $select_category_list->toArray();
 
         return $select_category_list;
     }

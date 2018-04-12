@@ -11,6 +11,7 @@ return [
     */
     'menus' => [
         'top-menu' => 'Categories',
+        'top-menu-contexts' => 'Contexts',
         'category' => 'Categories',
         'context' => 'Context',
     ],
@@ -48,6 +49,7 @@ return [
     |
     */
     'columns' => [
+        'any'   => 'Any',
         'order' => '#',
         'category-name' => 'Category name',
         'user-full-name' => 'User full name',

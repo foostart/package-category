@@ -51,6 +51,7 @@ return [
     'columns' => [
         'any'   => 'Any',
         'order' => '#',
+        'id'    => 'ID',
         'category-name' => 'Category name',
         'user-full-name' => 'User full name',
         'name-context' => 'Context name',
@@ -340,5 +341,23 @@ return [
         'edit-error' => 'Edit item failed',
         'delete-ok' => 'Delete item successfully',
         'delete-error' => 'Delete item failed',
+    ],
+    
+
+
+
+
+    /*
+    |-----------------------------------------------------------------------
+    | SEARCH
+    |-----------------------------------------------------------------------
+    |
+    |
+    |
+    |
+    */
+    'order' => [
+        'by-asc' => 'ASC',
+        'by-des' => 'DES',
     ],
 ];

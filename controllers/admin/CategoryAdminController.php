@@ -79,10 +79,8 @@ class CategoryAdminController extends FooController {
             'request' => $request,
             'params' => $params,
         ));
-
         return view($this->page_views['admin']['items'], $this->data_view);
     }
-
     /**
      * Edit existing category by id - context
      * Add new category by context

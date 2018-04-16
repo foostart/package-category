@@ -90,8 +90,8 @@ View::composer([
          * $order_by
          */
         $order_by = [
-            'asc' => trans('foostart.order_by.asc'),
-            'desc' => trans('foostart.order_by.desc'),
+            'asc' => trans('category-admin.order.by-asc'),
+            'desc' => trans('category-admin.order.by-des'),
         ];
 
         /**

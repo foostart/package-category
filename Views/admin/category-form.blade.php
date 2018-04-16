@@ -62,6 +62,18 @@
             ])
             <!--/NAME-->
 
+            <!--SLUG-->
+            @include('package-category::admin.partials.input_slug', [
+                'name' => 'category_slug',
+                'id' => 'category_slug',
+                'ref' => 'category_name',
+                'label' => trans($plang_admin.'.labels.category-slug'),
+                'value' => @$item->category_slug,
+                'description' => trans($plang_admin.'.descriptions.category-slug'),
+                'errors' => $errors,
+            ])
+            <!--/SLUG-->
+
             <!-- CATEGORY -->
             @include('package-category::admin.partials.select_single', [
                 'name' => 'category_id_parent',

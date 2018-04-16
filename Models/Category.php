@@ -8,9 +8,6 @@ class Category extends FooModel {
 
      public $courses = NULL;
 
-    public function __set($name, $value) {
-        $this->{$name} = $value;
-    }
     public $isTree;
     /**
      * @table Categories

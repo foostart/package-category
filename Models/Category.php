@@ -96,6 +96,7 @@ class Category extends FooModel {
         $this->valid_insert_fields = [
             //category info
             'category_name',
+            'category_slug',
             'category_overview',
             'category_description',
             'category_image',

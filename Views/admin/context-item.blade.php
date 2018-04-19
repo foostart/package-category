@@ -22,8 +22,7 @@
         {!! trans($plang_admin.'.descriptions.counters', ['number' => $nav['total']]) !!}
     @endif
 </caption>
-
-<div class="table-responsive" style="width: 950px">
+<div class="table-responsive">
 <table class="table table-hover">
 
     <thead>

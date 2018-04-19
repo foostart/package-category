@@ -48,21 +48,21 @@
 
             <!--NAME-->
             @include('package-category::admin.partials.input_text', [
-            'name' => 'context_name',
-            'label' => trans($plang_admin.'.labels.context-name'),
-            'value' => @$item->context_name,
-            'description' => trans($plang_admin.'.descriptions.context-name'),
-            'errors' => $errors,
+                'name' => 'context_name',
+                'label' => trans($plang_admin.'.labels.context-name'),
+                'value' => @$item->context_name,
+                'description' => trans($plang_admin.'.descriptions.context-name'),
+                'errors' => $errors,
             ])
             <!--/NAME-->
 
             <!--REF-->
             @include('package-category::admin.partials.input_text', [
-            'name' => 'context_ref',
-            'label' => trans($plang_admin.'.labels.context-ref'),
-            'value' => @$item->context_ref,
-            'description' => trans($plang_admin.'.descriptions.context-ref'),
-            'errors' => $errors,
+                'name' => 'context_ref',
+                'label' => trans($plang_admin.'.labels.context-ref'),
+                'value' => @$item->context_ref,
+                'description' => trans($plang_admin.'.descriptions.context-ref'),
+                'errors' => $errors,
             ])
             <!--/REF-->
 
@@ -80,13 +80,13 @@
 
             <!--STATUS-->
             @include('package-category::admin.partials.radio', [
-            'name' => 'context_status',
-            'label' => trans($plang_admin.'.labels.context-status'),
-            'value' => @$item->context_status,
-            'description' => trans($plang_admin.'.descriptions.context-status'),
-            'items' => $statuses
+                'name' => 'context_status',
+                'label' => trans($plang_admin.'.labels.context-status'),
+                'value' => @$item->context_status,
+                'description' => trans($plang_admin.'.descriptions.context-status'),
+                'items' => $statuses
             ])
-
+            
         </div>
 
         <!--GUIDE-->

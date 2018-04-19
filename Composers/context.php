@@ -1,6 +1,7 @@
 <?php
 
 use LaravelAcl\Authentication\Classes\Menu\SentryMenuFactory;
+use Foostart\Category\Helpers\SortTable;
 
 
 /*
@@ -30,13 +31,18 @@ View::composer([
         $plang_admin = 'category-admin';
         $plang_front = 'category-front';
 
-        $view->with('plang_admin', $plang_admin);
-        $view->with('plang_front', $plang_front);
+        /**
+         * Get list of params
+         */
+        $params = Request::all();
 
         /**
          * $sidebar_items
          */
-        $view->with('sidebar_items', [
+       /**
+         * $sidebar_items
+         */
+        $sidebar_items = [
             trans('category-admin.sidebar.add') => [
                 'url' => URL::route('contexts.edit', []),
                 'icon' => '<i class="fa fa-pencil-square-o" aria-hidden="true"></i>'
@@ -53,7 +59,7 @@ View::composer([
                 "url" => URL::route('contexts.lang', []),
                 'icon' => '<i class="fa fa-language" aria-hidden="true"></i>'
             ],
-        ]);
+        ];
 
         /**
          * $sorting
@@ -61,68 +67,31 @@ View::composer([
          */
         $orders = [
             '' => trans($plang_admin.'.form.no-selected'),
-            'context_name' => trans($plang_admin.'.fields.name-context'),
+            'context_name' => trans($plang_admin.'.fields.context-name'),
+            'context_ref' => trans($plang_admin.'.fields.context-ref'),
+            'context_status' => trans($plang_admin.'.fields.context-status'),
             'updated_at' => trans($plang_admin.'.fields.updated_at'),
         ];
-        $sorting = [
-            'label' => $orders,
-            'items' => [],
-            'url' => []
-        ];
+
         //Order by params
-        $params = Request::all();
+        $sortTable = new SortTable();
+        $sortTable->setOrders($orders);
+        $sorting = $sortTable->linkOrders();
 
-        $order_by = explode(',', @$params['order_by']);
-        $ordering = explode(',', @$params['ordering']);
-        foreach ($orders as $key => $value) {
-            $_order_by = $order_by;
-            $_ordering = $ordering;
-            if (!empty($key)) {
-                //existing key in order
-                if (in_array($key, $order_by)) {
-                    $index = array_search($key, $order_by);
-                    switch ($_ordering[$index]) {
-                        case 'asc':
-                            $sorting['items'][$key] = 'asc';
-                            $_ordering[$index] = 'desc';
-                            break;
-                        case 'desc':
-                             $sorting['items'][$key] = 'desc';
-                            $_ordering[$index] = 'asc';
-                            break;
-                        default:
-                            break;
-                    }
-                    $order_by_str = implode(',', $_order_by);
-                    $ordering_str = implode(',', $_ordering);
-
-                } else {//new key in order
-                    $sorting['items'][$key] = 'none';//asc
-                    if (empty($params['order_by'])) {
-                        $order_by_str = $key;
-                        $ordering_str = 'asc';
-                    } else {
-                        $_order_by[] = $key;
-                        $_ordering[] = 'asc';
-                        $order_by_str = implode(',', $_order_by);
-                        $ordering_str = implode(',', $_ordering);
-                    }
-                }
-                $sorting['url'][$key]['order_by'] = $order_by_str;
-                $sorting['url'][$key]['ordering'] = $ordering_str;
-            }
-        }
-        foreach ($sorting['url'] as $key => $item) {
-            $params['order_by'] = $item['order_by'];
-            $params['ordering'] = $item['ordering'];
-            $sorting['url'][$key] = Request::url().'?'.http_build_query($params);
-        }
-        $view->with('sorting', $sorting);
-
-        //Order by
+        /**
+         * $order_by
+         */
         $order_by = [
             'asc' => trans('category-admin.order.by-asc'),
             'desc' => trans('category-admin.order.by-des'),
         ];
+
+        /**
+         * Send to view
+         */
+        $view->with('sidebar_items', $sidebar_items );
+        $view->with('plang_admin', $plang_admin);
+        $view->with('plang_front', $plang_front);
+        $view->with('sorting', $sorting);
         $view->with('order_by', $order_by);
 });

@@ -46,7 +46,7 @@
 
                     <!--BODY-->
                     <div class="panel-body">
-                        {!! Form::open(['route'=>['categories.delete', 'id' => @$item->id], 'method' => 'get'])  !!}
+                        {!! Form::open(['route'=>['categories.delete', 'id' => @$item->id], 'method' => 'get', 'class' => 'form-responsive'])  !!}
 
                             @include('package-category::admin.category-item')
 

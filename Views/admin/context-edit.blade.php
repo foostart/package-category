@@ -42,7 +42,7 @@
 
                 <!--DESCRIPTION-->
                 <div class='panel-description'>
-                    {!! trans($plang_admin.'.descriptions.form-context') !!}</h4>
+                    {!! trans($plang_admin.'.descriptions.context-form') !!}</h4>
                 </div>
 
                 <!-- ERRORS NAME  -->

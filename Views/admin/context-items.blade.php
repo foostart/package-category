@@ -46,7 +46,7 @@
 
                     <!--BODY-->
                     <div class="panel-body">
-                        {!! Form::open(['route'=>['contexts.delete', 'id' => @$item->id], 'method' => 'get'])  !!}
+                        {!! Form::open(['route'=>['contexts.delete', 'id' => @$item->id], 'method' => 'get', 'class'=>'form-responsive'])  !!}
 
                             @include('package-category::admin.context-item')
 

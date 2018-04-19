@@ -1,8 +1,21 @@
 <?php
 return [
 
-    'name_category_min_length' => 5,
-    'name_category_max_length' => 255,
+    //Number of worlds
+    'length' => [
+        'category_name' => [
+            'min' => 3,
+            'max' => 255,
+        ],
+        'category_overview' => [
+            'min' => 10,
+            'max' => 255,
+        ],
+        'category_description' => [
+            'min' => 25,
+            'max' => 0,//unlimit
+        ],
+    ],
 
     'name_context_min_length' => 5,
     'name_context_max_length' => 255,
@@ -21,43 +34,36 @@ return [
     'load_from' => 'package-category::',
 
     /*
-    |-----------------------------------------------------------------------
-    | CONTEXTS
-    |-----------------------------------------------------------------------
-    | Users
-    | Groups
-    | Permissions
-    |
-    */
-    'contexts' => [
-
-        'users'         => [
-                                'key' => '1d13bdfe323c1d13bfe323c1d13bdfe323c',
-                                'route' => 'users.list',
-                                'name' => 'Users',
-                            ],
-
-        'groups'        => [
-                                'key' => '2a99aae4d5152a99a4d5152a99aae4d5152',
-                                'route' => 'groups.list',
-                                'name' => 'Groups',
-                            ],
-
-        'permissions'   => [
-                                'key' => '4bc83dbd2fef4bbd2fef4bc83dbd2dbd2ef',
-                                'route' => 'permissions.list',
-                                'name' => 'Permissions',
-                            ],
-        'statuses' => [
-            '1' => 'Active',
-            '0' => 'Disable',
+      |--------------------------------------------------------------------------
+      | ITEM STATUS
+      |--------------------------------------------------------------------------
+      | @public = 99
+      | @in_trash = 55 delete from list
+      | @draft = 11 auto save
+      | @unpublish = 33
+     */
+    'status' => [
+        'list' => [
+            99 => 'Publish',
+            33 => 'Unpublish',
+            55 => 'In trash',
+            11 => 'Draft',
+        ],
+        'color' => [
+            11 => '#ef4832',
+            33 => '#000000',
+            55 => '#a8aac2',
+            99 => '#5bc0de'
         ]
-
     ],
+
+
+
+
 
     /*
     |-----------------------------------------------------------------------
-    | Permissions test
+    | Permissions
     |-----------------------------------------------------------------------
     | List
     | Edit

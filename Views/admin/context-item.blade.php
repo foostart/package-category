@@ -2,6 +2,7 @@
 <?php
     $withs = [
         'order' => '5%',
+        'name' => '20%',
         'ref' => '20%',
         'key' => '20%',
         'status' => '5%',
@@ -22,6 +23,7 @@
     @endif
 </caption>
 
+<div class="table-responsive" style="width: 950px">
 <table class="table table-hover">
 
     <thead>
@@ -32,9 +34,34 @@
                 {{ trans($plang_admin.'.columns.order') }}
             </th>
 
+            <!-- NAME -->
+            <?php $name = 'context_name' ?>
+
+            <th class="hidden-xs" style='width:{{ $withs['name'] }}'>{!! trans($plang_admin.'.columns.context-name') !!}
+                <a href='{!! $sorting["url"][$name] !!}' class='tb-id' data-order='asc'>
+                    @if($sorting['items'][$name] == 'asc')
+                        <i class="fa fa-sort-alpha-asc" aria-hidden="true"></i>
+                    @elseif($sorting['items'][$name] == 'desc')
+                        <i class="fa fa-sort-alpha-desc" aria-hidden="true"></i>
+                    @else
+                        <i class="fa fa-sort-desc" aria-hidden="true"></i>
+                    @endif
+                </a>
+            </th>
+
             <!--REF-->
-            <th style='width:{{ $withs['ref'] }}'>
-                    {{ trans($plang_admin.'.columns.ref') }}
+            <?php $name = 'context_ref' ?>
+
+            <th class="hidden-xs" style='width:{{ $withs['name'] }}'>{!! trans($plang_admin.'.columns.context-ref') !!}
+                <a href='{!! $sorting["url"][$name] !!}' class='tb-id' data-order='asc'>
+                    @if($sorting['items'][$name] == 'asc')
+                        <i class="fa fa-sort-alpha-asc" aria-hidden="true"></i>
+                    @elseif($sorting['items'][$name] == 'desc')
+                        <i class="fa fa-sort-alpha-desc" aria-hidden="true"></i>
+                    @else
+                        <i class="fa fa-sort-desc" aria-hidden="true"></i>
+                    @endif
+                </a>
             </th>
 
             <!--KEY-->
@@ -42,9 +69,19 @@
                 {{ trans($plang_admin.'.columns.key') }}
             </th>
 
-            <!--STATUS-->
-            <th style='width:{{ $withs['status'] }}'>
-                {{ trans($plang_admin.'.columns.status') }}
+            <!--REF-->
+            <?php $name = 'context_status' ?>
+
+            <th class="hidden-xs" style='width:{{ $withs['name'] }}'>{!! trans($plang_admin.'.columns.context-status') !!}
+                <a href='{!! $sorting["url"][$name] !!}' class='tb-id' data-order='asc'>
+                    @if($sorting['items'][$name] == 'asc')
+                        <i class="fa fa-sort-alpha-asc" aria-hidden="true"></i>
+                    @elseif($sorting['items'][$name] == 'desc')
+                        <i class="fa fa-sort-alpha-desc" aria-hidden="true"></i>
+                    @else
+                        <i class="fa fa-sort-desc" aria-hidden="true"></i>
+                    @endif
+                </a>
             </th>
 
             <!-- UPDATED AT -->
@@ -93,6 +130,11 @@
 
                 <!--REF-->
                 <td>
+                    {!! $item->context_name !!}
+                </td>
+
+                <!--REF-->
+                <td>
                     <a href="{!! URL::route('categories.list', ['_key' => $item->context_key]) !!}">
                         {!! $item->context_ref !!}
                     </a>
@@ -104,10 +146,11 @@
                 <!--STATUS-->
                 <td style="text-align: center;">
 
-                    @if($item->context_status)
-                        <i class="fa fa-circle green"></i>
+                    <?php $status = config('package-category.status'); ?>
+                    @if($item->context_status && (isset($status['list'][$item->context_status])))
+                        <i class="fa fa-circle" style="color:{!! $status['color'][$item->context_status] !!}" title='{!! $status["list"][$item->context_status] !!}'></i>
                     @else
-                        <i class="fa fa-circle-o red"></i>
+                    <i class="fa fa-circle-o red" title='{!! trans($plang_admin.".labels.unknown") !!}'></i>
                     @endif
                 </td>
 
@@ -159,6 +202,7 @@
     </tbody>
 
 </table>
+</div>
 <div class="paginator">
     {!! $items->appends($request->except(['page']) )->render() !!}
 </div>

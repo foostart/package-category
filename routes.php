@@ -163,13 +163,6 @@ Route::group(['middleware' => ['web']], function () {
             'as' => 'categories.lang',
             'uses' => 'CategoryAdminController@lang'
         ]);
-	
-	/**
-	* level
-	*/
-	Route::get('admin/categories/level', [
-            'as' => 'categories.level',
-            'uses' => 'CategoryAdminController@index'
-        ]);
+
     });
 });

@@ -54,11 +54,12 @@ return [
         'id'    => 'ID',
         'category-name' => 'Category name',
         'user-full-name' => 'User full name',
-        'name-context' => 'Context name',
+        'context-name' => 'Context name',
         'operations' => 'Operations',
         'updated_at' => 'Updated at',
         'filename' => 'File name',
-        'ref' => 'Ref',
+        'context-ref' => 'Ref',
+        'context-status' => 'Status',
         'key' => 'Key',
         'status' => 'Status',
     ],
@@ -136,59 +137,41 @@ return [
     */
     'descriptions' => [
         'category-form' => 'Category form',
-        'overview' => '<blockquote class="quote-card">
-              <p>
+        'overview' => '<p>
                 Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-              </p>
-            </blockquote>',
-        'description' => '<blockquote class="quote-card">
-              <p>
+              </p>',
+        'description' => '<p>
                 Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-              </p>
-            </blockquote>',
+              </p>',
         'context-form' => 'Context form',
         'update' => 'Update category',
-        'category-name' => '<blockquote class="quote-card">
-              <p>
+        'category-name' => '<p>
                 Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-              </p>
-            </blockquote>',
-        'category' => '<blockquote class="quote-card">
-              <p>
+              </p>',
+        'category' => '<p>
                 Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-              </p>
-            </blockquote>',
+              </p>',
         'list' => 'List of items',
         'counters' => 'There are <b>:number</b> items',
         'counter' => 'There is <b>:number</b> item',
         'not-found' => 'Not found items',
         'config' => 'List of configurations',
         'lang' => 'List of languages',
-        'context-name' => '<blockquote class="quote-card">
-              <p>
+        'context-name' => '<p>
                 Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-              </p>
-            </blockquote>',
-        'context-ref' => '<blockquote class="quote-card">
-              <p>
+              </p>',
+        'context-ref' => '<p>
                 Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-              </p>
-            </blockquote>',
-        'context-key' => '<blockquote class="quote-card">
-              <p>
+              </p>',
+        'context-key' => '<p>
                 Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-              </p>
-            </blockquote>',
-        'context-status' => '<blockquote class="quote-card">
-              <p>
+              </p>',
+        'context-status' => '<p>
                 Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-              </p>
-            </blockquote>',
-        'status' => '<blockquote class="quote-card">
-              <p>
+              </p>',
+        'status' => '<p>
                 Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-              </p>
-            </blockquote>',
+              </p>',
     ],
 
 
@@ -226,7 +209,11 @@ return [
         'description' => 'Description',
         'overview' => 'Overview',
         'slug' => 'Slug',
-        'updated_at' => 'Updated at'
+        'updated_at' => 'Updated at',
+        'context-ref' => 'Ref',
+        'context-name' => 'Name',
+        'context-status' => 'Status',
+
     ],
 
 
@@ -260,6 +247,7 @@ return [
         'context-ref' => 'References',
         'context-key' => 'Context key',
         'context-status' => 'Status',
+        'unknown' => 'Unknown',
     ],
 
 
@@ -279,10 +267,17 @@ return [
         'menu_1' => 'Basic',
         'menu_2' => 'Advance',
         'menu_3' => 'Other',
-        'menu_4' => 'Other',
-        'menu_5' => 'Other',
-        'menu_6' => 'Other',
-        'menu_7' => 'Other',
+        'menu_4' => 'Menu 4',
+        'menu_5' => 'Menu 5',
+        'menu_6' => 'Menu 6',
+        'menu_7' => 'Menu 7',
+        'menu_8' => 'Menu 8',
+        'menu_9' => 'Menu 9',
+        'menu_9' => 'Menu 9',
+        'guide'  => 'Guide',
+        'other'  => 'Other',
+        'basic'  => 'Basic',
+        'advance' => 'Advance',
     ],
 
 
@@ -342,7 +337,7 @@ return [
         'delete-ok' => 'Delete item successfully',
         'delete-error' => 'Delete item failed',
     ],
-    
+
 
 
 

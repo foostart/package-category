@@ -61,7 +61,7 @@ class ContextAdminController extends FooController {
 
         $this->data_view['status'] = $this->obj_item->getPluckStatus();
 
-        $this->statuses = config('package-category.contexts.statuses');
+        $this->statuses = config('package-category.status.list');
 
     }
 

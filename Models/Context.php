@@ -82,6 +82,8 @@ class Context extends FooModel {
         $this->valid_ordering_fields = [
             'context_name',
             'context_key',
+            'context_ref',
+            'context_status',
             $this->field_status,
         ];
 

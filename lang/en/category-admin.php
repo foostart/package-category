@@ -102,6 +102,8 @@ return [
         'add' => 'Add',
         'save' => 'Save',
         'delete' => 'Delete',
+        'remove'    => 'Remove',
+        'upload'    => 'Upload',
     ],
 
 

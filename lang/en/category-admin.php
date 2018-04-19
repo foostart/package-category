@@ -192,6 +192,16 @@ return [
               </p>
             </blockquote>',
         'form-context' => 'Form context',
+        'category-slug' => '<blockquote class="quote-card">
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+              </p>
+            </blockquote>',
+        'image' => '<blockquote class="quote-card">
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+            </p>
+          </blockquote>',
     ],
 
 
@@ -263,6 +273,8 @@ return [
         'context-ref' => 'References',
         'context-key' => 'Context key',
         'context-status' => 'Status',
+        'category-slug' => 'Slug',
+        'image'     => 'Image',
     ],
 
 

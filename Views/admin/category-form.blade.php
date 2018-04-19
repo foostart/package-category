@@ -26,21 +26,21 @@
         <!--MENU 1-->
         <li class="active">
             <a data-toggle="tab" href="#menu_1">
-                {!! trans($plang_admin.'.tabs.menu_1') !!}
+                {!! trans($plang_admin.'.tabs.menu-1') !!}
             </a>
         </li>
 
         <!--MENU 2-->
         <li>
             <a data-toggle="tab" href="#menu_2">
-                {!! trans($plang_admin.'.tabs.menu_2') !!}
+                {!! trans($plang_admin.'.tabs.menu-2') !!}
             </a>
         </li>
 
         <!--MENU 3-->
         <li>
             <a data-toggle="tab" href="#menu_3">
-                {!! trans($plang_admin.'.tabs.menu_3') !!}
+                {!! trans($plang_admin.'.tabs.menu-3') !!}
             </a>
         </li>
     </ul>

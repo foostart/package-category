@@ -189,6 +189,7 @@ return [
                 Lorem ipsum dolor sit amet, consectetur adipisicing elit.
               </p>
             </blockquote>',
+        'form-context' => 'Form context',
     ],
 
 
@@ -276,13 +277,14 @@ return [
     |
       */
     'tabs' => [
-        'menu_1' => 'Basic',
-        'menu_2' => 'Advance',
-        'menu_3' => 'Other',
-        'menu_4' => 'Other',
-        'menu_5' => 'Other',
-        'menu_6' => 'Other',
-        'menu_7' => 'Other',
+        'menu-1' => 'Basic',
+        'menu-2' => 'Advance',
+        'menu-3' => 'Other',
+        'menu-4' => 'Other',
+        'menu-5' => 'Other',
+        'menu-6' => 'Other',
+        'menu-7' => 'Other',
+        'menu-8' => 'Guide',
     ],
 
 

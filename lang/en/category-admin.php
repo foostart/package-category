@@ -157,6 +157,7 @@ return [
         'not-found' => 'Not found items',
         'config' => 'List of configurations',
         'lang' => 'List of languages',
+        'category-slug' =>'Category Slug',
         'context-name' => '<p>
                 Lorem ipsum dolor sit amet, consectetur adipisicing elit.
               </p>',
@@ -248,6 +249,7 @@ return [
         'context-key' => 'Context key',
         'context-status' => 'Status',
         'unknown' => 'Unknown',
+        'category-slug' =>'Category Slug',
     ],
 
 

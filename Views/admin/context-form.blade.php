@@ -26,14 +26,14 @@
         <!--MENU 1-->
         <li class="active">
             <a data-toggle="tab" href="#menu_1">
-                {!! trans($plang_admin.'.tabs.menu-1') !!}
+                {!! trans($plang_admin.'.tabs.basic') !!}
             </a>
         </li>
 
         <!--MENU 2-->
         <li>
             <a data-toggle="tab" href="#menu_2">
-                {!! trans($plang_admin.'.tabs.menu-8') !!}
+                {!! trans($plang_admin.'.tabs.guide') !!}
             </a>
         </li>
 

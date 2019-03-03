@@ -32,6 +32,9 @@ class Category extends FooModel {
             'user_full_name',
 
             'category_name',
+            'category_order',
+            'category_url',
+            'category_slug',
             'category_overview',
             'category_description',
             'category_image',
@@ -52,6 +55,14 @@ class Category extends FooModel {
         $this->fields = [
             'category_name' => [
                 'name' => 'category_name',
+                'type' => 'Text',
+            ],
+            'category_order' => [
+                'name' => 'category_order',
+                'type' => 'Int',
+            ],
+            'category_url' => [
+                'name' => 'category_url',
                 'type' => 'Text',
             ],
             'category_overview' => [
@@ -96,6 +107,8 @@ class Category extends FooModel {
         $this->valid_insert_fields = [
             //category info
             'category_name',
+            'category_order',
+            'category_url',
             'category_slug',
             'category_overview',
             'category_description',
@@ -122,7 +135,7 @@ class Category extends FooModel {
         $this->valid_filter_fields = [
             'keyword',
             'context_id',
-            'status',
+            'category_status',
             '_key',
         ];
 
@@ -255,6 +268,11 @@ class Category extends FooModel {
                                 $this->isTree = FALSE;
                             }
                             break;
+                        case 'category_status':
+                            if (!empty($value)) {
+                                $elo = $elo->where($this->table . '.category_status', '=', $value);
+                            }
+                            break;
                         case 'keyword':
                             if (!empty($value)) {
                                 $elo = $elo->where(function($elo) use ($value) {
@@ -331,6 +349,10 @@ class Category extends FooModel {
 
             //unset unnessesary index
             unset($dataFields['context_id']);
+
+            if(empty($dataFields['category_order'])) {
+                $dataFields['category_order'] = $item->category_id;
+            }
 
             foreach ($dataFields as $key => $value) {
                 $item->$key = $value;
@@ -434,6 +456,10 @@ class Category extends FooModel {
         //create new record
         $item = self::create($dataFields);
 
+        if (empty($dataFields['category_order'])) {
+            $item->category_order = $item->category_id;
+            $item->save();
+        }
         $key = $this->primaryKey;
         $item->id = $item->$key;
 
@@ -492,9 +518,26 @@ class Category extends FooModel {
 
             $parent_pattern = '"'.$item->id.'":1';
 
-            $childs = self::select($this->table . '.*',
+            $elo = self::select($this->table . '.*',
                                 $this->table . '.category_id as id')
-                            ->where('category_id_parent_str', 'LIKE',  "%{$parent_pattern}%")->get();
+                            ->where('category_id_parent_str', 'LIKE',  "%{$parent_pattern}%");
+
+            //by category
+            if (!empty($params['category_status'])) {
+                $elo->where('category_status', '=', $params['category_status']);
+            }
+
+            //order by order
+            if (!empty($params['order'])) {
+                foreach ($params['order'] as $_key => $_value) {
+
+                    $elo->orderBy($_key, $_value);
+
+                }
+            }
+
+            $childs = $elo->get();
+
 
             if ($childs) {
                 $items[$key]->childs =  $this->buildTree($item->id, $childs);
@@ -558,13 +601,13 @@ class Category extends FooModel {
      * @param INT $category_id_parent
      * @return OBJECT list of categories
      */
-    public function getCategoriesByIdParent($category_id_parent, $isTree = TRUE) {
+    public function getCategoriesByIdParent($category_id_parent, $params = array()) {
 
         $parent = self::find($category_id_parent);
 
         if ($parent) {
             $parent->id = $parent->category_id;
-            $parent = $this->getChilds([$parent]);
+            $parent = $this->getChilds([$parent], $params);
             if (isset($parent[0])) {
                 $parent = $parent[0];
             }

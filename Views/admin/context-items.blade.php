@@ -7,10 +7,9 @@
 @section('content')
 
     <div class="row">
-        <div class="col-md-12">
 
-            <!--LIST OF ITEMS-->
-            <div class="col-md-8">
+        <!--LIST OF ITEMS-->
+            <div class="col-md-9">
 
                 <div class="panel panel-info">
 
@@ -61,12 +60,11 @@
             <!--/LIST OF ITEMS-->
 
             <!--SEARCH-->
-            <div class="col-md-4">
+            <div class="col-md-3">
                 @include('package-category::admin.context-search')
             </div>
             <!--/SEARCH-->
 
-        </div>
     </div>
 @stop
 

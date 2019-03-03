@@ -37,6 +37,10 @@ class FooController extends Controller {
 
     //user
     protected $user = NULL;
+    public $user_id = NULL;
+    public $user_full_name = NULL;
+    public $user_email = NULL;
+    public $token_api = NULL;
 
     //category
     protected $category_ref_name = NULL;
@@ -45,6 +49,25 @@ class FooController extends Controller {
 
     public function __construct() {
 
+    }
+
+    public function setUserInfo($user) {
+
+        $user = is_array($user) ? (object)$user : $user;
+
+        $this->user_id = !empty($user->user_id) ? $user->user_id : NULL;
+        $this->user_full_name = !empty($user->user_full_name) ? $user->user_full_name : 'Unknow';
+        $this->user_email = !empty($user->user_email) ? $user->user_email : 'Unknow';
+        $this->token_api = !empty($user->token_api) ? $user->token_api : NULL;
+
+        $this->data_view = array_merge($this->data_view, array(
+            'user_id' => $this->user_id,
+            'user_full_name' => $this->user_full_name,
+            'user_email' => $this->user_email,
+            'token_api' => $this->token_api
+        ));
+
+        return $this->data_view;
     }
 
     /**

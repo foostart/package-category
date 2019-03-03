@@ -36,17 +36,27 @@ View::composer([
          */
         $params = Request::all();
         $_key = @$params['_key'];
-
+        $callback_item = [];
+        $callback_url = empty($params['callback_url'])?'':base64_decode($params['callback_url']);
+        $label = empty($params['label'])?'':base64_decode($params['label']);
+        if ($callback_url && $label) {
+            $callback_item = [
+            "$label" => [
+                    'url' => $callback_url,
+                    'icon' => '<i class="fa fa-undo" aria-hidden="true"></i>',
+                ]
+            ];
+        }
         /**
          * $sidebar_items
          */
-        $sidebar_items = [
+        $sidebar_items = $callback_item + [
             //add new
             trans('category-admin.sidebar.add') => [
                 'url' => URL::route('categories.edit', [
                     '_key' => $_key,
                 ]),
-                'icon' => '<i class="fa fa-pencil-square-o" aria-hidden="true"></i>'
+                'icon' => '<i class="fa fa-pencil-square-o" aria-hidden="true"></i>',
             ],
 
             //list

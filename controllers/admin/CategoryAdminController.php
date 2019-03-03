@@ -70,7 +70,9 @@ class CategoryAdminController extends FooController {
 
         $params = $request->all();
         $params['category_id_parent'] = NULL;
-
+        $params['order'] = [
+            'category_order' => 'ASC',
+        ];
         $items = $this->obj_item->selectItems($params);
 
         // display view

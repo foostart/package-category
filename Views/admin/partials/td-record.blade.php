@@ -5,10 +5,13 @@ function displayChilds($childs, $level){ ?>
         <?php global $counter; global $request; ?>
     <?php foreach ($childs as $item): ?>
         <tr>
-                <!--ORDER-->
+                <!--#-->
                 <td> <?php echo $counter; $counter++ ?> </td>
 
-                <!--ID-->
+                <!--ORDER-->
+                <td>{!! $item->category_order !!}</td>
+
+                 <!--ID-->
                 <td>{!! $item->category_id !!}</td>
 
                 <!--NAME-->
@@ -17,8 +20,8 @@ function displayChilds($childs, $level){ ?>
                     {!! $item->category_name !!}
                 </td>
 
-                <!--USER_FULL_NAME-->
-                <td> {!! $item->user_full_name !!} </td>
+                <!--URL-->
+                <td>{!! $item->category_url !!}</td>
 
                 <!--STATUS-->
                 <td style="text-align: center;">

@@ -80,4 +80,16 @@ class CategoryServiceProvider extends ServiceProvider {
         ]);
     }
 
+    /** Public view to system
+    * @source: vendor/foostart/package-category/public/assets
+    * @destination: resources/views/vendor/package-category
+    */
+    protected function publishAssets()
+    {
+        $this->publishes([
+                     __DIR__ . '/public/assets' => public_path('packages/foostart'),
+        ]);
+
+    }
+
 }

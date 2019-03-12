@@ -166,7 +166,7 @@
                 <!--KEY-->
                 <td> {!! $item->context_key !!} </td>
 
-                
+
                 <!--OPERATOR-->
                 <td>
                     <!--edit-->
@@ -228,5 +228,5 @@
 
 @section('footer_scripts')
     @parent
-    {!! HTML::script('packages/foostart/package-sample/js/form-table.js')  !!}
+    {!! HTML::script('packages/foostart/js/form-table.js')  !!}
 @stop

@@ -34,9 +34,9 @@ class CategoryServiceProvider extends ServiceProvider {
 
         // publish views
         $this->publishViews();
-	
-	// publish assets
-	$this->publishAssets();
+
+        //public assets
+        $this->publishAssets();
 
     }
 
@@ -83,9 +83,9 @@ class CategoryServiceProvider extends ServiceProvider {
         ]);
     }
 
-    /** Public view to system
+    /** Public assets to system
     * @source: vendor/foostart/package-category/public/assets
-    * @destination: resources/views/vendor/package-category
+    * @destination: public/package/foostart
     */
     protected function publishAssets()
     {

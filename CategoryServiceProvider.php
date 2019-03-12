@@ -34,6 +34,9 @@ class CategoryServiceProvider extends ServiceProvider {
 
         // publish views
         $this->publishViews();
+	
+	// publish assets
+	$this->publishAssets();
 
     }
 

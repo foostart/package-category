@@ -1,5 +1,5 @@
 <!------------------------------------------------------------------------------
-| List of elements in sample form
+| List of elements in category form
 |------------------------------------------------------------------------------->
 
 {!! Form::open(['route'=>['categories.post', 'id' => @$item->id, '_key' => $request->get('_key')],  'files'=>true, 'method' => 'POST'])  !!}
@@ -189,5 +189,5 @@
 
 {!! Form::close() !!}
 <!------------------------------------------------------------------------------
-| End list of elements in sample form
+| End list of elements in category form
 |------------------------------------------------------------------------------>

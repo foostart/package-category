@@ -231,10 +231,15 @@ class ContextAdminController extends FooController {
     public function config(Request $request) {
         $is_valid_request = $this->isValidRequest($request);
         // display view
-        $config_path = realpath(base_path('config/package-sample.php'));
-        $package_path = realpath(base_path('vendor/foostart/package-sample'));
+        $config_path = realpath(base_path('config/package-category.php'));
+        $package_path = realpath(base_path('vendor/foostart/package-category'));
 
-        $config_bakup = realpath($package_path.'/storage/backup/config');
+        $config_bakup = $package_path.'/storage/backup/config';
+        if (!file_exists($config_bakup)) {
+            mkdir($config_bakup, 0755    , true);
+        }
+        $config_bakup = realpath($config_bakup);
+
 
         if ($version = $request->get('v')) {
             //load backup config
@@ -247,7 +252,7 @@ class ContextAdminController extends FooController {
         if ($request->isMethod('post') && $is_valid_request) {
 
             //create backup of current config
-            file_put_contents($config_bakup.'/package-sample-'.date('YmdHis',time()).'.php', $content);
+            file_put_contents($config_bakup.'/package-category-'.date('YmdHis',time()).'.php', $content);
 
             //update new config
             $content = $request->get('content');
@@ -275,16 +280,21 @@ class ContextAdminController extends FooController {
     public function lang(Request $request) {
         $is_valid_request = $this->isValidRequest($request);
         // display view
-        $langs = config('package-sample.langs');
+        $langs = config('package-category.langs');
         $lang_paths = [];
+        $package_path = realpath(base_path('vendor/foostart/package-category'));
 
         if (!empty($langs) && is_array($langs)) {
             foreach ($langs as $key => $value) {
-                $lang_paths[$key] = realpath(base_path('resources/lang/'.$key.'/sample-admin.php'));
+                $lang_paths[$key] = realpath(base_path('resources/lang/'.$key.'/category-admin.php'));
+
+                $key_backup = $package_path.'/storage/backup/lang/'.$key;
+
+                if (!file_exists($key_backup)) {
+                    mkdir($key_backup, 0755    , true);
+                }
             }
         }
-
-        $package_path = realpath(base_path('vendor/foostart/package-sample'));
 
         $lang_bakup = realpath($package_path.'/storage/backup/lang');
         $lang = $request->get('lang')?$request->get('lang'):'en';
@@ -313,8 +323,8 @@ class ContextAdminController extends FooController {
             foreach ($lang_paths as $key => $value) {
                 $content = file_get_contents($value);
 
-                //format file name sample-admin-YmdHis.php
-                file_put_contents($lang_bakup.'/'.$key.'/sample-admin-'.date('YmdHis',time()).'.php', $content);
+                //format file name category-admin-YmdHis.php
+                file_put_contents($lang_bakup.'/'.$key.'/category-admin-'.date('YmdHis',time()).'.php', $content);
             }
 
 

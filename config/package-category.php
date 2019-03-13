@@ -77,5 +77,23 @@ return [
         'edit' => ['_superadmin', '_user-editor'],
         'add' => ['_superadmin', '_user-editor'],
         'delete' => ['_superadmin', '_user-editor'],
-    ]
+    ],
+
+
+
+
+
+    /*
+    |-----------------------------------------------------------------------
+    | LANGUAGES
+    |-----------------------------------------------------------------------
+    | vi
+    | en
+    |
+    */
+    'langs' => [
+        'en' => 'English',
+        'vi' => 'Vietnam'
+    ],
+
 ];

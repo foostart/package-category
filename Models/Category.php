@@ -436,7 +436,7 @@ class Category extends FooModel {
     /**
      *
      * @param ARRAY $params list of parameters
-     * @return OBJECT sample
+     * @return OBJECT category
      */
     public function insertItem($params = []) {
 

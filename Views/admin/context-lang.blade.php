@@ -47,7 +47,7 @@
 
                     <!--BODY-->
                     <div class="panel-body">
-                        {!! Form::open(['route'=>['samples.lang'], 'method' => 'post'])  !!}
+                        {!! Form::open(['route'=>['contexts.lang'], 'method' => 'post'])  !!}
 
                             <div class='btn-form'>
 
@@ -94,7 +94,7 @@
 
             <!--SEARCH-->
             <div class="col-md-4">
-                @include('package-sample::admin.sample-lang-backup')
+                @include('package-category::admin.context-lang-backup')
             </div>
             <!--/SEARCH-->
 

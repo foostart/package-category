@@ -92,7 +92,7 @@
                     {{ trans($plang_admin.'.columns.operations') }}
                 </span>
 
-                {!! Form::submit(trans($plang_admin.'.buttons.delete-in-trash'), array(
+                 {!! Form::submit(trans($plang_admin.'.buttons.delete-in-trash'), array(
                                                                             "class"=>"btn btn-danger pull-right delete btn-delete-all del-trash",
                                                                             "title"=> trans($plang_admin.'.hint.delete-in-trash'),
                                                                             'name'=>'del-trash'))

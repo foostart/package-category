@@ -107,6 +107,24 @@ return [
         'delete' => 'Delete',
         'remove' => 'Remove',
         'upload' => 'Upload',
+        'delete-in-trash' => 'In trash',
+        'delete-forever' => 'Forever',
+    ],
+
+
+
+
+
+    /*
+    |-----------------------------------------------------------------------
+    | Hint
+    |-----------------------------------------------------------------------
+    | The list of hint
+    |
+    */
+    'hint'  => [
+        'delete-forever' => 'Delete forever',
+        'delete-in-trash' => 'Delete in trash',
     ],
 
 

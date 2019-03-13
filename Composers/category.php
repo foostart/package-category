@@ -39,9 +39,10 @@ View::composer([
         $callback_item = [];
         $callback_url = empty($params['callback_url'])?'':base64_decode($params['callback_url']);
         $label = empty($params['label'])?'':base64_decode($params['label']);
+
         if ($callback_url && $label) {
             $callback_item = [
-            "$label" => [
+            trans($label) => [
                     'url' => $callback_url,
                     'icon' => '<i class="fa fa-undo" aria-hidden="true"></i>',
                 ]

@@ -43,6 +43,11 @@ return [
       | @unpublish = 33
      */
     'status' => [
+        'publish' => 99,
+        'unpublish' => 33,
+        'intrash' => 55,
+        'draft' => 11,
+        'new'   => 22,
         'list' => [
             99 => 'Publish',
             33 => 'Unpublish',

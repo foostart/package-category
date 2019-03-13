@@ -69,13 +69,13 @@ View::composer([
 
             //config
             trans('category-admin.sidebar.config') => [
-                "url" => URL::route('categories.config', []),
+                "url" => URL::route('contexts.config', []),
                 'icon' => '<i class="fa fa-braille" aria-hidden="true"></i>'
             ],
 
             //language
             trans('category-admin.sidebar.lang') => [
-                "url" => URL::route('categories.lang', []),
+                "url" => URL::route('contexts.lang', []),
                 'icon' => '<i class="fa fa-language" aria-hidden="true"></i>'
             ],
         ];

@@ -73,8 +73,8 @@
 @if($tinymce)
     @section('footer_scripts')
         @parent
-        {!! HTML::script('package/foostart/js/tinymce/tinymce.min.js') !!}
-        {!! HTML::script('package/foostart/js/tinymce/tinymce-configs.js') !!}
+        {!! HTML::script('packages/foostart/js/tinymce/tinymce.min.js') !!}
+        {!! HTML::script('packages/foostart/js/tinymce/tinymce-configs.js') !!}
     @endsection
 @endif
 <!--/ADD SCRIPT TINYMCE-->

@@ -21,7 +21,7 @@
     //name
     $name = empty($name)?'undefined':$name;
     //value
-    $image_empty = URL::to('/sys/images/image-temp-220.png');
+    $image_empty = URL::to('packages/foostart/images/image-temp-220.png');
     $image_url = empty($value)?$image_empty:URL::to($value);
     //label
     $label = empty($label) ? '' : $label;

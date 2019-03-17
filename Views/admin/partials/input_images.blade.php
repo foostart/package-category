@@ -27,7 +27,7 @@
     //author
     $attr_author = empty($attr_author)?$name.'[]' : $attr_author.'[]';
     //value
-    $image_empty = URL::to('/sys/images/image-temp-220.png');
+    $image_empty = URL::to('packages/foostart/images/image-temp-220.png');
     $image_url = empty($value)?$image_empty:URL::to($value);
     //label
     $label = empty($label) ? '' : $label;

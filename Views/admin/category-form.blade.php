@@ -133,6 +133,19 @@
                         'errors' => $errors,
                     ])
                 </div>
+                
+                <!--ICON-->
+                <div class='col-md-6'>
+
+                    @include('package-category::admin.partials.input_text', [
+                        'name' => 'category_icon',
+                        'id' => 'category_icon',
+                        'label' => trans($plang_admin.'.labels.category-icon'),
+                        'value' => @$item->category_icon,
+                        'description' => trans($plang_admin.'.descriptions.category-icon'),
+                        'errors' => $errors,
+                    ])
+                </div>
             </div>
 
         </div>

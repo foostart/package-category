@@ -23,7 +23,7 @@ class ContextValidator extends FooValidator
         Event::listen('validating', function($input)
         {
             self::$messages = [
-                'context_name.required' => trans('sample-admin.errors.required', ['attribute' => 'sample name']),
+                'context_name.required' => trans('category-admin.errors.required', ['attribute' => 'category name']),
             ];
         });
 

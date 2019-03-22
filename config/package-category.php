@@ -43,6 +43,11 @@ return [
       | @unpublish = 33
      */
     'status' => [
+        'publish' => 99,
+        'unpublish' => 33,
+        'intrash' => 55,
+        'draft' => 11,
+        'new'   => 22,
         'list' => [
             99 => 'Publish',
             33 => 'Unpublish',
@@ -77,5 +82,23 @@ return [
         'edit' => ['_superadmin', '_user-editor'],
         'add' => ['_superadmin', '_user-editor'],
         'delete' => ['_superadmin', '_user-editor'],
-    ]
+    ],
+
+
+
+
+
+    /*
+    |-----------------------------------------------------------------------
+    | LANGUAGES
+    |-----------------------------------------------------------------------
+    | vi
+    | en
+    |
+    */
+    'langs' => [
+        'en' => 'English',
+        'vi' => 'Vietnam'
+    ],
+
 ];

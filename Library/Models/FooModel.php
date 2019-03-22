@@ -37,7 +37,11 @@ class FooModel extends Model {
 
     protected $field_status = 'status';
 
-    protected $status = NULL;
+    public $status = NULL;
+
+    public $config = NULL;
+
+    public $config_file =NULL;
 
     protected $obj_context = NULL;
 
@@ -49,7 +53,11 @@ class FooModel extends Model {
      */
     public function __construct(array $attributes = array()) {
         parent::__construct($attributes);
-        $this->status = config('foostart.item.status');
+        $this->status = config('package-category.status');
+
+        if ($this->config_file) {
+            $this->config = config($this->config_file);
+        }
     }
 
     /**
@@ -129,6 +137,13 @@ class FooModel extends Model {
      * @return eloquent object
      */
     protected function orderingFilters(array $params, $elo) {
+
+         //order
+        if (!empty($params['order'])) {
+            foreach ($params['order'] as $_key => $_value) {
+                $elo->orderBy($_key, $_value);
+            }
+        }
 
         //check empty filter
         if ($this->isNotOrderingFilter($params)) {
@@ -262,6 +277,20 @@ class FooModel extends Model {
      *
      * @param ARRAY $params list of parameters
      * @param STRING $key is field name
+     * @return BOOLEAN value
+     */
+    public function getBool($params, $key) {
+        $value = TRUE;
+
+        return $value;
+    }
+
+
+
+    /**
+     *
+     * @param ARRAY $params list of parameters
+     * @param STRING $key is field name
      * @return TEXT value
      */
     public function getJson($params, $key) {
@@ -338,7 +367,7 @@ class FooModel extends Model {
     public function fdelete($item) {
 
         $field_status = $this->field_status;
-        $item->$field_status = $this->status['in_trash'];
+        $item->$field_status = $this->status['intrash'];
 
         return $item->save();
     }
@@ -392,4 +421,19 @@ class FooModel extends Model {
         return $json;
     }
 
+
+    public function getValidInsertFields($fields) {
+
+        $validFields = [];
+
+        foreach ($fields as $key => $value) {
+            if (in_array($key, $this->valid_insert_fields)) {
+                $validFields[$key] = $value;
+            }
+        }
+
+        // Set status to new item
+        $validFields[$this->field_status] = $this->status['new'];
+        return $validFields;
+    }
 }

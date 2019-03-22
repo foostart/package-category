@@ -71,7 +71,7 @@
 <!-- /INPUT IMAGE -->
 @section('footer_scripts')
     @parent
-    {!! HTML::script('packages/foostart/package-post/js/slugit.js') !!}
+    {!! HTML::script('packages/foostart/js/slugit.js') !!}
 
     <script type='text/javascript'>
         $(document).ready(function(){

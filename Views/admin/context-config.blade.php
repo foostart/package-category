@@ -46,7 +46,7 @@
 
                     <!--BODY-->
                     <div class="panel-body">
-                        {!! Form::open(['route'=>['samples.config'], 'method' => 'post'])  !!}
+                        {!! Form::open(['route'=>['contexts.config'], 'method' => 'post'])  !!}
 
                             <div class='btn-form'>
 
@@ -69,7 +69,7 @@
 
             <!--SEARCH-->
             <div class="col-md-4">
-                @include('package-sample::admin.sample-config-backup')
+                @include('package-category::admin.context-config-backup')
             </div>
             <!--/SEARCH-->
 

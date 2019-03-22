@@ -50,7 +50,7 @@ return [
     */
     'columns' => [
         'any'   => 'Any',
-        'order' => '#',
+        'order' => 'Order',
         'id'    => 'ID',
         'category-name' => 'Category name',
         'user-full-name' => 'User full name',
@@ -62,6 +62,8 @@ return [
         'context-status' => 'Status',
         'key' => 'Key',
         'status' => 'Status',
+        '#' => '#',
+        'url' => 'Url',
     ],
 
 
@@ -103,6 +105,26 @@ return [
         'add' => 'Add',
         'save' => 'Save',
         'delete' => 'Delete',
+        'remove' => 'Remove',
+        'upload' => 'Upload',
+        'delete-in-trash' => 'In trash',
+        'delete-forever' => 'Forever',
+    ],
+
+
+
+
+
+    /*
+    |-----------------------------------------------------------------------
+    | Hint
+    |-----------------------------------------------------------------------
+    | The list of hint
+    |
+    */
+    'hint'  => [
+        'delete-forever' => 'Delete forever',
+        'delete-in-trash' => 'Delete in trash',
     ],
 
 
@@ -173,6 +195,18 @@ return [
         'status' => '<p>
                 Lorem ipsum dolor sit amet, consectetur adipisicing elit.
               </p>',
+        'category-url' => '<p>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+              </p>',
+        'category-order' => '<p>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+              </p>',
+        'category-parent' => '<p>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+              </p>',
+        'category-image' => '<p>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+              </p>',
     ],
 
 
@@ -214,6 +248,7 @@ return [
         'context-ref' => 'Ref',
         'context-name' => 'Name',
         'context-status' => 'Status',
+        'user_full_name' => 'User full name',
 
     ],
 
@@ -250,6 +285,16 @@ return [
         'context-status' => 'Status',
         'unknown' => 'Unknown',
         'category-slug' =>'Category Slug',
+        'category-url' => 'Category URL',
+        'category-order' => 'Category order',
+        'category-parent' => 'Category parent',
+        'image' => 'Image',
+    ],
+
+    'checkboxs' => [
+        'context-key' => [
+            'add' => 'Regenerate new key',
+        ]
     ],
 
 

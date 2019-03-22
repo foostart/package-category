@@ -1,10 +1,11 @@
 @if(!empty($items) && (!$items->isEmpty()) )
 <?php
     $withs = [
+        '#' => '5%',
         'order' => '5%',
         'id' => '5%',
         'category_name' => '30%',
-        'user_full_name' => '25%',
+        'category_url' => '20%',
         'status' => '5%',
         'updated_at' => '15%',
         'operations' => '10%',
@@ -22,13 +23,18 @@
         {!! trans($plang_admin.'.descriptions.counters', ['number' => $nav['total']]) !!}
     @endif
 </caption>
-
+<div class="table-responsive">
 <table class="table table-hover">
 
     <thead>
         <tr style="height: 50px;">
 
             <!--ORDER-->
+            <th style='width:{{ $withs['#'] }}'>
+                {{ trans($plang_admin.'.columns.#') }}
+            </th>
+
+             <!--ID-->
             <th style='width:{{ $withs['order'] }}'>
                 {{ trans($plang_admin.'.columns.order') }}
             </th>
@@ -53,20 +59,10 @@
                 </a>
             </th>
 
-
-            <!--USER FULL NAME-->
-            <?php $name = 'user_full_name' ?>
-
-            <th class="hidden-xs" style='width:{{ $withs[$name] }}'>{!! trans($plang_admin.'.columns.user-full-name') !!}
-                <a href='{!! $sorting["url"][$name] !!}' class='tb-id' data-order='asc'>
-                    @if($sorting['items'][$name] == 'asc')
-                        <i class="fa fa-sort-alpha-asc" aria-hidden="true"></i>
-                    @elseif($sorting['items'][$name] == 'desc')
-                        <i class="fa fa-sort-alpha-desc" aria-hidden="true"></i>
-                    @else
-                        <i class="fa fa-sort-desc" aria-hidden="true"></i>
-                    @endif
-                </a>
+            <!--URL-->
+            <?php $name = 'category_url' ?>
+            <th style='width:{{ $withs['category_url'] }}'>
+                {{ trans($plang_admin.'.columns.url') }}
             </th>
 
 
@@ -96,8 +92,16 @@
                     {{ trans($plang_admin.'.columns.operations') }}
                 </span>
 
-                {!! Form::submit(trans($plang_admin.'.buttons.delete'), array("class"=>"btn btn-danger pull-right delete btn-delete-all del-trash", 'name'=>'del-trash')) !!}
-                {!! Form::submit(trans($plang_admin.'.buttons.delete'), array("class"=>"btn btn-warning pull-right delete btn-delete-all del-forever", 'name'=>'del-forever')) !!}
+                 {!! Form::submit(trans($plang_admin.'.buttons.delete-in-trash'), array(
+                                                                            "class"=>"btn btn-danger pull-right delete btn-delete-all del-trash",
+                                                                            "title"=> trans($plang_admin.'.hint.delete-in-trash'),
+                                                                            'name'=>'del-trash'))
+                !!}
+                {!! Form::submit(trans($plang_admin.'.buttons.delete-forever'), array(
+                                                                            "class"=>"btn btn-warning pull-right delete btn-delete-all del-forever",
+                                                                            "title"=> trans($plang_admin.'.hint.delete-forever'),
+                                                                            'name'=>'del-forever'))
+                !!}
             </th>
 
             <!--DELETE-->
@@ -116,8 +120,11 @@
         @foreach($items as $item)
 
             <tr>
-                <!--ORDER-->
+                <!--#-->
                 <td> <?php echo $counter; $counter++ ?> </td>
+
+                <!--ORDER-->
+                <td> {!! $item->category_order !!} </td>
 
                 <!--ID-->
                 <td> {!! $item->category_id !!} </td>
@@ -125,8 +132,8 @@
                 <!--NAME-->
                 <td> {!! $item->category_name !!} </td>
 
-                <!--USER_FULL_NAME-->
-                <td> {!! $item->user_full_name !!} </td>
+                <!--URL-->
+                <td> {!! $item->category_url !!} </td>
 
                 <!--STATUS-->
                 <td style="text-align: center;">
@@ -197,6 +204,8 @@
 <div class="paginator">
     {!! $items->appends($request->except(['page']) )->render() !!}
 </div>
+
+</div>
 @else
     <!--SEARCH RESULT MESSAGE-->
     <span class="text-warning">
@@ -209,5 +218,5 @@
 
 @section('footer_scripts')
     @parent
-    {!! HTML::script('packages/foostart/package-sample/js/form-table.js')  !!}
+    {!! HTML::script('packages/foostart/js/form-table.js')  !!}
 @stop

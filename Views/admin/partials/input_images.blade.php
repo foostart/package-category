@@ -27,7 +27,7 @@
     //author
     $attr_author = empty($attr_author)?$name.'[]' : $attr_author.'[]';
     //value
-    $image_empty = URL::to('/sys/images/image-temp-220.png');
+    $image_empty = URL::to('packages/foostart/images/image-temp-220.png');
     $image_url = empty($value)?$image_empty:URL::to($value);
     //label
     $label = empty($label) ? '' : $label;
@@ -42,7 +42,7 @@
 
 @section('head_css')
     {!! HTML::style('vendor/laravel-filemanager/css/lfm-custom.css') !!}
-    {!! HTML::style('/css/jquery-1.12.1-ui.css') !!}
+    {!! HTML::style('packages/foostart/css/jquery-1.12.1-ui.css') !!}
 @endsection
 <!-- INPUT IMAGE -->
 <div class='form-group'>
@@ -140,8 +140,8 @@
 <!-- /INPUT IMAGE -->
 @section('footer_scripts')
     @parent
-    {!! HTML::script('/vendor/laravel-filemanager/js/lfm-configs.js') !!}
-    {!! HTML::script('/js/jquery-ui-1.12.1.min.js') !!}
+    {!! HTML::script('vendor/laravel-filemanager/js/lfm-configs.js') !!}
+    {!! HTML::script('packages/foostart/js/jquery-ui-1.12.1.min.js') !!}
     <script>
         $( function() {
             $( "#sortable" ).sortable({

@@ -35,6 +35,9 @@ class CategoryServiceProvider extends ServiceProvider {
         // publish views
         $this->publishViews();
 
+        //public assets
+        $this->publishAssets();
+
     }
 
     /**
@@ -78,6 +81,18 @@ class CategoryServiceProvider extends ServiceProvider {
         $this->publishes([
             __DIR__ . '/Views' => base_path('resources/views/vendor/package-category'),
         ]);
+    }
+
+    /** Public assets to system
+    * @source: vendor/foostart/package-category/public/assets
+    * @destination: public/package/foostart
+    */
+    protected function publishAssets()
+    {
+        $this->publishes([
+                     __DIR__ . '/public/assets' => public_path('packages/foostart'),
+        ]);
+
     }
 
 }

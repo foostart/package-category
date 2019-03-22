@@ -59,22 +59,27 @@ class FooCategory {
      * @param STRING $ref context reference name
      * @return ELOQUENT OBJECT category
      */
-    public function getCategoriesByRef($ref) {
+    public function getCategoriesByRef($ref, $params = array()) {
 
         $categories = [];
 
         //get context by context ref
-        $params = [
+        $_params = [
             'ref' => $ref
         ];
-        $context = $this->obj_context->selectItem($params);
+        $context = $this->obj_context->selectItem($_params);
 
         if (!empty($context)) {
             //get categories by context id
             $_params = [
                 'context_id' => $context->context_id,
+                'category_status' => $this->obj_category->status['publish']
             ];
 
+            //order
+            if (!empty($params['order'])) {
+                $_params['order'] = $params['order'];
+            }
             $categories = $this->obj_category->selectItems($_params);
         }
 
@@ -86,7 +91,7 @@ class FooCategory {
      * @param INT $category_id_parent
      * @return OBJECT list of childs of parent category
      */
-    public function getCategoriesByIdParent($category_id_parent) {
-        return $this->obj_category->getCategoriesByIdParent($category_id_parent);
+    public function getCategoriesByIdParent($category_id_parent, $params = array()) {
+        return $this->obj_category->getCategoriesByIdParent($category_id_parent, $params);
     }
 }

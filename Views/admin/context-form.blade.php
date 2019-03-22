@@ -1,5 +1,5 @@
 <!------------------------------------------------------------------------------
-| List of elements in sample form
+| List of elements in category form
 |------------------------------------------------------------------------------->
 
 {!! Form::open(['route'=>['contexts.post', 'id' => @$item->id],  'files'=>true, 'method' => 'post'])  !!}
@@ -86,7 +86,7 @@
                 'description' => trans($plang_admin.'.descriptions.context-status'),
                 'items' => $statuses
             ])
-            
+
         </div>
 
         <!--GUIDE-->
@@ -107,5 +107,5 @@
 
 {!! Form::close() !!}
 <!------------------------------------------------------------------------------
-| End list of elements in sample form
+| End list of elements in category form
 |------------------------------------------------------------------------------>

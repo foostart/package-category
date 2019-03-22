@@ -36,7 +36,7 @@
 
                     <!--NAME-->
                     <td>
-                        <a href="{!! URL::route('samples.config', ['v' => base64_encode($backup)]) !!}">
+                        <a href="{!! URL::route('contexts.config', ['v' => base64_encode($backup)]) !!}">
                             {!! basename($backup) !!}
                         </a>
                     </td>

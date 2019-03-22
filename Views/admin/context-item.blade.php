@@ -64,12 +64,7 @@
                 </a>
             </th>
 
-            <!--KEY-->
-            <th style='width:{{ $withs['key'] }}'>
-                {{ trans($plang_admin.'.columns.key') }}
-            </th>
-
-            <!--REF-->
+            <!--STATUS-->
             <?php $name = 'context_status' ?>
 
             <th class="hidden-xs" style='width:{{ $withs['name'] }}'>{!! trans($plang_admin.'.columns.context-status') !!}
@@ -99,14 +94,27 @@
                 </a>
             </th>
 
+             <!--KEY-->
+            <th style='width:{{ $withs['key'] }}'>
+                {{ trans($plang_admin.'.columns.key') }}
+            </th>
+
             <!--OPERATIONS-->
             <th style='width:{{ $withs['operations'] }}'>
                 <span class='lb-delete-all'>
                     {{ trans($plang_admin.'.columns.operations') }}
                 </span>
 
-                {!! Form::submit(trans($plang_admin.'.buttons.delete'), array("class"=>"btn btn-danger pull-right delete btn-delete-all del-trash", 'name'=>'del-trash')) !!}
-                {!! Form::submit(trans($plang_admin.'.buttons.delete'), array("class"=>"btn btn-warning pull-right delete btn-delete-all del-forever", 'name'=>'del-forever')) !!}
+                {!! Form::submit(trans($plang_admin.'.buttons.delete-in-trash'), array(
+                                                                            "class"=>"btn btn-danger pull-right delete btn-delete-all del-trash",
+                                                                            "title"=> trans($plang_admin.'.hint.delete-in-trash'),
+                                                                            'name'=>'del-trash'))
+                !!}
+                {!! Form::submit(trans($plang_admin.'.buttons.delete-forever'), array(
+                                                                            "class"=>"btn btn-warning pull-right delete btn-delete-all del-forever",
+                                                                            "title"=> trans($plang_admin.'.hint.delete-forever'),
+                                                                            'name'=>'del-forever'))
+                !!}
             </th>
 
             <!--DELETE-->
@@ -140,9 +148,6 @@
                     </a>
                 </td>
 
-                <!--KEY-->
-                <td> {!! $item->context_key !!} </td>
-
                 <!--STATUS-->
                 <td style="text-align: center;">
 
@@ -156,6 +161,11 @@
 
                 <!--UPDATED AT-->
                 <td> {!! date('Y-m-d', strtotime($item->updated_at) ) !!} </td>
+
+
+                <!--KEY-->
+                <td> {!! $item->context_key !!} </td>
+
 
                 <!--OPERATOR-->
                 <td>
@@ -218,5 +228,5 @@
 
 @section('footer_scripts')
     @parent
-    {!! HTML::script('packages/foostart/package-sample/js/form-table.js')  !!}
+    {!! HTML::script('packages/foostart/js/form-table.js')  !!}
 @stop

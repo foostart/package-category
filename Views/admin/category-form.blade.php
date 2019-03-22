@@ -1,5 +1,5 @@
 <!------------------------------------------------------------------------------
-| List of elements in sample form
+| List of elements in category form
 |------------------------------------------------------------------------------->
 
 {!! Form::open(['route'=>['categories.post', 'id' => @$item->id, '_key' => $request->get('_key')],  'files'=>true, 'method' => 'POST'])  !!}
@@ -26,21 +26,21 @@
         <!--MENU 1-->
         <li class="active">
             <a data-toggle="tab" href="#menu_1">
-                {!! trans($plang_admin.'.tabs.menu-1') !!}
+                {!! trans($plang_admin.'.tabs.basic') !!}
             </a>
         </li>
 
         <!--MENU 2-->
         <li>
             <a data-toggle="tab" href="#menu_2">
-                {!! trans($plang_admin.'.tabs.menu-2') !!}
+                {!! trans($plang_admin.'.tabs.advance') !!}
             </a>
         </li>
 
         <!--MENU 3-->
         <li>
             <a data-toggle="tab" href="#menu_3">
-                {!! trans($plang_admin.'.tabs.menu-3') !!}
+                {!! trans($plang_admin.'.tabs.other') !!}
             </a>
         </li>
     </ul>
@@ -62,37 +62,91 @@
             ])
             <!--/NAME-->
 
-            <!--SLUG-->
-            @include('package-category::admin.partials.input_slug', [
-                'name' => 'category_slug',
-                'id' => 'category_slug',
-                'ref' => 'category_name',
-                'label' => trans($plang_admin.'.labels.category-slug'),
-                'value' => @$item->category_slug,
-                'description' => trans($plang_admin.'.descriptions.category-slug'),
-                'errors' => $errors,
-            ])
-            <!--/SLUG-->
+             <div class="row">
 
-            <!-- CATEGORY -->
-            @include('package-category::admin.partials.select_single', [
-                'name' => 'category_id_parent',
-                'label' => trans($plang_admin.'.labels.category'),
-                'items' => $categories,
-                'value' => @$item->category_id_parent,
-            'description' => trans($plang_admin.'.descriptions.category', [
+                 <!--SLUG-->
+                 <div class='col-md-6'>
 
-                                ]),
-            'errors' => $errors,
-            ])
+                    @include('package-category::admin.partials.input_slug', [
+                        'name' => 'category_slug',
+                        'id' => 'category_slug',
+                        'ref' => 'category_name',
+                        'label' => trans($plang_admin.'.labels.category-slug'),
+                        'value' => @$item->category_slug,
+                        'description' => trans($plang_admin.'.descriptions.category-slug'),
+                        'errors' => $errors,
+                    ])
 
-            <!--STATUS-->
-            @include('package-category::admin.partials.select_single', [
-                'name' => 'status',
-                'label' => trans($plang_admin.'.form.status'),
-                'value' => @$item->category_status,
-                'items' => $status,
-            ])
+                 </div>
+                 <!--/SLUG-->
+
+                <!--SLUG-->
+                <div class='col-md-6'>
+
+                    @include('package-category::admin.partials.input_text', [
+                        'name' => 'category_url',
+                        'id' => 'category_url',
+                        'label' => trans($plang_admin.'.labels.category-url'),
+                        'value' => @$item->category_url,
+                        'description' => trans($plang_admin.'.descriptions.category-url'),
+                        'errors' => $errors,
+                    ])
+
+                </div>
+                <!--/SLUG-->
+
+                <!-- CATEGORY PARENT -->
+                <div class='col-md-6'>
+
+                    @include('package-category::admin.partials.select_single', [
+                        'name' => 'category_id_parent',
+                        'label' => trans($plang_admin.'.labels.category-parent'),
+                        'items' => $categories,
+                        'value' => @$item->category_id_parent,
+                        'description' => trans($plang_admin.'.descriptions.category-parent', [
+
+                                    ]),
+                        'errors' => $errors,
+                    ])
+                </div>
+
+                <!--STATUS-->
+                <div class='col-md-6'>
+
+                    @include('package-category::admin.partials.select_single', [
+                        'name' => 'status',
+                        'label' => trans($plang_admin.'.form.status'),
+                        'value' => @$item->category_status,
+                        'items' => $status,
+                    ])
+                </div>
+
+                <!--STATUS-->
+                <div class='col-md-6'>
+
+                    @include('package-category::admin.partials.input_text', [
+                        'name' => 'category_order',
+                        'id' => 'category_order',
+                        'label' => trans($plang_admin.'.labels.category-order'),
+                        'value' => @$item->category_order,
+                        'description' => trans($plang_admin.'.descriptions.category-order'),
+                        'errors' => $errors,
+                    ])
+                </div>
+                
+                <!--ICON-->
+                <div class='col-md-6'>
+
+                    @include('package-category::admin.partials.input_text', [
+                        'name' => 'category_icon',
+                        'id' => 'category_icon',
+                        'label' => trans($plang_admin.'.labels.category-icon'),
+                        'value' => @$item->category_icon,
+                        'description' => trans($plang_admin.'.descriptions.category-icon'),
+                        'errors' => $errors,
+                    ])
+                </div>
+            </div>
 
         </div>
 
@@ -130,7 +184,7 @@
                 'name' => 'category_image',
                 'label' => trans($plang_admin.'.labels.image'),
                 'value' => @$item->category_image,
-                'description' => trans($plang_admin.'.descriptions.image'),
+                'description' => trans($plang_admin.'.descriptions.category-image'),
                 'errors' => $errors,
             ])
             <!--/CATEGORY IMAGE-->
@@ -148,5 +202,5 @@
 
 {!! Form::close() !!}
 <!------------------------------------------------------------------------------
-| End list of elements in sample form
+| End list of elements in category form
 |------------------------------------------------------------------------------>

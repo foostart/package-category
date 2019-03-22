@@ -133,9 +133,9 @@ class Context extends FooModel {
     }
 
     /**
-     * Get a sample by {id}
+     * Get a category by {id}
      * @param ARRAY $params list of parameters
-     * @return OBJECT sample
+     * @return OBJECT category
      */
     public function selectItem($params = array(), $key = NULL) {
 
@@ -308,7 +308,7 @@ class Context extends FooModel {
     /**
      *
      * @param ARRAY $params list of parameters
-     * @return OBJECT sample
+     * @return OBJECT category
      */
     public function insertItem($params = []) {
 

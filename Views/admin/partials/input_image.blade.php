@@ -33,6 +33,8 @@
     $value = empty($value)?$request->get($name):$value;
     //description
     $description = empty($description) ? '' : $description;
+    //lfm_config
+    $lfm_config = empty($lfm_config) ? FALSE : TRUE;
 ?>
 <!--/DATA-->
 
@@ -104,5 +106,7 @@
 
 @section('footer_scripts')
     @parent
-    {!! HTML::script('/vendor/laravel-filemanager/js/lfm-configs.js') !!}
+    @if($lfm_config)
+        {!! HTML::script('/vendor/laravel-filemanager/js/lfm-configs.js') !!}
+    @endif
 @endsection

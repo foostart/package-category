@@ -109,6 +109,7 @@ return [
         'upload' => 'Upload',
         'delete-in-trash' => 'In trash',
         'delete-forever' => 'Forever',
+        'undo' => 'Undo',
     ],
 
 

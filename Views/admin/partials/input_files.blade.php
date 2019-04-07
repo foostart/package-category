@@ -37,7 +37,7 @@
 
 <!--HEAD CSS-->
 @section('head_css')
-    {!! HTML::style('vendor/laravel-filemanager/css/lfm-custom.css') !!}
+    {!! HTML::style('packages/foostart/css/lfm-custom.css') !!}
 @endsection
 <!--/HEAD CSS-->
 
@@ -126,7 +126,7 @@
 
 @section('footer_scripts')
     @parent
-    {!! HTML::script('/vendor/laravel-filemanager/js/lfm-configs.js') !!}
+    {!! HTML::script('packages/foostart/js/lfm-configs.js') !!}
 
     <script type='text/javascript'>
 

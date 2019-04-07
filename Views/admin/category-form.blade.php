@@ -118,6 +118,7 @@
                         'label' => trans($plang_admin.'.form.status'),
                         'value' => @$item->category_status,
                         'items' => $status,
+                        'description' => trans($plang_admin.'.descriptions.category-status'),
                     ])
                 </div>
 
@@ -133,7 +134,7 @@
                         'errors' => $errors,
                     ])
                 </div>
-                
+
                 <!--ICON-->
                 <div class='col-md-6'>
 

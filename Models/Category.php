@@ -141,7 +141,9 @@ class Category extends FooModel {
         $this->valid_filter_fields = [
             'keyword',
             'context_id',
-            'category_status',
+            'status',
+            'order',
+            'category_slug',
             '_key',
         ];
 
@@ -274,7 +276,13 @@ class Category extends FooModel {
                                 $this->isTree = FALSE;
                             }
                             break;
-                        case 'category_status':
+                        case 'category_slug':
+                            if (!empty($value)) {
+                                $elo = $elo->where($this->table . '.category_slug', '=', $value);
+                                $this->isTree = FALSE;
+                            }
+                            break;
+                        case 'status':
                             if (!empty($value)) {
                                 $elo = $elo->where($this->table . '.category_status', '=', $value);
                             }
@@ -344,14 +352,15 @@ class Category extends FooModel {
      */
     public function updateItem($params = []) {
 
-        $item = $this->selectItem($params);
+        $_params = [];
+        $item = $this->find($params['id']);
 
         if (!empty($item) && !empty($item->toArray())) {
 
             $dataFields = $this->getDataFields($params, $this->fields);
 
             //update category id parent string
-            $dataFields['category_id_parent_str'] = $this->_getIdParentStr($params, $params['category_id_parent']);
+            $dataFields['category_id_parent_str'] = $this->_getIdParentStr($_params, $params['category_id_parent']);
 
             //unset unnessesary index
             unset($dataFields['context_id']);
@@ -369,6 +378,9 @@ class Category extends FooModel {
             //update child
             $this->_updateItemChild($params, $item);
 
+            //add new attribute
+            $item->id = $item->category_id;
+
             return $item;
 
         }
@@ -379,17 +391,18 @@ class Category extends FooModel {
     /**
      * Return list of category id parent of item
      * @param ARRAY $params
-     * @param INT $category_id
+     * @param INT $category_id_parent
      * @return JSON list of category id
      */
-    private function _getIdParentStr($params, $category_id) {
+    private function _getIdParentStr($params, $category_id_parent) {
 
         $category_id_parent_str = NULL;
 
-        if (!empty($params['category_id_parent'])) {
+        if (!empty($category_id_parent)) {
 
             $this->isTree = false;
-            $parent = $this->selectItem($params, 'category_id', $category_id);
+            $_params = [];
+            $parent = $this->selectItem($_params, 'category_id', $category_id_parent);
 
             if ($parent && !empty($parent->toArray())) {
                 $category_id_parent_str = array($parent->category_id => 1);
@@ -529,8 +542,8 @@ class Category extends FooModel {
                             ->where('category_id_parent_str', 'LIKE',  "%{$parent_pattern}%");
 
             //by category
-            if (!empty($params['category_status'])) {
-                $elo->where('category_status', '=', $params['category_status']);
+            if (!empty($params['status'])) {
+                $elo->where('category_status', '=', $params['status']);
             }
 
             //order by order

@@ -1,14 +1,13 @@
 @if(!empty($items) && (!$items->isEmpty()) )
 <?php
     $withs = [
-        'order' => '5%',
+        'order' => '10%',
         'name' => '20%',
         'ref' => '20%',
         'key' => '20%',
         'status' => '5%',
         'updated_at' => '15%',
         'operations' => '10%',
-        'delete' => '5%',
     ];
 
     global $counter;
@@ -32,6 +31,10 @@
             <!--ORDER-->
             <th style='width:{{ $withs['order'] }}'>
                 {{ trans($plang_admin.'.columns.order') }}
+                <span class="del-checkbox pull-right">
+                    <input type="checkbox" id="selecctall" />
+                    <label for="del-checkbox"></label>
+                </span>
             </th>
 
             <!-- NAME -->
@@ -117,14 +120,6 @@
                 !!}
             </th>
 
-            <!--DELETE-->
-            <th style='width:{{ $withs['delete'] }}'>
-                <span class="del-checkbox pull-right">
-                    <input type="checkbox" id="selecctall" />
-                    <label for="del-checkbox"></label>
-                </span>
-            </th>
-
         </tr>
 
     </thead>
@@ -134,7 +129,13 @@
 
             <tr>
                 <!--ORDER-->
-                <td> <?php echo $counter; $counter++ ?> </td>
+                <td>
+                    <?php echo $counter; $counter++ ?>
+                    <span class='box-item pull-right'>
+                        <input type="checkbox" id="<?php echo $item->id ?>" name="ids[]" value="{!! $item->id !!}">
+                        <label for="box-item"></label>
+                    </span>
+                </td>
 
                 <!--REF-->
                 <td>
@@ -196,14 +197,6 @@
                         <i class="fa fa-files-o f-tb-icon" aria-hidden="true"></i>
                     </a>
 
-                </td>
-
-                <!--DELETE-->
-                <td>
-                    <span class='box-item pull-right'>
-                        <input type="checkbox" id="<?php echo $item->id ?>" name="ids[]" value="{!! $item->id !!}">
-                        <label for="box-item"></label>
-                    </span>
                 </td>
 
             </tr>

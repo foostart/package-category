@@ -1,0 +1,19 @@
+.item-template {
+    display: none !important;
+}
+
+.item-file {
+    display: inline-block;
+    margin: 0px;
+    position: relative;
+}
+
+.item-file span {
+        min-height: 20px;
+    padding-left: 20px;
+    margin-bottom: 0;
+    font-weight: 400;
+    cursor: pointer;
+    display: inline-block;
+    max-width: 100%;
+}

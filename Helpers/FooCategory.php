@@ -76,10 +76,16 @@ class FooCategory {
                 'category_status' => $this->obj_category->status['publish']
             ];
 
+            //category slug
+            if (!empty($params['category_slug'])) {
+                $_params['category_slug'] = $params['category_slug'];
+            }
+
             //order
             if (!empty($params['order'])) {
                 $_params['order'] = $params['order'];
             }
+            
             $categories = $this->obj_category->selectItems($_params);
         }
 

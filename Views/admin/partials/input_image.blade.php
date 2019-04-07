@@ -107,6 +107,6 @@
 @section('footer_scripts')
     @parent
     @if($lfm_config)
-        {!! HTML::script('/vendor/laravel-filemanager/js/lfm-configs.js') !!}
+        {!! HTML::script('packages/foostart/js/lfm-configs.js') !!}
     @endif
 @endsection

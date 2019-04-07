@@ -1,7 +1,7 @@
 @if(!empty($items) && (!$items->isEmpty()) )
 <?php
     $withs = [
-        '#' => '5%',
+        '#' => '10%',
         'order' => '5%',
         'id' => '5%',
         'category_name' => '30%',
@@ -9,7 +9,6 @@
         'status' => '5%',
         'updated_at' => '15%',
         'operations' => '10%',
-        'delete' => '5%',
     ];
 
     global $counter;
@@ -32,6 +31,10 @@
             <!--ORDER-->
             <th style='width:{{ $withs['#'] }}'>
                 {{ trans($plang_admin.'.columns.#') }}
+                <span class="del-checkbox pull-right">
+                    <input type="checkbox" id="selecctall" />
+                    <label for="del-checkbox"></label>
+                </span>
             </th>
 
              <!--ID-->
@@ -104,14 +107,6 @@
                 !!}
             </th>
 
-            <!--DELETE-->
-            <th style='width:{{ $withs['delete'] }}'>
-                <span class="del-checkbox pull-right">
-                    <input type="checkbox" id="selecctall" />
-                    <label for="del-checkbox"></label>
-                </span>
-            </th>
-
         </tr>
 
     </thead>
@@ -121,7 +116,13 @@
 
             <tr>
                 <!--#-->
-                <td> <?php echo $counter; $counter++ ?> </td>
+                <td>
+                    <?php echo $counter; $counter++ ?>
+                    <span class='box-item pull-right'>
+                        <input type="checkbox" id="<?php echo $item->id ?>" name="ids[]" value="{!! $item->id !!}">
+                        <label for="box-item"></label>
+                    </span>
+                </td>
 
                 <!--ORDER-->
                 <td> {!! $item->category_order !!} </td>
@@ -180,14 +181,6 @@
                         <i class="fa fa-trash-o f-tb-icon"></i>
                     </a>
 
-                </td>
-
-                <!--DELETE-->
-                <td>
-                    <span class='box-item pull-right'>
-                        <input type="checkbox" id="<?php echo $item->id ?>" name="ids[]" value="{!! $item->id !!}">
-                        <label for="box-item"></label>
-                    </span>
                 </td>
 
             </tr>

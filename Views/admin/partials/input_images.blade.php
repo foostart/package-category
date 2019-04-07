@@ -41,7 +41,7 @@
 <!--/DATA-->
 
 @section('head_css')
-    {!! HTML::style('vendor/laravel-filemanager/css/lfm-custom.css') !!}
+    {!! HTML::style('packages/foostart/css/lfm-custom.css') !!}
     {!! HTML::style('packages/foostart/css/jquery-1.12.1-ui.css') !!}
 @endsection
 <!-- INPUT IMAGE -->
@@ -140,7 +140,7 @@
 <!-- /INPUT IMAGE -->
 @section('footer_scripts')
     @parent
-    {!! HTML::script('vendor/laravel-filemanager/js/lfm-configs.js') !!}
+    {!! HTML::script('packages/foostart/js/lfm-configs.js') !!}
     {!! HTML::script('packages/foostart/js/jquery-ui-1.12.1.min.js') !!}
     <script>
         $( function() {

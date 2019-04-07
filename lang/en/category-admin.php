@@ -80,6 +80,7 @@ return [
         'title-list-search' => 'Search results',
         'title-edit' => 'Edit category',
         'title-edit-context' => 'Edit context',
+        'title-edit-category' => 'Edit category',
         'title-add' => 'Add new category',
         'title-add-context' => 'Add new context',
         'title-delete' => 'Delete category',
@@ -160,20 +161,12 @@ return [
     */
     'descriptions' => [
         'category-form' => 'Category form',
-        'overview' => '<p>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-              </p>',
-        'description' => '<p>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-              </p>',
+        'overview' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.',
+        'description' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.',
         'context-form' => 'Context form',
         'update' => 'Update category',
-        'category-name' => '<p>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-              </p>',
-        'category' => '<p>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-              </p>',
+        'category-name' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.',
+        'category' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.',
         'list' => 'List of items',
         'counters' => 'There are <b>:number</b> items',
         'counter' => 'There is <b>:number</b> item',
@@ -181,33 +174,17 @@ return [
         'config' => 'List of configurations',
         'lang' => 'List of languages',
         'category-slug' =>'Category Slug',
-        'context-name' => '<p>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-              </p>',
-        'context-ref' => '<p>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-              </p>',
-        'context-key' => '<p>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-              </p>',
-        'context-status' => '<p>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-              </p>',
-        'status' => '<p>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-              </p>',
-        'category-url' => '<p>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-              </p>',
-        'category-order' => '<p>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-              </p>',
-        'category-parent' => '<p>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-              </p>',
-        'category-image' => '<p>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-              </p>',
+        'context-name' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.',
+        'context-ref' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.',
+        'context-key' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.',
+        'context-status' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.',
+        'status' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.',
+        'category-url' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.',
+        'category-order' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.',
+        'category-parent' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.',
+        'category-image' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.',
+        'category-icon' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.',
+        'category-status' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.',
     ],
 
 
@@ -250,7 +227,7 @@ return [
         'context-name' => 'Name',
         'context-status' => 'Status',
         'user_full_name' => 'User full name',
-
+        'contact_status' => 'Status',
     ],
 
 
@@ -290,6 +267,7 @@ return [
         'category-order' => 'Category order',
         'category-parent' => 'Category parent',
         'image' => 'Image',
+        'category-icon' => 'Category icon',
     ],
 
     'checkboxs' => [

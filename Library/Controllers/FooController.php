@@ -46,9 +46,34 @@ class FooController extends Controller {
     protected $category_ref_name = NULL;
     protected $category_ref_type = NULL;
     protected $category_ref_level = NULL;
+    
+    public $breadcrumb_1 = [];
+    public $breadcrumb_2 = [];
+    public $breadcrumb_3 = [];
+
+
 
     public function __construct() {
-
+        /**
+         * Breadcrumb
+         */
+        //1
+        $this->breadcrumb_1 = [
+            'url' => url('/'.request()->segment(1)),
+        ];
+        //2
+        if (request()->segment(1)) {
+            $this->breadcrumb_2 = [
+                'url' => $this->breadcrumb_1['url'].'/'.request()->segment(2),
+            ];
+        }
+        //3
+        if (request()->segment(2)) {
+            $this->breadcrumb_3 = [
+                'url' =>$this->breadcrumb_2['url'].'/'.request()->segment(3),
+            ];
+        }
+        
     }
 
     public function setUserInfo($user) {

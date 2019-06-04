@@ -85,7 +85,6 @@ class FooCategory {
             if (!empty($params['order'])) {
                 $_params['order'] = $params['order'];
             }
-            
             $categories = $this->obj_category->selectItems($_params);
         }
 

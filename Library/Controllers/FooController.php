@@ -46,7 +46,7 @@ class FooController extends Controller {
     protected $category_ref_name = NULL;
     protected $category_ref_type = NULL;
     protected $category_ref_level = NULL;
-    
+
     public $breadcrumb_1 = [];
     public $breadcrumb_2 = [];
     public $breadcrumb_3 = [];
@@ -73,7 +73,7 @@ class FooController extends Controller {
                 'url' =>$this->breadcrumb_2['url'].'/'.request()->segment(3),
             ];
         }
-        
+
     }
 
     public function setUserInfo($user) {
@@ -118,6 +118,22 @@ class FooController extends Controller {
         unset($this->user['updated_at']);
 
         return $this->user;
+    }
+
+
+    /**
+     * //TODO: cache user info
+     * Get current logged user info
+     * @return ARRAY user info
+     * @date 28/12/2017
+     */
+    public function hasPermissions(array $permissions) {
+
+        $authentication = \App::make('authentication_helper');
+
+        $flag = $authentication->hasPermission($permissions);
+
+        return $flag;
     }
 
     /**

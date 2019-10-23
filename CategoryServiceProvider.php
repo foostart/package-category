@@ -3,7 +3,7 @@
 namespace Foostart\Category;
 
 use Illuminate\Support\ServiceProvider;
-use LaravelAcl\Authentication\Classes\Menu\SentryMenuFactory;
+use Foostart\Acl\Authentication\Classes\Menu\SentryMenuFactory;
 use URL,
     Route;
 use Illuminate\Http\Request;

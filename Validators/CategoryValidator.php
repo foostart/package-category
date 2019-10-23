@@ -2,7 +2,7 @@
 
 use Foostart\Category\Library\Validators\FooValidator;
 use Event;
-use \LaravelAcl\Library\Validators\AbstractValidator;
+use \Foostart\Acl\Library\Validators\AbstractValidator;
 use Foostart\Category\Models\Category;
 
 use Illuminate\Support\MessageBag as MessageBag;

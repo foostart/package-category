@@ -10,7 +10,7 @@ use URL,
     Redirect;
 use Foostart\Category\Models\Categories;
 
-class CategoriesFrontController extends Controller
+class CategoryFrontController extends Controller
 {
     public $data = array();
     public function __construct() {

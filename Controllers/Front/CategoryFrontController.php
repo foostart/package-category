@@ -1,6 +1,6 @@
 <?php
 
-namespace Foostart\Category\Controlers\Front;
+namespace Foostart\Category\Controllers\Front;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;

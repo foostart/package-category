@@ -48,5 +48,5 @@
 
 @section('footer_scripts')
     @parent
-    {!! HTML::script('packages/jacopo/laravel-authentication-acl/js/custom-ordering.js')  !!}
+    {!! HTML::script('packages-acl/js/custom-ordering.js')  !!}
 @stop

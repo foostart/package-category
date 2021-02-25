@@ -37,9 +37,9 @@ class FooModel extends Model {
 
     protected $field_status = 'status';
 
-    public $status = NULL;
-
     public $config = NULL;
+    
+    public $config_status = NULL;
 
     public $config_file =NULL;
 
@@ -53,7 +53,7 @@ class FooModel extends Model {
      */
     public function __construct(array $attributes = array()) {
         parent::__construct($attributes);
-        $this->status = config('package-category.status');
+        $this->config_status = config('package-category.status');
 
         if ($this->config_file) {
             $this->config = config($this->config_file);
@@ -138,7 +138,7 @@ class FooModel extends Model {
      */
     protected function orderingFilters(array $params, $elo) {
 
-         //order
+        //order
         if (!empty($params['order'])) {
             foreach ($params['order'] as $_key => $_value) {
                 $elo->orderBy($_key, $_value);
@@ -377,7 +377,10 @@ class FooModel extends Model {
      * @return ARRAY list of statuses
      */
     public function getPluckStatus() {
-       $pluck_status = config('package-category.status.list');
+       $pluck_status = [];
+       if ($this->config_status && $this->config_status['list']) {
+           $pluck_status = $this->config_status['list'];
+       }
        return $pluck_status;
     }
 

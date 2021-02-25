@@ -61,7 +61,7 @@ class ContextAdminController extends FooController {
 
         $this->data_view['status'] = $this->obj_item->getPluckStatus();
 
-        $this->statuses = config('package-category.status.list');
+        $this->statuses = $this->obj_item->config_status['list'];
 
     }
 
@@ -75,13 +75,14 @@ class ContextAdminController extends FooController {
         $params = $request->all();
 
         $items = $this->obj_item->selectItems($params);
-
+        
         // display view
         $this->data_view = array_merge($this->data_view, array(
             'items' => $items,
             'request' => $request,
             'params' => $params,
             'statuses' => $this->statuses,
+            'config_status' => $this->obj_item->config_status
         ));
 
         return view($this->page_views['admin']['items'], $this->data_view);

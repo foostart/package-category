@@ -1,6 +1,4 @@
-<?php
-
-namespace Foostart\Category;
+<?php namespace Foostart\Category;
 
 use Illuminate\Support\ServiceProvider;
 use Foostart\Acl\Authentication\Classes\Menu\SentryMenuFactory;
@@ -17,9 +15,6 @@ class CategoryServiceProvider extends ServiceProvider {
      */
     public function boot(Request $request) {
 
-        //generate context key
-//        $this->generateContextKey();
-
         // load view
         $this->loadViewsFrom(__DIR__ . '/Views', 'package-category');
 
@@ -33,10 +28,13 @@ class CategoryServiceProvider extends ServiceProvider {
         $this->publishLang();
 
         // publish views
-        $this->publishViews();
+        //$this->publishViews();
 
-        //public assets
+        // public assets
         $this->publishAssets();
+        
+        // public migrations
+        $this->publishMigrations();
 
     }
 
@@ -93,6 +91,17 @@ class CategoryServiceProvider extends ServiceProvider {
                      __DIR__ . '/public/assets' => public_path('packages/foostart'),
         ]);
 
+    }
+    
+    /**
+     * Publish migrations
+     * @source: foostart/package-category/database/migrations
+     * @destination: database/migrations
+     */
+    protected function publishMigrations() {        
+        $this->publishes([
+            __DIR__ . '/database/migrations' => $this->app->databasePath() . '/migrations',
+        ]);
     }
 
 }

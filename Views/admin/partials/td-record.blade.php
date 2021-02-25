@@ -32,9 +32,8 @@ function displayChilds($childs, $level){ ?>
                 <!--STATUS-->
                 <td style="text-align: center;">
 
-                    <?php $status = config('package-category.status'); ?>
-                    @if($item->category_status && (isset($status['list'][$item->category_status])))
-                        <i class="fa fa-circle" style="color:{!! $status['color'][$item->category_status] !!}" title='{!! $status["list"][$item->category_status] !!}'></i>
+                    @if($item->category_status && (isset($config_status['list'][$item->category_status])))
+                        <i class="fa fa-circle" style="color:{!! $config_status['color'][$item->category_status] !!}" title='{!! $config_status["list"][$item->category_status] !!}'></i>
                     @else
                         <i class="fa fa-circle-o red"></i>
                     @endif

@@ -68,7 +68,7 @@
             </th>
 
             <!--STATUS-->
-            <?php $name = 'context_status' ?>
+            <?php $name = 'status' ?>
 
             <th class="hidden-xs" style='width:{{ $withs['name'] }}'>{!! trans($plang_admin.'.columns.context-status') !!}
                 <a href='{!! $sorting["url"][$name] !!}' class='tb-id' data-order='asc'>
@@ -127,7 +127,7 @@
     <tbody>
         @foreach($items as $item)
 
-            <tr>
+        <tr>
                 <!--ORDER-->
                 <td>
                     <?php echo $counter; $counter++ ?>
@@ -152,9 +152,8 @@
                 <!--STATUS-->
                 <td style="text-align: center;">
 
-                    <?php $status = config('package-category.status'); ?>
-                    @if($item->context_status && (isset($status['list'][$item->context_status])))
-                        <i class="fa fa-circle" style="color:{!! $status['color'][$item->context_status] !!}" title='{!! $status["list"][$item->context_status] !!}'></i>
+                    @if($item->status && (isset($config_status['list'][$item->status])))
+                        <i class="fa fa-circle" style="color:{!! $config_status['color'][$item->status] !!}" title='{!! $config_status["list"][$item->status] !!}'></i>
                     @else
                     <i class="fa fa-circle-o red" title='{!! trans($plang_admin.".labels.unknown") !!}'></i>
                     @endif

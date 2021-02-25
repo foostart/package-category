@@ -82,7 +82,7 @@
             @include('package-category::admin.partials.radio', [
                 'name' => 'context_status',
                 'label' => trans($plang_admin.'.labels.context-status'),
-                'value' => @$item->context_status,
+                'value' => @$item->status,
                 'description' => trans($plang_admin.'.descriptions.context-status'),
                 'items' => $statuses
             ])

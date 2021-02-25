@@ -27,10 +27,7 @@ class Category extends FooModel {
         $this->table = 'categories';
 
         //list of field in table
-        $this->fillable = [
-            'user_id',
-            'user_full_name',
-
+        $this->fillable = [            
             'category_name',
             'category_order',
             'category_url',
@@ -38,15 +35,14 @@ class Category extends FooModel {
             'category_slug',
             'category_overview',
             'category_description',
-            'category_image',
-            'category_status',
-
+            'category_image',            
             'category_id_parent',
             'category_id_parent_str',
             'category_id_child_str',
-
+            'status',
+            'created_user_id',
+            'updated_user_id',
             'context_id',
-
             'created_at',
             'updated_at',
         ];
@@ -74,7 +70,7 @@ class Category extends FooModel {
                 'name' => 'category_description',
                 'type' => 'Text',
             ],
-            'category_status' => [
+            'status' => [
                 'name' => 'status',
                 'type' => 'Int',
             ],
@@ -98,8 +94,12 @@ class Category extends FooModel {
                 'name' => 'category_image',
                 'type' => 'Text',
             ],
-            'user_id' => [
-                'name' => 'user_id',
+            'created_user_id' => [
+                'name' => 'created_user_id',
+                'type' => 'Int',
+            ],
+            'updated_user_id' => [
+                'name' => 'updated_user_id',
                 'type' => 'Int',
             ],
             'user_full_name' => [
@@ -124,8 +124,8 @@ class Category extends FooModel {
             'category_id_parent',
             'category_id_parent_str',
             //user
-            'user_id',
-            'user_full_name',
+            'created_user_id',
+            'updated_user_id',
             //context
             'context_id',
         ];

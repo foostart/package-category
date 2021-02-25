@@ -2,24 +2,14 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Foostart\Category\Helpers\FoostartDatabaseTrait;
 
 /**
  * Set common fields of all table
  */
 class FoostartMigration extends Migration
 {
-    /**
-     * Prefix table
-     * @var String 
-     */
-    public $prefix_table = '';
-    
-    /**
-     * Prefix column in table
-     * @var type 
-     */
-    public $prefix_column = '';
-
+    use FoostartDatabaseTrait;
 
     /**
      * Set common columns

@@ -367,7 +367,7 @@ class FooModel extends Model {
     public function fdelete($item) {
 
         $field_status = $this->field_status;
-        $item->$field_status = $this->status['intrash'];
+        $item->$field_status = $this->config_status['intrash'];
 
         return $item->save();
     }

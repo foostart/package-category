@@ -31,8 +31,10 @@ class CreateCategoriesTable extends FoostartMigration
             $table->string($this->prefix_column . 'name', 255)->comment('Category name');
             $table->integer($this->prefix_column . 'order')->comment('Order in list of categories');
             $table->string($this->prefix_column . 'slug', 1000)->comment('Slug in URL');
-            $table->string($this->prefix_column . 'overview', 1000)->comment('Category overview');
-            $table->text($this->prefix_column . 'descrption')->comment('Category description');
+            $table->string($this->prefix_column . 'url', 1000)->comment('Category url');
+            $table->string($this->prefix_column . 'icon', 500)->comment('Category icon');
+            $table->string($this->prefix_column . 'overview', 1000)->comment('Category overview');            
+            $table->text($this->prefix_column . 'description')->comment('Category description');
             $table->string($this->prefix_column . 'image', 255)->nullable()->comment('Image path');
             
             //Set common columns

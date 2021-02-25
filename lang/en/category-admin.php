@@ -51,6 +51,7 @@ return [
     'columns' => [
         'any'   => 'Any',
         'order' => 'Order',
+        'counter' => '#',
         'id'    => 'ID',
         'category-name' => 'Category name',
         'user-full-name' => 'User full name',

@@ -95,11 +95,11 @@ class Category extends FooModel {
                 'type' => 'Text',
             ],
             'created_user_id' => [
-                'name' => 'created_user_id',
+                'name' => 'user_id',
                 'type' => 'Int',
             ],
             'updated_user_id' => [
-                'name' => 'updated_user_id',
+                'name' => 'user_id',
                 'type' => 'Int',
             ],
             'user_full_name' => [

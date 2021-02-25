@@ -1,7 +1,7 @@
 @if(!empty($items) && (!$items->isEmpty()) )
 <?php
     $withs = [
-        'order' => '10%',
+        'counter' => '10%',
         'name' => '20%',
         'ref' => '20%',
         'key' => '20%',
@@ -28,9 +28,9 @@
     <thead>
         <tr style="height: 50px;">
 
-            <!--ORDER-->
-            <th style='width:{{ $withs['order'] }}'>
-                {{ trans($plang_admin.'.columns.order') }}
+            <!--COUNTER-->
+            <th style='width:{{ $withs['counter'] }}'>
+                {{ trans($plang_admin.'.columns.counter') }}
                 <span class="del-checkbox pull-right">
                     <input type="checkbox" id="selecctall" />
                     <label for="del-checkbox"></label>
@@ -70,7 +70,7 @@
             <!--STATUS-->
             <?php $name = 'status' ?>
 
-            <th class="hidden-xs" style='width:{{ $withs['name'] }}'>{!! trans($plang_admin.'.columns.context-status') !!}
+            <th class="hidden-xs text-center" style='width:{{ $withs['name'] }}'>{!! trans($plang_admin.'.columns.context-status') !!}
                 <a href='{!! $sorting["url"][$name] !!}' class='tb-id' data-order='asc'>
                     @if($sorting['items'][$name] == 'asc')
                         <i class="fa fa-sort-alpha-asc" aria-hidden="true"></i>
@@ -137,7 +137,7 @@
                     </span>
                 </td>
 
-                <!--REF-->
+                <!--NAME-->
                 <td>
                     {!! $item->context_name !!}
                 </td>
@@ -176,6 +176,15 @@
                             !!}">
                         <i class="fa fa-edit f-tb-icon"></i>
                     </a>
+                    
+                    <!--copy-->
+                    <a href="{!! URL::route('contexts.copy',[   'cid' => $item->id,                                                           
+                                                                '_token' => csrf_token(),
+                                                            ])
+                             !!}"
+                        class="margin-left-5">
+                        <i class="fa fa-files-o f-tb-icon" aria-hidden="true"></i>
+                    </a>
 
                     <!--delete-->
                     <a href="{!! URL::route('contexts.delete',['id' => $item->id,
@@ -185,17 +194,6 @@
                        class="margin-left-5 delete">
                         <i class="fa fa-trash-o f-tb-icon"></i>
                     </a>
-
-                    <!--copy-->
-                    <a href="{!! URL::route('contexts.edit',['id' => $item->id,
-                                                            'cid' => $item->id,
-                                                            '_token' => csrf_token(),
-                                                            ])
-                             !!}"
-                        class="margin-left-5 delete">
-                        <i class="fa fa-files-o f-tb-icon" aria-hidden="true"></i>
-                    </a>
-
                 </td>
 
             </tr>

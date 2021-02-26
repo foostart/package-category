@@ -35,6 +35,9 @@ class CategoryServiceProvider extends ServiceProvider {
         
         // public migrations
         $this->publishMigrations();
+        
+        // public seeders
+        $this->publishSeeders();
 
     }
 
@@ -101,6 +104,17 @@ class CategoryServiceProvider extends ServiceProvider {
     protected function publishMigrations() {        
         $this->publishes([
             __DIR__ . '/database/migrations' => $this->app->databasePath() . '/migrations',
+        ]);
+    }
+    
+    /**
+     * Publish seeders
+     * @source: foostart/package-category/database/seeders
+     * @destination: database/seeders
+     */
+    protected function publishSeeders() {        
+        $this->publishes([
+            __DIR__ . '/database/seeders' => $this->app->databasePath() . '/seeders',
         ]);
     }
 

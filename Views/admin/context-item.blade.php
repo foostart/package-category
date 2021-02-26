@@ -204,7 +204,7 @@
 </table>
 </div>
 <div class="paginator">
-    {!! $items->appends($request->except(['page']) )->render() !!}
+    {!! $items->appends($request->except(['page']) )->render($pagination_view) !!}
 </div>
 @else
     <!--SEARCH RESULT MESSAGE-->

@@ -73,7 +73,13 @@ class FooController extends Controller {
                 'url' =>$this->breadcrumb_2['url'].'/'.request()->segment(3),
             ];
         }
-
+        
+        /**
+         * Data view
+         */
+        $this->data_view = array_merge($this->data_view, [
+            'pagination_view' => 'pagination::bootstrap-4'
+        ]);
     }
 
     public function setUserInfo($user) {
@@ -89,7 +95,7 @@ class FooController extends Controller {
             'user_id' => $this->user_id,
             'user_full_name' => $this->user_full_name,
             'user_email' => $this->user_email,
-            'token_api' => $this->token_api
+            'token_api' => $this->token_api,            
         ));
 
         return $this->data_view;

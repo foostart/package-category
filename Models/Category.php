@@ -102,10 +102,6 @@ class Category extends FooModel {
                 'name' => 'user_id',
                 'type' => 'Int',
             ],
-            'user_full_name' => [
-                'name' => 'user_full_name',
-                'type' => 'Text',
-            ]
         ];
 
         //check valid fields for inserting

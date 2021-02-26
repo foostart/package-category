@@ -61,8 +61,8 @@
                 'errors' => $errors,
             ])
             <!--/NAME-->
-
-             <div class="row">
+            
+            <div class="row">
 
                  <!--SLUG-->
                  <div class='col-md-6'>
@@ -80,21 +80,6 @@
                  </div>
                  <!--/SLUG-->
 
-                <!--SLUG-->
-                <div class='col-md-6'>
-
-                    @include('package-category::admin.partials.input_text', [
-                        'name' => 'category_url',
-                        'id' => 'category_url',
-                        'label' => trans($plang_admin.'.labels.category-url'),
-                        'value' => @$item->category_url,
-                        'description' => trans($plang_admin.'.descriptions.category-url'),
-                        'errors' => $errors,
-                    ])
-
-                </div>
-                <!--/SLUG-->
-
                 <!-- CATEGORY PARENT -->
                 <div class='col-md-6'>
 
@@ -110,49 +95,25 @@
                     ])
                 </div>
 
-                <!--STATUS-->
-                <div class='col-md-6'>
-
-                    @include('package-category::admin.partials.select_single', [
-                        'name' => 'status',
-                        'label' => trans($plang_admin.'.form.status'),
-                        'value' => @$item->category_status,
-                        'items' => $status,
-                        'description' => trans($plang_admin.'.descriptions.category-status'),
-                    ])
-                </div>
-
-                <!--STATUS-->
-                <div class='col-md-6'>
-
-                    @include('package-category::admin.partials.input_text', [
-                        'name' => 'category_order',
-                        'id' => 'category_order',
-                        'label' => trans($plang_admin.'.labels.category-order'),
-                        'value' => @$item->category_order,
-                        'description' => trans($plang_admin.'.descriptions.category-order'),
-                        'errors' => $errors,
-                    ])
-                </div>
-
-                <!--ICON-->
-                <div class='col-md-6'>
-
-                    @include('package-category::admin.partials.input_text', [
-                        'name' => 'category_icon',
-                        'id' => 'category_icon',
-                        'label' => trans($plang_admin.'.labels.category-icon'),
-                        'value' => @$item->category_icon,
-                        'description' => trans($plang_admin.'.descriptions.category-icon'),
-                        'errors' => $errors,
-                    ])
-                </div>
             </div>
+
+            <!--CATEGORY DESCRIPTION-->
+            @include('package-category::admin.partials.textarea', [
+                'name' => 'category_description',
+                'label' => trans($plang_admin.'.labels.description'),
+                'value' => @$item->category_description,
+                'description' => trans($plang_admin.'.descriptions.description'),
+                'rows' => 20,
+                'tinymce' => true,
+                'errors' => $errors,
+            ])
+            <!--/CATEGORY DESCRIPTION-->
 
         </div>
 
         <!--MENU 2-->
         <div id="menu_2" class="tab-pane fade">
+            
             <!--CATEGORY OVERVIEW-->
             @include('package-category::admin.partials.textarea', [
                 'name' => 'category_overview',
@@ -163,19 +124,60 @@
                 'errors' => $errors,
             ])
             <!--/CATEGORY OVERVIEW-->
+            
+            <div class="row">
 
-            <!--CATEGORY DESCRIPTION-->
-            @include('package-category::admin.partials.textarea', [
-                'name' => 'category_description',
-                'label' => trans($plang_admin.'.labels.description'),
-                'value' => @$item->category_description,
-                'description' => trans($plang_admin.'.descriptions.description'),
-                'rows' => 50,
-                'tinymce' => true,
-                'errors' => $errors,
-            ])
-            <!--/CATEGORY DESCRIPTION-->
+                <!--URL-->
+                <div class='col-md-6'>
+                    @include('package-category::admin.partials.input_text', [
+                        'name' => 'category_url',
+                        'id' => 'category_url',
+                        'label' => trans($plang_admin.'.labels.category-url'),
+                        'value' => @$item->category_url,
+                        'description' => trans($plang_admin.'.descriptions.category-url'),
+                        'errors' => $errors,
+                    ])
+                </div>
+                <!--/URL-->
 
+                <!--STATUS-->
+                <div class='col-md-6'>
+                    @include('package-category::admin.partials.select_single', [
+                        'name' => 'status',
+                        'label' => trans($plang_admin.'.form.status'),
+                        'value' => @$item->category_status,
+                        'items' => $status,
+                        'description' => trans($plang_admin.'.descriptions.category-status'),
+                    ])
+                </div>
+                <!--/STATUS-->
+
+                <!--ORDER-->
+                <div class='col-md-6'>
+                    @include('package-category::admin.partials.input_text', [
+                        'name' => 'category_order',
+                        'id' => 'category_order',
+                        'label' => trans($plang_admin.'.labels.category-order'),
+                        'value' => @$item->category_order,
+                        'description' => trans($plang_admin.'.descriptions.category-order'),
+                        'errors' => $errors,
+                    ])
+                </div>
+                <!--/ORDER-->
+
+                <!--ICON-->
+                <div class='col-md-6'>
+                    @include('package-category::admin.partials.input_text', [
+                        'name' => 'category_icon',
+                        'id' => 'category_icon',
+                        'label' => trans($plang_admin.'.labels.category-icon'),
+                        'value' => @$item->category_icon,
+                        'description' => trans($plang_admin.'.descriptions.category-icon'),
+                        'errors' => $errors,
+                    ])
+                </div>
+                <!--/ICON-->
+            </div>
         </div>
 
         <!--MENU 3-->

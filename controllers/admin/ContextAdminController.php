@@ -61,7 +61,7 @@ class ContextAdminController extends FooController {
 
         $this->data_view['status'] = $this->obj_item->getPluckStatus();
 
-        $this->statuses = config('package-category.status.list');
+        $this->statuses = $this->obj_item->config_status['list'];
 
     }
 
@@ -75,13 +75,14 @@ class ContextAdminController extends FooController {
         $params = $request->all();
 
         $items = $this->obj_item->selectItems($params);
-
+        
         // display view
         $this->data_view = array_merge($this->data_view, array(
             'items' => $items,
             'request' => $request,
             'params' => $params,
             'statuses' => $this->statuses,
+            'config_status' => $this->obj_item->config_status
         ));
 
         return view($this->page_views['admin']['items'], $this->data_view);
@@ -352,6 +353,39 @@ class ContextAdminController extends FooController {
 
         return view($this->page_views['admin']['lang'], $this->data_view);
     }
+    
+    /**
+     * Edit existing item by {id} parameters OR
+     * Add new item
+     * @return view edit page
+     * @date 26/12/2017
+     */
+    public function copy(Request $request) {
 
+        $params = $request->all();
 
+        $item = NULL;
+        $params['id'] = $request->get('cid', NULL);
+
+        if (!empty($params['id'])) {
+
+            $item = $this->obj_item->selectItem($params, FALSE);
+
+            if (empty($item)) {
+                return Redirect::route($this->root_router.'.list')
+                                ->withMessage(trans($this->plang_admin.'.actions.edit-error'));
+            }
+
+            $item->id = NULL;
+        }
+
+        // display view
+        $this->data_view = array_merge($this->data_view, array(
+            'item' => $item,
+            'statuses' => $this->statuses,
+            'request' => $request,
+        ));
+
+        return view($this->page_views['admin']['edit'], $this->data_view);
+    }
 }

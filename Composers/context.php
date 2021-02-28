@@ -1,6 +1,6 @@
 <?php
 
-use LaravelAcl\Authentication\Classes\Menu\SentryMenuFactory;
+use Foostart\Acl\Authentication\Classes\Menu\SentryMenuFactory;
 use Foostart\Category\Helpers\SortTable;
 
 
@@ -69,7 +69,7 @@ View::composer([
             '' => trans($plang_admin.'.form.no-selected'),
             'context_name' => trans($plang_admin.'.fields.context-name'),
             'context_ref' => trans($plang_admin.'.fields.context-ref'),
-            'context_status' => trans($plang_admin.'.fields.context-status'),
+            'status' => trans($plang_admin.'.fields.context-status'),
             'updated_at' => trans($plang_admin.'.fields.updated_at'),
         ];
 

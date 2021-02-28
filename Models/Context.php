@@ -24,13 +24,13 @@ class Context extends FooModel {
 
         //list of field in table
         $this->fillable = [
-            'user_id',
-            'user_full_name',
             'context_name',
             'context_key',
-            'context_ref',
-            'context_status',
+            'context_ref',            
             'context_notes',
+            'status',
+            'created_user_id',
+            'updated_user_id',
             'created_at',
             'updated_at',
         ];
@@ -49,7 +49,7 @@ class Context extends FooModel {
                 'name' => 'context_ref',
                 'type' => 'Text',
             ],
-            'context_status' => [
+            'status' => [
                 'name' => 'context_status',
                 'type' => 'Int',
             ],
@@ -57,14 +57,14 @@ class Context extends FooModel {
                 'name' => 'context_notes',
                 'type' => 'Text',
             ],
-            'user_id' => [
+            'created_user_id' => [
                 'name' => 'user_id',
                 'type' => 'Int',
             ],
-            'user_full_name' => [
-                'name' => 'user_full_name',
-                'type' => 'Text',
-            ]
+            'updated_user_id' => [
+                'name' => 'user_id',
+                'type' => 'Int',
+            ],
         ];
 
         //check valid fields for inserting
@@ -72,9 +72,9 @@ class Context extends FooModel {
             'context_name',
             'context_key',
             'context_ref',
-            'context_status',
-            'user_id',
-            'user_full_name',
+            'status',
+            'created_user_id',       
+            'updated_user_id',       
             'updated_at',
         ];
 
@@ -83,7 +83,7 @@ class Context extends FooModel {
             'context_name',
             'context_key',
             'context_ref',
-            'context_status',
+            'status',
             $this->field_status,
         ];
 
@@ -104,7 +104,7 @@ class Context extends FooModel {
         $this->perPage = 10;
 
         //item status
-        $this->field_status = 'context_status';
+        $this->field_status = 'status';
     }
 
     /**
@@ -314,7 +314,7 @@ class Context extends FooModel {
 
         $dataFields = $this->getDataFields($params, $this->fields);
         $dataFields['context_key'] = $this->generateContextKey();
-
+        
         $item = self::create($dataFields);
 
         $key = $this->primaryKey;

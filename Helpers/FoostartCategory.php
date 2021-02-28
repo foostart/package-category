@@ -4,7 +4,7 @@ use Foostart\Category\Models\Category;
 use Foostart\Category\Models\Context;
 use Config;
 
-class FooCategory {
+class FoostartCategory {
 
     //Object categories
     private $obj_category;

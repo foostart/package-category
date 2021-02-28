@@ -1,6 +1,6 @@
 <?php
 
-namespace Foostart\Category\Controlers\Front;
+namespace Foostart\Category\Controllers\Front;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -10,7 +10,7 @@ use URL,
     Redirect;
 use Foostart\Category\Models\Categories;
 
-class CategoriesFrontController extends Controller
+class CategoryFrontController extends Controller
 {
     public $data = array();
     public function __construct() {

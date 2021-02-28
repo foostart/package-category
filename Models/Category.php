@@ -27,10 +27,7 @@ class Category extends FooModel {
         $this->table = 'categories';
 
         //list of field in table
-        $this->fillable = [
-            'user_id',
-            'user_full_name',
-
+        $this->fillable = array_merge($this->fillable, [            
             'category_name',
             'category_order',
             'category_url',
@@ -38,22 +35,19 @@ class Category extends FooModel {
             'category_slug',
             'category_overview',
             'category_description',
-            'category_image',
-            'category_status',
-
+            'category_image',            
             'category_id_parent',
             'category_id_parent_str',
             'category_id_child_str',
-
+            //Relation
+            'created_user_id',
+            'updated_user_id',
             'context_id',
-
-            'created_at',
-            'updated_at',
-        ];
+        ]);
 
 
         //list of fields for inserting
-        $this->fields = [
+        $this->fields = array_merge($this->fields, [
             'category_name' => [
                 'name' => 'category_name',
                 'type' => 'Text',
@@ -74,10 +68,6 @@ class Category extends FooModel {
                 'name' => 'category_description',
                 'type' => 'Text',
             ],
-            'category_status' => [
-                'name' => 'status',
-                'type' => 'Int',
-            ],
             'category_slug' => [
                 'name' => 'category_slug',
                 'type' => 'Text',
@@ -90,26 +80,19 @@ class Category extends FooModel {
                 'name' => 'category_id_parent',
                 'type' => 'Int',
             ],
-            'context_id' => [
-                'name' => 'context_id',
-                'type' => 'Int',
-            ],
             'category_image' => [
                 'name' => 'category_image',
                 'type' => 'Text',
             ],
-            'user_id' => [
-                'name' => 'user_id',
+            //Relation
+            'context_id' => [
+                'name' => 'context_id',
                 'type' => 'Int',
             ],
-            'user_full_name' => [
-                'name' => 'user_full_name',
-                'type' => 'Text',
-            ]
-        ];
+        ]);
 
         //check valid fields for inserting
-        $this->valid_insert_fields = [
+        $this->valid_insert_fields = array_merge($this->valid_insert_fields, [
             //category info
             'category_name',
             'category_order',
@@ -119,16 +102,11 @@ class Category extends FooModel {
             'category_overview',
             'category_description',
             'category_image',
-            'category_status',
-            //relation
             'category_id_parent',
             'category_id_parent_str',
-            //user
-            'user_id',
-            'user_full_name',
-            //context
+            //relation
             'context_id',
-        ];
+        ]);
 
         //check valid fields for ordering
         $this->valid_ordering_fields = [
@@ -149,9 +127,6 @@ class Category extends FooModel {
 
         //primary key
         $this->primaryKey = 'category_id';
-
-        //the number of items on page
-        $this->perPage = 10;
 
         //build category tree
         $this->isTree = TRUE;

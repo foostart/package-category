@@ -1,9 +1,7 @@
-<?php
-
-namespace Foostart\Category;
+<?php namespace Foostart\Category;
 
 use Illuminate\Support\ServiceProvider;
-use LaravelAcl\Authentication\Classes\Menu\SentryMenuFactory;
+use Foostart\Acl\Authentication\Classes\Menu\SentryMenuFactory;
 use URL,
     Route;
 use Illuminate\Http\Request;
@@ -16,9 +14,6 @@ class CategoryServiceProvider extends ServiceProvider {
      * @return void
      */
     public function boot(Request $request) {
-
-        //generate context key
-//        $this->generateContextKey();
 
         // load view
         $this->loadViewsFrom(__DIR__ . '/Views', 'package-category');
@@ -33,10 +28,16 @@ class CategoryServiceProvider extends ServiceProvider {
         $this->publishLang();
 
         // publish views
-        $this->publishViews();
+        //$this->publishViews();
 
-        //public assets
+        // public assets
         $this->publishAssets();
+        
+        // public migrations
+        $this->publishMigrations();
+        
+        // public seeders
+        $this->publishSeeders();
 
     }
 
@@ -93,6 +94,28 @@ class CategoryServiceProvider extends ServiceProvider {
                      __DIR__ . '/public/assets' => public_path('packages/foostart'),
         ]);
 
+    }
+    
+    /**
+     * Publish migrations
+     * @source: foostart/package-category/database/migrations
+     * @destination: database/migrations
+     */
+    protected function publishMigrations() {        
+        $this->publishes([
+            __DIR__ . '/database/migrations' => $this->app->databasePath() . '/migrations',
+        ]);
+    }
+    
+    /**
+     * Publish seeders
+     * @source: foostart/package-category/database/seeders
+     * @destination: database/seeders
+     */
+    protected function publishSeeders() {        
+        $this->publishes([
+            __DIR__ . '/database/seeders' => $this->app->databasePath() . '/seeders',
+        ]);
     }
 
 }

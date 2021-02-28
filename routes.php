@@ -37,6 +37,14 @@ Route::group(['middleware' => ['web']], function () {
         ]);
 
         /**
+         * copy
+         */
+        Route::get('admin/contexts/copy', [
+            'as' => 'contexts.copy',
+            'uses' => 'ContextAdminController@copy'
+        ]);
+
+        /**
          * post
          */
         Route::post('admin/contexts/edit', [

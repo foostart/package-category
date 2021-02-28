@@ -47,8 +47,39 @@ class FooController extends Controller {
     protected $category_ref_type = NULL;
     protected $category_ref_level = NULL;
 
-    public function __construct() {
+    public $breadcrumb_1 = [];
+    public $breadcrumb_2 = [];
+    public $breadcrumb_3 = [];
 
+
+
+    public function __construct() {
+        /**
+         * Breadcrumb
+         */
+        //1
+        $this->breadcrumb_1 = [
+            'url' => url('/'.request()->segment(1)),
+        ];
+        //2
+        if (request()->segment(1)) {
+            $this->breadcrumb_2 = [
+                'url' => $this->breadcrumb_1['url'].'/'.request()->segment(2),
+            ];
+        }
+        //3
+        if (request()->segment(2)) {
+            $this->breadcrumb_3 = [
+                'url' =>$this->breadcrumb_2['url'].'/'.request()->segment(3),
+            ];
+        }
+        
+        /**
+         * Data view
+         */
+        $this->data_view = array_merge($this->data_view, [
+            'pagination_view' => 'pagination::bootstrap-4'
+        ]);
     }
 
     public function setUserInfo($user) {
@@ -64,7 +95,7 @@ class FooController extends Controller {
             'user_id' => $this->user_id,
             'user_full_name' => $this->user_full_name,
             'user_email' => $this->user_email,
-            'token_api' => $this->token_api
+            'token_api' => $this->token_api,            
         ));
 
         return $this->data_view;
@@ -93,6 +124,22 @@ class FooController extends Controller {
         unset($this->user['updated_at']);
 
         return $this->user;
+    }
+
+
+    /**
+     * //TODO: cache user info
+     * Get current logged user info
+     * @return ARRAY user info
+     * @date 28/12/2017
+     */
+    public function hasPermissions(array $permissions) {
+
+        $authentication = \App::make('authentication_helper');
+
+        $flag = $authentication->hasPermission($permissions);
+
+        return $flag;
     }
 
     /**

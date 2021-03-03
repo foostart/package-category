@@ -7,6 +7,7 @@ use Foostart\Category\Helpers\FoostartMigration;
 class CreateContextsTable extends FoostartMigration
 {
     public function __construct() {
+        $this->table = 'contexts';
         $this->prefix_column = 'context_';
     }
     /**
@@ -16,8 +17,8 @@ class CreateContextsTable extends FoostartMigration
      */
     public function up()
     {
-        Schema::dropIfExists('contexts');
-        Schema::create('contexts', function (Blueprint $table) {
+        Schema::dropIfExists($this->table);
+        Schema::create($this->table, function (Blueprint $table) {
             
             $table->increments($this->prefix_column . 'id')->comment('Primary key');
             
@@ -40,6 +41,6 @@ class CreateContextsTable extends FoostartMigration
      */
     public function down()
     {
-        Schema::dropIfExists('contexts');
+        Schema::dropIfExists($this->table);
     }
 }

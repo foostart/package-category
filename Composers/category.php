@@ -88,7 +88,8 @@ View::composer([
         $orders = [
             '' => trans($plang_admin.'.form.no-selected'),
             'id' => trans($plang_admin.'.fields.id'),
-            'category_name' => trans($plang_admin.'.fields.name'),            
+            'category_name' => trans($plang_admin.'.fields.name'),    
+            'status' => trans($plang_admin.'.fields.status'),
             'updated_at' => trans($plang_admin.'.fields.updated_at'),
         ];
 

@@ -1,12 +1,11 @@
 @if(!empty($items) && (!$items->isEmpty()) )
 <?php
     $withs = [
-        '#' => '10%',
+        'counter' => '5%',
         'order' => '5%',
         'id' => '5%',
         'category_name' => '30%',
-        'category_url' => '20%',
-        'status' => '5%',
+        'status' => '10%',
         'updated_at' => '15%',
         'operations' => '10%',
     ];
@@ -29,7 +28,7 @@
         <tr style="height: 50px;">
 
             <!--COUNTER-->
-            <th style='width:{{ $withs['#'] }}'>
+            <th style='width:{{ $withs['counter'] }}'>
                 {{ trans($plang_admin.'.columns.#') }}
                 <span class="del-checkbox pull-right">
                     <input type="checkbox" id="selecctall" />
@@ -62,16 +61,19 @@
                 </a>
             </th>
 
-            <!--URL-->
-            <?php $name = 'category_url' ?>
-            <th style='width:{{ $withs['category_url'] }}'>
-                {{ trans($plang_admin.'.columns.url') }}
-            </th>
-
-
             <!--STATUS-->
-            <th style='width:{{ $withs['status'] }}'>
-                {{ trans($plang_admin.'.columns.status') }}
+            <?php $name = 'status' ?>
+
+            <th class="hidden-xs text-center" style='width:{{ $withs[$name] }}'>{!! trans($plang_admin.'.columns.context-status') !!}
+                <a href='{!! $sorting["url"][$name] !!}' class='tb-id' data-order='asc'>
+                    @if($sorting['items'][$name] == 'asc')
+                        <i class="fa fa-sort-alpha-asc" aria-hidden="true"></i>
+                    @elseif($sorting['items'][$name] == 'desc')
+                        <i class="fa fa-sort-alpha-desc" aria-hidden="true"></i>
+                    @else
+                        <i class="fa fa-sort-desc" aria-hidden="true"></i>
+                    @endif
+                </a>
             </th>
 
             <!-- UPDATED AT -->
@@ -133,16 +135,13 @@
                 <!--NAME-->
                 <td> {!! $item->category_name !!} </td>
 
-                <!--URL-->
-                <td> {!! $item->category_url !!} </td>
-
                 <!--STATUS-->
                 <td style="text-align: center;">
 
-                    @if($item->category_status && (isset($config_status['list'][$item->category_status])))
-                        <i class="fa fa-circle" style="color:{!! $config_status['color'][$item->category_status] !!}" title='{!! $config_status["list"][$item->category_status] !!}'></i>
+                    @if($item->status && (isset($config_status['list'][$item->status])))
+                        <i class="fa fa-circle" style="color:{!! $config_status['color'][$item->status] !!}" title='{!! $config_status["list"][$item->status] !!}'></i>
                     @else
-                        <i class="fa fa-circle-o red"></i>
+                    <i class="fa fa-circle-o red" title='{!! trans($plang_admin.".labels.unknown") !!}'></i>
                     @endif
                 </td>
 

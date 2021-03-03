@@ -202,6 +202,8 @@ return [
     'errors' => [
         'required' => ':attribute is required',
         'required_length' => 'Allow from: <b>:minlength</b> to <b>:maxlength</b>. characters',
+        'required_min_length' => 'Allow from: <b>:minlength</b> characters',
+        'required_max_length' => 'Allow max: <b>:minlength</b> characters',
     ],
 
 
@@ -229,6 +231,8 @@ return [
         'context-status' => 'Status',
         'user_full_name' => 'User full name',
         'contact_status' => 'Status',
+        'title' => 'Title',
+        'status' => 'Status'
     ],
 
 

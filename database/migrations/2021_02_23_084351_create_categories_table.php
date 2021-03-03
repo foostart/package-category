@@ -7,6 +7,7 @@ use Foostart\Category\Helpers\FoostartMigration;
 class CreateCategoriesTable extends FoostartMigration
 {
     public function __construct() {
+        $this->table = 'categories';
         $this->prefix_column = 'category_';
     }
     /**
@@ -16,8 +17,8 @@ class CreateCategoriesTable extends FoostartMigration
      */
     public function up()
     {
-        Schema::dropIfExists('categories');
-        Schema::create('categories', function (Blueprint $table) {
+        Schema::dropIfExists($this->table);
+        Schema::create($this->table, function (Blueprint $table) {
             
             $table->increments($this->prefix_column . 'id')->comment('Primary key');
             
@@ -49,6 +50,6 @@ class CreateCategoriesTable extends FoostartMigration
      */
     public function down()
     {
-        Schema::dropIfExists('categories');
+        Schema::dropIfExists($this->table);
     }
 }

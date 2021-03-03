@@ -6,17 +6,23 @@ trait FoostartDatabaseTrait {
      * Table name
      * @var String
      */
-    public $table = '';
+    protected $table = '';
     
     /**
      * Prefix table
      * @var String 
      */
-    public $prefix_table = '';
+    protected $prefix_table = '';
     
     /**
      * Prefix column in table
      * @var type 
      */
-    public $prefix_column = '';
+    protected $prefix_column = '';
+    
+    /**
+     * Prefix column of contexts table
+     */
+    protected $prefix_context = 'context_';
+            
 }

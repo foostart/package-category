@@ -58,6 +58,7 @@ class CategoryAdminController extends FooController {
 
         // status of item
         $this->data_view['status'] = $this->obj_item->getPluckStatus();
+        $this->statuses = $this->obj_item->config_status['list'];
 
     }
 
@@ -80,6 +81,7 @@ class CategoryAdminController extends FooController {
             'items' => $items,
             'request' => $request,
             'params' => $params,
+            'config_status' => $this->obj_item->config_status
         ));
 
         return view($this->page_views['admin']['items'], $this->data_view);
@@ -107,6 +109,7 @@ class CategoryAdminController extends FooController {
             'item' => $item,
             'categories' => $categories,
             'request' => $request,
+            'statuses' => $this->statuses,
         ));
 
         return view($this->page_views['admin']['edit'], $this->data_view);

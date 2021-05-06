@@ -204,6 +204,8 @@ return [
         'required_length' => 'Allow from: <b>:minlength</b> to <b>:maxlength</b>. characters',
         'required_min_length' => 'Allow from: <b>:minlength</b> characters',
         'required_max_length' => 'Allow max: <b>:minlength</b> characters',
+        'required-order-by' => 'Required order by',
+        'existing-order' => 'Existing order'
     ],
 
 

@@ -24,8 +24,12 @@
     <!-- SORTING BY -->
     <div class="col-md-12 margin-top-10">
         {!!Form::select('', $sorting['label'], $request->get('order_by',''), ['class' => 'form-control form-validable', 'id' => 'order-by-select']) !!}
-        <span class="text-danger hidden form-error-required-order">{!! trans('client.required_order_by') !!}</span>
-        <span class="text-danger hidden form-error-existing-order">{!! trans('client.existing_order') !!}</span>
+        <span class="text-danger hidden form-error-required-order">
+            {!! trans('category-admin.errors.required-order-by') !!}
+        </span>
+        <span class="text-danger hidden form-error-existing-order">
+            {!! trans('category-admin.errors.existing-order') !!}
+        </span>
     </div>
 
     <!-- ORDER BY -->

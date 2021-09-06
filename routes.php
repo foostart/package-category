@@ -16,14 +16,14 @@ use Illuminate\Session\TokenMismatchException;
 Route::group(['middleware' => ['web']], function () {
 
     Route::group(['middleware' => ['admin_logged', 'can_see', 'in_context'],
-                  'namespace' => 'Foostart\Category\Controllers\Admin',
-        ], function () {
+        'namespace' => 'Foostart\Category\Controllers\Admin',
+    ], function () {
 
 
         /**
          * list
          */
-        Route::get('admin/contexts/list', [
+        Route::get('admin/contexts', [
             'as' => 'contexts.list',
             'uses' => 'ContextAdminController@index'
         ]);
@@ -62,7 +62,7 @@ Route::group(['middleware' => ['web']], function () {
 
         /**
          * configs
-        */
+         */
         Route::get('admin/contexts/config', [
             'as' => 'contexts.config',
             'uses' => 'ContextAdminController@config'
@@ -75,7 +75,7 @@ Route::group(['middleware' => ['web']], function () {
 
         /**
          * language
-        */
+         */
         Route::get('admin/contexts/lang', [
             'as' => 'contexts.lang',
             'uses' => 'ContextAdminController@lang'
@@ -103,13 +103,13 @@ Route::group(['middleware' => ['web']], function () {
 Route::group(['middleware' => ['web']], function () {
 
     Route::group(['middleware' => ['admin_logged', 'can_see', 'in_context'],
-                  'namespace' => 'Foostart\Category\Controllers\Admin',
-        ], function () {
+        'namespace' => 'Foostart\Category\Controllers\Admin',
+    ], function () {
 
         /**
          * list
          */
-        Route::get('admin/categories/list', [
+        Route::get('admin/categories', [
             'as' => 'categories.list',
             'uses' => 'CategoryAdminController@index'
         ]);
@@ -122,7 +122,7 @@ Route::group(['middleware' => ['web']], function () {
             'uses' => 'CategoryAdminController@edit'
         ]);
 
-         /**
+        /**
          * copy
          */
         Route::get('admin/categories/copy', [
@@ -148,7 +148,7 @@ Route::group(['middleware' => ['web']], function () {
 
         /**
          * configs
-        */
+         */
         Route::get('admin/categories/config', [
             'as' => 'categories.config',
             'uses' => 'CategoryAdminController@config'
@@ -161,7 +161,7 @@ Route::group(['middleware' => ['web']], function () {
 
         /**
          * language
-        */
+         */
         Route::get('admin/categories/lang', [
             'as' => 'categories.lang',
             'uses' => 'CategoryAdminController@lang'

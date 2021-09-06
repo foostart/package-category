@@ -18,32 +18,32 @@
 
 <!--DATA-->
 <?php
-    //name
-    $name = empty($name)?'undefined':$name;
-    //value
-    $image_empty = URL::to('packages/foostart/images/image-temp-220.png');
-    $image_url = empty($value)?$image_empty:URL::to($value);
-    //label
-    $label = empty($label) ? '' : $label;
-    //place hover
-    $placehover = empty($placehover) ? $label : $placehover;
-    //eror
-    $errors = empty($errors) ? '' : $errors;
-    //value
-    $value = empty($value)?$request->get($name):$value;
-    //description
-    $description = empty($description) ? '' : $description;
-    //lfm_config
-    $lfm_config = empty($lfm_config) ? FALSE : TRUE;
+//name
+$name = empty($name) ? 'undefined' : $name;
+//value
+$image_empty = URL::to('packages/foostart/images/image-temp-220.png');
+$image_url = empty($value) ? $image_empty : URL::to($value);
+//label
+$label = empty($label) ? '' : $label;
+//place hover
+$placehover = empty($placehover) ? $label : $placehover;
+//eror
+$errors = empty($errors) ? '' : $errors;
+//value
+$value = empty($value) ? $request->get($name) : $value;
+//description
+$description = empty($description) ? '' : $description;
+//lfm_config
+$lfm_config = empty($lfm_config) ? FALSE : TRUE;
 ?>
 <!--/DATA-->
 
 <!-- INPUT IMAGE -->
 
 <div class='form-group'>
-    {!! Form::label($name, $label) !!}
+{!! Form::label($name, $label) !!}
 
-    <!--thumbnail-->
+<!--thumbnail-->
     <div class='image-control'>
 
         <img id='_preview' class="thumbnail box-center margin-top-20" alt="No image" src="{!! $image_url !!}">
@@ -61,7 +61,7 @@
                     data-label-remove='{!! trans("category-admin.buttons.remove") !!}'
                     data-label-undo='{!! trans("category-admin.buttons.undo") !!}'
                     class='btn btn-sm'
-                    >
+            >
                 <i class="icon-remove"></i>{!! trans("category-admin.buttons.remove") !!}
             </button>
             <!--upload-->
@@ -86,14 +86,14 @@
         </span>
     @endif
 
-    <!--errors-->
+<!--errors-->
     @if ($errors->has($name))
         <ul class='error-item'>
             @foreach($errors->get($name) as $error)
                 @if($error)
-                <li>
-                    <span class='input-text-error'>{!! $error !!}</span>
-                </li>
+                    <li>
+                        <span class='input-text-error'>{!! $error !!}</span>
+                    </li>
                 @endif
             @endforeach
         </ul>

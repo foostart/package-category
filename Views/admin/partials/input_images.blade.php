@@ -18,25 +18,25 @@
 
 <!--DATA-->
 <?php
-    //name
-    $name = empty($name)?'undefined':$name;
-    //id
-    $id = empty($id)?$name.'[]' : $id.'[]';
-    //text
-    $attr_description = empty($attr_description)?$name.'[]' : $attr_description.'[]';
-    //author
-    $attr_author = empty($attr_author)?$name.'[]' : $attr_author.'[]';
-    //value
-    $image_empty = URL::to('packages/foostart/images/image-temp-220.png');
-    $image_url = empty($value)?$image_empty:URL::to($value);
-    //label
-    $label = empty($label) ? '' : $label;
-    //place hover
-    $placehover = empty($placehover) ? $label : $placehover;
-    //eror
-    $errors = empty($errors) ? '' : $errors;
-    //description
-    $description = empty($description) ? '' : $description;
+//name
+$name = empty($name) ? 'undefined' : $name;
+//id
+$id = empty($id) ? $name . '[]' : $id . '[]';
+//text
+$attr_description = empty($attr_description) ? $name . '[]' : $attr_description . '[]';
+//author
+$attr_author = empty($attr_author) ? $name . '[]' : $attr_author . '[]';
+//value
+$image_empty = URL::to('packages/foostart/images/image-temp-220.png');
+$image_url = empty($value) ? $image_empty : URL::to($value);
+//label
+$label = empty($label) ? '' : $label;
+//place hover
+$placehover = empty($placehover) ? $label : $placehover;
+//eror
+$errors = empty($errors) ? '' : $errors;
+//description
+$description = empty($description) ? '' : $description;
 ?>
 <!--/DATA-->
 
@@ -46,9 +46,9 @@
 @endsection
 <!-- INPUT IMAGE -->
 <div class='form-group'>
-    {!! Form::label($name, $label) !!}
+{!! Form::label($name, $label) !!}
 
-    <!--thumbnail-->
+<!--thumbnail-->
     <div class='image-control'>
 
         <!--buttons-->
@@ -75,7 +75,7 @@
         </span>
     @endif
 
-    <!--list uploaded files-->
+<!--list uploaded files-->
     <div class="list-uploaded-images">
 
         <ul id="sortable" class="list-group">
@@ -83,8 +83,10 @@
             <li class="ui-state-default  list-group-item item-template">
                 <input type='hidden' name='<?php echo $id ?>' value=''>
                 <img class='thumbnail box-center margin-top-20' src=''>
-                <textarea name="<?php echo $attr_description ?>" class="" rows="5" placeholder="Introduction text" cols="29"></textarea>
-                <textarea name="<?php echo $attr_author ?>" class="" rows="5" placeholder="Introduction text" cols="29"></textarea>
+                <textarea name="<?php echo $attr_description ?>" class="" rows="5" placeholder="Introduction text"
+                          cols="29"></textarea>
+                <textarea name="<?php echo $attr_author ?>" class="" rows="5" placeholder="Introduction text"
+                          cols="29"></textarea>
 
                 <div class="pull-right delete-item">
                     <a href='javascript:;' class="trash"><span class="glyphicon glyphicon-trash"></span></a>
@@ -99,13 +101,15 @@
                         <input type='hidden' name='<?php echo $id ?>' value='{!! $item->image !!}'>
                         <img class='thumbnail box-center margin-top-20' src='{!! Url::to($item->image) !!}'>
 
-                        <textarea name="<?php echo $attr_description ?>" class=" " rows="5" placeholder="Introduction text"  cols="29">
+                        <textarea name="<?php echo $attr_description ?>" class=" " rows="5"
+                                  placeholder="Introduction text" cols="29">
                             @if(!empty($item->description))
                                 {!! $item->description !!}
                             @endif
                         </textarea>
 
-                        <textarea name="<?php echo $attr_author ?>" class=" " rows="5" placeholder="Introduction text"  cols="29">
+                        <textarea name="<?php echo $attr_author ?>" class=" " rows="5" placeholder="Introduction text"
+                                  cols="29">
                             @if(!empty($item->author))
                                 {!! $item->author !!}
                             @endif
@@ -126,9 +130,9 @@
         <ul class='error-item'>
             @foreach($errors->get($name) as $error)
                 @if($error)
-                <li>
-                    <span class='input-text-error'>{!! $error !!}</span>
-                </li>
+                    <li>
+                        <span class='input-text-error'>{!! $error !!}</span>
+                    </li>
                 @endif
             @endforeach
         </ul>
@@ -143,12 +147,12 @@
     {!! HTML::script('vendor/package-filemanager/js/lfm-configs.js') !!}
     {!! HTML::script('packages/foostart/js/jquery-ui-1.12.1.min.js') !!}
     <script>
-        $( function() {
-            $( "#sortable" ).sortable({
+        $(function () {
+            $("#sortable").sortable({
                 appendTo: document.body,
                 axis: "y"
             });
-            $( "#sortable" ).disableSelection();
-        } );
+            $("#sortable").disableSelection();
+        });
     </script>
 @endsection

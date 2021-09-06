@@ -4,16 +4,19 @@ use Foostart\Category\Library\Models\FooModel;
 use Illuminate\Database\Eloquent\Model;
 use Foostart\Category\Models\Context;
 
-class Category extends FooModel {
+class Category extends FooModel
+{
 
-     public $courses = NULL;
+    public $courses = NULL;
 
     public $isTree;
+
     /**
      * @table Categories
      * @param ARRAY $attributes
      */
-    public function __construct(array $attributes = array()) {
+    public function __construct(array $attributes = array())
+    {
         //set configurations
         $this->setConfigs();
 
@@ -21,13 +24,14 @@ class Category extends FooModel {
 
     }
 
-    public function setConfigs() {
+    public function setConfigs()
+    {
 
         //table name
         $this->table = 'categories';
 
         //list of field in table
-        $this->fillable = array_merge($this->fillable, [            
+        $this->fillable = array_merge($this->fillable, [
             'category_name',
             'category_order',
             'category_url',
@@ -35,7 +39,7 @@ class Category extends FooModel {
             'category_slug',
             'category_overview',
             'category_description',
-            'category_image',            
+            'category_image',
             'category_id_parent',
             'category_id_parent_str',
             'category_id_child_str',
@@ -138,7 +142,8 @@ class Category extends FooModel {
      * @param type $params
      * @return object list of categories
      */
-    public function selectItems($params = array(), $key = NULL, $value = NULL) {
+    public function selectItems($params = array(), $key = NULL, $value = NULL)
+    {
 
         //join to another tables
         $elo = $this->joinTable($params);
@@ -172,13 +177,14 @@ class Category extends FooModel {
      * @param ARRAY $params
      * @return object category
      */
-    public function selectItem($params = array(), $key = NULL, $value = NULL) {
+    public function selectItem($params = array(), $key = NULL, $value = NULL)
+    {
 
         $this->isTree = FALSE;
         if (empty($key)) {
             $key = $this->primaryKey;
         }
-       //join to another tables
+        //join to another tables
         $elo = $this->joinTable($params);
 
         //search filters
@@ -190,7 +196,7 @@ class Category extends FooModel {
         //id
         if (!empty($params['id'])) {
 
-            $elo = $elo->where($key, $value?$value:$params['id']);
+            $elo = $elo->where($key, $value ? $value : $params['id']);
 
         } elseif ($key && $value) {
 
@@ -208,12 +214,13 @@ class Category extends FooModel {
      * @param ARRAY $params
      * @return ELOQUENT OBJECT
      */
-    protected function joinTable(array $params = []){
+    protected function joinTable(array $params = [])
+    {
 
         $elo = $this;
 
         if (!empty($params['_key'])) {
-            $elo = $elo->join('contexts', 'categories.context_id','=', 'contexts.context_id');
+            $elo = $elo->join('contexts', 'categories.context_id', '=', 'contexts.context_id');
         }
 
         return $elo;
@@ -224,16 +231,13 @@ class Category extends FooModel {
      * @param ARRAY $params
      * @return ELOQUENT OBJECT
      */
-    protected function searchFilters($params = [], $elo){
+    protected function searchFilters(array $params, $elo)
+    {
 
-        if($this->isValidFilters($params))
-        {
-            foreach($params as $column => $value)
-            {
-                if($this->isValidValue($value))
-                {
-                    switch($column)
-                    {
+        if ($this->isValidFilters($params)) {
+            foreach ($params as $column => $value) {
+                if ($this->isValidValue($value)) {
+                    switch ($column) {
                         case 'id':
                             if (!empty($value)) {
                                 $elo = $elo->where($this->table . '.id', '=', $value);
@@ -264,7 +268,7 @@ class Category extends FooModel {
                             break;
                         case 'keyword':
                             if (!empty($value)) {
-                                $elo = $elo->where(function($elo) use ($value) {
+                                $elo = $elo->where(function ($elo) use ($value) {
                                     $elo->where($this->table . '.category_name', 'LIKE', "%{$value}%");
                                 });
                                 $this->isTree = FALSE;
@@ -272,7 +276,7 @@ class Category extends FooModel {
                             break;
                         case '_key':
                             if (!empty($value)) {
-                               $elo = $elo->where('contexts.context_key', '=', $value);
+                                $elo = $elo->where('contexts.context_key', '=', $value);
                             }
                             break;
                         default:
@@ -294,11 +298,12 @@ class Category extends FooModel {
      * @param ELOQUENT OBJECT
      * @return ELOQUENT OBJECT
      */
-    public function createSelect($elo) {
+    public function createSelect($elo)
+    {
 
         $elo = $elo->select($this->table . '.*',
-                            $this->table . '.category_id as id'
-                );
+            $this->table . '.category_id as id'
+        );
 
         return $elo;
     }
@@ -308,7 +313,8 @@ class Category extends FooModel {
      * @param ARRAY $params
      * @return ELOQUENT OBJECT
      */
-    public function paginateItems($params = [], $elo) {
+    public function paginateItems(array $params, $elo)
+    {
         $items = $elo->paginate($this->perPage);
 
         //build category tree
@@ -325,7 +331,8 @@ class Category extends FooModel {
      * @param ARRAY $params
      * @return ELOQUENT OBJECT category
      */
-    public function updateItem($params = []) {
+    public function updateItem($params = [])
+    {
 
         $_params = [];
         $item = $this->find($params['id']);
@@ -340,7 +347,7 @@ class Category extends FooModel {
             //unset unnessesary index
             unset($dataFields['context_id']);
 
-            if(empty($dataFields['category_order'])) {
+            if (empty($dataFields['category_order'])) {
                 $dataFields['category_order'] = $item->category_id;
             }
 
@@ -369,7 +376,8 @@ class Category extends FooModel {
      * @param INT $category_id_parent
      * @return JSON list of category id
      */
-    private function _getIdParentStr($params, $category_id_parent) {
+    private function _getIdParentStr($params, $category_id_parent)
+    {
 
         $category_id_parent_str = NULL;
 
@@ -385,7 +393,7 @@ class Category extends FooModel {
                 if ($parent->category_id_parent_str) {
 
                     $category_id_parent_str_sub = json_decode($parent->category_id_parent_str);
-                    $category_id_parent_str += (array) $category_id_parent_str_sub;
+                    $category_id_parent_str += (array)$category_id_parent_str_sub;
                 }
 
                 $category_id_parent_str = json_encode($category_id_parent_str);
@@ -399,7 +407,8 @@ class Category extends FooModel {
      * Update category_id_parent_str of list of childs of item
      * @param ELOQUENT OBJECT $parent
      */
-    private function _updateItemChild($params, $parent) {
+    private function _updateItemChild($params, $parent)
+    {
 
         if (!empty($parent)) {
             $childs = self::where('category_id_parent', $parent->category_id)->get();
@@ -413,7 +422,7 @@ class Category extends FooModel {
                     if ($parent->category_id_parent_str) {
 
                         $category_id_parent_str_sub = json_decode($parent->category_id_parent_str);
-                        $category_id_parent_str += (array) $category_id_parent_str_sub;
+                        $category_id_parent_str += (array)$category_id_parent_str_sub;
 
                     }
                     $category->category_id_parent_str = json_encode($category_id_parent_str);
@@ -432,7 +441,8 @@ class Category extends FooModel {
      * @param ARRAY $params list of parameters
      * @return OBJECT category
      */
-    public function insertItem($params = []) {
+    public function insertItem($params = [])
+    {
 
         $dataFields = $this->getDataFields($params, $this->fields);
 
@@ -469,18 +479,19 @@ class Category extends FooModel {
      * Get list of categories into select
      * @return OBJECT PLUCK SELECT
      */
-     public function pluckSelect($params) {
+    public function pluckSelect($params)
+    {
 
-         $elo = self::orderBy('category_name', 'ASC');
+        $elo = self::orderBy('category_name', 'ASC');
 
-         //context
-         $context = $this->getContext($params);
+        //context
+        $context = $this->getContext($params);
 
-         if ($context) {
-             $elo = $elo->where($this->table.'.context_id', $context->context_id);
-         }
+        if ($context) {
+            $elo = $elo->where($this->table . '.context_id', $context->context_id);
+        }
 
-         $items = $elo->pluck('category_name', $this->primaryKey);
+        $items = $elo->pluck('category_name', $this->primaryKey);
 
         return $items;
     }
@@ -491,7 +502,8 @@ class Category extends FooModel {
      * @param ELOQUENT OBJECT $category
      * @return BOOLEAN
      */
-    public function deleteItem($input = []) {
+    public function deleteItem($input = [])
+    {
 
         $category = $this->selectItem($input);
 
@@ -506,15 +518,16 @@ class Category extends FooModel {
      * @param ELOQUENT OBJECT $categories
      * @return ELOQUENT OBJECT
      */
-    public function getChilds($items, $params = array()) {
+    public function getChilds($items, $params = array())
+    {
 
         foreach ($items as $key => $item) {
 
-            $parent_pattern = '"'.$item->id.'":1';
+            $parent_pattern = '"' . $item->id . '":1';
 
             $elo = self::select($this->table . '.*',
-                                $this->table . '.category_id as id')
-                            ->where('category_id_parent_str', 'LIKE',  "%{$parent_pattern}%");
+                $this->table . '.category_id as id')
+                ->where('category_id_parent_str', 'LIKE', "%{$parent_pattern}%");
 
             //by category
             if (!empty($params['status'])) {
@@ -534,7 +547,7 @@ class Category extends FooModel {
 
 
             if ($childs) {
-                $items[$key]->childs =  $this->buildTree($item->id, $childs);
+                $items[$key]->childs = $this->buildTree($item->id, $childs);
             }
         }
 
@@ -547,7 +560,8 @@ class Category extends FooModel {
      * @param ELOQUENT OBJECT $categories list of categories
      * @return ELOQUENT OBJECT list of category structure
      */
-    public function buildTree($category_id, $categories) {
+    public function buildTree($category_id, $categories)
+    {
         $childs = array();
         foreach ($categories as $category) {
             if ($category->category_id_parent == $category_id) {
@@ -563,10 +577,11 @@ class Category extends FooModel {
      * @param STRING $category_id_parent
      * @return ARRAY list of ids
      */
-    public function getIdChilds($category_id_parent) {
+    public function getIdChilds($category_id_parent)
+    {
 
-        $parent_pattern = '"'.$category_id_parent.'":1';
-        $obj_category = self::where('category_id_parent_str', 'LIKE',  "%{$parent_pattern}%")->get();
+        $parent_pattern = '"' . $category_id_parent . '":1';
+        $obj_category = self::where('category_id_parent_str', 'LIKE', "%{$parent_pattern}%")->get();
 
         $id_childs = [$category_id_parent];
         if ($obj_category) {
@@ -582,7 +597,8 @@ class Category extends FooModel {
      * @param STRING $key
      * @return ELOQUENT OBJECT context
      */
-    public function getContext($params) {
+    public function getContext($params)
+    {
         $obj_context = new Context();
 
         $context = $obj_context->selectItem($params);
@@ -595,7 +611,8 @@ class Category extends FooModel {
      * @param INT $category_id_parent
      * @return OBJECT list of categories
      */
-    public function getCategoriesByIdParent($category_id_parent, $params = array()) {
+    public function getCategoriesByIdParent($category_id_parent, $params = array())
+    {
 
         $parent = self::find($category_id_parent);
 
@@ -610,7 +627,8 @@ class Category extends FooModel {
         return $parent;
     }
 
-    public function getCategoryById($id) {
+    public function getCategoryById($id)
+    {
         $category = self::find($id);
 
         return $category;
@@ -621,7 +639,8 @@ class Category extends FooModel {
      * Set childs for parent category
      * @param type $category_id
      */
-    public function setChilds($category_id) {
+    public function setChilds($category_id)
+    {
 
         $category = self::find($category_id);
         if ($category) {
@@ -634,7 +653,7 @@ class Category extends FooModel {
                     $_id_childs = [$child->category_id => 1];
                     if (!empty($child->category_id_child_str)) {
                         $_id_childs_sub = json_decode($child->category_id_child_str);
-                        $_id_childs += (array) $_id_childs_sub;
+                        $_id_childs += (array)$_id_childs_sub;
                     }
 
                     $list_id_childs += $_id_childs;

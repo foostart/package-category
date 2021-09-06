@@ -17,9 +17,6 @@ return [
     ],
 
 
-
-
-
     /*
     |-----------------------------------------------------------------------
     | SIDEBAR
@@ -38,9 +35,6 @@ return [
     ],
 
 
-
-
-
     /*
     |-----------------------------------------------------------------------
     | Table column
@@ -49,9 +43,9 @@ return [
     |
     */
     'columns' => [
-        'any'   => 'Any',
+        'any' => 'Any',
         'order' => '#',
-        'id'    => 'ID',
+        'id' => 'ID',
         'category-name' => 'Category name',
         'user-full-name' => 'User full name',
         'context-name' => 'Context name',
@@ -87,9 +81,6 @@ return [
     ],
 
 
-
-
-
     /*
     |-----------------------------------------------------------------------
     | Button
@@ -106,9 +97,6 @@ return [
     ],
 
 
-
-
-
     /*
     |-----------------------------------------------------------------------
     | Form
@@ -123,9 +111,6 @@ return [
         'no-selected' => 'No selected',
         'status' => 'Status',
     ],
-
-
-
 
 
     /*
@@ -157,7 +142,7 @@ return [
         'not-found' => 'Not found items',
         'config' => 'List of configurations',
         'lang' => 'List of languages',
-        'category-slug' =>'Category Slug',
+        'category-slug' => 'Category Slug',
         'context-name' => '<p>
                 Lorem ipsum dolor sit amet, consectetur adipisicing elit.
               </p>',
@@ -176,7 +161,6 @@ return [
     ],
 
 
-
     /*
     |-----------------------------------------------------------------------
     | Error
@@ -190,8 +174,6 @@ return [
         'required' => ':attribute is required',
         'required_length' => 'Allow from: <b>:minlength</b> to <b>:maxlength</b>. characters',
     ],
-
-
 
 
     /*
@@ -216,8 +198,6 @@ return [
         'context-status' => 'Status',
 
     ],
-
-
 
 
     /*
@@ -249,11 +229,8 @@ return [
         'context-key' => 'Context key',
         'context-status' => 'Status',
         'unknown' => 'Unknown',
-        'category-slug' =>'Category Slug',
+        'category-slug' => 'Category Slug',
     ],
-
-
-
 
 
     /*
@@ -276,14 +253,11 @@ return [
         'menu_8' => 'Menu 8',
         'menu_9' => 'Menu 9',
         'menu_9' => 'Menu 9',
-        'guide'  => 'Guide',
-        'other'  => 'Other',
-        'basic'  => 'Basic',
+        'guide' => 'Guide',
+        'other' => 'Other',
+        'basic' => 'Basic',
         'advance' => 'Advance',
     ],
-
-
-
 
 
     /*
@@ -302,9 +276,6 @@ return [
     ],
 
 
-
-
-
     /*
     |-----------------------------------------------------------------------
     | CONFIRMS
@@ -317,9 +288,6 @@ return [
     'confirms' => [
         'delete' => 'Are you sure you want to delete this item?',
     ],
-
-
-
 
 
     /*
@@ -339,9 +307,6 @@ return [
         'delete-ok' => 'Delete item successfully',
         'delete-error' => 'Delete item failed',
     ],
-
-
-
 
 
     /*

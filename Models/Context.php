@@ -3,13 +3,15 @@
 use Foostart\Category\Library\Models\FooModel;
 use Illuminate\Database\Eloquent\Model;
 
-class Context extends FooModel {
+class Context extends FooModel
+{
 
     /**
      * @table Contexts
      * @param array $attributes
      */
-    public function __construct(array $attributes = array()) {
+    public function __construct(array $attributes = array())
+    {
         //set configurations
         $this->setConfigs();
 
@@ -17,7 +19,8 @@ class Context extends FooModel {
 
     }
 
-    public function setConfigs() {
+    public function setConfigs()
+    {
 
         //table name
         $this->table = 'contexts';
@@ -26,7 +29,7 @@ class Context extends FooModel {
         $this->fillable = [
             'context_name',
             'context_key',
-            'context_ref',            
+            'context_ref',
             'context_notes',
             'status',
             'created_user_id',
@@ -73,8 +76,8 @@ class Context extends FooModel {
             'context_key',
             'context_ref',
             'status',
-            'created_user_id',       
-            'updated_user_id',       
+            'created_user_id',
+            'updated_user_id',
             'updated_at',
         ];
 
@@ -112,7 +115,8 @@ class Context extends FooModel {
      * @param type $params
      * @return object list of categories
      */
-    public function selectItems($params = array()) {
+    public function selectItems($params = array())
+    {
 
         //join to another tables
         $elo = $this->joinTable();
@@ -137,7 +141,8 @@ class Context extends FooModel {
      * @param ARRAY $params list of parameters
      * @return OBJECT category
      */
-    public function selectItem($params = array(), $key = NULL) {
+    public function selectItem($params = array(), $key = NULL)
+    {
 
         if (empty($key)) {
             $key = $this->primaryKey;
@@ -155,7 +160,7 @@ class Context extends FooModel {
             unset($params['status']);
         }
 
-       //join to another tables
+        //join to another tables
         $elo = $this->joinTable();
 
         //search filters
@@ -179,7 +184,8 @@ class Context extends FooModel {
      * @param ARRAY $params list of parameters
      * @return ELOQUENT OBJECT
      */
-    protected function joinTable(array $params = []){
+    protected function joinTable(array $params = [])
+    {
         return $this;
     }
 
@@ -188,17 +194,14 @@ class Context extends FooModel {
      * @param ARRAY $params list of parameters
      * @return ELOQUENT OBJECT
      */
-    protected function searchFilters(array $params = [], $elo){
+    protected function searchFilters(array $params, $elo)
+    {
 
         //filter
-        if ($this->isValidFilters($params) && (!empty($params)))
-        {
-            foreach($params as $column => $value)
-            {
-                if($this->isValidValue($value))
-                {
-                    switch($column)
-                    {
+        if ($this->isValidFilters($params) && (!empty($params))) {
+            foreach ($params as $column => $value) {
+                if ($this->isValidValue($value)) {
+                    switch ($column) {
                         case 'context_id':
                             if (!empty($value)) {
                                 $elo = $elo->where($this->table . '.context_id', '=', $value);
@@ -223,15 +226,15 @@ class Context extends FooModel {
 
                         case 'status':
                             if (!empty($value)) {
-                                $elo = $elo->where($this->table . '.'.$this->field_status, '=', $value);
+                                $elo = $elo->where($this->table . '.' . $this->field_status, '=', $value);
                             }
                             break;
 
                         case 'keyword':
                             if (!empty($value)) {
-                                $elo = $elo->where(function($elo) use ($value) {
+                                $elo = $elo->where(function ($elo) use ($value) {
                                     $elo->where($this->table . '.context_name', 'LIKE', "%{$value}%")
-                                    ->orWhere($this->table . '.context_key','LIKE', "%{$value}%");
+                                        ->orWhere($this->table . '.context_key', 'LIKE', "%{$value}%");
                                 });
                             }
                             break;
@@ -251,11 +254,12 @@ class Context extends FooModel {
      * @param ELOQUENT OBJECT
      * @return ELOQUENT OBJECT
      */
-    public function createSelect($elo) {
+    public function createSelect($elo)
+    {
 
         $elo = $elo->select($this->table . '.*',
-                            $this->table . '.context_id as id'
-                );
+            $this->table . '.context_id as id'
+        );
 
         return $elo;
     }
@@ -265,7 +269,8 @@ class Context extends FooModel {
      * @param ARRAY $params list of parameters
      * @return ELOQUENT OBJECT
      */
-    public function paginateItems(array $params = [], $elo) {
+    public function paginateItems(array $params, $elo)
+    {
         $items = $elo->paginate($this->perPage);
 
         return $items;
@@ -277,7 +282,8 @@ class Context extends FooModel {
      * @param INT $id is primary key
      * @return type
      */
-    public function updateItem($params = [], $id = NULL) {
+    public function updateItem($params = [], $id = NULL)
+    {
 
         $field_status = $this->field_status;
 
@@ -286,9 +292,9 @@ class Context extends FooModel {
         if (!empty($item)) {
             $dataFields = $this->getDataFields($params, $this->fields);
 
-            if(isset($dataFields['context_key'])) {
+            if (isset($dataFields['context_key'])) {
                 $dataFields['context_key'] = $this->generateContextKey();
-            }else {
+            } else {
                 unset($dataFields['context_key']);
             }
 
@@ -310,11 +316,12 @@ class Context extends FooModel {
      * @param ARRAY $params list of parameters
      * @return OBJECT category
      */
-    public function insertItem($params = []) {
+    public function insertItem($params = [])
+    {
 
         $dataFields = $this->getDataFields($params, $this->fields);
         $dataFields['context_key'] = $this->generateContextKey();
-        
+
         $item = self::create($dataFields);
 
         $key = $this->primaryKey;
@@ -328,7 +335,8 @@ class Context extends FooModel {
      * @param ARRAY $input list of parameters
      * @return boolean TRUE incase delete successfully otherwise return FALSE
      */
-    public function deleteItem($input = [], $delete_type) {
+    public function deleteItem(?array $input, $delete_type)
+    {
 
         $item = $this->find($input['id']);
 
@@ -350,8 +358,9 @@ class Context extends FooModel {
     /**
      * Generate context key
      */
-    private function generateContextKey(){
-        $context_key = substr(md5(time().rand(1,99999)),rand(1,10),29);
+    private function generateContextKey()
+    {
+        $context_key = substr(md5(time() . rand(1, 99999)), rand(1, 10), 29);
         return $context_key;
     }
 

@@ -20,8 +20,7 @@ class ContextValidator extends FooValidator
         ];
 
         // event listening
-        Event::listen('validating', function($input)
-        {
+        Event::listen('validating', function ($input) {
             self::$messages = [
                 'context_name.required' => trans('category-admin.errors.required', ['attribute' => 'category name']),
             ];
@@ -39,7 +38,8 @@ class ContextValidator extends FooValidator
      * @param ARRAY $input is form data
      * @return type
      */
-    public function validate($input) {
+    public function validate($input)
+    {
 
         $flag = parent::validate($input);
 
@@ -51,7 +51,8 @@ class ContextValidator extends FooValidator
      * Load configuration
      * @return ARRAY $configs list of configurations
      */
-    public function loadConfigs(){
+    public function loadConfigs()
+    {
         $configs = [
             'min_lenght' => config('package-category.name_context_min_length'),
             'max_lenght' => config('package-category.name_context_max_length'),

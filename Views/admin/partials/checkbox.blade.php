@@ -18,20 +18,20 @@
 
 <!--DATA-->
 <?php
-    //name
-    $name = empty($name)?'undefined':$name;
-    //value
-    $value = empty($value)?$request->get($name):$value;
-    //items
-    $items = empty($items)?[]:$items;
-    //label
-    $label = empty($label) ? '' : $label;
-    //place hover
-    $placehover = empty($placehover) ? $label : $placehover;
-    //eror
-    $errors = empty($errors) ? '' : $errors;
-    //description
-    $description = empty($description) ? '' : $description;
+//name
+$name = empty($name) ? 'undefined' : $name;
+//value
+$value = empty($value) ? $request->get($name) : $value;
+//items
+$items = empty($items) ? [] : $items;
+//label
+$label = empty($label) ? '' : $label;
+//place hover
+$placehover = empty($placehover) ? $label : $placehover;
+//eror
+$errors = empty($errors) ? '' : $errors;
+//description
+$description = empty($description) ? '' : $description;
 ?>
 <!--/DATA-->
 
@@ -39,16 +39,16 @@
 <div class="form-group">
 
     <!--label-->
-    @if($label)
+@if($label)
     {!! Form::label($name, $label) !!}
-    @endif
+@endif
 
-     <!--value-->
+<!--value-->
     @if($value)
         <span class='input-text-value' style="display: block;">{!! $value !!}</span>
     @endif
 
-    <!--checkbox-->
+<!--checkbox-->
     @if($value && $items)
         @foreach($items as $item)
             <span class='checkbox-item' style="display: block;">
@@ -58,22 +58,22 @@
         @endforeach
     @endif
 
-    <!--description-->
+<!--description-->
     @if($description)
-    <span class='input-text-description'>
+        <span class='input-text-description'>
         <blockquote class="quote-card">
             <p>{!! $description !!}</p>
         </blockquote>
     </span>
     @endif
-    <!--errors-->
+<!--errors-->
     @if ($errors->has($name))
         <ul class='error-item'>
             @foreach($errors->get($name) as $error)
                 @if($error)
-                <li>
-                    <span class='input-text-error'>{!! $error !!}</span>
-                </li>
+                    <li>
+                        <span class='input-text-error'>{!! $error !!}</span>
+                    </li>
                 @endif
             @endforeach
         </ul>

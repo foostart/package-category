@@ -24,11 +24,12 @@ class FooValidator extends AbstractValidator
      * @param type $input
      * @return type
      */
-    public function validate($input) {
+    public function validate($input)
+    {
 
         $flag = parent::validate($input);
 
-        $this->errors = $this->errors?$this->errors:new MessageBag();
+        $this->errors = $this->errors ? $this->errors : new MessageBag();
 
         return $flag;
     }
@@ -40,26 +41,27 @@ class FooValidator extends AbstractValidator
      * @param STRING $str
      * @return BOOLEAN
      */
-    public function isValidLength($str, $params) {
+    public function isValidLength($str, $params)
+    {
 
         $flag = TRUE;
 
         if ($params['max'] == 0) {
             if (strlen($str) < $params['min']) {
 
-                $this->errors->add($params['key'], trans($this->lang_admin.'.errors.required_min_length', [
-                                                                                    'attribute ' => $params['label'],
-                                                                                    'minlength' => $params['min'],
-                                                                                ]));
+                $this->errors->add($params['key'], trans($this->lang_admin . '.errors.required_min_length', [
+                    'attribute ' => $params['label'],
+                    'minlength' => $params['min'],
+                ]));
                 $flag = FALSE;
             }
-        } elseif ((strlen($str) < $params['min'])  || (strlen($str) > $params['max'])) {
+        } elseif ((strlen($str) < $params['min']) || (strlen($str) > $params['max'])) {
 
-            $this->errors->add($params['key'], trans($this->lang_admin.'.errors.required_length', [
-                                                                                    'attribute ' => $params['label'],
-                                                                                    'minlength' => $params['min'],
-                                                                                    'maxlength' => $params['max'],
-                                                                                ]));
+            $this->errors->add($params['key'], trans($this->lang_admin . '.errors.required_length', [
+                'attribute ' => $params['label'],
+                'minlength' => $params['min'],
+                'maxlength' => $params['max'],
+            ]));
             $flag = FALSE;
         }
 

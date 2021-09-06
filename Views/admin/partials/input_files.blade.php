@@ -18,20 +18,20 @@
 
 <!--DATA-->
 <?php
-    //name
-    $name           = empty($name)      ?   'undefined' : $name;
-    //id
-    $id             = empty($id)        ?   $name : $id;
-    //value
-    $value          = empty($value)     ?   $request->get($name):$value;
-    //label
-    $label          = empty($label)     ?   '' : $label;
-    //place hover
-    $placehover     = empty($placehover)?   $label : $placehover;
-    //eror
-    $errors         = empty($errors)    ?   '' : $errors;
-    //description
-    $description    = empty($description) ? '' : $description;
+//name
+$name = empty($name) ? 'undefined' : $name;
+//id
+$id = empty($id) ? $name : $id;
+//value
+$value = empty($value) ? $request->get($name) : $value;
+//label
+$label = empty($label) ? '' : $label;
+//place hover
+$placehover = empty($placehover) ? $label : $placehover;
+//eror
+$errors = empty($errors) ? '' : $errors;
+//description
+$description = empty($description) ? '' : $description;
 ?>
 <!--/DATA-->
 
@@ -44,9 +44,9 @@
 <!--UPLOAD FILES-->
 <div class='form-group'>
 
-    {!! Form::label($name, $label) !!}
+{!! Form::label($name, $label) !!}
 
-    <!--button upload-->
+<!--button upload-->
     <div class='image-control'>
 
         <p class='btn-image-control'>
@@ -54,8 +54,8 @@
                     data-grid-view='list-uploaded-<?php echo $id ?>'
                     class="btn btn-primary btn-sm">
 
-                    <i class="icon-ok icon-white"></i>
-                    {!! trans("category-admin.buttons.upload") !!}
+                <i class="icon-ok icon-white"></i>
+                {!! trans("category-admin.buttons.upload") !!}
             </button>
         </p>
 
@@ -70,7 +70,7 @@
         </span>
     @endif
 
-    <!--list uploaded files-->
+<!--list uploaded files-->
     <div class="list-uploaded-{!! $id !!}">
 
         <ul class="list-group">
@@ -87,19 +87,19 @@
             @if($value)
                 <?php $items = json_decode($value);?>
                 @if(is_array($items))
-                @foreach($items as $item)
-                    <li class="list-group-item">
-                        <input type='hidden' name='<?php echo $name ?>[]' value='{!! $item !!}'>
-                        <span class='file-item'>
+                    @foreach($items as $item)
+                        <li class="list-group-item">
+                            <input type='hidden' name='<?php echo $name ?>[]' value='{!! $item !!}'>
+                            <span class='file-item'>
                             <a href='{!! Url::to($item) !!}'>{!! $item !!}</a>
                         </span>
-                        <div class="pull-right delete-item">
-                            <a href='javascript:;' class="trash">
-                                <span class="glyphicon glyphicon-trash"></span>
-                            </a>
-                        </div>
-                    </li>
-                @endforeach
+                            <div class="pull-right delete-item">
+                                <a href='javascript:;' class="trash">
+                                    <span class="glyphicon glyphicon-trash"></span>
+                                </a>
+                            </div>
+                        </li>
+                    @endforeach
                 @endif
             @endif
 
@@ -111,14 +111,14 @@
         <ul class='alert alert-danger error-item'>
             @foreach($errors->get($name) as $error)
                 @if($error)
-                <li>
-                    <span class='input-text-error'>{!! $error !!}</span>
-                </li>
+                    <li>
+                        <span class='input-text-error'>{!! $error !!}</span>
+                    </li>
                 @endif
             @endforeach
         </ul>
-    @endif
-    <!--/ERRORS-->
+@endif
+<!--/ERRORS-->
 
 
 </div>
@@ -130,7 +130,7 @@
 
     <script type='text/javascript'>
 
-        $(document).ready(function(){
+        $(document).ready(function () {
             if ($('#<?php echo $id ?>').length) {
                 $('#<?php echo $id ?>').filemanager('file', {});
             }

@@ -9,27 +9,26 @@
         $('.edit').unbind();
         $('.view').unbind();
         var thumbnail = $('#thumbnail').val();
-        
+
         $('.showfile .del').click(function () {
             $('.showfile .fa').removeClass('fa-file-excel-o');
             $('.showfile .fa').addClass('fa-file-image-o');
-            $('.showfile .fa').css({'color': '#31708f', 'font-size':135});
+            $('.showfile .fa').css({'color': '#31708f', 'font-size': 135});
             $('.showfile .undo').show();
             $('.showfile .filename').hide();
             $('#thumbnail').val('');
-            $('#holder').attr('src','');
+            $('#holder').attr('src', '');
             $(this).hide();
         });
 
         $('.showfile .undo').click(function () {
             $('.showfile .fa').removeClass('fa-file-image-o');
-           
+
             $(this).hide();
             $('#thumbnail').val(thumbnail);
-            $('#holder').attr('src',thumbnail);
+            $('#holder').attr('src', thumbnail);
             $('.showfile .del').show();
         });
-
 
 
         $(".delete").click(function () {

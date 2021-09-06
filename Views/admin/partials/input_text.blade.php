@@ -18,20 +18,20 @@
 
 <!--DATA-->
 <?php
-    //name
-    $name = empty($name)?'undefined':$name;
-    //id
-    $id = empty($id)?$name:$id;
-    //value
-    $value = empty($value)?$request->get($name):$value;
-    //label
-    $label = empty($label) ? '' : $label;
-    //place hover
-    $placehover = empty($placehover) ? $label : $placehover;
-    //eror
-    $errors = empty($errors) ? '' : $errors;
-    //description
-    $description = empty($description) ? '' : $description;
+//name
+$name = empty($name) ? 'undefined' : $name;
+//id
+$id = empty($id) ? $name : $id;
+//value
+$value = empty($value) ? $request->get($name) : $value;
+//label
+$label = empty($label) ? '' : $label;
+//place hover
+$placehover = empty($placehover) ? $label : $placehover;
+//eror
+$errors = empty($errors) ? '' : $errors;
+//description
+$description = empty($description) ? '' : $description;
 ?>
 <!--/DATA-->
 
@@ -39,10 +39,10 @@
 <div class="form-group">
 
     <!--element-->
-    {!! Form::label($name, $label) !!}
-    {!! Form::text($name, $value, ['id' => $id, 'class' => 'form-control', 'placeholder' => $placehover]) !!}
+{!! Form::label($name, $label) !!}
+{!! Form::text($name, $value, ['id' => $id, 'class' => 'form-control', 'placeholder' => $placehover]) !!}
 
-    <!--description-->
+<!--description-->
     @if($description)
         <span class='input-text-description'>
             <blockquote class="quote-card">
@@ -51,14 +51,14 @@
         </span>
     @endif
 
-    <!--errors-->
+<!--errors-->
     @if ($errors->has($name))
         <ul class='alert alert-danger error-item'>
             @foreach($errors->get($name) as $error)
                 @if($error)
-                <li>
-                    <span class='input-text-error'>{!! $error !!}</span>
-                </li>
+                    <li>
+                        <span class='input-text-error'>{!! $error !!}</span>
+                    </li>
                 @endif
             @endforeach
         </ul>

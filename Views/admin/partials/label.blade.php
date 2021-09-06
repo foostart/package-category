@@ -14,10 +14,10 @@
 
 <!--DATA-->
 <?php
-    //value
-    $value = empty($value)?$request->get($name):$value;
-    //label
-    $label = empty($label) ? '' : $label;
+//value
+$value = empty($value) ? $request->get($name) : $value;
+//label
+$label = empty($label) ? '' : $label;
 ?>
 <!--/DATA-->
 
@@ -25,17 +25,17 @@
 <div class="form-group">
 
     <!--element-->
-    {!! Form::label($name, $label) !!}
+{!! Form::label($name, $label) !!}
 
 
-     <!--value-->
+<!--value-->
     @if($value)
         <span class='input-text-value' style="display: block;">{!! $value !!}</span>
     @endif
 
-    <!--description-->
+<!--description-->
     @if($description)
-    <span class='input-text-description'>
+        <span class='input-text-description'>
         <blockquote class="quote-card">
             <p>{!! $description !!}</p>
         </blockquote>

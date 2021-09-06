@@ -18,21 +18,21 @@
 
 <!--DATA-->
 <?php
-    //name
-    $name = empty($name)?'undefined':$name;
-    //value
-    $value = !empty($value)?$value:0;
+//name
+$name = empty($name) ? 'undefined' : $name;
+//value
+$value = !empty($value) ? $value : 0;
 
-    //items
-    $items = empty($items)?[]:$items;
-    //label
-    $label = empty($label) ? '' : $label;
-    //place hover
-    $placehover = empty($placehover) ? $label : $placehover;
-    //eror
-    $errors = empty($errors) ? '' : $errors;
-    //description
-    $description = empty($description) ? '' : $description;
+//items
+$items = empty($items) ? [] : $items;
+//label
+$label = empty($label) ? '' : $label;
+//place hover
+$placehover = empty($placehover) ? $label : $placehover;
+//eror
+$errors = empty($errors) ? '' : $errors;
+//description
+$description = empty($description) ? '' : $description;
 ?>
 <!--/DATA-->
 
@@ -41,7 +41,7 @@
 
     <!--element-->
     @if($label)
-    {!! Form::label($name, $label) !!}
+        {!! Form::label($name, $label) !!}
     @endif
 
     @if($items)
@@ -53,22 +53,22 @@
         @endforeach
     @endif
 
-    <!--description-->
+<!--description-->
     @if($description)
-    <span class='input-text-description'>
+        <span class='input-text-description'>
         <blockquote class="quote-card">
             <p>{!! $description !!}</p>
         </blockquote>
     </span>
     @endif
-    <!--errors-->
+<!--errors-->
     @if ($errors->has($name))
         <ul class='error-item'>
             @foreach($errors->get($name) as $error)
                 @if($error)
-                <li>
-                    <span class='input-text-error'>{!! $error !!}</span>
-                </li>
+                    <li>
+                        <span class='input-text-error'>{!! $error !!}</span>
+                    </li>
                 @endif
             @endforeach
         </ul>

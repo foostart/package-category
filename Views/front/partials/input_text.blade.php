@@ -67,7 +67,7 @@ $type = empty($type) ? '' : 'password';
                                         'autocomplete' => 'off'])
             !!}
         @else
-            {!! Form::text($name, '', [ 'id' => $id,
+            {!! Form::text($name, $value, [ 'id' => $id,
                                         'class' => 'form-control '.$class,
                                         'placeholder' => $placeholder,
                                         $required,

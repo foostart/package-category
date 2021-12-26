@@ -286,7 +286,13 @@ class Context extends FooModel
     {
 
         $field_status = $this->field_status;
-
+        if (empty($params['context_id'])) {
+            if (!empty($id)) {
+                $params[$this->pri] = $id;
+            } else if (!empty($params['id'])) {
+                $params['context_id'] = $params['id'];
+            }
+        }
         $item = $this->selectItem($params);
 
         if (!empty($item)) {

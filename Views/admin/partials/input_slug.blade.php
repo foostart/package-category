@@ -34,39 +34,47 @@ $placehover = empty($placehover) ? $label : $placehover;
 $errors = empty($errors) ? '' : $errors;
 //description
 $description = empty($description) ? '' : $description;
+//hidden
+
+$hidden = empty($hidden) ? false : true;
 ?>
 <!--/DATA-->
 
-<!-- INPUT TEXT -->
-<div class="form-group">
-
-    <!--element-->
-{!! Form::label($name, $label) !!}
-{!! Form::text($name, $value, ['id' => $id, 'class' => 'form-control', 'placeholder' => $placehover]) !!}
-
-<!--description-->
-    @if($description)
-        <span class='input-text-description'>
+<!--element-->
+@if($hidden)
+    {!! Form::hidden($name, $value, ['id' => $id]) !!}
+@else
+    <!-- INPUT TEXT -->
+    <div class="form-group">
+    {!! Form::label($name, $label) !!}
+    {!! Form::text($name, $value, ['id' => $id, 'class' => 'form-control', 'placeholder' => $placehover]) !!}
+    <!--description-->
+        @if($description)
+            <span class='input-text-description'>
             <blockquote class="quote-card">
                 <p>{!! $description !!}</p>
             </blockquote>
         </span>
-    @endif
+        @endif
 
-<!--errors-->
-    @if ($errors->has($name))
-        <ul class='alert alert-danger error-item'>
-            @foreach($errors->get($name) as $error)
-                @if($error)
-                    <li>
-                        <span class='input-text-error'>{!! $error !!}</span>
-                    </li>
-                @endif
-            @endforeach
-        </ul>
-    @endif
-</div>
+    <!--errors-->
+        @if ($errors->has($name))
+            <ul class='alert alert-danger error-item'>
+                @foreach($errors->get($name) as $error)
+                    @if($error)
+                        <li>
+                            <span class='input-text-error'>{!! $error !!}</span>
+                        </li>
+                    @endif
+                @endforeach
+            </ul>
+        @endif
+    </div>
 <!-- /INPUT TEXT -->
+@endif
+
+
+
 
 <!-- /INPUT IMAGE -->
 @section('footer_scripts')

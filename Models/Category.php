@@ -502,7 +502,7 @@ class Category extends FooModel
      * @param ELOQUENT OBJECT $category
      * @return BOOLEAN
      */
-    public function deleteItem($input = [])
+    public function deleteItem(array $input)
     {
 
         $category = $this->selectItem($input);

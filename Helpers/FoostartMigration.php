@@ -19,7 +19,7 @@ class FoostartMigration extends Migration
     {
 
         //Status
-        $table->tinyInteger('status')->nullable()->default(1)->comment('1: show, 0: hide');
+        $table->tinyInteger('status')->nullable()->default(null)->comment('1: show, 0: hide');
 
         //The order item in list of items
         $table->integer('sequence')->nullable()->comment('Input order');

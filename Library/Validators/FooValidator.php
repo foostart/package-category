@@ -46,24 +46,6 @@ class FooValidator extends AbstractValidator
 
         $flag = TRUE;
 
-        if ($params['max'] == 0) {
-            if (strlen($str) < $params['min']) {
-
-                $this->errors->add($params['key'], trans($this->lang_admin . '.errors.required_min_length', [
-                    'attribute ' => $params['label'],
-                    'minlength' => $params['min'],
-                ]));
-                $flag = FALSE;
-            }
-        } elseif ((strlen($str) < $params['min']) || (strlen($str) > $params['max'])) {
-
-            $this->errors->add($params['key'], trans($this->lang_admin . '.errors.required_length', [
-                'attribute ' => $params['label'],
-                'minlength' => $params['min'],
-                'maxlength' => $params['max'],
-            ]));
-            $flag = FALSE;
-        }
 
         return $flag;
     }

@@ -21,7 +21,7 @@
 
         <strong>
             <i class="fa fa-bug" aria-hidden="true"></i>
-            {!! trans('foo-admin.has-errors') !!}
+            {!! trans('acl-admin.errors.has_errors') !!}
         </strong>
 
         <hr class="message-inner-separator">

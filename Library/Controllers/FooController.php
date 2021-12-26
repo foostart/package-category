@@ -74,7 +74,8 @@ class FooController extends Controller
          * Data view
          */
         $this->data_view = array_merge($this->data_view, [
-            'pagination_view' => 'pagination::bootstrap-4'
+            'pagination_view' => 'pagination::bootstrap-4',
+            'breadcrumbs' => $this->breadcrumbs,
         ]);
     }
 

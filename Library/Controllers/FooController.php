@@ -122,9 +122,38 @@ class FooController extends Controller
         unset($this->user['created_at']);
         unset($this->user['updated_at']);
 
+        $this->user['is_admin'] = false;
+        //TODO: Check permission
+        if ($this->user['user_name'] === 'admin') {
+            $this->user['is_admin'] = true;
+        }
+
         return $this->user;
     }
 
+    /**
+     * //TODO: cache user info
+     * Get current logged user info
+     * @return ARRAY user info
+     * @date 28/12/2017
+     */
+    public function getUserInfoById(int $uid)
+    {
+
+        $authentication = \App::make('authenticator');
+        $profile_repository = \App::make('profile_repository');
+
+        $userInfo = [];
+        $user = $authentication->getUserById($uid);
+        $profile = $profile_repository->getFromUserId($uid);
+        $userInfo = [
+            'userinfo_email' => $user->email,
+            'userinfo_id' => $uid,
+            'userinfo_username' => $user->user_name,
+            'userinfo_fullname' => $profile->first_name . ' ' . $profile->last_name
+        ];
+        return $userInfo;
+    }
 
     /**
      * //TODO: cache user info

@@ -33,7 +33,7 @@ class ContextSeeder extends FoostartSeeder
         //Create context for user/level
         DB::table($this->table)->insert([
             $this->prefix_column . 'name' => 'User level',
-            $this->prefix_column . 'key' => 'ab7e417e2dddc5e5240b586d454e',
+            $this->prefix_column . 'key' => md5('user/level'),
             $this->prefix_column . 'ref' => 'user/level',
             'status' => 99,
             'created_user_id' => 1,
@@ -45,7 +45,7 @@ class ContextSeeder extends FoostartSeeder
         //Create context for user/level
         DB::table($this->table)->insert([
             $this->prefix_column . 'name' => 'User department',
-            $this->prefix_column . 'key' => 'ab7e417e2dddc5e5240b586d454f',
+            $this->prefix_column . 'key' => md5('user/department'),
             $this->prefix_column . 'ref' => 'user/department',
             'status' => 99,
             'created_user_id' => 1,
@@ -58,7 +58,7 @@ class ContextSeeder extends FoostartSeeder
     private function postCreateContext() {
         DB::table($this->table)->insert([
             $this->prefix_context . 'name' => 'Admin posts',
-            $this->prefix_context . 'key' => 'ab7e417e2dddc5240b586d454e',
+            $this->prefix_context . 'key' => md5('admin/posts'),
             $this->prefix_context . 'ref' => 'admin/posts',
             'status' => 99,
             'created_user_id' => 1,
@@ -71,7 +71,7 @@ class ContextSeeder extends FoostartSeeder
     private function slideshowCreateContext() {
         DB::table($this->table)->insert([
             $this->prefix_context . 'name' => 'Admin slideshows',
-            $this->prefix_context . 'key' => 'ab7e417e2dddc5e5240b586d454f',
+            $this->prefix_context . 'key' => md5('admin/slideshows'),
             $this->prefix_context . 'ref' => 'admin/slideshows',
             'status' => 99,
             'created_user_id' => 1,

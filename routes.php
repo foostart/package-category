@@ -64,12 +64,12 @@ Route::group(['middleware' => ['web']], function () {
          * configs
          */
         Route::get('admin/contexts/config', [
-            'as' => 'contexts.config',
+            'as' => 'contexts.configGet',
             'uses' => 'ContextAdminController@config'
         ]);
 
         Route::post('admin/contexts/config', [
-            'as' => 'contexts.config',
+            'as' => 'contexts.configPost',
             'uses' => 'ContextAdminController@config'
         ]);
 
@@ -77,12 +77,12 @@ Route::group(['middleware' => ['web']], function () {
          * language
          */
         Route::get('admin/contexts/lang', [
-            'as' => 'contexts.lang',
+            'as' => 'contexts.langGet',
             'uses' => 'ContextAdminController@lang'
         ]);
 
         Route::post('admin/contexts/lang', [
-            'as' => 'contexts.lang',
+            'as' => 'contexts.langPost',
             'uses' => 'ContextAdminController@lang'
         ]);
 
@@ -150,12 +150,12 @@ Route::group(['middleware' => ['web']], function () {
          * configs
          */
         Route::get('admin/categories/config', [
-            'as' => 'categories.config',
+            'as' => 'categories.configGet',
             'uses' => 'CategoryAdminController@config'
         ]);
 
         Route::post('admin/categories/config', [
-            'as' => 'categories.config',
+            'as' => 'categories.configPost',
             'uses' => 'CategoryAdminController@config'
         ]);
 
@@ -163,12 +163,12 @@ Route::group(['middleware' => ['web']], function () {
          * language
          */
         Route::get('admin/categories/lang', [
-            'as' => 'categories.lang',
+            'as' => 'categories.langGet',
             'uses' => 'CategoryAdminController@lang'
         ]);
 
         Route::post('admin/categories/lang', [
-            'as' => 'categories.lang',
+            'as' => 'categories.langPost',
             'uses' => 'CategoryAdminController@lang'
         ]);
 

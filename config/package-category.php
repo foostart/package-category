@@ -44,6 +44,7 @@ return [
      */
     'status' => [
         'publish' => 99,
+        'closed' => 88,
         'intrash' => 55,
         'unpublish' => 33,
         'new' => 22,
@@ -53,12 +54,14 @@ return [
             55 => 'In trash',
             33 => 'Unpublish',
             11 => 'Draft',
+            88 => 'Closed',
         ],
         'color' => [
             99 => '#5bc0de',
             55 => '#a8aac2',
             33 => '#000000',
             11 => '#ef4832',
+            88 => '#aab832',
         ]
     ],
 

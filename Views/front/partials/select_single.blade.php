@@ -1,9 +1,9 @@
 <!--
-| @TITLE
+| TITLE
 | Select single item in form
 |
 |-------------------------------------------------------------------------------
-| @REQUIRED
+| REQUIRED
 | $name is select name
 | $items is list of items
 | $label is select label

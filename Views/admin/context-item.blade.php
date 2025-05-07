@@ -1,7 +1,7 @@
 @if(!empty($items) && (!$items->isEmpty()) )
 <?php
     $withs = [
-        'counter' => '10%',
+        'counter' => '5%',
         'name' => '20%',
         'ref' => '20%',
         'key' => '20%',

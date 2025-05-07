@@ -70,7 +70,7 @@ class FooModel extends Model
 
     protected $obj_context = NULL;
 
-    protected $is_pagination = TRUE;
+    public $is_pagination = TRUE;
 
     /**
      *
@@ -171,7 +171,6 @@ class FooModel extends Model
      */
     protected function orderingFilters(array $params, $elo)
     {
-
         //order
         if (!empty($params['order'])) {
             foreach ($params['order'] as $_key => $_value) {

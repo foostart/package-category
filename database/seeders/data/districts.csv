@@ -1,0 +1,706 @@
+province_id,district_code,district_name
+HANOI,001,Quận Ba Đình
+HANOI,002,Quận Hoàn Kiếm
+HANOI,003,Quận Tây Hồ
+HANOI,004,Quận Long Biên
+HANOI,005,Quận Cầu Giấy
+HANOI,006,Quận Đống Đa
+HANOI,007,Quận Hai Bà Trưng
+HANOI,008,Quận Hoàng Mai
+HANOI,009,Quận Thanh Xuân
+HANOI,016,Huyện Sóc Sơn
+HANOI,017,Huyện Đông Anh
+HANOI,018,Huyện Gia Lâm
+HANOI,019,Quận Nam Từ Liêm
+HANOI,020,Huyện Thanh Trì
+HANOI,021,Quận Bắc Từ Liêm
+HAGIANG,024,Thành phố Hà Giang
+HAGIANG,026,Huyện Đồng Văn
+HAGIANG,027,Huyện Mèo Vạc
+HAGIANG,028,Huyện Yên Minh
+HAGIANG,029,Huyện Quản Bạ
+HAGIANG,030,Huyện Vị Xuyên
+HAGIANG,031,Huyện Bắc Mê
+HAGIANG,032,Huyện Hoàng Su Phì
+HAGIANG,033,Huyện Xín Mần
+HAGIANG,034,Huyện Bắc Quang
+HAGIANG,035,Huyện Quang Bình
+CAOBANG,040,Thành phố Cao Bằng
+CAOBANG,042,Huyện Bảo Lâm
+CAOBANG,043,Huyện Bảo Lạc
+CAOBANG,045,Huyện Hà Quảng
+CAOBANG,047,Huyện Trùng Khánh
+CAOBANG,048,Huyện Hạ Lang
+CAOBANG,049,Huyện Quảng Hòa
+CAOBANG,051,Huyện Hoà An
+CAOBANG,052,Huyện Nguyên Bình
+CAOBANG,053,Huyện Thạch An
+BACKAN,058,Thành Phố Bắc Kạn
+BACKAN,060,Huyện Pác Nặm
+BACKAN,061,Huyện Ba Bể
+BACKAN,062,Huyện Ngân Sơn
+BACKAN,063,Huyện Bạch Thông
+BACKAN,064,Huyện Chợ Đồn
+BACKAN,065,Huyện Chợ Mới
+BACKAN,066,Huyện Na Rì
+TUYENQUANG,070,Thành phố Tuyên Quang
+TUYENQUANG,071,Huyện Lâm Bình
+TUYENQUANG,072,Huyện Na Hang
+TUYENQUANG,073,Huyện Chiêm Hóa
+TUYENQUANG,074,Huyện Hàm Yên
+TUYENQUANG,075,Huyện Yên Sơn
+TUYENQUANG,076,Huyện Sơn Dương
+LAOCAI,080,Thành phố Lào Cai
+LAOCAI,082,Huyện Bát Xát
+LAOCAI,083,Huyện Mường Khương
+LAOCAI,084,Huyện Si Ma Cai
+LAOCAI,085,Huyện Bắc Hà
+LAOCAI,086,Huyện Bảo Thắng
+LAOCAI,087,Huyện Bảo Yên
+LAOCAI,088,Thị xã Sa Pa
+LAOCAI,089,Huyện Văn Bàn
+DIENBIEN,094,Thành phố Điện Biên Phủ
+DIENBIEN,095,Thị Xã Mường Lay
+DIENBIEN,096,Huyện Mường Nhé
+DIENBIEN,097,Huyện Mường Chà
+DIENBIEN,098,Huyện Tủa Chùa
+DIENBIEN,099,Huyện Tuần Giáo
+DIENBIEN,100,Huyện Điện Biên
+DIENBIEN,101,Huyện Điện Biên Đông
+DIENBIEN,102,Huyện Mường Ảng
+DIENBIEN,103,Huyện Nậm Pồ
+LAICHAU,105,Thành phố Lai Châu
+LAICHAU,106,Huyện Tam Đường
+LAICHAU,107,Huyện Mường Tè
+LAICHAU,108,Huyện Sìn Hồ
+LAICHAU,109,Huyện Phong Thổ
+LAICHAU,110,Huyện Than Uyên
+LAICHAU,111,Huyện Tân Uyên
+LAICHAU,112,Huyện Nậm Nhùn
+SONLA,116,Thành phố Sơn La
+SONLA,118,Huyện Quỳnh Nhai
+SONLA,119,Huyện Thuận Châu
+SONLA,120,Huyện Mường La
+SONLA,121,Huyện Bắc Yên
+SONLA,122,Huyện Phù Yên
+SONLA,123,Huyện Mộc Châu
+SONLA,124,Huyện Yên Châu
+SONLA,125,Huyện Mai Sơn
+SONLA,126,Huyện Sông Mã
+SONLA,127,Huyện Sốp Cộp
+SONLA,128,Huyện Vân Hồ
+YENBAI,132,Thành phố Yên Bái
+YENBAI,133,Thị xã Nghĩa Lộ
+YENBAI,135,Huyện Lục Yên
+YENBAI,136,Huyện Văn Yên
+YENBAI,137,Huyện Mù Căng Chải
+YENBAI,138,Huyện Trấn Yên
+YENBAI,139,Huyện Trạm Tấu
+YENBAI,140,Huyện Văn Chấn
+YENBAI,141,Huyện Yên Bình
+HOABINH,148,Thành phố Hòa Bình
+HOABINH,150,Huyện Đà Bắc
+HOABINH,152,Huyện Lương Sơn
+HOABINH,153,Huyện Kim Bôi
+HOABINH,154,Huyện Cao Phong
+HOABINH,155,Huyện Tân Lạc
+HOABINH,156,Huyện Mai Châu
+HOABINH,157,Huyện Lạc Sơn
+HOABINH,158,Huyện Yên Thủy
+HOABINH,159,Huyện Lạc Thủy
+THAINGUYEN,164,Thành phố Thái Nguyên
+THAINGUYEN,165,Thành phố Sông Công
+THAINGUYEN,167,Huyện Định Hóa
+THAINGUYEN,168,Huyện Phú Lương
+THAINGUYEN,169,Huyện Đồng Hỷ
+THAINGUYEN,170,Huyện Võ Nhai
+THAINGUYEN,171,Huyện Đại Từ
+THAINGUYEN,172,Thị xã Phổ Yên
+THAINGUYEN,173,Huyện Phú Bình
+LANGSON,178,Thành phố Lạng Sơn
+LANGSON,180,Huyện Tràng Định
+LANGSON,181,Huyện Bình Gia
+LANGSON,182,Huyện Văn Lãng
+LANGSON,183,Huyện Cao Lộc
+LANGSON,184,Huyện Văn Quan
+LANGSON,185,Huyện Bắc Sơn
+LANGSON,186,Huyện Hữu Lũng
+LANGSON,187,Huyện Chi Lăng
+LANGSON,188,Huyện Lộc Bình
+LANGSON,189,Huyện Đình Lập
+QUANGNINH,193,Thành phố Hạ Long
+QUANGNINH,194,Thành phố Móng Cái
+QUANGNINH,195,Thành phố Cẩm Phả
+QUANGNINH,196,Thành phố Uông Bí
+QUANGNINH,198,Huyện Bình Liêu
+QUANGNINH,199,Huyện Tiên Yên
+QUANGNINH,200,Huyện Đầm Hà
+QUANGNINH,201,Huyện Hải Hà
+QUANGNINH,202,Huyện Ba Chẽ
+QUANGNINH,203,Huyện Vân Đồn
+QUANGNINH,205,Thị xã Đông Triều
+QUANGNINH,206,Thị xã Quảng Yên
+QUANGNINH,207,Huyện Cô Tô
+BACGIANG,213,Thành phố Bắc Giang
+BACGIANG,215,Huyện Yên Thế
+BACGIANG,216,Huyện Tân Yên
+BACGIANG,217,Huyện Lạng Giang
+BACGIANG,218,Huyện Lục Nam
+BACGIANG,219,Huyện Lục Ngạn
+BACGIANG,220,Huyện Sơn Động
+BACGIANG,221,Huyện Yên Dũng
+BACGIANG,222,Huyện Việt Yên
+BACGIANG,223,Huyện Hiệp Hòa
+PHUTHO,227,Thành phố Việt Trì
+PHUTHO,228,Thị xã Phú Thọ
+PHUTHO,230,Huyện Đoan Hùng
+PHUTHO,231,Huyện Hạ Hoà
+PHUTHO,232,Huyện Thanh Ba
+PHUTHO,233,Huyện Phù Ninh
+PHUTHO,234,Huyện Yên Lập
+PHUTHO,235,Huyện Cẩm Khê
+PHUTHO,236,Huyện Tam Nông
+PHUTHO,237,Huyện Lâm Thao
+PHUTHO,238,Huyện Thanh Sơn
+PHUTHO,239,Huyện Thanh Thuỷ
+PHUTHO,240,Huyện Tân Sơn
+VINHPHUC,243,Thành phố Vĩnh Yên
+VINHPHUC,244,Thành phố Phúc Yên
+VINHPHUC,246,Huyện Lập Thạch
+VINHPHUC,247,Huyện Tam Dương
+VINHPHUC,248,Huyện Tam Đảo
+VINHPHUC,249,Huyện Bình Xuyên
+HANOI,250,Huyện Mê Linh
+VINHPHUC,251,Huyện Yên Lạc
+VINHPHUC,252,Huyện Vĩnh Tường
+VINHPHUC,253,Huyện Sông Lô
+BACNINH,256,Thành phố Bắc Ninh
+BACNINH,258,Huyện Yên Phong
+BACNINH,259,Huyện Quế Võ
+BACNINH,260,Huyện Tiên Du
+BACNINH,261,Thị xã Từ Sơn
+BACNINH,262,Huyện Thuận Thành
+BACNINH,263,Huyện Gia Bình
+BACNINH,264,Huyện Lương Tài
+HANOI,268,Quận Hà Đông
+HANOI,269,Thị xã Sơn Tây
+HANOI,271,Huyện Ba Vì
+HANOI,272,Huyện Phúc Thọ
+HANOI,273,Huyện Đan Phượng
+HANOI,274,Huyện Hoài Đức
+HANOI,275,Huyện Quốc Oai
+HANOI,276,Huyện Thạch Thất
+HANOI,277,Huyện Chương Mỹ
+HANOI,278,Huyện Thanh Oai
+HANOI,279,Huyện Thường Tín
+HANOI,280,Huyện Phú Xuyên
+HANOI,281,Huyện Ứng Hòa
+HANOI,282,Huyện Mỹ Đức
+HAIDUONG,288,Thành phố Hải Dương
+HAIDUONG,290,Thành phố Chí Linh
+HAIDUONG,291,Huyện Nam Sách
+HAIDUONG,292,Thị xã Kinh Môn
+HAIDUONG,293,Huyện Kim Thành
+HAIDUONG,294,Huyện Thanh Hà
+HAIDUONG,295,Huyện Cẩm Giàng
+HAIDUONG,296,Huyện Bình Giang
+HAIDUONG,297,Huyện Gia Lộc
+HAIDUONG,298,Huyện Tứ Kỳ
+HAIDUONG,299,Huyện Ninh Giang
+HAIDUONG,300,Huyện Thanh Miện
+HAIPHONG,303,Quận Hồng Bàng
+HAIPHONG,304,Quận Ngô Quyền
+HAIPHONG,305,Quận Lê Chân
+HAIPHONG,306,Quận Hải An
+HAIPHONG,307,Quận Kiến An
+HAIPHONG,308,Quận Đồ Sơn
+HAIPHONG,309,Quận Dương Kinh
+HAIPHONG,311,Huyện Thuỷ Nguyên
+HAIPHONG,312,Huyện An Dương
+HAIPHONG,313,Huyện An Lão
+HAIPHONG,314,Huyện Kiến Thuỵ
+HAIPHONG,315,Huyện Tiên Lãng
+HAIPHONG,316,Huyện Vĩnh Bảo
+HAIPHONG,317,Huyện Cát Hải
+HAIPHONG,318,Huyện Bạch Long Vĩ
+HUNGYEN,323,Thành phố Hưng Yên
+HUNGYEN,325,Huyện Văn Lâm
+HUNGYEN,326,Huyện Văn Giang
+HUNGYEN,327,Huyện Yên Mỹ
+HUNGYEN,328,Thị xã Mỹ Hào
+HUNGYEN,329,Huyện Ân Thi
+HUNGYEN,330,Huyện Khoái Châu
+HUNGYEN,331,Huyện Kim Động
+HUNGYEN,332,Huyện Tiên Lữ
+HUNGYEN,333,Huyện Phù Cừ
+THAIBINH,336,Thành phố Thái Bình
+THAIBINH,338,Huyện Quỳnh Phụ
+THAIBINH,339,Huyện Hưng Hà
+THAIBINH,340,Huyện Đông Hưng
+THAIBINH,341,Huyện Thái Thụy
+THAIBINH,342,Huyện Tiền Hải
+THAIBINH,343,Huyện Kiến Xương
+THAIBINH,344,Huyện Vũ Thư
+HANAM,347,Thành phố Phủ Lý
+HANAM,349,Thị xã Duy Tiên
+HANAM,350,Huyện Kim Bảng
+HANAM,351,Huyện Thanh Liêm
+HANAM,352,Huyện Bình Lục
+HANAM,353,Huyện Lý Nhân
+NAMDINH,356,Thành phố Nam Định
+NAMDINH,358,Huyện Mỹ Lộc
+NAMDINH,359,Huyện Vụ Bản
+NAMDINH,360,Huyện Ý Yên
+NAMDINH,361,Huyện Nghĩa Hưng
+NAMDINH,362,Huyện Nam Trực
+NAMDINH,363,Huyện Trực Ninh
+NAMDINH,364,Huyện Xuân Trường
+NAMDINH,365,Huyện Giao Thủy
+NAMDINH,366,Huyện Hải Hậu
+NINHBINH,369,Thành phố Ninh Bình
+NINHBINH,370,Thành phố Tam Điệp
+NINHBINH,372,Huyện Nho Quan
+NINHBINH,373,Huyện Gia Viễn
+NINHBINH,374,Huyện Hoa Lư
+NINHBINH,375,Huyện Yên Khánh
+NINHBINH,376,Huyện Kim Sơn
+NINHBINH,377,Huyện Yên Mô
+THANHHOA,380,Thành phố Thanh Hóa
+THANHHOA,381,Thị xã Bỉm Sơn
+THANHHOA,382,Thành phố Sầm Sơn
+THANHHOA,384,Huyện Mường Lát
+THANHHOA,385,Huyện Quan Hóa
+THANHHOA,386,Huyện Bá Thước
+THANHHOA,387,Huyện Quan Sơn
+THANHHOA,388,Huyện Lang Chánh
+THANHHOA,389,Huyện Ngọc Lặc
+THANHHOA,390,Huyện Cẩm Thủy
+THANHHOA,391,Huyện Thạch Thành
+THANHHOA,392,Huyện Hà Trung
+THANHHOA,393,Huyện Vĩnh Lộc
+THANHHOA,394,Huyện Yên Định
+THANHHOA,395,Huyện Thọ Xuân
+THANHHOA,396,Huyện Thường Xuân
+THANHHOA,397,Huyện Triệu Sơn
+THANHHOA,398,Huyện Thiệu Hóa
+THANHHOA,399,Huyện Hoằng Hóa
+THANHHOA,400,Huyện Hậu Lộc
+THANHHOA,401,Huyện Nga Sơn
+THANHHOA,402,Huyện Như Xuân
+THANHHOA,403,Huyện Như Thanh
+THANHHOA,404,Huyện Nông Cống
+THANHHOA,405,Huyện Đông Sơn
+THANHHOA,406,Huyện Quảng Xương
+THANHHOA,407,Thị xã Nghi Sơn
+NGHEAN,412,Thành phố Vinh
+NGHEAN,413,Thị xã Cửa Lò
+NGHEAN,414,Thị xã Thái Hoà
+NGHEAN,415,Huyện Quế Phong
+NGHEAN,416,Huyện Quỳ Châu
+NGHEAN,417,Huyện Kỳ Sơn
+NGHEAN,418,Huyện Tương Dương
+NGHEAN,419,Huyện Nghĩa Đàn
+NGHEAN,420,Huyện Quỳ Hợp
+NGHEAN,421,Huyện Quỳnh Lưu
+NGHEAN,422,Huyện Con Cuông
+NGHEAN,423,Huyện Tân Kỳ
+NGHEAN,424,Huyện Anh Sơn
+NGHEAN,425,Huyện Diễn Châu
+NGHEAN,426,Huyện Yên Thành
+NGHEAN,427,Huyện Đô Lương
+NGHEAN,428,Huyện Thanh Chương
+NGHEAN,429,Huyện Nghi Lộc
+NGHEAN,430,Huyện Nam Đàn
+NGHEAN,431,Huyện Hưng Nguyên
+NGHEAN,432,Thị xã Hoàng Mai
+HATINH,436,Thành phố Hà Tĩnh
+HATINH,437,Thị xã Hồng Lĩnh
+HATINH,439,Huyện Hương Sơn
+HATINH,440,Huyện Đức Thọ
+HATINH,441,Huyện Vũ Quang
+HATINH,442,Huyện Nghi Xuân
+HATINH,443,Huyện Can Lộc
+HATINH,444,Huyện Hương Khê
+HATINH,445,Huyện Thạch Hà
+HATINH,446,Huyện Cẩm Xuyên
+HATINH,447,Huyện Kỳ Anh
+HATINH,448,Huyện Lộc Hà
+HATINH,449,Thị xã Kỳ Anh
+QUANGBINH,450,Thành Phố Đồng Hới
+QUANGBINH,452,Huyện Minh Hóa
+QUANGBINH,453,Huyện Tuyên Hóa
+QUANGBINH,454,Huyện Quảng Trạch
+QUANGBINH,455,Huyện Bố Trạch
+QUANGBINH,456,Huyện Quảng Ninh
+QUANGBINH,457,Huyện Lệ Thủy
+QUANGBINH,458,Thị xã Ba Đồn
+QUANGTRI,461,Thành phố Đông Hà
+QUANGTRI,462,Thị xã Quảng Trị
+QUANGTRI,464,Huyện Vĩnh Linh
+QUANGTRI,465,Huyện Hướng Hóa
+QUANGTRI,466,Huyện Gio Linh
+QUANGTRI,467,Huyện Đa Krông
+QUANGTRI,468,Huyện Cam Lộ
+QUANGTRI,469,Huyện Triệu Phong
+QUANGTRI,470,Huyện Hải Lăng
+QUANGTRI,471,Huyện Cồn Cỏ
+THUATHIENHUE,474,Thành phố Huế
+THUATHIENHUE,476,Huyện Phong Điền
+THUATHIENHUE,477,Huyện Quảng Điền
+THUATHIENHUE,478,Huyện Phú Vang
+THUATHIENHUE,479,Thị xã Hương Thủy
+THUATHIENHUE,480,Thị xã Hương Trà
+THUATHIENHUE,481,Huyện A Lưới
+THUATHIENHUE,482,Huyện Phú Lộc
+THUATHIENHUE,483,Huyện Nam Đông
+DANANG,490,Quận Liên Chiểu
+DANANG,491,Quận Thanh Khê
+DANANG,492,Quận Hải Châu
+DANANG,493,Quận Sơn Trà
+DANANG,494,Quận Ngũ Hành Sơn
+DANANG,495,Quận Cẩm Lệ
+DANANG,497,Huyện Hòa Vang
+DANANG,498,Huyện Hoàng Sa
+QUANGNAM,502,Thành phố Tam Kỳ
+QUANGNAM,503,Thành phố Hội An
+QUANGNAM,504,Huyện Tây Giang
+QUANGNAM,505,Huyện Đông Giang
+QUANGNAM,506,Huyện Đại Lộc
+QUANGNAM,507,Thị xã Điện Bàn
+QUANGNAM,508,Huyện Duy Xuyên
+QUANGNAM,509,Huyện Quế Sơn
+QUANGNAM,510,Huyện Nam Giang
+QUANGNAM,511,Huyện Phước Sơn
+QUANGNAM,512,Huyện Hiệp Đức
+QUANGNAM,513,Huyện Thăng Bình
+QUANGNAM,514,Huyện Tiên Phước
+QUANGNAM,515,Huyện Bắc Trà My
+QUANGNAM,516,Huyện Nam Trà My
+QUANGNAM,517,Huyện Núi Thành
+QUANGNAM,518,Huyện Phú Ninh
+QUANGNAM,519,Huyện Nông Sơn
+QUANGNGAI,522,Thành phố Quảng Ngãi
+QUANGNGAI,524,Huyện Bình Sơn
+QUANGNGAI,525,Huyện Trà Bồng
+QUANGNGAI,527,Huyện Sơn Tịnh
+QUANGNGAI,528,Huyện Tư Nghĩa
+QUANGNGAI,529,Huyện Sơn Hà
+QUANGNGAI,530,Huyện Sơn Tây
+QUANGNGAI,531,Huyện Minh Long
+QUANGNGAI,532,Huyện Nghĩa Hành
+QUANGNGAI,533,Huyện Mộ Đức
+QUANGNGAI,534,Thị xã Đức Phổ
+QUANGNGAI,535,Huyện Ba Tơ
+QUANGNGAI,536,Huyện Lý Sơn
+BINHDINH,540,Thành phố Quy Nhơn
+BINHDINH,542,Huyện An Lão
+BINHDINH,543,Thị xã Hoài Nhơn
+BINHDINH,544,Huyện Hoài Ân
+BINHDINH,545,Huyện Phù Mỹ
+BINHDINH,546,Huyện Vĩnh Thạnh
+BINHDINH,547,Huyện Tây Sơn
+BINHDINH,548,Huyện Phù Cát
+BINHDINH,549,Thị xã An Nhơn
+BINHDINH,550,Huyện Tuy Phước
+BINHDINH,551,Huyện Vân Canh
+PHUYEN,555,Thành phố Tuy Hoà
+PHUYEN,557,Thị xã Sông Cầu
+PHUYEN,558,Huyện Đồng Xuân
+PHUYEN,559,Huyện Tuy An
+PHUYEN,560,Huyện Sơn Hòa
+PHUYEN,561,Huyện Sông Hinh
+PHUYEN,562,Huyện Tây Hoà
+PHUYEN,563,Huyện Phú Hoà
+PHUYEN,564,Thị xã Đông Hòa
+KHANHHOA,568,Thành phố Nha Trang
+KHANHHOA,569,Thành phố Cam Ranh
+KHANHHOA,570,Huyện Cam Lâm
+KHANHHOA,571,Huyện Vạn Ninh
+KHANHHOA,572,Thị xã Ninh Hòa
+KHANHHOA,573,Huyện Khánh Vĩnh
+KHANHHOA,574,Huyện Diên Khánh
+KHANHHOA,575,Huyện Khánh Sơn
+KHANHHOA,576,Huyện Trường Sa
+NINHTHUAN,582,Thành phố Phan Rang-Tháp Chàm
+NINHTHUAN,584,Huyện Bác Ái
+NINHTHUAN,585,Huyện Ninh Sơn
+NINHTHUAN,586,Huyện Ninh Hải
+NINHTHUAN,587,Huyện Ninh Phước
+NINHTHUAN,588,Huyện Thuận Bắc
+NINHTHUAN,589,Huyện Thuận Nam
+BINHTHUAN,593,Thành phố Phan Thiết
+BINHTHUAN,594,Thị xã La Gi
+BINHTHUAN,595,Huyện Tuy Phong
+BINHTHUAN,596,Huyện Bắc Bình
+BINHTHUAN,597,Huyện Hàm Thuận Bắc
+BINHTHUAN,598,Huyện Hàm Thuận Nam
+BINHTHUAN,599,Huyện Tánh Linh
+BINHTHUAN,600,Huyện Đức Linh
+BINHTHUAN,601,Huyện Hàm Tân
+BINHTHUAN,602,Huyện Phú Quí
+KONTUM,608,Thành phố Kon Tum
+KONTUM,610,Huyện Đắk Glei
+KONTUM,611,Huyện Ngọc Hồi
+KONTUM,612,Huyện Đắk Tô
+KONTUM,613,Huyện Kon Plông
+KONTUM,614,Huyện Kon Rẫy
+KONTUM,615,Huyện Đắk Hà
+KONTUM,616,Huyện Sa Thầy
+KONTUM,617,Huyện Tu Mơ Rông
+KONTUM,618,Huyện Ia H' Drai
+GIALAI,622,Thành phố Pleiku
+GIALAI,623,Thị xã An Khê
+GIALAI,624,Thị xã Ayun Pa
+GIALAI,625,Huyện KBang
+GIALAI,626,Huyện Đăk Đoa
+GIALAI,627,Huyện Chư Păh
+GIALAI,628,Huyện Ia Grai
+GIALAI,629,Huyện Mang Yang
+GIALAI,630,Huyện Kông Chro
+GIALAI,631,Huyện Đức Cơ
+GIALAI,632,Huyện Chư Prông
+GIALAI,633,Huyện Chư Sê
+GIALAI,634,Huyện Đăk Pơ
+GIALAI,635,Huyện Ia Pa
+GIALAI,637,Huyện Krông Pa
+GIALAI,638,Huyện Phú Thiện
+GIALAI,639,Huyện Chư Pưh
+DAKLAK,643,Thành phố Buôn Ma Thuột
+DAKLAK,644,Thị Xã Buôn Hồ
+DAKLAK,645,Huyện Ea H'leo
+DAKLAK,646,Huyện Ea Súp
+DAKLAK,647,Huyện Buôn Đôn
+DAKLAK,648,Huyện Cư M'gar
+DAKLAK,649,Huyện Krông Búk
+DAKLAK,650,Huyện Krông Năng
+DAKLAK,651,Huyện Ea Kar
+DAKLAK,652,Huyện M'Đrắk
+DAKLAK,653,Huyện Krông Bông
+DAKLAK,654,Huyện Krông Pắc
+DAKLAK,655,Huyện Krông A Na
+DAKLAK,656,Huyện Lắk
+DAKLAK,657,Huyện Cư Kuin
+DAKNONG,660,Thành phố Gia Nghĩa
+DAKNONG,661,Huyện Đăk Glong
+DAKNONG,662,Huyện Cư Jút
+DAKNONG,663,Huyện Đắk Mil
+DAKNONG,664,Huyện Krông Nô
+DAKNONG,665,Huyện Đắk Song
+DAKNONG,666,Huyện Đắk R'Lấp
+DAKNONG,667,Huyện Tuy Đức
+LAMDONG,672,Thành phố Đà Lạt
+LAMDONG,673,Thành phố Bảo Lộc
+LAMDONG,674,Huyện Đam Rông
+LAMDONG,675,Huyện Lạc Dương
+LAMDONG,676,Huyện Lâm Hà
+LAMDONG,677,Huyện Đơn Dương
+LAMDONG,678,Huyện Đức Trọng
+LAMDONG,679,Huyện Di Linh
+LAMDONG,680,Huyện Bảo Lâm
+LAMDONG,681,Huyện Đạ Huoai
+LAMDONG,682,Huyện Đạ Tẻh
+LAMDONG,683,Huyện Cát Tiên
+BINHPHUOC,688,Thị xã Phước Long
+BINHPHUOC,689,Thành phố Đồng Xoài
+BINHPHUOC,690,Thị xã Bình Long
+BINHPHUOC,691,Huyện Bù Gia Mập
+BINHPHUOC,692,Huyện Lộc Ninh
+BINHPHUOC,693,Huyện Bù Đốp
+BINHPHUOC,694,Huyện Hớn Quản
+BINHPHUOC,695,Huyện Đồng Phú
+BINHPHUOC,696,Huyện Bù Đăng
+BINHPHUOC,697,Huyện Chơn Thành
+BINHPHUOC,698,Huyện Phú Riềng
+TAYNINH,703,Thành phố Tây Ninh
+TAYNINH,705,Huyện Tân Biên
+TAYNINH,706,Huyện Tân Châu
+TAYNINH,707,Huyện Dương Minh Châu
+TAYNINH,708,Huyện Châu Thành
+TAYNINH,709,Thị xã Hòa Thành
+TAYNINH,710,Huyện Gò Dầu
+TAYNINH,711,Huyện Bến Cầu
+TAYNINH,712,Thị xã Trảng Bàng
+BINHDUONG,718,Thành phố Thủ Dầu Một
+BINHDUONG,719,Huyện Bàu Bàng
+BINHDUONG,720,Huyện Dầu Tiếng
+BINHDUONG,721,Thị xã Bến Cát
+BINHDUONG,722,Huyện Phú Giáo
+BINHDUONG,723,Thị xã Tân Uyên
+BINHDUONG,724,Thành phố Dĩ An
+BINHDUONG,725,Thành phố Thuận An
+BINHDUONG,726,Huyện Bắc Tân Uyên
+DONGNAI,731,Thành phố Biên Hòa
+DONGNAI,732,Thành phố Long Khánh
+DONGNAI,734,Huyện Tân Phú
+DONGNAI,735,Huyện Vĩnh Cửu
+DONGNAI,736,Huyện Định Quán
+DONGNAI,737,Huyện Trảng Bom
+DONGNAI,738,Huyện Thống Nhất
+DONGNAI,739,Huyện Cẩm Mỹ
+DONGNAI,740,Huyện Long Thành
+DONGNAI,741,Huyện Xuân Lộc
+DONGNAI,742,Huyện Nhơn Trạch
+BARIAVUNGTAU,747,Thành phố Vũng Tàu
+BARIAVUNGTAU,748,Thành phố Bà Rịa
+BARIAVUNGTAU,750,Huyện Châu Đức
+BARIAVUNGTAU,751,Huyện Xuyên Mộc
+BARIAVUNGTAU,752,Huyện Long Điền
+BARIAVUNGTAU,753,Huyện Đất Đỏ
+BARIAVUNGTAU,754,Thị xã Phú Mỹ
+BARIAVUNGTAU,755,Huyện Côn Đảo
+HOCHIMINH,760,Quận 1
+HOCHIMINH,761,Quận 12
+HOCHIMINH,764,Quận Gò Vấp
+HOCHIMINH,765,Quận Bình Thạnh
+HOCHIMINH,766,Quận Tân Bình
+HOCHIMINH,767,Quận Tân Phú
+HOCHIMINH,768,Quận Phú Nhuận
+HOCHIMINH,769,Thành phố Thủ Đức
+HOCHIMINH,770,Quận 3
+HOCHIMINH,771,Quận 10
+HOCHIMINH,772,Quận 11
+HOCHIMINH,773,Quận 4
+HOCHIMINH,774,Quận 5
+HOCHIMINH,775,Quận 6
+HOCHIMINH,776,Quận 8
+HOCHIMINH,777,Quận Bình Tân
+HOCHIMINH,778,Quận 7
+HOCHIMINH,783,Huyện Củ Chi
+HOCHIMINH,784,Huyện Hóc Môn
+HOCHIMINH,785,Huyện Bình Chánh
+HOCHIMINH,786,Huyện Nhà Bè
+HOCHIMINH,787,Huyện Cần Giờ
+LONGAN,794,Thành phố Tân An
+LONGAN,795,Thị xã Kiến Tường
+LONGAN,796,Huyện Tân Hưng
+LONGAN,797,Huyện Vĩnh Hưng
+LONGAN,798,Huyện Mộc Hóa
+LONGAN,799,Huyện Tân Thạnh
+LONGAN,800,Huyện Thạnh Hóa
+LONGAN,801,Huyện Đức Huệ
+LONGAN,802,Huyện Đức Hòa
+LONGAN,803,Huyện Bến Lức
+LONGAN,804,Huyện Thủ Thừa
+LONGAN,805,Huyện Tân Trụ
+LONGAN,806,Huyện Cần Đước
+LONGAN,807,Huyện Cần Giuộc
+LONGAN,808,Huyện Châu Thành
+TIENGIANG,815,Thành phố Mỹ Tho
+TIENGIANG,816,Thị xã Gò Công
+TIENGIANG,817,Thị xã Cai Lậy
+TIENGIANG,818,Huyện Tân Phước
+TIENGIANG,819,Huyện Cái Bè
+TIENGIANG,820,Huyện Cai Lậy
+TIENGIANG,821,Huyện Châu Thành
+TIENGIANG,822,Huyện Chợ Gạo
+TIENGIANG,823,Huyện Gò Công Tây
+TIENGIANG,824,Huyện Gò Công Đông
+TIENGIANG,825,Huyện Tân Phú Đông
+BENTRE,829,Thành phố Bến Tre
+BENTRE,831,Huyện Châu Thành
+BENTRE,832,Huyện Chợ Lách
+BENTRE,833,Huyện Mỏ Cày Nam
+BENTRE,834,Huyện Giồng Trôm
+BENTRE,835,Huyện Bình Đại
+BENTRE,836,Huyện Ba Tri
+BENTRE,837,Huyện Thạnh Phú
+BENTRE,838,Huyện Mỏ Cày Bắc
+TRAVINH,842,Thành phố Trà Vinh
+TRAVINH,844,Huyện Càng Long
+TRAVINH,845,Huyện Cầu Kè
+TRAVINH,846,Huyện Tiểu Cần
+TRAVINH,847,Huyện Châu Thành
+TRAVINH,848,Huyện Cầu Ngang
+TRAVINH,849,Huyện Trà Cú
+TRAVINH,850,Huyện Duyên Hải
+TRAVINH,851,Thị xã Duyên Hải
+VINHLONG,855,Thành phố Vĩnh Long
+VINHLONG,857,Huyện Long Hồ
+VINHLONG,858,Huyện Mang Thít
+VINHLONG,859,Huyện Vũng Liêm
+VINHLONG,860,Huyện Tam Bình
+VINHLONG,861,Thị xã Bình Minh
+VINHLONG,862,Huyện Trà Ôn
+VINHLONG,863,Huyện Bình Tân
+DONGTHAP,866,Thành phố Cao Lãnh
+DONGTHAP,867,Thành phố Sa Đéc
+DONGTHAP,868,Thành phố Hồng Ngự
+DONGTHAP,869,Huyện Tân Hồng
+DONGTHAP,870,Huyện Hồng Ngự
+DONGTHAP,871,Huyện Tam Nông
+DONGTHAP,872,Huyện Tháp Mười
+DONGTHAP,873,Huyện Cao Lãnh
+DONGTHAP,874,Huyện Thanh Bình
+DONGTHAP,875,Huyện Lấp Vò
+DONGTHAP,876,Huyện Lai Vung
+DONGTHAP,877,Huyện Châu Thành
+ANGIANG,883,Thành phố Long Xuyên
+ANGIANG,884,Thành phố Châu Đốc
+ANGIANG,886,Huyện An Phú
+ANGIANG,887,Thị xã Tân Châu
+ANGIANG,888,Huyện Phú Tân
+ANGIANG,889,Huyện Châu Phú
+ANGIANG,890,Huyện Tịnh Biên
+ANGIANG,891,Huyện Tri Tôn
+ANGIANG,892,Huyện Châu Thành
+ANGIANG,893,Huyện Chợ Mới
+ANGIANG,894,Huyện Thoại Sơn
+KIENGIANG,899,Thành phố Rạch Giá
+KIENGIANG,900,Thành phố Hà Tiên
+KIENGIANG,902,Huyện Kiên Lương
+KIENGIANG,903,Huyện Hòn Đất
+KIENGIANG,904,Huyện Tân Hiệp
+KIENGIANG,905,Huyện Châu Thành
+KIENGIANG,906,Huyện Giồng Riềng
+KIENGIANG,907,Huyện Gò Quao
+KIENGIANG,908,Huyện An Biên
+KIENGIANG,909,Huyện An Minh
+KIENGIANG,910,Huyện Vĩnh Thuận
+KIENGIANG,911,Thành phố Phú Quốc
+KIENGIANG,912,Huyện Kiên Hải
+KIENGIANG,913,Huyện U Minh Thượng
+KIENGIANG,914,Huyện Giang Thành
+CANTHO,916,Quận Ninh Kiều
+CANTHO,917,Quận Ô Môn
+CANTHO,918,Quận Bình Thuỷ
+CANTHO,919,Quận Cái Răng
+CANTHO,923,Quận Thốt Nốt
+CANTHO,924,Huyện Vĩnh Thạnh
+CANTHO,925,Huyện Cờ Đỏ
+CANTHO,926,Huyện Phong Điền
+CANTHO,927,Huyện Thới Lai
+HAUGIANG,930,Thành phố Vị Thanh
+HAUGIANG,931,Thành phố Ngã Bảy
+HAUGIANG,932,Huyện Châu Thành A
+HAUGIANG,933,Huyện Châu Thành
+HAUGIANG,934,Huyện Phụng Hiệp
+HAUGIANG,935,Huyện Vị Thuỷ
+HAUGIANG,936,Huyện Long Mỹ
+HAUGIANG,937,Thị xã Long Mỹ
+SOCTRANG,941,Thành phố Sóc Trăng
+SOCTRANG,942,Huyện Châu Thành
+SOCTRANG,943,Huyện Kế Sách
+SOCTRANG,944,Huyện Mỹ Tú
+SOCTRANG,945,Huyện Cù Lao Dung
+SOCTRANG,946,Huyện Long Phú
+SOCTRANG,947,Huyện Mỹ Xuyên
+SOCTRANG,948,Thị xã Ngã Năm
+SOCTRANG,949,Huyện Thạnh Trị
+SOCTRANG,950,Thị xã Vĩnh Châu
+SOCTRANG,951,Huyện Trần Đề
+BACLIEU,954,Thành phố Bạc Liêu
+BACLIEU,956,Huyện Hồng Dân
+BACLIEU,957,Huyện Phước Long
+BACLIEU,958,Huyện Vĩnh Lợi
+BACLIEU,959,Thị xã Giá Rai
+BACLIEU,960,Huyện Đông Hải
+BACLIEU,961,Huyện Hoà Bình
+CAMAU,964,Thành phố Cà Mau
+CAMAU,966,Huyện U Minh
+CAMAU,967,Huyện Thới Bình
+CAMAU,968,Huyện Trần Văn Thời
+CAMAU,969,Huyện Cái Nước
+CAMAU,970,Huyện Đầm Dơi
+CAMAU,971,Huyện Năm Căn
+CAMAU,972,Huyện Phú Tân
+CAMAU,973,Huyện Ngọc Hiển

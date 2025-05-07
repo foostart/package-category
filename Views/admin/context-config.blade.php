@@ -46,7 +46,7 @@
 
                     <!--BODY-->
                     <div class="panel-body">
-                        {!! html()->form('POST', route('contexts.config'))->open() !!}
+                        {!! html()->form('POST', route('contexts.configPost'))->open() !!}
 
                         <div class='btn-form'>
 

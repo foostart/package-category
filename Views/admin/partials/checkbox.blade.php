@@ -52,7 +52,7 @@
     @if($value && $items)
         @foreach($items as $item)
             <span class='checkbox-item' style="display: block;">
-                {{ Form::checkbox($name, $value, null, ['class' => '']) }}
+                {!! html()->checkbox($name, null, $value)->class('') !!}
                 <label for='{!! $name !!}' style="font-weight: normal;">{!! $item !!}</label>
             </span>
         @endforeach

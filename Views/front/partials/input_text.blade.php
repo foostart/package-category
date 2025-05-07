@@ -60,18 +60,23 @@
 
         <!--element-->
         @if($type)
-            {!! Form::password($name, [ 'id' => $id,
-                                        'class' => 'form-control '.$class,
-                                        'placeholder' => $placeholder,
-                                        $required,
-                                        'autocomplete' => 'off']) !!}
+            {!! html()->password($name)
+                ->id($id)
+                ->class('form-control ' . $class)
+                ->placeholder($placeholder)
+                ->attribute('required', $required)
+                ->attribute('autocomplete', 'off')
+            !!}
         @else
-            {!! Form::text($name, '', [ 'id' => $id,
-                                        'class' => 'form-control '.$class,
-                                        'placeholder' => $placeholder,
-                                        $required,
-                                        'autocomplete' => 'off']) !!}
+            {!! html()->text($name)
+                ->id($id)
+                ->class('form-control ' . $class)
+                ->placeholder($placeholder)
+                ->attribute('required', $required)
+                ->attribute('autocomplete', 'off')
+            !!}
         @endif
+
     </div>
     <!--errors-->
     @if ($errors->has($name))

@@ -46,9 +46,9 @@
 
                     <!--BODY-->
                     <div class="panel-body">
-                        {!! Form::open(['route'=>['contexts.config'], 'method' => 'post'])  !!}
+                        {!! html()->form('POST', route('contexts.config'))->open() !!}
 
-                            <div class='btn-form'>
+                        <div class='btn-form'>
 
                                 <!-- SAVE BUTTON -->
                                 {{ html()->submit(trans($plang_admin.'.buttons.save'))->class('btn btn-info pull-right') }}

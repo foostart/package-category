@@ -4,7 +4,8 @@ use Foostart\Category\Models\Category;
 use Foostart\Category\Models\Context;
 use Config;
 
-class FooCategory {
+class FooCategory
+{
 
     //Object categories
     private $obj_category;
@@ -15,7 +16,8 @@ class FooCategory {
     /**
      * Constructor
      */
-    public function __construct() {
+    public function __construct()
+    {
 
         //Object categories
         $this->obj_category = new Category();
@@ -29,7 +31,8 @@ class FooCategory {
      * @param ARRAY $params array of conditions
      * @return OBJECT list of categories in select format
      */
-    public function pluckSelect($params){
+    public function pluckSelect($params)
+    {
 
         $select_category_list = $this->obj_category->pluckSelect($params);
 
@@ -43,7 +46,8 @@ class FooCategory {
      * @param STRING reference name
      * @return STRING context key
      */
-    public function getContextKeyByRef($ref) {
+    public function getContextKeyByRef($ref)
+    {
 
         $params = ['ref' => $ref];
         $context = $this->obj_context->selectItem($params);
@@ -59,7 +63,8 @@ class FooCategory {
      * @param STRING $ref context reference name
      * @return ELOQUENT OBJECT category
      */
-    public function getCategoriesByRef($ref, $params = array()) {
+    public function getCategoriesByRef($ref, $params = array())
+    {
 
         $categories = [];
 
@@ -96,7 +101,8 @@ class FooCategory {
      * @param INT $category_id_parent
      * @return OBJECT list of childs of parent category
      */
-    public function getCategoriesByIdParent($category_id_parent, $params = array()) {
+    public function getCategoriesByIdParent($category_id_parent, $params = array())
+    {
         return $this->obj_category->getCategoriesByIdParent($category_id_parent, $params);
     }
 }

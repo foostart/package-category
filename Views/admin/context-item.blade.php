@@ -13,17 +13,31 @@
     global $counter;
     $nav = $items->toArray();
     $counter = ($nav['current_page'] - 1) * $nav['per_page'] + 1;
-?>
-<caption>
-    @if($nav['total'] == 1)
-        {!! trans($plang_admin.'.descriptions.counter', ['number' => $nav['total']]) !!}
-    @else
-        {!! trans($plang_admin.'.descriptions.counters', ['number' => $nav['total']]) !!}
-    @endif
-</caption>
+    ?>
+    <div class="btn-delete-top">
+        <div>
+            @if($nav['total'] == 1)
+                {!! trans($plang_admin.'.descriptions.counter', ['number' => $nav['total']]) !!}
+            @else
+                {!! trans($plang_admin.'.descriptions.counters', ['number' => $nav['total']]) !!}
+            @endif
+        </div>
+		{!! html()->submit(trans($plang_admin.'.buttons.delete-in-trash'))
+		    ->class('btn btn-danger delete btn-delete-all del-trash')
+		    ->title(trans($plang_admin.'.hint.delete-in-trash'))
+		    ->name('del-trash')
+		!!}
 
-<div class="table-responsive" style="width: 950px">
-<table class="table table-hover">
+		{!! html()->submit(trans($plang_admin.'.buttons.delete-forever'))
+		    ->class('btn btn-warning delete btn-delete-all del-forever')
+		    ->title(trans($plang_admin.'.hint.delete-forever'))
+		    ->name('del-forever')
+		!!}
+
+        </div>
+
+    <div class="table-responsive">
+    <table class="table table-hover">
 
     <thead>
         <tr style="height: 50px;">
@@ -108,15 +122,6 @@
                     {{ trans($plang_admin.'.columns.operations') }}
                 </span>
 
-                {{ html()->submit(trans($plang_admin.'.buttons.delete-in-trash'))
-                ->class('btn btn-danger pull-right delete btn-delete-all del-trash')
-                ->title(trans($plang_admin.'.hint.delete-in-trash'))
-                ->name('del-trash') }}
-
-                {{ html()->submit(trans($plang_admin.'.buttons.delete-forever'))
-                    ->class('btn btn-warning pull-right delete btn-delete-all del-forever')
-                    ->title(trans($plang_admin.'.hint.delete-forever'))
-                    ->name('del-forever') }}
 
             </th>
 

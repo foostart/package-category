@@ -1,8 +1,8 @@
 $(document).ready(function () {
-    
+
     //TODO: unknow
     setTimeout(function () {
-    $('.flash-message').fadeOut('fast');
+        $('.flash-message').fadeOut('fast');
     }, 30000);
 
     //hide button delete

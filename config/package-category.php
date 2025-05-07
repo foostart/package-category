@@ -44,26 +44,23 @@ return [
      */
     'status' => [
         'publish' => 99,
-        'unpublish' => 33,
         'intrash' => 55,
+        'unpublish' => 33,
+        'new' => 22,
         'draft' => 11,
-        'new'   => 22,
         'list' => [
             99 => 'Publish',
-            33 => 'Unpublish',
             55 => 'In trash',
+            33 => 'Unpublish',
             11 => 'Draft',
         ],
         'color' => [
-            11 => '#ef4832',
-            33 => '#000000',
+            99 => '#5bc0de',
             55 => '#a8aac2',
-            99 => '#5bc0de'
+            33 => '#000000',
+            11 => '#ef4832',
         ]
     ],
-
-
-
 
 
     /*
@@ -85,9 +82,6 @@ return [
     ],
 
 
-
-
-
     /*
     |-----------------------------------------------------------------------
     | LANGUAGES
@@ -100,9 +94,6 @@ return [
         'en' => 'English',
         'vi' => 'Vietnam'
     ],
-
-
-
 
 
     /*

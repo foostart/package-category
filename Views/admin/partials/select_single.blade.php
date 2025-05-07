@@ -47,7 +47,9 @@
 <div class="form-group">
 
     <!--element-->
+@if($label)
     {{ html()->label($label, $name) }}
+@endif
     @if($items)
         {{ html()->select($name, $items, $value)->class('form-control')->placeholder($placehover) }}
     @endif

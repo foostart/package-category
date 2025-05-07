@@ -1,35 +1,44 @@
 <?php namespace Foostart\Category\Helpers;
+
 use Request;
-class SortTable {
+
+class SortTable
+{
 
     public $orders = [];
     public $sorting = [];
 
-    public function __construct($orders = array()) {
+    public function __construct($orders = array())
+    {
         if (!empty($orders)) {
             $this->orders = $orders;
         }
     }
 
-    public function setOrders($orders) {
+    public function setOrders($orders)
+    {
         $this->orders = $orders;
     }
 
-    public function getOrders($orders) {
+    public function getOrders($orders)
+    {
         return $this->orders;
     }
 
-    public function setSorting($sorting) {
+    public function setSorting($sorting)
+    {
         $this->sorting = $sorting;
     }
-    public function linkOrders() {
+
+    public function linkOrders()
+    {
 
         $sorting = [
             'label' => $this->orders,
             'items' => [],
             'url' => []
         ];
-        
+
         if ($this->sorting) {
             $sorting = $this->sorting;
         }

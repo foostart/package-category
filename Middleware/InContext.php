@@ -11,11 +11,13 @@ class InContext
     /**
      * Handle an incoming request.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure  $next
+     * @param \Illuminate\Http\Request $request
+     * @param \Closure $next
      * @return mixed
      */
-    public function handle($request, Closure $next){ return $next($request);
+    public function handle($request, Closure $next)
+    {
+        return $next($request);
         //load context config
         $configs = Config::get('package-category');
 
@@ -48,7 +50,8 @@ class InContext
      * @param type $routeName
      * @return boolean
      */
-    private function authList($routeName, $context_key, $configs){
+    private function authList($routeName, $context_key, $configs)
+    {
         $flag = TRUE;
         if (strcmp($routeName, 'categories.list') == 0) {
             //check permission
@@ -72,7 +75,8 @@ class InContext
      * @param type $routeName
      * @return boolean
      */
-    private function authEdit($routeName, $context_key, $configs){
+    private function authEdit($routeName, $context_key, $configs)
+    {
         $flag = TRUE;
         $authentication_helper = App::make('authentication_helper');
 
@@ -85,12 +89,12 @@ class InContext
                 $flag = FALSE;
 
             } elseif (!$this->isValidContextKey($context_key, $configs)) {
-                    //check valid context key
-                    $flag = FALSE;
+                //check valid context key
+                $flag = FALSE;
 
             } elseif (!$authentication_helper->hasPermission($configs['permissions']['edit'])) {
 
-                    $flag = FALSE;
+                $flag = FALSE;
             }
         }
         return $flag;
@@ -101,7 +105,8 @@ class InContext
      * @param type $routeName
      * @return boolean
      */
-    private function authPost($routeName, $context_key, $configs){
+    private function authPost($routeName, $context_key, $configs)
+    {
 
         $flag = TRUE;
         $authentication_helper = App::make('authentication_helper');
@@ -115,12 +120,12 @@ class InContext
                 $flag = FALSE;
 
             } elseif (!$this->isValidContextKey($context_key, $configs)) {
-                    //check valid context key
-                    $flag = FALSE;
+                //check valid context key
+                $flag = FALSE;
 
             } elseif (!$authentication_helper->hasPermission($configs['permissions']['edit'])) {
 
-                    $flag = FALSE;
+                $flag = FALSE;
             }
         }
 
@@ -133,7 +138,8 @@ class InContext
      * @param type $key
      * @param type $contexts
      */
-    private function isValidContextKey($key, $configs) {
+    private function isValidContextKey($key, $configs)
+    {
 
         //valid context key
         $flag = TRUE;

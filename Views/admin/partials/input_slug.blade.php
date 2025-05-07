@@ -18,55 +18,64 @@
 
 <!--DATA-->
 <?php
-    //name
-    $name = empty($name)?'undefined':$name;
-    //id
-    $id = empty($id)?$name:$id;
-    //ref
-    $ref = empty($ref)?$name:$ref;
-    //value
-    $value = empty($value)?$request->get($name):$value;
-    //label
-    $label = empty($label) ? '' : $label;
-    //place hover
-    $placehover = empty($placehover) ? $label : $placehover;
-    //eror
-    $errors = empty($errors) ? '' : $errors;
-    //description
-    $description = empty($description) ? '' : $description;
+//name
+$name = empty($name) ? 'undefined' : $name;
+//id
+$id = empty($id) ? $name : $id;
+//ref
+$ref = empty($ref) ? $name : $ref;
+//value
+$value = empty($value) ? $request->get($name) : $value;
+//label
+$label = empty($label) ? '' : $label;
+//place hover
+$placehover = empty($placehover) ? $label : $placehover;
+//eror
+$errors = empty($errors) ? '' : $errors;
+//description
+$description = empty($description) ? '' : $description;
+//hidden
+
+$hidden = empty($hidden) ? false : true;
 ?>
 <!--/DATA-->
 
-<!-- INPUT TEXT -->
-<div class="form-group">
-
-    <!--element-->
+<!--element-->
+@if($hidden)
+    {!! html()->hidden($name, $value)->id($id) !!}
+@else
+    <!-- INPUT TEXT -->
+    <div class="form-group">
     {{ html()->label($label)->for($name) }}
     {{ html()->text($name, $value)->id($id)->class('form-control')->placeholder($placehover) }}
 
     <!--description-->
-    @if($description)
-        <span class='input-text-description'>
+        @if($description)
+            <span class='input-text-description'>
             <blockquote class="quote-card">
                 <p>{!! $description !!}</p>
             </blockquote>
         </span>
-    @endif
+        @endif
 
     <!--errors-->
-    @if ($errors->has($name))
-        <ul class='alert alert-danger error-item'>
-            @foreach($errors->get($name) as $error)
-                @if($error)
-                <li>
-                    <span class='input-text-error'>{!! $error !!}</span>
-                </li>
-                @endif
-            @endforeach
-        </ul>
-    @endif
-</div>
+        @if ($errors->has($name))
+            <ul class='alert alert-danger error-item'>
+                @foreach($errors->get($name) as $error)
+                    @if($error)
+                        <li>
+                            <span class='input-text-error'>{!! $error !!}</span>
+                        </li>
+                    @endif
+                @endforeach
+            </ul>
+        @endif
+    </div>
 <!-- /INPUT TEXT -->
+@endif
+
+
+
 
 <!-- /INPUT IMAGE -->
 @section('footer_scripts')

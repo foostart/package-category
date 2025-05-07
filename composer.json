@@ -14,7 +14,7 @@
     ],
     "license": "MIT",
     "require": {
-		"foostart/package-post": "*"
+        "foostart/package-post": "*"
     },
     "autoload": {
         "psr-4": {

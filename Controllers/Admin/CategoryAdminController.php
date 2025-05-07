@@ -20,12 +20,14 @@ use Foostart\Category\Models\Context;
 use Foostart\Category\Models\Category;
 use Foostart\Category\Validators\CategoryValidator;
 
-class CategoryAdminController extends FooController {
+class CategoryAdminController extends FooController
+{
 
     public $obj_item = NULL;
     public $obj_context = NULL;
 
-    public function __construct() {
+    public function __construct()
+    {
 
         parent::__construct();
         // models
@@ -49,10 +51,10 @@ class CategoryAdminController extends FooController {
         // page views
         $this->page_views = [
             'admin' => [
-                'items' => $this->package_name.'::admin.'.$this->package_base_name.'-items',
-                'edit'  => $this->package_name.'::admin.'.$this->package_base_name.'-edit',
-                'config'  => $this->package_name.'::admin.'.$this->package_base_name.'-config',
-                'lang'  => $this->package_name.'::admin.'.$this->package_base_name.'-lang',
+                'items' => $this->package_name . '::admin.' . $this->package_base_name . '-items',
+                'edit' => $this->package_name . '::admin.' . $this->package_base_name . '-edit',
+                'config' => $this->package_name . '::admin.' . $this->package_base_name . '-config',
+                'lang' => $this->package_name . '::admin.' . $this->package_base_name . '-lang',
             ]
         ];
 
@@ -66,8 +68,9 @@ class CategoryAdminController extends FooController {
      * Show list of items by key
      * @return view list of items
      * @date 27/12/2017
-    */
-    public function index(Request $request) {
+     */
+    public function index(Request $request)
+    {
 
         $params = $request->all();
         $params['category_id_parent'] = NULL;
@@ -92,7 +95,8 @@ class CategoryAdminController extends FooController {
      * Add new category by context
      * @return screen
      */
-    public function edit(Request $request) {
+    public function edit(Request $request)
+    {
 
         $params = $request->all();
 
@@ -120,7 +124,8 @@ class CategoryAdminController extends FooController {
      * @return view edit page
      * @date 27/12/2017
      */
-    public function post(Request $request) {
+    public function post(Request $request)
+    {
 
         $item = NULL;
 
@@ -129,7 +134,7 @@ class CategoryAdminController extends FooController {
 
         $is_valid_request = $this->isValidRequest($request);
 
-        $id = (int) $request->get('id');
+        $id = (int)$request->get('id');
 
         if ($is_valid_request && $this->obj_validator->validate($params)) {
 
@@ -143,19 +148,19 @@ class CategoryAdminController extends FooController {
                     $item = $this->obj_item->updateItem($params);
 
                     // message
-                    return Redirect::route($this->root_router.'.edit', [
-                                                                        'id' => $item->id,
-                                                                        '_key' => $_key,
-                                                                    ])
-                                    ->withMessage(trans($this->plang_admin.'.actions.edit-ok'));
+                    return Redirect::route($this->root_router . '.edit', [
+                        'id' => $item->id,
+                        '_key' => $_key,
+                    ])
+                        ->withMessage(trans($this->plang_admin . '.actions.edit-ok'));
                 } else {
 
                     // message
-                    return Redirect::route($this->root_router.'.list')
-                                    ->withMessage(trans($this->plang_admin.'.actions.edit-error'));
+                    return Redirect::route($this->root_router . '.list')
+                        ->withMessage(trans($this->plang_admin . '.actions.edit-error'));
                 }
 
-            // add new item
+                // add new item
             } else {
 
                 $item = $this->obj_item->insertItem($params);
@@ -163,19 +168,19 @@ class CategoryAdminController extends FooController {
                 if (!empty($item)) {
 
                     //message
-                    return Redirect::route($this->root_router.'.edit', [
-                                                                        'id' => $item->id,
-                                                                        '_key' => $_key,
-                                                                    ])
-                                    ->withMessage(trans($this->plang_admin.'.actions.add-ok'));
+                    return Redirect::route($this->root_router . '.edit', [
+                        'id' => $item->id,
+                        '_key' => $_key,
+                    ])
+                        ->withMessage(trans($this->plang_admin . '.actions.add-ok'));
                 } else {
 
                     //message
-                    return Redirect::route($this->root_router.'.edit', [
-                                                                        'id' => $item->id,
-                                                                        '_key' => $_key,
-                                                                    ])
-                                    ->withMessage(trans($this->plang_admin.'.actions.add-error'));
+                    return Redirect::route($this->root_router . '.edit', [
+                        'id' => $item->id,
+                        '_key' => $_key,
+                    ])
+                        ->withMessage(trans($this->plang_admin . '.actions.add-error'));
                 }
 
             }
@@ -185,28 +190,29 @@ class CategoryAdminController extends FooController {
             $errors = $this->obj_validator->getErrors();
 
             // passing the id incase fails editing an already existing item
-            return Redirect::route($this->root_router.'.edit', $id ? [ 'id' => $id,
-                                                                        '_key' => $_key,
-                                                                    ] : [
-                                                                        '_key' => $_key
-                                                                    ])
-                    ->withInput()->withErrors($errors);
+            return Redirect::route($this->root_router . '.edit', $id ? ['id' => $id,
+                '_key' => $_key,
+            ] : [
+                '_key' => $_key
+            ])
+                ->withInput()->withErrors($errors);
         }
     }
 
-/**
+    /**
      * Delete existing item
      * @return view list of items
      * @date 27/12/2017
      */
-    public function delete(Request $request) {
+    public function delete(Request $request)
+    {
 
         $item = NULL;
         $flag = TRUE;
         $params = array_merge($request->all(), $this->getUser());
         $_key = @$params['_key'];
 
-        $delete_type = isset($params['del-forever'])?'delete-forever':'delete-trash';
+        $delete_type = isset($params['del-forever']) ? 'delete-forever' : 'delete-trash';
         $id = (int)$request->get('id');
         $ids = $request->get('ids');
 
@@ -214,7 +220,7 @@ class CategoryAdminController extends FooController {
 
         if ($is_valid_request && (!empty($id) || !empty($ids))) {
 
-            $ids = !empty($id)?[$id]:$ids;
+            $ids = !empty($id) ? [$id] : $ids;
 
             foreach ($ids as $id) {
 
@@ -225,17 +231,17 @@ class CategoryAdminController extends FooController {
                 }
             }
             if ($flag) {
-                return Redirect::route($this->root_router.'.list', [
-                                                            '_key' => $_key,
-                                                        ])
-                                ->withMessage(trans($this->plang_admin.'.actions.delete-ok'));
+                return Redirect::route($this->root_router . '.list', [
+                    '_key' => $_key,
+                ])
+                    ->withMessage(trans($this->plang_admin . '.actions.delete-ok'));
             }
         }
 
-        return Redirect::route($this->root_router.'.list', [
-                                                            '_key' => $_key,
-                                                        ])
-                        ->withMessage(trans($this->plang_admin.'.actions.delete-error'));
+        return Redirect::route($this->root_router . '.list', [
+            '_key' => $_key,
+        ])
+            ->withMessage(trans($this->plang_admin . '.actions.delete-error'));
     }
 
 
@@ -245,7 +251,8 @@ class CategoryAdminController extends FooController {
      * @return view edit page
      * @date 26/12/2017
      */
-    public function copy(Request $request) {
+    public function copy(Request $request)
+    {
 
         $params = $request->all();
 
@@ -257,8 +264,8 @@ class CategoryAdminController extends FooController {
             $item = $this->obj_item->selectItem($params, FALSE);
 
             if (empty($item)) {
-                return Redirect::route($this->root_router.'.list')
-                                ->withMessage(trans($this->plang_admin.'.actions.edit-error'));
+                return Redirect::route($this->root_router . '.list')
+                    ->withMessage(trans($this->plang_admin . '.actions.edit-error'));
             }
 
             $item->id = NULL;

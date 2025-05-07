@@ -11,7 +11,9 @@ use Foostart\Category\Models\Categories;
 class CategoryFrontController extends Controller
 {
     public $data = array();
-    public function __construct() {
+
+    public function __construct()
+    {
 
     }
 

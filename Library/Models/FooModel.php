@@ -6,11 +6,13 @@ use App;
 use DB;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Pagination\Paginator;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 use Foostart\Category\Models\Context;
 
-class FooModel extends Model {
-
+class FooModel extends Model
+{
+    use SoftDeletes;
 
     protected $prefix_table = '';
 
@@ -29,13 +31,13 @@ class FooModel extends Model {
 
     protected $fields = [
         'status' => [
-                'name' => 'status',
-                'type' => 'Int',
-            ],
+            'name' => 'status',
+            'type' => 'Int',
+        ],
         'created_user_id' => [
-                'name' => 'user_id',
-                'type' => 'Int',
-            ],
+            'name' => 'user_id',
+            'type' => 'Int',
+        ],
         'updated_user_id' => [
             'name' => 'user_id',
             'type' => 'Int',
@@ -61,10 +63,10 @@ class FooModel extends Model {
     protected $field_status = 'status';
 
     public $config = NULL;
-    
+
     public $config_status = NULL;
 
-    public $config_file =NULL;
+    public $config_file = NULL;
 
     protected $obj_context = NULL;
 
@@ -74,12 +76,17 @@ class FooModel extends Model {
      *
      * @param array $attributes
      */
-    public function __construct(array $attributes = array()) {
+    public function __construct(array $attributes = array())
+    {
         parent::__construct($attributes);
         $this->config_status = config('package-category.status');
 
         if ($this->config_file) {
             $this->config = config($this->config_file);
+        }
+
+        if (!empty($attributes['perPage'])) {
+            $this->perPage = $attributes['perPage'];
         }
     }
 
@@ -88,7 +95,8 @@ class FooModel extends Model {
      * @param ARRAY $params list of parameters
      * @return ARRAY OBJECT list of items
      */
-    public function selectItems($params = []) {
+    public function selectItems($params = [])
+    {
         $items = [];
         return $items;
     }
@@ -98,10 +106,10 @@ class FooModel extends Model {
      * @param ARRAY $params list of parameters
      * @param OBJECT $item
      */
-    public function selectItem($params = [], $key = NULL) {
+    public function selectItem($params = [], $key = NULL)
+    {
 
     }
-
 
 
     /**
@@ -131,7 +139,8 @@ class FooModel extends Model {
      * @param array $filters
      * @return array list of valid filters
      */
-    protected function isValidFilters(&$filters = []) {
+    protected function isValidFilters(&$filters = [])
+    {
 
         $flag = TRUE;
 
@@ -149,7 +158,8 @@ class FooModel extends Model {
      * @param $value
      * @return bool
      */
-    protected function isValidValue($value) {
+    protected function isValidValue($value)
+    {
         $flag = TRUE;
         return $flag;
     }
@@ -159,7 +169,8 @@ class FooModel extends Model {
      * @param eloquent $elo
      * @return eloquent object
      */
-    protected function orderingFilters(array $params, $elo) {
+    protected function orderingFilters(array $params, $elo)
+    {
 
         //order
         if (!empty($params['order'])) {
@@ -197,7 +208,8 @@ class FooModel extends Model {
      * @param array $input_filter
      * @return bool
      */
-    private function isNotOrderingFilter(array $input_filter) {
+    private function isNotOrderingFilter(array $input_filter)
+    {
         return empty($input_filter['order_by']) || empty($input_filter['ordering']);
     }
 
@@ -233,11 +245,11 @@ class FooModel extends Model {
 
 
     /**
-     * @param int $per_page
+     * @param int $perPage
      */
-    public function setPerPage($per_page)
+    public function setPerPage($perPage)
     {
-        $this->per_page = $per_page;
+        $this->perPage = $perPage;
     }
 
     /**
@@ -245,7 +257,7 @@ class FooModel extends Model {
      */
     public function getPerPage()
     {
-        return $this->per_page;
+        return $this->perPage;
     }
 
     /**
@@ -253,7 +265,8 @@ class FooModel extends Model {
      * @param ARRAY $params list of parameters
      * @return INT value
      */
-    public function getInt($params, $key) {
+    public function getInt($params, $key)
+    {
 
         $value = NULL;
 
@@ -270,7 +283,8 @@ class FooModel extends Model {
      * @param STRING $key is field name
      * @return DATE value
      */
-    public function getDate($params, $key) {
+    public function getDate($params, $key)
+    {
         $value = NULL;
 
         if (isset($params[$key])) {
@@ -286,7 +300,8 @@ class FooModel extends Model {
      * @param STRING $key is field name
      * @return TEXT value
      */
-    public function getText($params, $key) {
+    public function getText($params, $key)
+    {
         $value = NULL;
 
         if (isset($params[$key])) {
@@ -302,12 +317,12 @@ class FooModel extends Model {
      * @param STRING $key is field name
      * @return BOOLEAN value
      */
-    public function getBool($params, $key) {
+    public function getBool($params, $key)
+    {
         $value = TRUE;
 
         return $value;
     }
-
 
 
     /**
@@ -316,7 +331,8 @@ class FooModel extends Model {
      * @param STRING $key is field name
      * @return TEXT value
      */
-    public function getJson($params, $key) {
+    public function getJson($params, $key)
+    {
         $value = NULL;
 
         if (isset($params[$key])) {
@@ -333,7 +349,8 @@ class FooModel extends Model {
      * @param ARRAY $args
      * @return STRING JSON
      */
-    public function getXJson($params, $key, $args) {
+    public function getXJson($params, $key, $args)
+    {
         $value = NULL;
 
         if (!empty($params[$key]) && is_array($params[$key])) {
@@ -365,16 +382,17 @@ class FooModel extends Model {
      * @param ARRAY $fields
      * @return ARRAY fields data
      */
-    public function getDataFields($params, $fields) {
+    public function getDataFields($params, $fields)
+    {
 
         $data_fields = [];
 
         foreach ($fields as $key => $field) {
 
-            $funGet = 'get'.$field['type'];
+            $funGet = 'get' . $field['type'];
             if (!empty($field['attr'])) {
                 $data_fields[$key] = $this->$funGet($params, $field['name'], $field['attr']);
-            }else {
+            } else {
                 $data_fields[$key] = $this->$funGet($params, $field['name']);
             }
         }
@@ -387,7 +405,8 @@ class FooModel extends Model {
      * @param ELOQUENT OBJECT $item
      * @return ELOQUENT OBJECT
      */
-    public function fdelete($item) {
+    public function fdelete($item)
+    {
 
         $field_status = $this->field_status;
         $item->$field_status = $this->config_status['intrash'];
@@ -399,12 +418,13 @@ class FooModel extends Model {
      * Get list of statuses to push to select
      * @return ARRAY list of statuses
      */
-    public function getPluckStatus() {
-       $pluck_status = [];
-       if ($this->config_status && $this->config_status['list']) {
-           $pluck_status = $this->config_status['list'];
-       }
-       return $pluck_status;
+    public function getPluckStatus()
+    {
+        $pluck_status = [];
+        if ($this->config_status && $this->config_status['list']) {
+            $pluck_status = $this->config_status['list'];
+        }
+        return $pluck_status;
     }
 
     /**
@@ -412,7 +432,8 @@ class FooModel extends Model {
      * @param STRING $ref context
      * @return ELOQUENT OBJECT context
      */
-    public function getContext($ref) {
+    public function getContext($ref)
+    {
         $obj_context = new Context();
         $params = [
             'ref' => $ref
@@ -428,7 +449,8 @@ class FooModel extends Model {
      * @param BOOLEAN $isNull remove elements are null
      * @return JSON
      */
-    public function _toJson($arr, $isNull = false) {
+    public function _toJson($arr, $isNull = false)
+    {
         $json = NULL;
 
         if ($isNull) {
@@ -448,7 +470,8 @@ class FooModel extends Model {
     }
 
 
-    public function getValidInsertFields($fields) {
+    public function getValidInsertFields($fields)
+    {
 
         $validFields = [];
 

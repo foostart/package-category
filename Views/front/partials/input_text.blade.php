@@ -50,7 +50,7 @@
 
         <!--label-->
         @if($label)
-            {!! Form::label($name, $label) !!}
+            {!! html()->label($label)->for($name) !!}
         @endif
 
         <!--icon-->
@@ -60,19 +60,17 @@
 
         <!--element-->
         @if($type)
-        {!! Form::password($name, [ 'id' => $id,
-                                    'class' => 'form-control '.$class,
-                                    'placeholder' => $placeholder,
-                                    $required,
-                                    'autocomplete' => 'off'])
-        !!}
+            {!! Form::password($name, [ 'id' => $id,
+                                        'class' => 'form-control '.$class,
+                                        'placeholder' => $placeholder,
+                                        $required,
+                                        'autocomplete' => 'off']) !!}
         @else
-        {!! Form::text($name, '', [ 'id' => $id,
-                                    'class' => 'form-control '.$class,
-                                    'placeholder' => $placeholder,
-                                    $required,
-                                    'autocomplete' => 'off'])
-        !!}
+            {!! Form::text($name, '', [ 'id' => $id,
+                                        'class' => 'form-control '.$class,
+                                        'placeholder' => $placeholder,
+                                        $required,
+                                        'autocomplete' => 'off']) !!}
         @endif
     </div>
     <!--errors-->

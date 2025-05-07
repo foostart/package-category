@@ -37,14 +37,14 @@
 
 <!--HEAD CSS-->
 @section('head_css')
-    {!! HTML::style('vendor/package-filemanager/css/lfm-custom.css') !!}
+    {{ html()->style('vendor/package-filemanager/css/lfm-custom.css') }}
 @endsection
 <!--/HEAD CSS-->
 
 <!--UPLOAD FILES-->
 <div class='form-group'>
 
-    {!! Form::label($name, $label) !!}
+    {{ html()->label($label)->for($name) }}
 
     <!--button upload-->
     <div class='image-control'>
@@ -126,7 +126,7 @@
 
 @section('footer_scripts')
     @parent
-    {!! HTML::script('vendor/package-filemanager/js/lfm-configs.js') !!}
+    {{ html()->script('vendor/package-filemanager/js/lfm-configs.js') }}
 
     <script type='text/javascript'>
 

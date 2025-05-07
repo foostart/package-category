@@ -2,7 +2,7 @@
 | List of elements in category form
 |------------------------------------------------------------------------------->
 
-{!! Form::open(['route'=>['categories.post', 'id' => @$item->id, '_key' => $request->get('_key')],  'files'=>true, 'method' => 'POST'])  !!}
+{{ html()->form('POST', route('categories.post', ['id' => @$item->id, '_key' => $request->get('_key')]))->files()->open() }}
 
     <!--BUTTONS-->
     <div class='btn-form'>
@@ -16,7 +16,7 @@
         <!-- DELETE BUTTON -->
 
         <!-- SAVE BUTTON -->
-        {!! Form::submit(trans($plang_admin.'.buttons.save'), array("class"=>"btn btn-info pull-right")) !!}
+        {{ html()->submit(trans($plang_admin.'.buttons.save'))->class('btn btn-info pull-right') }}
         <!-- /SAVE BUTTON -->
     </div>
     <!--/BUTTONS-->
@@ -199,12 +199,12 @@
 
     <!--HIDDEN FIELDS-->
     <div class='hidden-field'>
-        {!! Form::hidden('id',@$item->id) !!}
-        {!! Form::hidden('_key',$request->get('_key','')) !!}
+        {{ html()->hidden('id', @$item->id) }}
+        {{ html()->hidden('_key', $request->get('_key', '')) }}
     </div>
     <!--/HIDDEN FIELDS-->
 
-{!! Form::close() !!}
+{{ html()->form()->close() }}
 <!------------------------------------------------------------------------------
 | End list of elements in category form
 |------------------------------------------------------------------------------>

@@ -41,13 +41,13 @@
 
     <!--element-->
     @if($label)
-    {!! Form::label($name, $label) !!}
+        {{ html()->label($label)->for($name) }}
     @endif
 
     @if($items)
         @foreach($items as $key => $item)
             <span class='radio-item' style="display: block;">
-                {{ Form::radio($name, $key, $key==$value?true:false, ['class' => '', 'id' => $name.'-'.$key]) }}
+                {{ html()->radio($key, $key == $value, ['class' => '', 'id' => $name . '-' . $key]) }}
                 <label for='{!! $name."-".$key !!}' style="font-weight: normal;">{!! $item !!}</label>
             </span>
         @endforeach

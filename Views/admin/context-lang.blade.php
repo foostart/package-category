@@ -47,13 +47,13 @@
 
                     <!--BODY-->
                     <div class="panel-body">
-                        {!! Form::open(['route'=>['contexts.lang'], 'method' => 'post'])  !!}
+                        {{ html()->form('POST', route('contexts.lang'))->open() }}
 
-                            <div class='btn-form'>
+                        <div class='btn-form'>
 
                                 <!-- SAVE BUTTON -->
-                                {!! Form::submit(trans($plang_admin.'.buttons.save'), array("class"=>"btn btn-info pull-right ")) !!}
-                                <!-- /SAVE BUTTON -->
+                            {{ html()->submit(trans($plang_admin.'.buttons.save'))->class('btn btn-info pull-right') }}
+                            <!-- /SAVE BUTTON -->
 
                             </div>
 
@@ -77,14 +77,14 @@
                         <!--LANG CONTENT-->
                         @foreach($lang_contents as $key => $content)
                             <div id="{{$key}}" class="tab-pane fade {!! ($key==$lang)?'in active':'' !!}">
-                                {!! Form::textarea($key, $content, ['class' => 'form-control textarea-margin', 'size' => '30x50']) !!}
+                                {{ html()->textarea($key, $content)->class('form-control textarea-margin')->attribute('size', '30x50') }}
                             </div>
                         @endforeach
 
                         </div>
 
 
-                            {!! Form::close() !!}
+                        {{ html()->form()->close() }}
                     </div>
                     <!--/BODY-->
 

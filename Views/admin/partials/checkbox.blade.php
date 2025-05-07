@@ -40,7 +40,7 @@
 
     <!--label-->
     @if($label)
-    {!! Form::label($name, $label) !!}
+        {{ html()->label($label)->for($name) }}
     @endif
 
      <!--value-->

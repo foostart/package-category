@@ -18,12 +18,12 @@
 -->
 <div class="row form-group">
     <div class="col-md-12">
-        {!!Form::label(trans('category-admin.labels.sorting')) !!}
+        {{ html()->label(trans('category-admin.labels.sorting')) }}
     </div>
 
     <!-- SORTING BY -->
     <div class="col-md-12 margin-top-10">
-        {!!Form::select('', $sorting['label'], $request->get('order_by',''), ['class' => 'form-control form-validable', 'id' => 'order-by-select']) !!}
+        {{ html()->select($sorting['label'], $sorting['label'], $request->get('order_by',''))->class('form-control form-validable')->id('order-by-select') }}
         <span class="text-danger hidden form-error-required-order">
             {!! trans('category-admin.errors.required-order-by') !!}
         </span>
@@ -34,7 +34,7 @@
 
     <!-- ORDER BY -->
     <div class="col-md-12 margin-top-10">
-        {!!Form::select('', $order_by, $request->get('ordering','asc'), ['class' =>'form-control', 'id' => 'ordering-select']) !!}
+        {{ html()->select('', $order_by, $request->get('ordering','asc'))->class('form-control')->id('ordering-select') }}
     </div>
 
     <!-- BUTTON -->
@@ -46,11 +46,11 @@
     </div>
     <!-- SORTED BY -->
     <span id="append-sorting" style="display: inline-block;padding: 15px;"></span>
-    {!!Form::hidden('order_by',$request->get('order_by'),["id" => "order-by" ]) !!}
-    {!!Form::hidden('ordering',$request->get('ordering'), ["id" => "ordering"]) !!}
+    {{ html()->hidden('order_by', $request->get('order_by'))->id('order-by') }}
+    {{ html()->hidden('ordering', $request->get('ordering'))->id('ordering') }}
 </div>
 
 @section('footer_scripts')
     @parent
-    {!! HTML::script('packages/foostart/js/custom-ordering.js')  !!}
+    {{ html()->script('packages/foostart/js/custom-ordering.js') }}
 @stop

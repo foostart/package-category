@@ -6,14 +6,14 @@
     </div>
     <div class="panel-body">
 
-        {!! Form::open(['route' => ['categories.list', '_key' => @$params['_key']],'method' => 'get']) !!}
+        {{ html()->form('get', route('categories.list', ['_key' => @$params['_key']]))->open() }}
 
-            <!--BUTTONS-->
+        <!--BUTTONS-->
             <div class="form-group">
                 <a href="{!! URL::route('categories.list', ['_key' => @$params['_key']]) !!}" class="btn btn-default search-reset">
                     {!! trans($plang_admin.'.buttons.reset') !!}
                 </a>
-                {!! Form::submit(trans($plang_admin.'.buttons.search').'', ["class" => "btn btn-info", 'id' => 'search-submit']) !!}
+                {{ html()->submit(trans($plang_admin.'.buttons.search'))->class('btn btn-info')->id('search-submit') }}
             </div>
 
             <!-- KEYWORD -->
@@ -35,10 +35,10 @@
             @include('package-category::admin.partials.sorting')
 
             <div class='hidden-field'>
-                {!! Form::hidden('_key',@$params['_key']) !!}
+                {{ html()->hidden('_key', @$params['_key']) }}
                 {!! csrf_field() !!}
             </div>
 
-        {!! Form::close() !!}
+        {{ html()->form()->close() }}
     </div>
 </div>

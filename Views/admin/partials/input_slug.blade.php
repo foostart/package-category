@@ -41,8 +41,8 @@
 <div class="form-group">
 
     <!--element-->
-    {!! Form::label($name, $label) !!}
-    {!! Form::text($name, $value, ['id' => $id, 'class' => 'form-control', 'placeholder' => $placehover]) !!}
+    {{ html()->label($label)->for($name) }}
+    {{ html()->text($name, $value)->id($id)->class('form-control')->placeholder($placehover) }}
 
     <!--description-->
     @if($description)
@@ -71,7 +71,7 @@
 <!-- /INPUT IMAGE -->
 @section('footer_scripts')
     @parent
-    {!! HTML::script('packages/foostart/js/slugit.js') !!}
+    {{ html()->script('packages/foostart/js/slugit.js') }}
 
     <script type='text/javascript'>
         $(document).ready(function(){

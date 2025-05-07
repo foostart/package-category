@@ -41,8 +41,8 @@
 <div class="form-group">
 
     <!--element-->
-    {!! Form::label($name, $label) !!}
-    {!! Form::textarea ($name, $value, ['class' => 'form-control tinymce '.$tinymce, 'rows' => $rows, 'placeholder' => $placehover]) !!}
+    {{ html()->label($label, $name) }}
+    {{ html()->textarea($name, $value)->class('form-control tinymce ' . $tinymce)->rows($rows)->placeholder($placehover) }}
     <!--description-->
     @if($description)
         <span class='input-text-description'>
@@ -73,8 +73,8 @@
 @if($tinymce)
     @section('footer_scripts')
         @parent
-        {!! HTML::script('packages/foostart/js/tinymce/tinymce.min.js') !!}
-        {!! HTML::script('packages/foostart/js/tinymce/tinymce-configs.js') !!}
+        {{ html()->script('packages/foostart/js/tinymce/tinymce.min.js') }}
+        {{ html()->script('packages/foostart/js/tinymce/tinymce-configs.js') }}
     @endsection
 @endif
 <!--/ADD SCRIPT TINYMCE-->

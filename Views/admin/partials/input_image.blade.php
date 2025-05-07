@@ -41,7 +41,7 @@
 <!-- INPUT IMAGE -->
 
 <div class='form-group'>
-    {!! Form::label($name, $label) !!}
+    {{ html()->label($label)->for($name) }}
 
     <!--thumbnail-->
     <div class='image-control'>
@@ -74,7 +74,7 @@
                 <i class="icon-ok icon-white"></i>{!! trans("category-admin.buttons.upload") !!}
             </button>
         </p>
-        {!! Form::hidden($name, $value, ['id' => '_image', 'data-control' => 'lfm-remove']) !!}
+        {{ html()->hidden($name, $value)->id('_image')->attribute('data-control', 'lfm-remove') }}
     </div>
 
     <!--description-->
@@ -107,6 +107,6 @@
 @section('footer_scripts')
     @parent
     @if($lfm_config)
-        {!! HTML::script('vendor/package-filemanager/js/lfm-configs.js') !!}
+        {{ html()->script('vendor/package-filemanager/js/lfm-configs.js') }}
     @endif
 @endsection

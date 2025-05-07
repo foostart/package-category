@@ -25,8 +25,7 @@
 <div class="form-group">
 
     <!--element-->
-    {!! Form::label($name, $label) !!}
-
+    {{ html()->label($label)->for($name) }}
 
      <!--value-->
     @if($value)

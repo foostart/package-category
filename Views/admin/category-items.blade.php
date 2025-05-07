@@ -45,15 +45,15 @@
 
                     <!--BODY-->
                     <div class="panel-body">
-                        {!! Form::open(['route'=>['categories.delete', 'id' => @$item->id], 'method' => 'get', 'class' => 'form-responsive'])  !!}
+                        {{ html()->form('GET', route('categories.delete', ['id' => @$item->id]))->class('form-responsive')->open() }}
 
-                            @include('package-category::admin.category-item')
+                        @include('package-category::admin.category-item')
 
                             <div class='hidden-field'>
                             {!! csrf_field(); !!}
-                            {!! Form::hidden('_key',$request->get('_key','')) !!}
+                            {{ html()->hidden('_key', $request->get('_key', '')) }}
                             </div>
-                        {!! Form::close() !!}
+                        {{ html()->form()->close() }}
                     </div>
                     <!--/BODY-->
 

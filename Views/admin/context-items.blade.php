@@ -45,13 +45,15 @@
 
                     <!--BODY-->
                     <div class="panel-body">
-                        {!! Form::open(['route'=>['contexts.delete', 'id' => @$item->id], 'method' => 'get', 'class'=>'form-responsive'])  !!}
+                        {{ html()->form('GET', route('contexts.delete', ['id' => @$item->id]))
+                            ->class('form-responsive') }}
 
-                            @include('package-category::admin.context-item')
+
+                        @include('package-category::admin.context-item')
 
                             {!! csrf_field(); !!}
 
-                        {!! Form::close() !!}
+                        {{ html()->form()->close() }}
                     </div>
                     <!--/BODY-->
 

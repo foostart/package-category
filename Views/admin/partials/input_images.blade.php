@@ -41,12 +41,12 @@
 <!--/DATA-->
 
 @section('head_css')
-    {!! HTML::style('vendor/package-filemanager/css/lfm-custom.css') !!}
-    {!! HTML::style('packages/foostart/css/jquery-1.12.1-ui.css') !!}
+    {{ html()->style('vendor/package-filemanager/css/lfm-custom.css') }}
+    {{ html()->style('packages/foostart/css/jquery-1.12.1-ui.css') }}
 @endsection
 <!-- INPUT IMAGE -->
 <div class='form-group'>
-    {!! Form::label($name, $label) !!}
+    {{ html()->label($label)->for($name) }}
 
     <!--thumbnail-->
     <div class='image-control'>
@@ -63,7 +63,7 @@
                 <i class="icon-ok icon-white"></i>{!! trans("category-admin.buttons.upload") !!}
             </button>
         </p>
-        {!! Form::hidden($name, $value, ['id' => '_image', 'data-control' => 'lfm-remove']) !!}
+        {{ html()->hidden($name, $value)->id('_image')->attribute('data-control', 'lfm-remove') }}
     </div>
 
     <!--description-->
@@ -140,8 +140,8 @@
 <!-- /INPUT IMAGE -->
 @section('footer_scripts')
     @parent
-    {!! HTML::script('vendor/package-filemanager/js/lfm-configs.js') !!}
-    {!! HTML::script('packages/foostart/js/jquery-ui-1.12.1.min.js') !!}
+    {{ html()->script('vendor/package-filemanager/js/lfm-configs.js') }}
+    {{ html()->script('packages/foostart/js/jquery-ui-1.12.1.min.js') }}
     <script>
         $( function() {
             $( "#sortable" ).sortable({

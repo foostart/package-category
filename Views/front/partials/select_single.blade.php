@@ -47,9 +47,13 @@
 <div class="form-group">
 
     <!--element-->
-    {!! Form::label($name, $label) !!}
+    {!! html()->label($label)->for($name) !!}
     @if($items)
-        {!! Form::select($name, $items, $value, ['class' => 'form-control',  'placeholder' => $placehover]) !!}
+        {!! html()->select($name)
+            ->options($items)
+            ->value($value)
+            ->class('form-control')
+            ->placeholder($placehover) !!}
     @endif
 
     <!--description-->

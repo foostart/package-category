@@ -2,8 +2,12 @@
 | List of elements in category form
 |------------------------------------------------------------------------------->
 
-{{ html()->openForm()->route('contexts.post', ['id' => @$item->id])->files(true)->method('post') }}
-
+<!-- FORM OPEN -->
+@include('package-category::admin.partials.form_open', [
+               'method' => 'POST',
+               'action' => route('contexts.post', ['id' => @$item->id]),
+               'file' => true
+])
     <!--BUTTONS-->
     <div class='btn-form'>
         <!-- DELETE BUTTON -->
@@ -16,7 +20,11 @@
         <!-- DELETE BUTTON -->
 
         <!-- SAVE BUTTON -->
-        {{ html()->submit(trans($plang_admin.'.buttons.save'))->class('btn btn-info pull-right') }}
+        @include('package-category::admin.partials.btn_submit', [
+            'label' => trans($plang_admin.'.buttons.save'),
+            'class' => 'btn btn-info pull-right'
+        ])
+
         <!-- /SAVE BUTTON -->
     </div>
     <!--/BUTTONS-->
@@ -100,12 +108,25 @@
 
     <!--HIDDEN FIELDS-->
     <div class='hidden-field'>
-        {{ html()->hidden('id', @$item->id) }}
-        {{ html()->hidden('context', $request->get('context', null)) }}
+        @include('package-category::admin.partials.input_text', [
+            'hidden' => true,
+            'name'   => 'id',
+            'id'     => 'id',
+            'value'  => @$item->id
+        ])
+
+        @include('package-category::admin.partials.input_text', [
+            'hidden' => true,
+            'name'   => 'context',
+            'id'     => 'context',
+            'value'  => $request->get('context', null)
+        ])
+
     </div>
     <!--/HIDDEN FIELDS-->
 
-{{ html()->form()->close() }}
+<!-- FORM CLOSE -->
+@include('package-category::admin.partials.form_close')
 <!------------------------------------------------------------------------------
 | End list of elements in category form
 |------------------------------------------------------------------------------>

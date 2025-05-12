@@ -1,9 +1,9 @@
 <!------------------------------------------------------------------------------
-| @TITLE
+| TITLE
 | Input text element in form
 |
 |-------------------------------------------------------------------------------
-| @REQUIRED
+| REQUIRED
 | $name is input name
 | $value is input value
 | $label is input lable
@@ -12,7 +12,7 @@
 | $description is description text
 |
 |-------------------------------------------------------------------------------
-| @SYNTAX
+| SYNTAX
 |
 ------------------------------------------------------------------------------->
 
@@ -42,14 +42,26 @@ $hidden = empty($hidden) ? false : true;
 
 <!--element-->
 @if($hidden)
-    {!! html()->hidden($name, $value)->id($id) !!}
+    @include('package-category::admin.partials.input_text', [
+        'hidden' => true,
+        'name'   => $name,
+        'id'     => $id,
+        'value'  => $value
+    ])
 @else
     <!-- INPUT TEXT -->
     <div class="form-group">
-    {{ html()->label($label)->for($name) }}
-    {{ html()->text($name, $value)->id($id)->class('form-control')->placeholder($placehover) }}
+        @include('package-category::admin.partials.input_text', [
+        'label'       => $label,
+        'name'        => $name,
+        'value'       => $value,
+        'id'          => $id,
+        'class'       => 'form-control',
+        'placeholder' => $placehover
+    ])
 
-    <!--description-->
+
+        <!--description-->
         @if($description)
             <span class='input-text-description'>
             <blockquote class="quote-card">
@@ -80,7 +92,7 @@ $hidden = empty($hidden) ? false : true;
 <!-- /INPUT IMAGE -->
 @section('footer_scripts')
     @parent
-    {{ html()->script('packages/foostart/js/slugit.js') }}
+    <script src="{{ asset('packages/foostart/js/slugit.js') }}"></script>
 
     <script type='text/javascript'>
         $(document).ready(function(){

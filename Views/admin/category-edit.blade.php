@@ -8,7 +8,7 @@
 | Permission
 |
 |-------------------------------------------------------------------------------
-| @DESCRIPTION
+| DESCRIPTION
 | 1. Admin
 | 2. Manager
 | 3. User

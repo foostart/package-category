@@ -22,19 +22,22 @@
                 {!! trans($plang_admin.'.descriptions.counters', ['number' => $nav['total']]) !!}
             @endif
         </div>
-		{!! html()->submit(trans($plang_admin.'.buttons.delete-in-trash'))
-		    ->class('btn btn-danger delete btn-delete-all del-trash')
-		    ->title(trans($plang_admin.'.hint.delete-in-trash'))
-		    ->name('del-trash')
-		!!}
+        @include('package-category::admin.partials.btn_submit', [
+            'label' => trans($plang_admin.'.buttons.delete-in-trash'),
+            'class' => 'btn btn-danger delete btn-delete-all del-trash',
+            'title' => trans($plang_admin.'.hint.delete-in-trash'),
+            'name' => 'del-trash'
+        ])
 
-		{!! html()->submit(trans($plang_admin.'.buttons.delete-forever'))
-		    ->class('btn btn-warning delete btn-delete-all del-forever')
-		    ->title(trans($plang_admin.'.hint.delete-forever'))
-		    ->name('del-forever')
-		!!}
+        @include('package-category::admin.partials.btn_submit', [
+            'label' => trans($plang_admin.'.buttons.delete-forever'),
+            'class' => 'btn btn-warning delete btn-delete-all del-forever',
+            'title' => trans($plang_admin.'.hint.delete-forever'),
+            'name' => 'del-forever'
+        ])
 
-        </div>
+
+    </div>
 
     <div class="table-responsive">
     <table class="table table-hover">
@@ -181,9 +184,9 @@
                             !!}">
                         <i class="fa fa-edit f-tb-icon"></i>
                     </a>
-                    
+
                     <!--copy-->
-                    <a href="{!! URL::route('contexts.copy',[   'cid' => $item->id,                                                           
+                    <a href="{!! URL::route('contexts.copy',[   'cid' => $item->id,
                                                                 '_token' => csrf_token(),
                                                             ])
                              !!}"
@@ -223,5 +226,5 @@
 
 @section('footer_scripts')
     @parent
-    {{ html()->script('packages/foostart/js/form-table.js') }}
+    <script src="{{ asset('packages/foostart/js/form-table.js') }}"></script>
 @stop

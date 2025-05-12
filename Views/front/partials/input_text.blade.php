@@ -2,6 +2,7 @@
 | TITLE
 | Input text element in form
 |
+|
 |-------------------------------------------------------------------------------
 | REQUIRED
 | $name is input name
@@ -13,6 +14,7 @@
 |
 |-------------------------------------------------------------------------------
 | SYNTAX
+|
 |
 ------------------------------------------------------------------------------->
 
@@ -39,7 +41,9 @@
     //class
     $class = empty($class) ? '' : $class;
     //type
-    $type = empty($type) ? '':'password';
+    $type = empty($type) ? 'text' : 'password';
+    //autocomplete
+    $autocomplete = empty($autocomplete) ? '' : $autocomplete
 ?>
 <!--/DATA-->
 
@@ -50,7 +54,7 @@
 
         <!--label-->
         @if($label)
-            {!! html()->label($label)->for($name) !!}
+            <label for="{!! $name !!}">{!! $label !!}</label>
         @endif
 
         <!--icon-->
@@ -59,23 +63,18 @@
         @endif
 
         <!--element-->
-        @if($type)
-            {!! html()->password($name)
-                ->id($id)
-                ->class('form-control ' . $class)
-                ->placeholder($placeholder)
-                ->attribute('required', $required)
-                ->attribute('autocomplete', 'off')
-            !!}
-        @else
-            {!! html()->text($name)
-                ->id($id)
-                ->class('form-control ' . $class)
-                ->placeholder($placeholder)
-                ->attribute('required', $required)
-                ->attribute('autocomplete', 'off')
-            !!}
-        @endif
+        <input  type="{!! $type !!}"
+                id="{!! $id !!}"
+                name="{!! $name !!}"
+                class="{!! $class !!}"
+                placeholder="{!! $placeholder !!}"
+                @if($required)
+                   required
+                @endif
+                @if($autocomplete)
+                    autocomplete = "{!! $autocomplete !!}"
+                @endif
+        >
 
     </div>
     <!--errors-->

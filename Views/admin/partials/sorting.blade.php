@@ -1,21 +1,21 @@
 <!------------------------------------------------------------------------------
-| @TITLE
+| TITLE
 | Sorting data on the list of items
 |
 |-------------------------------------------------------------------------------
-| @REQUIRED
+| REQUIRED
 | 1. The list of messages: admin_message_script.blade.php
 | 2. The script: custom-ordering.js
 |
 |-------------------------------------------------------------------------------
-| @DESCRIPTION
+| DESCRIPTION
 | 1. Show select sorting
 | 2. Show select order by
 | 3. Show button add sorting
 | 4. Show message error
 |
-|_______________________________________________________________________________
--->
+|------------------------------------------------------------------------------>
+
 <div class="row form-group">
     <div class="col-md-12">
         {{ html()->label(trans('category-admin.labels.sorting')) }}
@@ -23,7 +23,12 @@
 
     <!-- SORTING BY -->
     <div class="col-md-12 margin-top-10">
-        {{ html()->select($sorting['label'], $sorting['label'], $request->get('order_by',''))->class('form-control form-validable')->id('order-by-select') }}
+
+        {{ html()->select('order_by', $sorting['label'], $request->get('order_by',''))
+                ->class('form-control form-validable')
+                ->id('order-by-select')
+                }}
+
         <span class="text-danger hidden form-error-required-order">
             {!! trans('category-admin.errors.required-order-by') !!}
         </span>
@@ -34,7 +39,7 @@
 
     <!-- ORDER BY -->
     <div class="col-md-12 margin-top-10">
-        {{ html()->select('', $order_by, $request->get('ordering','asc'))->class('form-control')->id('ordering-select') }}
+        {{ html()->select('ordering', $order_by, $request->get('ordering','asc'))->class('form-control')->id('ordering-select') }}
     </div>
 
     <!-- BUTTON -->
@@ -46,11 +51,23 @@
     </div>
     <!-- SORTED BY -->
     <span id="append-sorting" style="display: inline-block;padding: 15px;"></span>
-    {{ html()->hidden('order_by', $request->get('order_by'))->id('order-by') }}
-    {{ html()->hidden('ordering', $request->get('ordering'))->id('ordering') }}
+    @include('package-category::admin.partials.input_text', [
+        'hidden' => true,
+        'name'   => 'order_by',
+        'id'     => 'order-by',
+        'value'  => $request->get('order_by')
+    ])
+
+    @include('package-category::admin.partials.input_text', [
+        'hidden' => true,
+        'name'   => 'ordering',
+        'id'     => 'ordering',
+        'value'  => $request->get('ordering')
+    ])
+
 </div>
 
 @section('footer_scripts')
     @parent
-    {{ html()->script('packages/foostart/js/custom-ordering.js') }}
+    <script src="{{ asset('packages/foostart/js/custom-ordering.js') }}"></script>
 @stop

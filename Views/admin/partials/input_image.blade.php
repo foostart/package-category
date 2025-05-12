@@ -1,9 +1,9 @@
 <!------------------------------------------------------------------------------
-| @TITLE
+| TITLE
 | Input text element in form
 |
 |-------------------------------------------------------------------------------
-| @REQUIRED
+| REQUIRED
 | $name is input name
 | $value is input value
 | $label is input lable
@@ -12,7 +12,7 @@
 | $description is description text
 |
 |-------------------------------------------------------------------------------
-| @SYNTAX
+| SYNTAX
 |
 ------------------------------------------------------------------------------->
 
@@ -74,7 +74,14 @@
                 <i class="icon-ok icon-white"></i>{!! trans("category-admin.buttons.upload") !!}
             </button>
         </p>
-        {{ html()->hidden($name, $value)->id('_image')->attribute('data-control', 'lfm-remove') }}
+        @include('package-category::admin.partials.input_text', [
+            'hidden' => true,
+            'name'   => $name,
+            'id'     => '_image',
+            'value'  => $value,
+            'attribute' => ['data-control' => 'lfm-remove']
+        ])
+
     </div>
 
     <!--description-->
@@ -107,6 +114,6 @@
 @section('footer_scripts')
     @parent
     @if($lfm_config)
-        {{ html()->script('vendor/package-filemanager/js/lfm-configs.js') }}
+        <script src="{{ asset('vendor/package-filemanager/js/lfm-configs.js') }}"></script>
     @endif
 @endsection

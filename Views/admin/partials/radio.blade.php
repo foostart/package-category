@@ -1,9 +1,9 @@
 <!------------------------------------------------------------------------------
-| @TITLE
+| TITLE
 | Input text element in form
 |
 |-------------------------------------------------------------------------------
-| @REQUIRED
+| REQUIRED
 | $name is radio name
 | $value is radio value
 | $label is radio lable
@@ -12,7 +12,7 @@
 | $description is description text
 |
 |-------------------------------------------------------------------------------
-| @SYNTAX
+| SYNTAX
 |
 ------------------------------------------------------------------------------->
 
@@ -47,8 +47,8 @@
     @if($items)
         @foreach($items as $key => $item)
             <span class='radio-item' style="display: block;">
-                {{ html()->radio($key, $key == $value, ['class' => '', 'id' => $name . '-' . $key]) }}
-                <label for='{!! $name."-".$key !!}' style="font-weight: normal;">{!! $item !!}</label>
+                {{ html()->radio($key, $key == $value, $value) }}
+                <label for='{!! $key."_".$value !!}' style="font-weight: normal;">{!! $item !!}</label>
             </span>
         @endforeach
     @endif

@@ -1,9 +1,10 @@
 <!------------------------------------------------------------------------------
-| @TITLE
+| TITLE
 | Input text element in form
+| Input hidden
 |
 |-------------------------------------------------------------------------------
-| @REQUIRED
+| REQUIRED
 | $name is input name
 | $value is input value
 | $label is input lable
@@ -12,23 +13,28 @@
 | $description is description text
 |
 |-------------------------------------------------------------------------------
-| @SYNTAX
+| SYNTAX
+|
 |
 ------------------------------------------------------------------------------->
 
 <!--DATA-->
 <?php
+    //hidden
+    $hidden = empty($hidden) ? false : true;
     //name
-    $name = empty($name)?'undefined':$name;
+    $name = empty($name) ? 'undefined' : $name;
     //id
-    $id = empty($id)?$name:$id;
+    $id = empty($id) ? $name : $id;
     //value
-    $value = empty($value)?$request->get($name):$value;
+    $value = empty($value) ? $request->get($name) : $value;
     //label
     $label = empty($label) ? '' : $label;
+    //class
+    $class = empty($class) ? '' : $class;
     //place hover
     $placehover = empty($placehover) ? $label : $placehover;
-    //eror
+    //errors
     $errors = empty($errors) ? '' : $errors;
     //description
     $description = empty($description) ? '' : $description;
@@ -38,11 +44,25 @@
 <!-- INPUT TEXT -->
 <div class="form-group">
 
-    <!--element-->
-    {{ html()->label($label)->for($name) }}
-    {{ html()->text($name)->value($value)->id($id)->class('form-control')->placeholder($placehover) }}
+    @if($hidden)
+        <input type="hidden"
+               id="{!! $id !!}"
+               value="{!! $value !!}"
+        >
+    @else
+        @if($label)
+            {{ html()->label($label)->for($name) }}
+        @endif
+        <input type="hidden"
+               id="{!! $id !!}"
+               name="{!! $name !!}"
+               value="{!! $value !!}"
+               class="{!! $class !!}"
+               placehover="{!! $placehover !!}"
+        >
+    @endif
 
-    <!--description-->
+    <!-- DESCTIPTION -->
     @if($description)
         <span class='input-text-description'>
             <blockquote class="quote-card">
@@ -51,14 +71,16 @@
         </span>
     @endif
 
-    <!--errors-->
-    @if ($errors->has($name))
+    <!-- ERRORS -->
+    @if (!empty($errors) && $errors->has($name))
         <ul class='alert alert-danger error-item'>
             @foreach($errors->get($name) as $error)
                 @if($error)
-                <li>
-                    <span class='input-text-error'>{!! $error !!}</span>
-                </li>
+                    <li>
+                        <span class='input-text-error'>
+                            {!! $error !!}
+                        </span>
+                    </li>
                 @endif
             @endforeach
         </ul>

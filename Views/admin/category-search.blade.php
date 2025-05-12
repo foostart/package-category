@@ -6,14 +6,24 @@
     </div>
     <div class="panel-body">
 
-        {{ html()->form('get', route('categories.list', ['_key' => @$params['_key']]))->open() }}
+        <!-- FORM OPEN -->
+        @include('package-category::admin.partials.form_open', [
+            'method' => 'GET',
+            'action' => route('categories.list', ['_key' => @$params['_key']])
+        ])
+
 
         <!--BUTTONS-->
             <div class="form-group">
                 <a href="{!! URL::route('categories.list', ['_key' => @$params['_key']]) !!}" class="btn btn-default search-reset">
                     {!! trans($plang_admin.'.buttons.reset') !!}
                 </a>
-                {{ html()->submit(trans($plang_admin.'.buttons.search'))->class('btn btn-info')->id('search-submit') }}
+                @include('package-category::admin.partials.btn_submit', [
+                    'label' => trans($plang_admin.'.buttons.search'),
+                    'class' => 'btn btn-info',
+                    'id' => 'search-submit'
+                ])
+
             </div>
 
             <!-- KEYWORD -->
@@ -35,10 +45,17 @@
             @include('package-category::admin.partials.sorting')
 
             <div class='hidden-field'>
-                {{ html()->hidden('_key', @$params['_key']) }}
+                @include('package-category::admin.partials.input_text', [
+                    'hidden' => true,
+                    'name'   => '_key',
+                    'id'     => '_key',
+                    'value'  => @$params['_key']
+                ])
+
                 {!! csrf_field() !!}
             </div>
 
-        {{ html()->form()->close() }}
+        <!-- FORM CLOSE -->
+        @include('package-category::admin.partials.form_close')
     </div>
 </div>

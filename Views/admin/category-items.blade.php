@@ -45,15 +45,26 @@
 
                     <!--BODY-->
                     <div class="panel-body">
-                        {{ html()->form('GET', route('categories.delete', ['id' => @$item->id]))->class('form-responsive')->open() }}
+                        <!-- FORM OPEN -->
+                        @include('package-category::admin.partials.form_open', [
+                            'method' => 'GET',
+                            'action' => route('categories.delete', ['id' => @$item->id]),
+                            'class' => 'form-responsive'
+                        ])
 
                         @include('package-category::admin.category-item')
 
                             <div class='hidden-field'>
                             {!! csrf_field(); !!}
-                            {{ html()->hidden('_key', $request->get('_key', '')) }}
+                                @include('package-category::admin.partials.input_text', [
+                                    'hidden' => true,
+                                    'name'   => '_key',
+                                    'id'     => '_key',
+                                    'value'  => $request->get('_key', '')
+                                ])
                             </div>
-                        {{ html()->form()->close() }}
+                        <!-- FORM CLOSE -->
+                        @include('package-category::admin.partials.form_close')
                     </div>
                     <!--/BODY-->
 

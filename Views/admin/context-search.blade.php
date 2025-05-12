@@ -6,14 +6,24 @@
     </div>
     <div class="panel-body">
 
-        {{ html()->form()->get(route('contexts.list'))->open() }}
+        <!-- FORM OPEN -->
+        @include('package-category::admin.partials.form_open', [
+            'method' => 'GET',
+            'action' => route('contexts.list')
+        ])
+
 
         <!--BUTTONS-->
             <div class="form-group">
                 <a href="{!! URL::route('contexts.list', ['context' => @$params['context']]) !!}" class="btn btn-default search-reset">
                     {!! trans($plang_admin.'.buttons.reset') !!}
                 </a>
-                {{ html()->submit(trans($plang_admin.'.buttons.search'))->class('btn btn-info')->id('search-submit') }}
+                @include('package-category::admin.partials.btn_submit', [
+                    'label' => trans($plang_admin.'.buttons.search'),
+                    'class' => 'btn btn-info',
+                    'id' => 'search-submit'
+                ])
+
             </div>
 
             <!-- KEYWORD -->
@@ -35,10 +45,17 @@
             @include('package-category::admin.partials.sorting')
 
             <div class='hidden-field'>
-                {!! html()->hidden('context', $request->get('context', null)) !!}
+                @include('package-category::admin.partials.input_text', [
+                    'hidden' => true,
+                    'name'   => 'context',
+                    'id'     => 'context',
+                    'value'  => $request->get('context', null)
+                ])
+
                 {!! csrf_field() !!}
             </div>
 
-        {!! html()->form()->close() !!}
+        <!-- FORM CLOSE -->
+        @include('package-category::admin.partials.form_close')
     </div>
 </div>

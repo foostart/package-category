@@ -2,7 +2,13 @@
 | List of elements in category form
 |------------------------------------------------------------------------------->
 
-{{ html()->form('POST', route('categories.post', ['id' => @$item->id, '_key' => $request->get('_key')]))->files()->open() }}
+<!-- FORM OPEN -->
+@include('package-category::admin.partials.form_open', [
+    'method' => 'POST',
+    'action' => route('categories.post', ['id' => @$item->id, '_key' => $request->get('_key')]),
+    'files' => true
+])
+
 
     <!--BUTTONS-->
     <div class='btn-form'>
@@ -16,7 +22,11 @@
         <!-- DELETE BUTTON -->
 
         <!-- SAVE BUTTON -->
-        {{ html()->submit(trans($plang_admin.'.buttons.save'))->class('btn btn-info pull-right') }}
+        @include('package-category::admin.partials.btn_submit', [
+            'label' => trans($plang_admin.'.buttons.save'),
+            'class' => 'btn btn-info pull-right'
+        ])
+
         <!-- /SAVE BUTTON -->
     </div>
     <!--/BUTTONS-->
@@ -61,7 +71,7 @@
                 'errors' => $errors,
             ])
             <!--/NAME-->
-            
+
             <div class="row">
 
                  <!--SLUG-->
@@ -113,7 +123,7 @@
 
         <!--MENU 2-->
         <div id="menu_2" class="tab-pane fade">
-            
+
             <!--CATEGORY OVERVIEW-->
             @include('package-category::admin.partials.textarea', [
                 'name' => 'category_overview',
@@ -124,7 +134,7 @@
                 'errors' => $errors,
             ])
             <!--/CATEGORY OVERVIEW-->
-            
+
             <div class="row">
 
                 <!--URL-->
@@ -199,12 +209,25 @@
 
     <!--HIDDEN FIELDS-->
     <div class='hidden-field'>
-        {{ html()->hidden('id', @$item->id) }}
-        {{ html()->hidden('_key', $request->get('_key', '')) }}
+        @include('package-category::admin.partials.input_text', [
+            'hidden' => true,
+            'name'   => 'id',
+            'id'     => 'id',
+            'value'  => @$item->id
+        ])
+
+        @include('package-category::admin.partials.input_text', [
+            'hidden' => true,
+            'name'   => '_key',
+            'id'     => '_key',
+            'value'  => $request->get('_key', '')
+        ])
+
     </div>
     <!--/HIDDEN FIELDS-->
 
-{{ html()->form()->close() }}
+<!-- FORM CLOSE -->
+@include('package-category::admin.partials.form_close')
 <!------------------------------------------------------------------------------
 | End list of elements in category form
 |------------------------------------------------------------------------------>

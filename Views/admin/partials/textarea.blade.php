@@ -1,9 +1,9 @@
 <!------------------------------------------------------------------------------
-| @TITLE
+| TITLE
 | Textarea element in form
 |
 |-------------------------------------------------------------------------------
-| @REQUIRED
+| REQUIRED
 | $name is textarea name
 | $value is textarea value
 | $label is textarea lable
@@ -12,7 +12,7 @@
 | $description is description text
 |
 |-------------------------------------------------------------------------------
-| @SYNTAX
+| SYNTAX
 |
 ------------------------------------------------------------------------------->
 
@@ -20,6 +20,8 @@
 <?php
     //name
     $name = empty($name)?'undefined':$name;
+    //id
+    $id = empty($id) ? $name : $id;
     //value
     $value = empty($value)?$request->get($name):$value;
     //label
@@ -41,8 +43,23 @@
 <div class="form-group">
 
     <!--element-->
-    {{ html()->label($label, $name) }}
-    {{ html()->textarea($name, $value)->class('form-control tinymce ' . $tinymce)->rows($rows)->placeholder($placehover) }}
+    @if($label)
+        <label for="{!! $id !!}">
+            {!! $label !!}
+        </label>
+    @endif
+    <br>
+
+    <textarea id="{!! $id !!}"
+              name="{!! $name !!}"
+              rows="{!! $rows !!}"
+              cols="{!! $cols !!}"
+              class="form-control tinymce {!! $tinymce !!}"
+              placeholder="{!! $placeholder !!}">
+        {!! $value !!}
+    </textarea>
+    <br><br>
+
     <!--description-->
     @if($description)
         <span class='input-text-description'>
@@ -73,9 +90,8 @@
 @if($tinymce)
     @section('footer_scripts')
         @parent
-        {{ html()->script('packages/foostart/js/tinymce/tinymce.min.js') }}
-        {{ html()->script('packages/foostart/js/tinymce/tinymce-configs.js') }}
+        <script src="{{ asset('packages/foostart/js/tinymce/tinymce.min.js') }}"></script>
+        <script src="{{ asset('packages/foostart/js/tinymce/tinymce-configs.js') }}"></script>
     @endsection
 @endif
 <!--/ADD SCRIPT TINYMCE-->
-

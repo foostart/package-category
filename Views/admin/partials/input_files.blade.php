@@ -1,9 +1,9 @@
 <!------------------------------------------------------------------------------
-| @TITLE
+| TITLE
 | Input text element in form
 |
 |-------------------------------------------------------------------------------
-| @REQUIRED
+| REQUIRED
 | $name is input name
 | $value is input value
 | $label is input lable
@@ -12,7 +12,7 @@
 | $description is description text
 |
 |-------------------------------------------------------------------------------
-| @SYNTAX
+| SYNTAX
 |
 ------------------------------------------------------------------------------->
 
@@ -126,7 +126,7 @@
 
 @section('footer_scripts')
     @parent
-    {{ html()->script('vendor/package-filemanager/js/lfm-configs.js') }}
+    <script src="{{ asset('vendor/package-filemanager/js/lfm-configs.js') }}"></script>
 
     <script type='text/javascript'>
 

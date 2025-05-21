@@ -15,13 +15,15 @@
 |-------------------------------------------------------------------------------
 | DESCRIPTION
 |
-|_______________________________________________________________________________
--->
+|____________________________________________________________________________-->
 
 <!--DATA-->
 <?php
     //name
     $name = empty($name)?'undefined':$name;
+
+    //id
+    $id = empty($id) ? $name : $id;
 
     //items
     $items = empty($items)?[]:$items;
@@ -40,19 +42,34 @@
 
     //description
     $description = empty($description) ? '' : $description;
+
+    //class
+    $class = empty($class) ? '' : $class;
 ?>
 <!--/DATA-->
 
-<!-- CATEGORY LIST -->
+<!-- SELECT -->
 <div class="form-group">
 
-    <!--element-->
-@if($label)
-    {{ html()->label($label, $name) }}
-@endif
-    @if($items)
-        {{ html()->select($name, $items, $value)->class('form-control')->placeholder($placehover) }}
+    @if($label)
+        <label for="{!! $name !!}">{!! $label !!}</label>
     @endif
+
+
+    <select name="{!! $name !!}" class="form-control {!! $class !!}" >
+
+        @if($placehover)
+            <option value="">{!! $placehover !!}</option>
+        @endif
+        @if($items)
+            @foreach($items as $_value => $_label)
+                <option value="{!! $_value !!}" @if($_value == $value) selected @endif>
+                    {!! $_label !!}
+                </option>
+            @endforeach
+        @endif
+
+    </select>
 
     <!--description-->
     @if($description)
@@ -76,4 +93,4 @@
         </ul>
     @endif
 </div>
-<!-- /CATEGORY LIST -->
+<!-- /SELECT -->

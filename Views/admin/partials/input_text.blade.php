@@ -44,16 +44,17 @@
 <!-- INPUT TEXT -->
 <div class="form-group">
 
+    @if($label)
+        {{ html()->label($label)->for($name) }}
+    @endif
+
     @if($hidden)
         <input type="hidden"
                id="{!! $id !!}"
                value="{!! $value !!}"
         >
     @else
-        @if($label)
-            {{ html()->label($label)->for($name) }}
-        @endif
-        <input type="hidden"
+        <input type="text"
                id="{!! $id !!}"
                name="{!! $name !!}"
                value="{!! $value !!}"

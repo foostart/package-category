@@ -47,13 +47,15 @@
 <div class="form-group">
 
     <!--element-->
-    {!! html()->label($label)->for($name) !!}
     @if($items)
-        {!! html()->select($name)
-            ->options($items)
-            ->value($value)
-            ->class('form-control')
-            ->placeholder($placehover) !!}
+        @include('package-category::admin.partials.select_single', [
+            'name' => $name,
+            'label' => $label,
+            'value' => $value,
+            'items' => $items,
+            'placeholder' => $placehover,
+            'class' => 'form-control',
+        ])
     @endif
 
     <!--description-->

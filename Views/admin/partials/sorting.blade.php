@@ -24,11 +24,13 @@
     <!-- SORTING BY -->
     <div class="col-md-12 margin-top-10">
 
-        {{ html()->select('order_by', $sorting['label'], $request->get('order_by',''))
-                ->class('form-control form-validable')
-                ->id('order-by-select')
-                }}
-
+        @include('package-category::admin.partials.select_single', [
+                'name' => 'order_by',
+                'value' => $request->get('order_by', ''),
+                'items' => $sorting['label'],
+                'class' => 'form-control form-validable',
+                'id' => 'order-by-select',
+            ])
         <span class="text-danger hidden form-error-required-order">
             {!! trans('category-admin.errors.required-order-by') !!}
         </span>
@@ -39,7 +41,13 @@
 
     <!-- ORDER BY -->
     <div class="col-md-12 margin-top-10">
-        {{ html()->select('ordering', $order_by, $request->get('ordering','asc'))->class('form-control')->id('ordering-select') }}
+        @include('package-category::admin.partials.select_single', [
+            'name' => 'ordering',
+            'value' => $request->get('ordering', 'asc'),
+            'items' => $order_by,
+            'class' => 'form-control',
+            'id' => 'ordering-select',
+        ])
     </div>
 
     <!-- BUTTON -->

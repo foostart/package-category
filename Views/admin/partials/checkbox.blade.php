@@ -1,6 +1,6 @@
 <!------------------------------------------------------------------------------
 | TITLE
-| Input text element in form
+| Input checkbox element in form
 |
 |-------------------------------------------------------------------------------
 | REQUIRED
@@ -20,8 +20,12 @@
 <?php
     //name
     $name = empty($name)?'undefined':$name;
+    //id
+    $id = empty($id) ? $name : $id;
     //value
     $value = empty($value)?$request->get($name):$value;
+    //item
+    $item = empty($item)?[]:$item;
     //items
     $items = empty($items)?[]:$items;
     //label
@@ -38,22 +42,21 @@
 <!-- INPUT TEXT -->
 <div class="form-group">
 
-    <!--label-->
-    @if($label)
-        {{ html()->label($label)->for($name) }}
-    @endif
-
-     <!--value-->
+    <!--value-->
     @if($value)
         <span class='input-text-value' style="display: block;">{!! $value !!}</span>
     @endif
 
     <!--checkbox-->
     @if($value && $items)
-        @foreach($items as $item)
+        @foreach($items as $_key => $_value)
             <span class='checkbox-item' style="display: block;">
-                {!! html()->checkbox($name, null, $value)->class('') !!}
-                <label for='{!! $name !!}' style="font-weight: normal;">{!! $item !!}</label>
+                <input type="checkbox"
+                       name="{!! $name !!}[]"
+                       value="{!! $value !!}[]">
+                @if($label)
+                    <label for='{!! $name !!}'>{!! $label !!}</label>
+                @endif
             </span>
         @endforeach
     @endif

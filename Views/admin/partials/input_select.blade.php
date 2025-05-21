@@ -15,8 +15,7 @@
 |-------------------------------------------------------------------------------
 | DESCRIPTION
 |
-|_______________________________________________________________________________
--->
+|____________________________________________________________________________-->
 
 <!--DATA-->
 <?php
@@ -40,6 +39,9 @@
 
     //description
     $description = empty($description) ? '' : $description;
+
+    //class
+    $class = empty($class) ? '' : $class;
 ?>
 <!--/DATA-->
 
@@ -50,9 +52,20 @@
 @if($label)
     {{ html()->label($label, $name) }}
 @endif
-    @if($items)
-        {{ html()->select($name, $items, $value)->class('form-control')->placeholder($placehover) }}
-    @endif
+    <select name="{!! $name !!}" class="form-control {!! $class !!}" >
+
+        @if($placehover)
+            <option value="">{!! $placehover !!}</option>
+        @endif
+        @if($items)
+            @foreach($items as $_value => $_label)
+                <option value="{!! $_value !!}" @if($_value == $value) selected @endif>
+                    {!! $_label !!}
+                </option>
+            @endforeach
+        @endif
+
+    </select>
 
     <!--description-->
     @if($description)

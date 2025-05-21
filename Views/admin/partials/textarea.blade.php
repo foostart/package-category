@@ -34,8 +34,12 @@
     $description = empty($description) ? '' : $description;
     //rows
     $rows = empty($rows) ? 5 : $rows;
+    //cols
+    $cols = empty($cols) ? 5 : $cols;
+    //class
+    $class = empty($class) ? '' : $class;
     //tinymce
-    $tinymce = !$tinymce ? '' : 'my-editor';
+    $tinymce = empty($tinymce) ? 'my-editor' : $tinymce;
 ?>
 <!--/DATA-->
 
@@ -54,7 +58,7 @@
               name="{!! $name !!}"
               rows="{!! $rows !!}"
               cols="{!! $cols !!}"
-              class="form-control tinymce {!! $tinymce !!}"
+              class="form-control tinymce {!! $class !!}  {!! $tinymce !!}"
               placeholder="{!! $placeholder !!}">
         {!! $value !!}
     </textarea>

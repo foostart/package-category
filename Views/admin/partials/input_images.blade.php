@@ -41,8 +41,8 @@
 <!--/DATA-->
 
 @section('head_css')
-    {{ html()->style('vendor/package-filemanager/css/lfm-custom.css') }}
-    {{ html()->style('packages/foostart/css/jquery-1.12.1-ui.css') }}
+    <link rel="stylesheet" href="{{ asset('vendor/package-filemanager/css/lfm-custom.css') }}">
+    <link rel="stylesheet" href="{{ asset('packages/foostart/css/jquery-1.12.1-ui.css') }}">
 @endsection
 <!-- INPUT IMAGE -->
 <div class='form-group'>

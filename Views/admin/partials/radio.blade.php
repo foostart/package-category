@@ -21,8 +21,7 @@
     //name
     $name = empty($name)?'undefined':$name;
     //value
-    $value = !empty($value)?$value:0;
-
+    $value = empty($value) ? 0 : $value;
     //items
     $items = empty($items)?[]:$items;
     //label
@@ -41,14 +40,21 @@
 
     <!--element-->
     @if($label)
-        {{ html()->label($label)->for($name) }}
+        <label for="{!! $name !!}">{!! $label !!}</label>
     @endif
 
     @if($items)
         @foreach($items as $key => $item)
             <span class='radio-item' style="display: block;">
-                {{ html()->radio($key, $key == $value, $value) }}
-                <label for='{!! $key."_".$value !!}' style="font-weight: normal;">{!! $item !!}</label>
+                <input type="radio"
+                       id="{!! $name."_".$key !!}"
+                       name="{!! $name !!}"
+                       value="{!! $key !!}"
+                       @if($value == $key)
+                           checked
+                        @endif
+                >
+                <label for='{!! $name."_".$key !!}' style="font-weight: normal;">{!! $item !!}</label>
             </span>
         @endforeach
     @endif

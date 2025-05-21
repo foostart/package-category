@@ -50,7 +50,11 @@
 
     <!--element-->
 @if($label)
-    {{ html()->label($label, $name) }}
+
+        @include('package-category::admin.partials.label', [
+            'name' => $name,
+            'label' => $label
+        ])
 @endif
     <select name="{!! $name !!}" class="form-control {!! $class !!}" >
 

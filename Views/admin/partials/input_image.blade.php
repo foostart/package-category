@@ -41,8 +41,7 @@
 <!-- INPUT IMAGE -->
 
 <div class='form-group'>
-    {{ html()->label($label)->for($name) }}
-
+    <label for="{!! $name !!}">{!! $label !!}</label>
     <!--thumbnail-->
     <div class='image-control'>
 

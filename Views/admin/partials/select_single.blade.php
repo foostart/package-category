@@ -29,13 +29,13 @@
     $items = empty($items)?[]:$items;
 
     //value
-    $value = empty($value)?$request->get($name):$value;
+    $value = empty($value)  ?   '' : $value;
 
     //label
     $label = empty($label) ? '' : $label;
 
     //place hover
-    $placehover = empty($placehover) ? $label : $placehover;
+    $placeholder = empty($placeholder) ? $label : $placeholder;
 
     //eror
     $errors = empty($errors) ? '' : $errors;
@@ -58,8 +58,8 @@
 
     <select name="{!! $name !!}" class="form-control {!! $class !!}" >
 
-        @if($placehover)
-            <option value="">{!! $placehover !!}</option>
+        @if($placeholder)
+            <option value="">{!! $placeholder !!}</option>
         @endif
         @if($items)
             @foreach($items as $_value => $_label)

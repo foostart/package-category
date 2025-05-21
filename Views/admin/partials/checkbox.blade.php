@@ -19,17 +19,19 @@
 <!--DATA-->
 <?php
     //name
-    $name = empty($name)?'undefined':$name;
+    $name = empty($name) ? 'undefined' : $name;
     //id
     $id = empty($id) ? $name : $id;
     //value
-    $value = empty($value)?$request->get($name):$value;
+    $value = empty($value) ? '' : $value;
     //item
-    $item = empty($item)?[]:$item;
+    $item = empty($item) ? [] : $item;
     //items
-    $items = empty($items)?[]:$items;
+    $items = empty($items) ? [] : $items;
     //label
     $label = empty($label) ? '' : $label;
+    //class
+    $class = empty($class) ? '' : $class;
     //place hover
     $placehover = empty($placehover) ? $label : $placehover;
     //eror
@@ -47,18 +49,32 @@
         <span class='input-text-value' style="display: block;">{!! $value !!}</span>
     @endif
 
-    <!--checkbox-->
-    @if($value && $items)
+    @if(!empty($item))
+        <span class='checkbox-item' style="display: block;">
+            <input type="checkbox"
+               name="{!! $name !!}"
+               id="{!! $id !!}"
+               value="{!! $value !!}"
+            >
+            @if($label)
+                <label for='{!! $name !!}'>{!! $label !!}</label>
+            @endif
+        </span>
+    @elseif(!empty($items))
         @foreach($items as $_key => $_value)
-            <span class='checkbox-item' style="display: block;">
+            <span class="checkbox-item" style="display: block;">
                 <input type="checkbox"
-                       name="{!! $name !!}[]"
-                       value="{!! $value !!}[]">
+                    name="{!! $name !!}[]"
+                    value="{!! $_key !!}"
+                    id="{!! $name . '_' . $_key !!}"
+                   @if(is_array($value) && in_array($_key, $value)) checked @endif
+                >
                 @if($label)
-                    <label for='{!! $name !!}'>{!! $label !!}</label>
-                @endif
+                    <label for="{!! $name . '_' . $_key !!}">{!! $_value !!}</label>
+                @endif`
             </span>
         @endforeach
+
     @endif
 
     <!--description-->

@@ -23,7 +23,7 @@
     //id
     $id             = empty($id)        ?   $name : $id;
     //value
-    $value          = empty($value)     ?   $request->get($name):$value;
+    $value          = empty($value)     ?   '' : $value;
     //label
     $label          = empty($label)     ?   '' : $label;
     //place hover
@@ -37,15 +37,13 @@
 
 <!--HEAD CSS-->
 @section('head_css')
-    {{ html()->style('vendor/package-filemanager/css/lfm-custom.css') }}
+    <link rel="stylesheet" href="{{ asset('vendor/package-filemanager/css/lfm-custom.css') }}">
 @endsection
 <!--/HEAD CSS-->
 
 <!--UPLOAD FILES-->
 <div class='form-group'>
-
-    {{ html()->label($label)->for($name) }}
-
+    <label for="{!! $name !!}">{!! $label !!}</label>
     <!--button upload-->
     <div class='image-control'>
 

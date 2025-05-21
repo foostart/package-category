@@ -18,7 +18,7 @@
 
 <div class="row form-group">
     <div class="col-md-12">
-        {{ html()->label(trans('category-admin.labels.sorting')) }}
+        <label>{!! trans('category-admin.labels.sorting') !!}</label>
     </div>
 
     <!-- SORTING BY -->

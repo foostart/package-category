@@ -1,14 +1,14 @@
 <!------------------------------------------------------------------------------
 | TITLE
-| Input text element in form
-| Input hidden
+| Input type: text, hidden
+|
 |
 |-------------------------------------------------------------------------------
 | REQUIRED
 | $name is input name
 | $value is input value
-| $label is input lable
-| $placehover is placehover text
+| $label is input label
+| $placeholder is placeholder text
 | $errors is error name
 | $description is description text
 |
@@ -18,52 +18,55 @@
 |
 ------------------------------------------------------------------------------->
 
-<!--DATA-->
+<!--PARAMS-->
 <?php
     //hidden
-    $hidden = empty($hidden) ? false : true;
+    $hidden         = empty($hidden)        ? false         : true;
     //name
-    $name = empty($name) ? 'undefined' : $name;
+    $name           = empty($name)          ? 'undefined'   : $name;
     //id
-    $id = empty($id) ? $name : $id;
+    $id             = empty($id)            ? $name         : $id;
     //value
-    $value = empty($value) ? $request->get($name) : $value;
+    $value          = empty($value)         ? ''            : $value;
+    //type
+    $type           = empty($type)         ? 'text'         : $type;
     //label
-    $label = empty($label) ? '' : $label;
+    $label          = empty($label)         ? ''            : $label;
     //class
-    $class = empty($class) ? '' : $class;
+    $class          = empty($class)         ? ''            : $class;
     //place hover
-    $placehover = empty($placehover) ? $label : $placehover;
+    $placeholder    = empty($placeholder)   ? $label        : $placeholder;
     //errors
-    $errors = empty($errors) ? '' : $errors;
+    $errors         = empty($errors)        ? ''            : $errors;
     //description
-    $description = empty($description) ? '' : $description;
+    $description    = empty($description)   ? ''            : $description;
 ?>
-<!--/DATA-->
+<!--/PARAMS-->
 
 <!-- INPUT TEXT -->
 <div class="form-group">
 
     @if($label)
-        {{ html()->label($label)->for($name) }}
+        <label for="{!! $name !!}">{!! $label !!}</label>
     @endif
 
     @if($hidden)
         <input type="hidden"
                id="{!! $id !!}"
+               name="{!! $name !!}"
                value="{!! $value !!}"
         >
     @else
-        <input type="text"
+        <input type="{!! $type !!}"
                id="{!! $id !!}"
                name="{!! $name !!}"
                value="{!! $value !!}"
                class="{!! $class !!}"
-               placehover="{!! $placehover !!}"
+               placehover="{!! $placeholder !!}"
         >
     @endif
 
-    <!-- DESCTIPTION -->
+    <!-- DESCRIPTION -->
     @if($description)
         <span class='input-text-description'>
             <blockquote class="quote-card">

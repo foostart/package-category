@@ -33,7 +33,7 @@
     //label
     $label          = empty($label)         ? ''            : $label;
     //class
-    $class          = empty($class)         ? ''            : $class;
+    $class          = empty($class)         ? 'form-control'  : $class;
     //place hover
     $placeholder    = empty($placeholder)   ? $label        : $placeholder;
     //errors

@@ -26,8 +26,8 @@
     $value = empty($value)?$request->get($name):$value;
     //label
     $label = empty($label) ? '' : $label;
-    //place hover
-    $placehover = empty($placehover) ? $label : $placehover;
+    //placeholder
+    $placeholder = empty($placeholder) ? $label : $placeholder;
     //eror
     $errors = empty($errors) ? '' : $errors;
     //description
